@@ -11,7 +11,7 @@ const generateToken = (res, userId) => {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',     // https in production, otherwise http
         sameSite: 'strict',                                 // to prevent CSRF attacks
-        maxAge: 30 * 24 * 60 * 60 * 1000                   // 30 days (same as token expiration)
+        maxAge: 30 * 24 * 60 * 60 * 1000                    // 30 days (same as token expiration)
     });
 };
 

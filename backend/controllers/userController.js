@@ -1,23 +1,10 @@
 import asyncHandler from 'express-async-handler';
-// import generateToken from generateToken.js
-// import user model here from userModels.js
-
-
-// desc    Register new user
-// route   POST /api/users/register
-// access  Public (because anyone can access without token)
-const registerUser = asyncHandler(async (req, res) => {
-    const { nic, name, email, password } = req.body;
-
-    // check if user already exists
-
-    // if user not exists, create new user
-
-    // check if user created successfully
-    // generate token
-
-    res.status(200).json({message: 'Register user'});
-});
+import generateToken from "../utils/generateToken.js";
+import {
+    isUserExists,
+    registerUsers,
+    authUser,
+} from "../models/userModel.js";
 
 
 // desc    Login user
@@ -26,12 +13,19 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    // check if user exists by email
+    const user = await authUser(email, password);
 
-    // authenticate user
-    // generate token
-
-    res.status(200).json({message: 'Login user'});
+    if (user) {
+        generateToken(res, user.nic);
+        res.status(201).json({
+            nic: user.nic,
+            name: user.name,
+            email: user.email
+        });
+    }else {
+        res.status(400);
+        throw new Error('Invalid email or password');
+    }
 });
 
 
@@ -48,10 +42,41 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 
+// desc    Register new user
+// route   POST /api/users/register
+// access  Public (because anyone can access without token)
+const registerUser = asyncHandler(async (req, res) => {
+    const { nic, name, email, password } = req.body;
+
+    const isExist = await isUserExists(email);
+
+    if (isExist) {
+        res.status(400);
+        throw new Error("User already exists");
+    }
+
+    const user = await registerUsers(nic, name, email, password);
+
+    if (user.rowCount > 0) {
+        // do we have to generate token here?
+        res.status(201).json({
+            nic: user.rows[0].nic,
+            name: user.rows[0].name,
+            email: user.rows[0].email
+        });
+    } else {
+        res.status(400);
+        throw new Error('Invalid user data');
+    }
+});
+
+
 // desc    Get user profile
 // route   GET /api/users/profile
 // access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
+    console.log(req.user);
+
     res.status(200).json({message: 'Get user profile'});
 });
 
@@ -60,6 +85,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // route   PUT /api/users/profile
 // access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
+    console.log(req.user);
+
     res. status(200).json({message: 'Update user profile'});
 });
 
