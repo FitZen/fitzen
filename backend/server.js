@@ -12,6 +12,11 @@ connectDB();
 // create express app
 const app = express();
 
+// middlewares to parse raw JSON from request body (req.body) and
+// urlencoded data (req.query) from URL query string (?key=value&key2=value2)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // user routes
 app.use('/api/users', userRoutes);
 
