@@ -16,7 +16,7 @@ const pool = new Pool({
 const connectDB = async () => {
     try {
         const conn = await pool.connect()
-        console.log(`PostgreSQL is connected to DB: ${conn.connectionParameters.database}`)
+        console.log(`Server is connected to DB: ${conn.connectionParameters.database}`)
     } catch (error) {
         console.error(`Error connecting DB: ${error.message}`)
         process.exit(1)
