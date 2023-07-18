@@ -6,7 +6,7 @@ import {
     logoutUser,
     getUserProfile,
     updateUserProfile
-} from "../controllers/userControllers.js";
+} from "../controllers/userController.js";
 
 // '/api/users' is connected to this file
 // therefore no need to add '/api/users' in the routes
