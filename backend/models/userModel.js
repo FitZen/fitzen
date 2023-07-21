@@ -2,6 +2,7 @@ import { query } from '../config/db.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 
+
 // find user is exists
 const isUserExists = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
@@ -9,6 +10,7 @@ const isUserExists = asyncHandler(async (email) => {
 
     return result.rowCount > 0;
 });
+
 
 // find user by email
 const findUserByEmail = asyncHandler(async (email) => {
@@ -18,6 +20,7 @@ const findUserByEmail = asyncHandler(async (email) => {
     return result.rows[0];
 });
 
+
 // find user by nic
 const findUserByNic = asyncHandler(async (nic) => {
     const sql = 'SELECT * FROM users WHERE nic = $1';
@@ -25,6 +28,7 @@ const findUserByNic = asyncHandler(async (nic) => {
 
     return result.rows[0];
 });
+
 
 // authenticate user
 const authUser = asyncHandler(async (email, password) => {
@@ -44,6 +48,7 @@ const authUser = asyncHandler(async (email, password) => {
     }
 });
 
+
 // register user
 const registerUsers = asyncHandler(async (nic, name, email, password) => {
     const salt = await bcrypt.genSalt(10);
@@ -54,6 +59,7 @@ const registerUsers = asyncHandler(async (nic, name, email, password) => {
 
     return result;
 });
+
 
 export {
     isUserExists,

@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 // do we have to import dotenv here?
 import { findUserByNic } from '../models/userModel.js';
 
+
 const protect = asyncHandler(async (req, res, next) => {
     let token = req.cookies.jwt;
 
@@ -21,5 +22,6 @@ const protect = asyncHandler(async (req, res, next) => {
         throw new Error('Not authorized, no token');
     }
 });
+
 
 export default protect;

@@ -3,6 +3,7 @@ const { Pool } = pkg;
 import dotenv from 'dotenv';
 dotenv.config();
 
+
 // create connection string
 const pool = new Pool({
     host: process.env.PG_HOST,
@@ -11,6 +12,7 @@ const pool = new Pool({
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT
 });
+
 
 // create connection
 const connectDB = async () => {
@@ -23,6 +25,7 @@ const connectDB = async () => {
     }
 };
 
+
 // create query
 const query = async (text, params) => {
     try {
@@ -33,6 +36,7 @@ const query = async (text, params) => {
         throw error
     }
 }
+
 
 export {
     connectDB,
