@@ -3,6 +3,7 @@ const { Pool } = pkg;
 import dotenv from 'dotenv';
 dotenv.config();
 
+
 // create connection string
 const pool = new Pool({
     host: process.env.PG_HOST,
@@ -12,16 +13,18 @@ const pool = new Pool({
     port: process.env.PG_PORT
 });
 
+
 // create connection
 const connectDB = async () => {
     try {
         const conn = await pool.connect()
-        console.log(`PostgreSQL is connected to DB: ${conn.connectionParameters.database}`)
+        console.log(`Server is connected to DB: ${conn.connectionParameters.database}`)
     } catch (error) {
         console.error(`Error connecting DB: ${error.message}`)
         process.exit(1)
     }
 };
+
 
 // create query
 const query = async (text, params) => {
@@ -33,6 +36,7 @@ const query = async (text, params) => {
         throw error
     }
 }
+
 
 export {
     connectDB,
