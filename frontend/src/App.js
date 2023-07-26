@@ -19,7 +19,8 @@ function App() {
       <GetStarted/>
       <ContactUs />
       <Footer/> */}
-      <Sidebar/>
+      <Sidebar/> 
+      {/* this is sidebar */}
     </div>
    
   );
