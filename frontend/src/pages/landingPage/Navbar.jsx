@@ -29,6 +29,7 @@ const NavbarContainer = styled(Container)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   maxWidth: "100%",
+  height: "10vh",
   gap: "2.5rem",
   padding: theme.spacing(2),
   backgroundColor: color1,
@@ -38,7 +39,7 @@ const NavbarContainer = styled(Container)(({ theme }) => ({
 }));
 
 const NavLink = styled("a")(({ theme }) => ({
-  fontSize: "18px",
+  fontSize: "16px",
   color: color2,
   fontWeight: "700",
   cursor: "pointer",
@@ -52,7 +53,7 @@ const NavLink = styled("a")(({ theme }) => ({
 }));
 
 const NavLinkSign = styled("a")(({ theme }) => ({
-  fontSize: "18px",
+  fontSize: "16px",
   color: color2,
   backgroundColor: color3,
   fontWeight: "700",
@@ -89,8 +90,8 @@ const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({
 
 const NavbarLogo = styled("img")(({ theme }) => ({
   cursor: "pointer",
-  width: "180px",
-  marginLeft: "200px",
+  width: "10rem",
+  marginLeft: "10rem",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -166,7 +167,7 @@ const Navbar = () => {
 
       {/* Links */}
       <NavbarLinkBox>
-        <NavLink variant="body2">HOME</NavLink>
+        <NavLink variant="body1">HOME</NavLink>
         <NavLink variant="body2">DISCOVER</NavLink>
         <NavLink variant="body2">ABOUT</NavLink>
         <NavLink variant="body2">CONTACT US</NavLink>

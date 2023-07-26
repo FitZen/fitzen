@@ -61,39 +61,39 @@ const Reports = () => {
       
 
   return (
-    <Box sx>
+    <Box >
         <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>Reports</Typography>
         
-        <Box sx={{display:"flex", width:"90%", height:"90%", backgroundColor:"#E5E8E8", padding:"1rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"0.5rem"}}>
+        <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
             <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
-                <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "1%" }}>Monthly Session Overview</Typography>
+                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "1%" }}>Monthly Session Overview</Typography>
                 <Box sx={{}}>
                     <Box sx={{display:"flex", justifyContent:"center"}}>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled personal <br /> Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled personal <br /> Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed personal <br />Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed personal <br />Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled personal <br /> Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled personal <br /> Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
                     </Box>
                     <Box sx={{display:"flex", justifyContent:"center"}}>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Scheduled training <br />Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Scheduled training <br />Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>10 </Typography>
                         </Box>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Completed training <br />Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Completed training <br />Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                            <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Cancelled training <br />Workouts </Typography>
-                            <Typography variant="h4" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>10 </Typography>
+                            <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Cancelled training <br />Workouts </Typography>
+                            <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>10 </Typography>
                         </Box>
                     </Box>
                 </Box>
@@ -150,7 +150,7 @@ const Reports = () => {
             </FormControl>
       <br />
                 
-                <Button variant="contained" style={{marginTop:"45rem"}}>Contained</Button>
+                <Button variant="contained" style={{marginTop:"38rem"}}>Contained</Button>
             </Box>
         </Box>
 

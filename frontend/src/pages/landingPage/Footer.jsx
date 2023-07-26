@@ -1,5 +1,4 @@
 import { Box, Container, Typography } from "@mui/material";
-import { styled } from "@mui/system";
 import React from "react";
 import HighOctaneLogo from "../../assets/download.png";
 import logoImg from "../../assets/logo.png";
@@ -9,7 +8,7 @@ import {FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 
 const color1 = "#000000"; // Black
 const color2 = "#FFFFFF"; // White
-const color3 = "#FF0000"; // Red
+
 
 const footerIcons = {
     color: 'white', // Change the color to your desired color
@@ -30,11 +29,11 @@ function Footer() {
                 <Typography variant="h5" sx={{ fontSize:"20px",fontWeight: "700", marginLeft: "1rem", color:color2 }}>Powered by</Typography>
                 <img src={HighOctaneLogo} alt="Virtual Gym" style={{ width: "70%", height: "60%" }} />
             </Box>
-            <Box sx={{marginLeft:"28%"}}>
-            <Typography variant="h5" sx={{ fontSize:"20px",fontWeight: "500",marginTop:"-2%", marginLeft: "1rem", color:color2 }}>Copyright (c) 2023. Alright reserved</Typography>
-            <Typography variant="h5" sx={{ fontSize:"20px",fontWeight: "500", marginLeft: "1rem", color:color2 }}>Privacy policy | Terms & Conditions</Typography>
+            <Box sx={{marginLeft:"25%"}}>
+              <Typography variant="h5" sx={{ fontSize:"18px",fontWeight: "500",marginTop:"-2%", marginLeft: "1rem", color:color2 }}>Copyright (c) 2023. Alright reserved</Typography>
+              <Typography variant="h5" sx={{ fontSize:"18px",fontWeight: "500", marginLeft: "1rem", color:color2 }}>Privacy policy | Terms & Conditions</Typography>
             </Box>
-            <Box sx={{marginLeft:"30%"}}>
+            <Box sx={{marginLeft:"25%"}}>
                 <FaFacebook style={footerIcons} />
                 <FaInstagramSquare style={footerIcons} />    
                 <FaTwitter style={footerIcons} />

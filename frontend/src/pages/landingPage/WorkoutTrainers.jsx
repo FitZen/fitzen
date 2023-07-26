@@ -13,7 +13,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
   width: "40%",
   height: "50%",
-  marginTop: "12rem",
+  marginTop: "3rem",
 
   marginBottom: "5rem",
   padding: "1rem",
@@ -46,8 +46,8 @@ function WorkoutTrainers() {
           />
         </Box>
         <StyledBox>
-          <Typography variant="h3" sx={{ textAlign: "left", fontWeight: "bold", marginTop: "3rem" }}>Workout With Best Trainers</Typography>
-          <Typography variant="body1" sx={{ fontSize: "20px", textAlign: "justify", marginTop: "2rem" }}>
+          <Typography variant="h3" sx={{ textAlign: "left", fontWeight: "bold", marginTop: "2.5rem" }}>Workout With Best Trainers</Typography>
+          <Typography variant="body1" sx={{ fontSize: "18px", textAlign: "justify", marginTop: "2rem" }}>
           Working with the best trainers at a gym offers an unparalleled fitness journey characterized by expert guidance, motivation, and personalized attention. These experienced trainers possess in-depth knowledge of various workout techniques and are adept at tailoring fitness plans to individual needs and goals. Through one-on-one coaching and group sessions, they provide valuable insights, correct form, and offer constant encouragement, empowering gym-goers to achieve optimal results and surpass their fitness aspirations. The best trainers foster a supportive and positive environment, instilling confidence and self-discipline, making each workout session an inspiring and transformative experience on the path to enhanced health and well-being.
           </Typography>
         </StyledBox>

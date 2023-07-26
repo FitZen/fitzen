@@ -28,12 +28,12 @@ function GetStarted() {
   return (
     <Container maxWidth="" sx={{ backgroundColor: "#f8f8f8", marginTop: "-5%", marginBottom:"2rem" }}>
       <Box sx={{ height: "30vh", justifyContent: "center", alignItems: "center", padding:"2rem" }}>
-        <Typography variant="h3" sx={{ fontWeight: "bold", marginTop:"3rem" }}>Let's Get You Ready!</Typography>
+        <Typography variant="h4" sx={{ fontWeight: "bold", marginTop:"3rem" }}>Let's Get You Ready!</Typography>
         <Box sx={{marginTop:"3rem", display:"flex", justifyContent:"center"}}>
             <NavLink
             variant="body2"
             style={{
-                padding: "0.8rem",
+                padding: "0.6rem",
                 borderRadius: "100px",
                 alignItems: "center",
                 textAlign: "center",

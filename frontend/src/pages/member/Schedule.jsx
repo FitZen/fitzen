@@ -35,6 +35,7 @@ const Shakebar = () => {
             <FormControl style={{width:"15%"}}>
                 <InputLabel id="demo-simple-select-label">All</InputLabel>
                 <Select
+                style={{height:"85%"}}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={item}
@@ -48,109 +49,109 @@ const Shakebar = () => {
             </FormControl>
         </Box>
         
-        <Box sx={{display:"flex", width:"95%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.5rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"2rem"}}>
-            <Box sx={{display:"flex",height:"82vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1.2rem", margin:"0.1rem"}}>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+        <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
+            <Box sx={{display:"flex",height:"82vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item1} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item2} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Warne</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Both</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Warne</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Both</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item3} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mrs. Jhonson</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Female only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mrs. Jhonson</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Female only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item4} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Ms. Natalie</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Female only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Ms. Natalie</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Female only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item5} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item6} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item7} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item8} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item9} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item10} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item11} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item12} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
-                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2rem", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
                     <img src={item1} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                    <Typography variant="h6" style={{fontWeight: 700}}>Mr. Jhonny</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Workouts for : Male only</Typography>
-                    <Typography variant="h6" style={{fontWeight: 500}}>Mode : Onsite only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Mr. Jhonny</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Workouts for : Male only</Typography>
+                    <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Mode : Onsite only</Typography>
                     <Rating name="read-only" value={4} readOnly /><br />
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700"}}>View Profile</Button>
                 </Box>
