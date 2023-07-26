@@ -123,6 +123,18 @@ const Shakebar = () => {
                     <Typography variant="h6" style={{fontWeight: 500}}>Rs: 2300</Typography>
                     <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700", width: "50%"}}>Buy</Button>
                 </Box>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"52%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                    <img src={item1} alt="item"  style={{width:"85%", height:"65%"}}></img>
+                    <Typography variant="h6" style={{fontWeight: 700}}>Vitamin C</Typography>
+                    <Typography variant="h6" style={{fontWeight: 500}}>Rs: 2300</Typography>
+                    <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700", width: "50%"}}>Buy</Button>
+                </Box>
+                <Box sx={{width:"22%",justifyContent: "center", alignItems:"center",height:"52%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"2.5em", marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#FFBF00',  transition: "ease 0.5s"}}}>
+                    <img src={item1} alt="item"  style={{width:"85%", height:"65%"}}></img>
+                    <Typography variant="h6" style={{fontWeight: 700}}>Vitamin C</Typography>
+                    <Typography variant="h6" style={{fontWeight: 500}}>Rs: 2300</Typography>
+                    <Button variant="contained" style={{backgroundColor:"#FFBF00", color:"black", fontWeight:"700", width: "50%"}}>Buy</Button>
+                </Box>
 
 
                 
