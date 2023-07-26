@@ -3,9 +3,9 @@ import { styled } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-import Image1 from "F:/3rd Year Project/Frontend/project/src/assets/krakenimages-4l8UH4G2_Dg-unsplash.jpg";
-import Image2 from "F:/3rd Year Project/Frontend/project/src/assets/images.jpg";
-import Image3 from "F:/3rd Year Project/Frontend/project/src/assets/at-home-workout.jpg";
+import Image1 from "../../assets/krakenimages-4l8UH4G2_Dg-unsplash.jpg";
+import Image2 from "../../assets/images.jpg";
+import Image3 from "../../assets/at-home-workout.jpg";
 
 const images = [Image1, Image2, Image3];
 

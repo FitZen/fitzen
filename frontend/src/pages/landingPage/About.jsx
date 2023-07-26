@@ -1,8 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
-import HighOctaneLogo from "F:/3rd Year Project/Frontend/project/src/assets/download.png";
-import Place from "F:/3rd Year Project/Frontend/project/src/assets/High-Octane-Training-and-Therapy.jpg";
+import HighOctaneLogo from "../../assets/download.png";
+import Place from "../../assets/High-Octane-Training-and-Therapy.jpg";
 
 
 function VirtualGym() {

@@ -3,14 +3,14 @@ import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 
 
-import item1 from "F:/3rd Year Project/Frontend/project/src/assets/images (3).jpg"
-import item2 from "F:/3rd Year Project/Frontend/project/src/assets/images (2).jpg"
-import item3 from "F:/3rd Year Project/Frontend/project/src/assets/images (4).jpg"
-import item4 from "F:/3rd Year Project/Frontend/project/src/assets/kisspng-dietary-supplement-optimum-nutrition-serious-mass-nutrition-and-supplements-puregym-shop-5b63010863aca4.2335550215332149844083.jpg"
-import item5 from "F:/3rd Year Project/Frontend/project/src/assets/images (5).jpg"
-import item6 from "F:/3rd Year Project/Frontend/project/src/assets/images-9.jpg"
-import item7 from "F:/3rd Year Project/Frontend/project/src/assets/5lb_Promasil_Choc__62208.webp"
-import item8 from "F:/3rd Year Project/Frontend/project/src/assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c131a00-2144-43e6-b87b-1b5eeb2c29ab_grande.webp"
+import item1 from "../../assets/images (3).jpg"
+import item2 from "../../assets/images (2).jpg"
+import item3 from "../../assets/images (4).jpg"
+import item4 from "../../assets/kisspng-dietary-supplement-optimum-nutrition-serious-mass-nutrition-and-supplements-puregym-shop-5b63010863aca4.2335550215332149844083.jpg"
+import item5 from "../../assets/images (5).jpg"
+import item6 from "../../assets/images-9.jpg"
+import item7 from "../../assets/5lb_Promasil_Choc__62208.webp"
+import item8 from "../../assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c131a00-2144-43e6-b87b-1b5eeb2c29ab_grande.webp"
 
 
 const Shakebar = () => {

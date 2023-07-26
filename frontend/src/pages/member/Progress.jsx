@@ -6,7 +6,7 @@ import {GiBodyHeight, GiWeight} from 'react-icons/gi';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 
 
-import BMI from "F:/3rd Year Project/Frontend/project/src/assets/BMI-Calculator.png";
+import BMI from "../../assets/BMI-Calculator.png";
 const Progress = () => {
 
     const pData = [80,80,79,75,70,70 ];

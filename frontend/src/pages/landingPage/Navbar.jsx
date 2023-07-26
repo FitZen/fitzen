@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ListAtIcon from "@mui/icons-material/ListAlt";
 import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
-import logoImg from "F:/3rd Year Project/Frontend/project/src/assets/logo.png";
+import logoImg from "../../assets/logo.png";
 import { Container } from "@mui/material";
 import CustomButton from "./CustomButton";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";

@@ -1,7 +1,7 @@
 import { Box, Container, Typography, TextField, styled } from "@mui/material";
 import React from "react";
 
-import Location from "F:/3rd Year Project/Frontend/project/src/assets/Screenshot 2023-07-23 202423.png"; 
+import Location from "../../assets/Screenshot 2023-07-23 202423.png"; 
 
 
 const color1 = "#000000"; // Black

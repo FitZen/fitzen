@@ -3,9 +3,9 @@ import { styled } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-import Image1 from "F:/3rd Year Project/Frontend/project/src/assets/8-Chest-Exercises-That-Can-Be-Done-Without-A-Bench-1.jpg";
-import Image2 from "F:/3rd Year Project/Frontend/project/src/assets/shutterstock_1139618876-1280x853.jpg";
-import Image3 from "F:/3rd Year Project/Frontend/project/src/assets/GettyImages-470333827-59d7cc980d327a0011d4b715.jpg";
+import Image3 from "../../assets/GettyImages-470333827-59d7cc980d327a0011d4b715.jpg";
+import Image1 from "../../assets/8-Chest-Exercises-That-Can-Be-Done-Without-A-Bench-1.jpg";
+import Image2 from "../../assets/shutterstock_1139618876-1280x853.jpg";
 
 const images = [Image1, Image2, Image3];
 

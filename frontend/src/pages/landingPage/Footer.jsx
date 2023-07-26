@@ -1,8 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
-import HighOctaneLogo from "F:/3rd Year Project/Frontend/project/src/assets/download.png";
-import logoImg from "F:/3rd Year Project/Frontend/project/src/assets/logo.png";
+import HighOctaneLogo from "../../assets/download.png";
+import logoImg from "../../assets/logo.png";
 import {FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 
 

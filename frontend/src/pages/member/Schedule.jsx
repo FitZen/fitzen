@@ -3,18 +3,18 @@ import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 import Rating from '@mui/material/Rating';
 
-import item1 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg"
-import item2 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/ben-den-engelsen-YUu9UAcOKZ4-unsplash.jpg"
-import item3 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/christina-wocintechchat-com-SJvDxw0azqw-unsplash.jpg"
-import item4 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/jake-nackos-IF9TK5Uy-KI-unsplash.jpg"
-import item5 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/james-timothy-Kh3aTWwMH1I-unsplash.jpg"
-import item6 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/jonas-kakaroto-KIPqvvTOC1s-unsplash.jpg"
-import item7 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
-import item8 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/roland-cousins-3GTHyh2lo9o-unsplash.jpg"
-import item9 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/stephanie-liverani-Zz5LQe-VSMY-unsplash.jpg"
-import item10 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/jd-mason-2oUiUu5QAys-unsplash.jpg"
-import item11 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/tamarcus-brown-29pFbI_D1Sc-unsplash.jpg"
-import item12 from "F:/3rd Year Project/Frontend/project/src/assets/Trainers/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg"
+import item1 from "../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg"
+import item2 from "../../assets/Trainers/ben-den-engelsen-YUu9UAcOKZ4-unsplash.jpg"
+import item3 from "../../assets/Trainers/christina-wocintechchat-com-SJvDxw0azqw-unsplash.jpg"
+import item4 from "../../assets/Trainers/jake-nackos-IF9TK5Uy-KI-unsplash.jpg"
+import item5 from "../../assets/Trainers/james-timothy-Kh3aTWwMH1I-unsplash.jpg"
+import item6 from "../../assets/Trainers/jonas-kakaroto-KIPqvvTOC1s-unsplash.jpg"
+import item7 from "../../assets/Trainers/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
+import item8 from "../../assets/Trainers/roland-cousins-3GTHyh2lo9o-unsplash.jpg"
+import item9 from "../../assets/Trainers/stephanie-liverani-Zz5LQe-VSMY-unsplash.jpg"
+import item10 from "../../assets/Trainers/jd-mason-2oUiUu5QAys-unsplash.jpg"
+import item11 from "../../assets/Trainers/tamarcus-brown-29pFbI_D1Sc-unsplash.jpg"
+import item12 from "../../assets/Trainers/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg"
 
 
 

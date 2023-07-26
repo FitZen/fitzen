@@ -5,7 +5,7 @@ import CustomButton from "./CustomButton";
 import Navbar from "./Navbar";
 
 // Import the background image
-import firstImg from "F:/3rd Year Project/Frontend/project/src/assets/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg";
+import firstImg from "../../assets/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg";
 
 const color1 = "#000000"; // Black
 const color2 = "#FFFFFF"; // White
