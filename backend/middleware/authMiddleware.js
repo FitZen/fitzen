@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
-// do we have to import dotenv here?
 import { findUserByNic } from '../models/userModel.js';
 
 
@@ -24,4 +23,6 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 
-export default protect;
+export {
+    protect
+};
