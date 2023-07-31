@@ -11,12 +11,14 @@ const images = [Image1, Image2, Image3];
 
 const StyledBox = styled(Box)(({ theme }) => ({
 
-  width: "40%",
-  height: "50%",
+  width: "60%",
+  height: "40%",
   marginTop: "3rem",
-
+  textAlign: "left",
   marginBottom: "5rem",
   padding: "1rem",
+  marginRight: "3rem",
+  marginLeft: "2rem",
  
 }));
 
@@ -33,13 +35,13 @@ function WorkoutTrainers() {
 
   return (
     <Container maxWidth="" style={{ backgroundColor: "#f8f8f8"}}>
-      <Box sx={{ height: "100vh", display: "flex"}}>
-        <Box sx={{ marginTop: "5rem",marginLeft: "2rem" }}>
+      <Box sx={{ height: "100vh", display: "flex", width:"100%"}}>
+        <Box sx={{ marginTop: "5rem",marginLeft: "5rem" }}>
           {/* Animate the image from the right-hand side */}
           <motion.img
             src={images[currentImage]}
             alt="Virtual Gym"
-            style={{ width: "90%", height: "80%", marginTop: "2rem" }}
+            style={{ width: "100%", height: "80%", marginTop: "2rem" }}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 2 }}

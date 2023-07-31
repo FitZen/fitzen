@@ -40,7 +40,7 @@ function VirtualGym() {
             Virtual Gym is a revolutionary fitness platform offering an all-encompassing workout experience from the comfort of one's home. Through cutting-edge technology and a diverse array of virtual workouts, users can access live classes or on-demand sessions, led by expert instructors. The platform fosters a sense of community by enabling real-time interactions with trainers and fellow fitness enthusiasts, enhancing motivation and accountability. With personalized workout plans, progress tracking, and interactive features, Virtual Gym ensures tailored fitness journeys for every individual. This accessible and flexible approach empowers users to maintain a consistent exercise routine regardless of their location or busy schedules, making fitness and well-being achievable for all.
           </Typography>
         </StyledBox>
-        <Box sx={{ marginTop: "5rem" }}>
+        <Box sx={{ marginTop: "5rem", marginLeft:"2%" }}>
           {/* Animate the image from the right-hand side */}
           <motion.img
             src={images[currentImage]}

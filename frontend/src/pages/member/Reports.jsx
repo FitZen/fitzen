@@ -2,6 +2,8 @@ import {React, useState} from "react";
 import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 import { Bar } from 'react-chartjs-2';
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
 
 const Reports = () => {
 
@@ -61,19 +63,29 @@ const Reports = () => {
       
 
   return (
-    <Box >
+
+    <Box sx={{ flex: "1", display:"flex", mb:2}}>
+      <Box>
+        <Sidebar />
+      </Box>
+      
+      <Box component="main" sx={{flex:1 }}>
+        <Box>
+          <Navbar />
+        </Box>
+        <Box sx={{ paddingLeft:"5rem", flex:1 }}>
         <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>Reports</Typography>
         
         <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
             <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
-                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "1%" }}>Monthly Session Overview</Typography>
+                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"center" }}>Monthly Session Overview</Typography>
                 <Box sx={{}}>
                     <Box sx={{display:"flex", justifyContent:"center"}}>
                         <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
                             <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled personal <br /> Workouts </Typography>
                             <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
-                        <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
+                        <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
                             <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed personal <br />Workouts </Typography>
                             <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
@@ -87,7 +99,7 @@ const Reports = () => {
                             <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Scheduled training <br />Workouts </Typography>
                             <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>10 </Typography>
                         </Box>
-                        <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
+                        <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
                             <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Completed training <br />Workouts </Typography>
                             <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                         </Box>
@@ -104,7 +116,7 @@ const Reports = () => {
                
 
             </Box>
-            <Box sx={{width:"25%", height:"100%"}}>
+            <Box sx={{width:"25%", height:"100%", marginLeft:"5%"}}>
               <FormControl>
                   <InputLabel id="demo-simple-select-label">Year</InputLabel>
                   <Select
@@ -148,14 +160,16 @@ const Reports = () => {
                 <MenuItem value="December">December</MenuItem>
               </Select>
             </FormControl>
-      <br />
+             <br />
                 
                 <Button variant="contained" style={{marginTop:"38rem"}}>Contained</Button>
             </Box>
+          </Box>
         </Box>
-
-      
+      </Box>
+     
     </Box>
+
   );
 };
 

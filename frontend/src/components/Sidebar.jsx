@@ -14,20 +14,24 @@ import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Dashboard from '../pages/member/Dashboard';
-import Instructors from '../pages/member/Instructors';
-import Schedule from '../pages/member/Schedule';
-import Progress from '../pages/member/Progress';
-import Shakebar from '../pages/member/Shakebar';
-import Reports from '../pages/member/Reports';
-import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
-import MoreIcon from '@mui/icons-material/MoreVert';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+// import Dashboard from '../pages/member/Dashboard';
+// import Instructors from '../pages/member/Instructors';
+// import Schedule from '../pages/member/Schedule';
+// import Progress from '../pages/member/Progress';
+// import Shakebar from '../pages/member/Shakebar';
+// import Reports from '../pages/member/Reports';
+// import Badge from '@mui/material/Badge';
+// import MailIcon from '@mui/icons-material/Mail';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
+// import MenuItem from '@mui/material/MenuItem';
+// import Menu from '@mui/material/Menu';
+// import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
+// import MoreIcon from '@mui/icons-material/MoreVert';
+// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+// import Notification from '../pages/member/Notification';  
+
+
 
 const drawerWidth = 250;
 
@@ -63,23 +67,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
   width: drawerWidth,
@@ -157,6 +145,10 @@ const footerIcons = {
 }
 
 
+const activeLinkStyle = {
+  backgroundColor: '#cccccc', // Add the background color for the hovered state
+};
+
 
 export default function Sidebar() {
   const theme = useTheme();
@@ -176,177 +168,12 @@ export default function Sidebar() {
     setActivePage(page);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-    handleDrawerClose();
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-      
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge variant="dot" color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge variant="dot" color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          {/* <AccountCircle /> */}
-          <img src={Profile} alt="Profile" width="40px" height="40px"  style={{borderRadius:"50px"}}/>
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
 
     <Box>
-      <AppBar position="static" sx={{ backgroundColor: 'white', height:"60px" }}>
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}>
-              <Badge variant="dot" color="error">
-                <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}
-            >
-              <Badge variant="dot" color="error" style={{marginRight:"10px"}}>
-              <NotificationsIcon style={{ fontSize: "1.2rem", color: "black" }} />
-              </Badge>
-            </IconButton>
-            <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
-                Tharindu Gunawardhana
-                <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
-                  Physical Member
-                </Typography>
-            </Typography>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-       
-              color="inherit"
-            >
-              {/* <AccountCircle /> */}
-              <img src={Profile} alt="Profile" width="50px" height="50px" style={{borderRadius:"50px"}}/>
-            </IconButton>
-           
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              {/* <AccountCircle /> */}
-              <ArrowDropDownIcon style={{color:"#000000"}}/>
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon style={{color:"black"}}/>
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-
-      {renderMobileMenu}
-      {renderMenu}
+      
 
       <Box sx={{ display: 'flex' }}>
           <CssBaseline />
@@ -361,7 +188,7 @@ export default function Sidebar() {
             <Divider />
             <List>
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Dashboard')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaTachometerAlt />
                   </ListItemIconStyled>
@@ -370,7 +197,7 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaUsers />
                   </ListItemIconStyled>
@@ -379,7 +206,7 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Schedule')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Schedule' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaCalendarAlt />
                   </ListItemIconStyled>
@@ -388,7 +215,7 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Progress')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Progress' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaChartLine />
                   </ListItemIconStyled>
@@ -397,7 +224,7 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaCocktail />
                   </ListItemIconStyled>
@@ -406,7 +233,7 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
-                <ListItemButtonStyled theme={theme} open={open}>
+                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaClipboardList />
                   </ListItemIconStyled>
@@ -424,19 +251,11 @@ export default function Sidebar() {
 
           </Drawer>
 
-          <Box component="main" sx={{ paddingLeft:"5rem", flex:1 }}>
-            {activePage === 'Dashboard' && <Dashboard />}
-            {activePage === 'Instructors' && <Instructors />}
-            {activePage === 'Schedule' && <Schedule />}
-            {activePage === 'Progress' && <Progress />}
-            {activePage === 'Shakebar' && <Shakebar />}
-            {activePage === 'Reports' && <Reports />}
-          </Box>
-
+          
           
         </Box>
   </Box>
-
+  
     
       
     

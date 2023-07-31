@@ -4,6 +4,8 @@ import { Typography } from "@mui/material";
 import { LineChart } from '@mui/x-charts/LineChart';
 import {GiBodyHeight, GiWeight} from 'react-icons/gi';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
 
 
 import BMI from "../../assets/BMI-Calculator.png";
@@ -23,7 +25,18 @@ const Progress = () => {
 
  
   return (
-    <Box sx={{ flex: "1", width:"100%"}}>
+
+    <Box sx={{ flex: "1", display:"flex", mb:2}}>
+      <Box>
+        <Sidebar />
+      </Box>
+      
+      <Box component="main" sx={{flex:1 }}>
+        <Box>
+          <Navbar />
+        </Box>
+        <Box sx={{ paddingLeft:"5rem", flex:1 }}>
+            
         <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Progress</Typography>
         <Box sx={{display:"flex", width:"100%"}}>
             <Box sx={{width:"50%", marginRight:"5rem"}}>
@@ -90,8 +103,13 @@ const Progress = () => {
                 </Box>
             </Box>
         </Box>
-      
+
+        </Box>
+      </Box>
+     
     </Box>
+
+ 
   );
 };
 
