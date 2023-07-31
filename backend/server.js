@@ -30,7 +30,9 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 
 
-app.get('/', (req, res) => res.send('Server is ready'));
+app.get('/', (req, res) => {
+    res.send('Server is ready')
+});
 
 
 // error handlers
