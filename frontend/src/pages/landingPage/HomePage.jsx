@@ -1,0 +1,24 @@
+import React from 'react'
+import Hero from './Hero'
+import VirtualGym from './VirtualGym'
+import WorkoutTrainers from './WorkoutTrainers'
+import About from './About'
+import GetStarted from './GetStarted'
+import ContactUs from './ContactUs'
+import Footer from './Footer'
+
+const HomePage = () => {
+  return (
+    <>
+        <Hero />
+        <VirtualGym />
+        <WorkoutTrainers />
+        <About />
+        <GetStarted />
+        <ContactUs />
+        <Footer />
+    </>
+  )
+}
+
+export default HomePage;

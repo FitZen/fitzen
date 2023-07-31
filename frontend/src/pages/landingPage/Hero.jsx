@@ -14,7 +14,7 @@ const color3 = "#FF0000"; // Red
 const Hero = () => {
   const CustomBackgroundBox = styled(Box)(({ theme }) => ({
     position: "relative",
-    minHeight: "100vh",
+    minHeight: "90vh",
     backgroundImage: `url(${firstImg})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -34,7 +34,7 @@ const Hero = () => {
   const CustomContentBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
-    width: "59%",
+    width: "68%",
     gap: theme.spacing(5),
     marginTop: theme.spacing(3),
     
@@ -77,17 +77,17 @@ const Hero = () => {
       <CustomBackgroundBox>
         <Container>
           <CustomContentBox>
-            <Box sx={{ flex: "1", mt: 25, ml: -13 }}>
-              <Title variant="h1">
+            <Box sx={{ flex: "1", mt: 12, ml:9 }}>
+              <Title variant="h1" style={{fontSize:"4rem"}}>
                 Get the best virtual gym experience with us
               </Title>
               <Typography
                 variant="body1" // Changed from "body" to "body1" to use Material-UI typography variants
                 sx={{
-                  fontSize: "20px",
+                  fontSize: "18px",
                   fontWeight: "regular", // Changed from "bold" to "regular"
                   color: color2,
-                  mt: 8,
+                  mt: 6,
                   mb: 4,
                 }}
               >

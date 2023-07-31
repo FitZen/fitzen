@@ -8,7 +8,7 @@ const CustomButton = (backgroundColor, color, buttonText, heroBtn, guideBtn, get
         fontSize: "14px",
         fontWeight: "700",
         marginTop: "3rem",
-        padding: "0.8rem 1rem",
+        padding: "0.6rem 1rem",
         cursor: "pointer",
         borderRadius: "50px",
         textTransform: "none",
