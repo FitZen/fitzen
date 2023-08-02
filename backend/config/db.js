@@ -1,8 +1,11 @@
 import pg from 'pg';
 const { Pool } = pg;
 
+// this is comment
+// this is comment
+// this is comment
 
-// create connection string
+// create connection
 // no need to import .env file
 // since default env variable names are used in .env file for postgres connection
 const pool = new Pool();
