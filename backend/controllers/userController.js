@@ -8,9 +8,9 @@ import {
 } from "../models/userModel.js";
 
 
-// desc    Login user
+// desc    login user
 // route   POST /api/users/login
-// access  Public
+// access  public
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -39,15 +39,15 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
 
-// desc    Logout user
+// desc    logout user
 // route   POST /api/users/logout
-// access  Private (users who only has token/login can access => protected route)
+// access  private (users who only has login/token can access => protected route)
 const logoutUser = asyncHandler(async (req, res) => {
     await setLoginStatus(req.user.id, 'Inactive');
 
     res.cookie('jwt', '', {
         httpOnly: true,
-        expires: new Date(Date.now())
+        expires: new Date(0)
     });
 
     res.status(200).json({message: 'User logged out'});
@@ -55,10 +55,9 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 
 // This made for test the protected routes
-
-// desc    Get user profile
+// desc    get user profile
 // route   GET /api/users/profile
-// access  Private
+// access  private
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = {
         id: req.user.id,
