@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken';
-// do we have to import dotenv here?
 
 
 // generate token
-const generateToken = (res, userId) => {
-    const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+const generateToken = (res, id, type) => {
+    const token = jwt.sign({ id, type }, process.env.JWT_SECRET, {
         expiresIn: '30d',
     });
 
