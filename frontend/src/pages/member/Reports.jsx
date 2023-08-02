@@ -5,6 +5,13 @@ import { Bar } from 'react-chartjs-2';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 
+
+
+const color1 = "#102B4C" //dark blue
+const color2 = "#346E93" //light blue
+const color3 = "#96CDEF" //lighter blue
+const color4 = "#DC1E2A" //red 
+
 const Reports = () => {
 
   const [selectedYear, setSelectedYear] = useState('');
@@ -24,8 +31,8 @@ const Reports = () => {
         datasets: [{
           label: 'Sales',
           data: [5, 2, 3, 1, 4, 2, 3,1,2,0,1,1,2,1,3,0,4,1,2,5,4,3,1,2,0,1,2,3,0,0,1],
-          backgroundColor: ['#2C3E50','#5DADE2', '#E74C3C', '#2C3E50', '#5DADE2', '#E74C3C', '#2C3E50'],
-          borderColor: ['#2C3E50','#5DADE2', '#E74C3C', '#2C3E50', '#5DADE2', '#E74C3C', '#2C3E50'],
+          backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+          borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
           borderWidth: 1
         }]
       };

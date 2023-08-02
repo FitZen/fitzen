@@ -58,9 +58,11 @@ export default function PrimarySearchAppBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    > 
+      <Link to="../profile" style={{textDecoration:"none", color:"black"}}>
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -90,31 +92,34 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p style={{fontSize:"13px"}}>Messages</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="1rem"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge variant="dot" color="error">
-            <NotificationsIcon style={{fontSize:"1.5rem"}}/>
-          </Badge>
-        </IconButton>
-        <p style={{fontSize:"13px"}}>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="1rem"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          {/* <AccountCircle /> */}
-          <img src={Profile} alt="Profile" width="35px" height="35px"  style={{borderRadius:"50px", marginLeft:"-0.4rem"}}/>
-        </IconButton>
-        <p style={{fontSize:"13px"}}>Profile</p>
-      </MenuItem>
+      <Link to="../notification" style={{textDecoration:"none", color:"black"}}>
+        <MenuItem>
+            <IconButton
+              size="1rem"
+              color="inherit"
+            >
+              <Badge variant="dot" color="error">
+                <NotificationsIcon style={{fontSize:"1.5rem"}}/>
+              </Badge>
+            </IconButton>
+            <p style={{fontSize:"13px"}}>Notifications</p>
+        </MenuItem>
+      </Link>
+      <Link to="../profile" style={{textDecoration:"none", color:"black"}}>
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="1rem"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            {/* <AccountCircle /> */}
+            <img src={Profile} alt="Profile" width="35px" height="35px"  style={{borderRadius:"50px", marginLeft:"-0.4rem"}}/>
+          </IconButton>
+          <p style={{fontSize:"13px"}}>Profile</p>
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -130,7 +135,7 @@ export default function PrimarySearchAppBar() {
                 <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
               </Badge>
             </IconButton>
-            <Link to="../pages/member/Notification.jsx" style={{textDecoration:"none"}}>
+            <Link to="../notification" style={{textDecoration:"none", color:"black"}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -158,7 +163,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               {/* <AccountCircle /> */}
-              <img src={Profile} alt="Profile" width="50px" height="50px" style={{borderRadius:"50px"}}/>
+              <img src={Profile} alt="Profile" width="40px" height="40px" style={{borderRadius:"50px"}}/>
             </IconButton>
            
             <IconButton
