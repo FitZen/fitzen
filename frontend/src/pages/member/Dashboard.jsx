@@ -9,6 +9,11 @@ import {GoGoal} from 'react-icons/go';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 
+const color1 = "#102B4C" //dark blue
+const color2 = "#346E93" //light blue
+const color3 = "#96CDEF" //lighter blue
+const color4 = "#DC1E2A" //red 
+
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
@@ -19,8 +24,8 @@ const Dashboard = () => {
     datasets: [{
       label: 'Sales',
       data: [5, 2, 3, 1, 4, 2, 3],
-      backgroundColor: ['#2C3E50','#5DADE2', '#E74C3C', '#2C3E50', '#5DADE2', '#E74C3C', '#2C3E50'],
-      borderColor: ['#2C3E50','#5DADE2', '#E74C3C', '#2C3E50', '#5DADE2', '#E74C3C', '#2C3E50'],
+      backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+      borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
       borderWidth: 1
     }]
   };
@@ -49,7 +54,7 @@ const Dashboard = () => {
     labels: ['Completed', 'Upcoming', 'Cancelled', 'Total'],
     datasets: [{
       data: [65, 59, 80, 81],
-      backgroundColor: ['#52BE80 ','#5DADE2', '#E74C3C', '#F1C40F'],
+      backgroundColor: [`${color3}`,`${color2}`, `${color4}`, `${color1}`],
       borderColor: '#000',
       borderWidth: 0
     }]
@@ -123,7 +128,7 @@ const Dashboard = () => {
               <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
               <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
               <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:"#58D68D", borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"20rem", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
+              <Box style={{display:"flex", backgroundColor:`${color3}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
                 <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Completed </Typography>
                 <FaCheckCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
               </Box>
@@ -133,7 +138,7 @@ const Dashboard = () => {
               <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
               <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
               <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:"#F1C40F", borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"20rem", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
+              <Box style={{display:"flex", backgroundColor:`${color2}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
                 <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Pending </Typography>
                 <FaClock style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
               </Box>
@@ -143,9 +148,9 @@ const Dashboard = () => {
               <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
               <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
               <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:"#E74C3C", borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"20rem", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
+              <Box style={{display:"flex", backgroundColor:`${color4}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
                 <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Cancelled </Typography>
-                <FaTimesCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
+                <FaTimesCircle style={{ fontSize: '1rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
               </Box>
             
             </Box>
