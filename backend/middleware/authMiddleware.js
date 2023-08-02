@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
-import { findUserByNic } from '../models/userModel.js';
+import { findUserById } from '../models/userModel.js';
 
 
 const protect = asyncHandler(async (req, res, next) => {
@@ -9,8 +9,9 @@ const protect = asyncHandler(async (req, res, next) => {
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            const nic = decoded.userId;
-            req.user = await findUserByNic(nic);
+            const id = decoded.id;
+            const type = decoded.type;
+            req.user = await findUserById(id);
             next();
         } catch (error) {
             res.status(401);
