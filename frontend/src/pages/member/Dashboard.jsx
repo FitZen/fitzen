@@ -102,16 +102,16 @@ const Dashboard = () => {
           
           
           
-          <Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem", overflowY: "auto"}}>
-            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:4, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {borderColor: 'gold',transition: "ease 0.5s"}}}>
+          <Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem"}}>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:4, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
               <FaRegAddressCard size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
               <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Membership</Typography>
             </Box>
-            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {borderColor: 'gold', transition: "ease 0.5s"}}}>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
               <IoFastFoodOutline size={120} style={{textAlign:"left", marginLeft:"5", marginTop:"5%"}}/>
               <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Meal Plan</Typography>
             </Box>
-            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {borderColor: 'gold', transition: "ease 0.5s"}}}>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
               <GoGoal size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
               <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Membership</Typography>
             </Box>

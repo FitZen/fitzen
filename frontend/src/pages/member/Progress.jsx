@@ -66,7 +66,7 @@ const Progress = () => {
                 </Box>
             </Box>
             <Box sx={{width:"100%" , justifyContent:"center", alignItems:"center"}}>
-                <Box sx={{width:"85%" , border: "1px solid white", padding:"1rem",paddingBottom:"2rem", marginLeft:"2rem",cursor:"pointer", marginTop:"1rem", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: 'yellow', backgroundColor:"#E5E8E8", transition: "ease 0.5s"} }}>
+                <Box sx={{width:"85%" , border: "1px solid white", padding:"1rem",paddingBottom:"2rem", marginLeft:"2rem",cursor:"pointer", marginTop:"1rem", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"} }}>
                     <Typography variant="h6" style={{ fontWeight: 700 }}>Current Body Status</Typography>
                     <Box sx={{display:"flex", justifyContent:"center", marginTop:"2rem"}}>
                         <Box sx={{width:"14rem" , height:"8rem", display:"flex", padding:"1rem", marginRight:"1rem", borderRadius:"10px", boxShadow: 'rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em',}}>
@@ -86,15 +86,15 @@ const Progress = () => {
                     </Box>
 
                 </Box>
-                <Box sx={{width:"85%" , border: "1px solid white", padding:"1rem",paddingBottom:"2rem", marginLeft:"2rem",marginBottom:"1em", marginTop:"7rem", borderRadius:"10px",cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px','&:hover': {borderColor: 'yellow', backgroundColor:"#E5E8E8", transition: "ease 0.5s"}}}>
+                <Box sx={{width:"85%" , border: "1px solid white", padding:"1rem",paddingBottom:"2rem", marginLeft:"2rem",marginBottom:"1em", marginTop:"7rem", borderRadius:"10px",justifyContent:"center", alignItems:"center", textAlign:"center",cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px','&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Typography variant="h6" style={{ fontWeight: 700 }}>Body Mass Index</Typography>
-                    <img src={BMI} alt="BMI" width="70%" height="70%"  style={{borderRadius:"50px", marginTop:"0.5rem"}}/>
-                    <Box sx={{display:"flex", justifyContent:"center"}}>
+                    <img src={BMI} alt="BMI" width="70%" height="70%"  style={{borderRadius:"50px", marginTop:"0.5rem", }}/>
+                    <Box sx={{display:"flex", justifyContent:"center", textAlign:"center"}}>
                         <Box sx={{boxShadow: 'rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em', width:"30%", borderRadius:"20px", marginRight:"2rem"}}>
                             <Typography variant="h6" style={{ fontWeight: 700, marginTop: "1rem" }}>Your status</Typography>
                             <SentimentVerySatisfiedOutlinedIcon style={{fontSize:"5rem"}}/>
                         </Box>
-                        <Box sx={{boxShadow: 'rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em', width:"30%", borderRadius:"20px",}}>
+                        <Box sx={{boxShadow: 'rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em', width:"30%", borderRadius:"20px",textAlign:"center"}}>
                             <Typography variant="h6" style={{ fontWeight: 700, marginTop: "1rem" }}>20.5</Typography>
                             <Typography variant="h6" style={{ fontWeight: 700, marginTop: "1.5rem" }}>Normal</Typography>
                         </Box>

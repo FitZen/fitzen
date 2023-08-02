@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Logo from '../assets/logo.png';
+import BGImg from '../assets/Trainers/valery-sysoev-LDAirERNzew-unsplash.jpg';
 
 function Copyright(props) {
   return (
@@ -47,30 +49,32 @@ export default function SignInSide() {
         <Grid
           item
           xs={false}
-          sm={4}
+          sm={{display:"none"}}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: `url(${BGImg})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            objectFit: 'cover',
           }}
         />
-        <Grid item xs={12} sm={10} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
-              mx: 4,
+              mx: 12,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} >
+              <LockOutlinedIcon xs={false}/>
             </Avatar>
+            <Box component="img" src={Logo} sx={{ width: 200, height: 100 }} />
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -103,9 +107,10 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+               
+                sx={{ mt: 3, mb: 2,  backgroundColor:"#000000" }}
               >
-                Sign In
+                Log In
               </Button>
               <Grid container>
                 <Grid item xs>
