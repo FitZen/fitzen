@@ -186,7 +186,7 @@ export default function Sidebar() {
             </DrawerHeader>
             <Divider />
             <List>
-              <Link to="/dashboard" style={{textDecoration:"none"}}> 
+              <Link to="/member/dashboard" style={{textDecoration:"none"}}> 
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Dashboard')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -197,7 +197,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="/instructors" style={{textDecoration:"none"}}>
+              <Link to="/member/instructors" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -208,7 +208,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
               
-              <Link to="/schedule" style={{textDecoration:"none"}}>
+              <Link to="/member/schedule" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Schedule')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Schedule' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -219,7 +219,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="/progress" style={{textDecoration:"none"}}>
+              <Link to="/member/progress" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Progress')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Progress' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -230,7 +230,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="/shakebar" style={{textDecoration:"none"}}>
+              <Link to="/member/shakebar" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -241,7 +241,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="/reports" style={{textDecoration:"none"}}>
+              <Link to="/member/reports" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
                 <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
