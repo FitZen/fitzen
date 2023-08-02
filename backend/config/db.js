@@ -4,6 +4,8 @@ const { Pool } = pg;
 // this is comment
 // this is comment
 // this is comment
+// this is comment
+// this is comment
 
 // create connection
 // no need to import .env file
