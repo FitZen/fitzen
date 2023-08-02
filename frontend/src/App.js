@@ -17,6 +17,7 @@ import Schedule from './pages/member/Schedule';
 import Notification from './pages/member/Notification';
 import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
+import Login from './components/Login';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -25,6 +26,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/instructors" element={<Instructors />} />
