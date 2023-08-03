@@ -150,7 +150,7 @@ const Dashboard = () => {
               <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
               <Box style={{display:"flex", backgroundColor:`${color4}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
                 <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Cancelled </Typography>
-                <FaTimesCircle style={{ fontSize: '1rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
+                <FaTimesCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
               </Box>
             
             </Box>

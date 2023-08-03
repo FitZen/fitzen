@@ -18,6 +18,7 @@ import Notification from './pages/member/Notification';
 import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
+import EditProfile from './pages/member/EditProfile';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -36,8 +37,7 @@ function App() {
         <Route path="/member/schedule" element={<Schedule />} />
         <Route path="/member/notification" element={<Notification />} />
         <Route path="/member/profile" element={<Profile />} />
-
-        
+        <Route path="/member/editProfile" element={<EditProfile />} />
 
       </Routes>
     </>

@@ -1,0 +1,131 @@
+import React from "react";
+import Box from "@mui/material/Box";
+import { InputLabel, Typography, Select, MenuItem, Button } from "@mui/material";
+import {FaTelegram, FaFeatherAlt, FaCamera} from 'react-icons/fa';
+import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
+import {PiMedalFill} from 'react-icons/pi';
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
+import {FaUserEdit} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import {Grid} from '@mui/material';
+import TextField from '@mui/material/TextField';
+
+const color1 = "#102B4C" //dark blue
+const color2 = "#346E93" //light blue
+const color3 = "#96CDEF" //lighter blue
+const color4 = "#DC1E2A" //red 
+
+const Profile = () => {
+
+  const [gender, setGender] = React.useState('');
+  const [selectedDate, setSelectedDate] = React.useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+
+  return (
+
+
+    <Box sx={{ flex: "1", display:"flex", mb:2}}>
+      <Box>
+        <Sidebar />
+      </Box>
+      
+      <Box component="main" sx={{flex:1 }}>
+        <Box>
+          <Navbar />
+        </Box>
+        <Box sx={{ paddingLeft:"5rem", flex:1, width:"100%"}}>
+           
+        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Edit Profile</Typography>
+        <Grid container spacing={2} style={{marginTop:"1rem", width:"100%"}}>
+            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
+                <Grid md={5} sx={{marginRight:"20%", display:"flex"}}>
+                    <img src={ProfileImg} alt="Profile" width="300px"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
+                    <FaCamera size={35} style={{cursor:"pointer"}}/>
+                </Grid>    
+                <Grid md={7}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>First Name:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Last Name:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>NIC:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
+                <Grid md={5} sx={{marginRight:"20%"}}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Gender:</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={gender}
+                        size="small"
+                        style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}
+        
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={10}>Male</MenuItem>
+                        <MenuItem value={20}>Female</MenuItem>
+                      
+                    </Select>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Height(cm):</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership ID:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>    
+                <Grid md={7}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Date of Birth:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Weight(KG):</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership Type:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
+                <Grid md={5} sx={{marginRight:"20%"}}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Contact Number:</InputLabel>
+                    <TextField type="dropdown" variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Email:</InputLabel>
+                    <TextField type="email" variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>    
+                <Grid md={7}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Emergency Contact Number:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Address:</InputLabel>
+                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
+                <Grid md={12} sx={{marginRight:"14%"}}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Medical Conditions:</InputLabel>
+                    <TextField type="dropdown" variant="outlined" size="small" multiline rows="4" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} md={12} sx={{display:"flex", marginBottom:"5%", marginTop:"2%"}}>
+                <Box sx={{display:"block",textAlign:"left", marginRight:"25%"}}>
+                    <Link to="/profile" style={{}}>Change Password</Link><br />
+                    <Link to="" style={{marginLeft:""}}>Delete Account</Link>
+                </Box>
+                <Button variant="contained" style={{backgroundColor: color2, justifyContent:"center"}}> Save changes </Button>
+            </Grid>
+
+        </Grid>    
+    
+        
+        </Box>
+      </Box>
+     
+    </Box>
+
+  );
+};
+
+export default Profile;
