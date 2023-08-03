@@ -10,6 +10,9 @@ import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {Grid} from '@mui/material';
 import TextField from '@mui/material/TextField';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -19,11 +22,8 @@ const color4 = "#DC1E2A" //red
 const Profile = () => {
 
   const [gender, setGender] = React.useState('');
-  const [selectedDate, setSelectedDate] = React.useState(null);
+  const [value, setValue] = React.useState(null);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
   const handleChange = (event) => {
     setGender(event.target.value);
@@ -51,12 +51,12 @@ const Profile = () => {
                     <FaCamera size={35} style={{cursor:"pointer"}}/>
                 </Grid>    
                 <Grid md={7}>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>First Name:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Last Name:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>NIC:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>First Name:</InputLabel>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Last Name:</InputLabel>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>NIC:</InputLabel>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
@@ -67,8 +67,8 @@ const Profile = () => {
                         id="demo-simple-select"
                         value={gender}
                         size="small"
-                        style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}
-        
+                        style={{marginTop:"0.5rem", width:"97%", height:"", marginBottom:"0.5rem", borderRadius:"5px", border:"0.01px solid"}}
+                        
                         onChange={handleChange}
                     >
                         <MenuItem value={10}>Male</MenuItem>
@@ -76,37 +76,46 @@ const Profile = () => {
                       
                     </Select>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Height(cm):</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership ID:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>    
                 <Grid md={7}>
+
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Date of Birth:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker 
+                            label=""
+                            value={value}
+                            onChange={(newValue) => setValue(newValue)} 
+                            renderInput={(params) => <TextField {...params}  inputProps={{style:{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid red"}}} />}
+                        />
+                    </LocalizationProvider>
+                    
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Weight(KG):</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership Type:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={5} sx={{marginRight:"20%"}}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Contact Number:</InputLabel>
-                    <TextField type="dropdown" variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Email:</InputLabel>
-                    <TextField type="email" variant="outlined" size="small" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>    
                 <Grid md={7}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Emergency Contact Number:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Address:</InputLabel>
-                    <TextField variant="outlined" size="small" style={{marginTop:"0.5rem", width:"70%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={12} sx={{marginRight:"14%"}}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Medical Conditions:</InputLabel>
-                    <TextField type="dropdown" variant="outlined" size="small" multiline rows="4" style={{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid"}}/>
+                    <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:1000,border:"1px solid", borderRadius:"5px", outline:"none"}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", marginBottom:"5%", marginTop:"2%"}}>
@@ -114,7 +123,7 @@ const Profile = () => {
                     <Link to="/profile" style={{}}>Change Password</Link><br />
                     <Link to="" style={{marginLeft:""}}>Delete Account</Link>
                 </Box>
-                <Button variant="contained" style={{backgroundColor: color2, justifyContent:"center"}}> Save changes </Button>
+                <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Save changes </Button>
             </Grid>
 
         </Grid>    
