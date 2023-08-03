@@ -19,6 +19,10 @@ import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
 
+import SDashboard from './pages/shakebarmanager/Dashboard';
+
+
+
 import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -37,8 +41,8 @@ function App() {
         <Route path="/notification" element={<Notification />} />
         <Route path="/profile" element={<Profile />} />
 
-        
 
+        <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />
       </Routes>
     </>
    
