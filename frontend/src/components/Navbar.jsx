@@ -59,7 +59,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     > 
-      <Link to="../profile" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
@@ -92,7 +92,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p style={{fontSize:"13px"}}>Messages</p>
       </MenuItem>
-      <Link to="../notification" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
         <MenuItem>
             <IconButton
               size="1rem"
@@ -105,7 +105,7 @@ export default function PrimarySearchAppBar() {
             <p style={{fontSize:"13px"}}>Notifications</p>
         </MenuItem>
       </Link>
-      <Link to="../profile" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             size="1rem"
@@ -135,7 +135,7 @@ export default function PrimarySearchAppBar() {
                 <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
               </Badge>
             </IconButton>
-            <Link to="../notification" style={{textDecoration:"none", color:"black"}}>
+            <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"

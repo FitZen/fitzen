@@ -2,14 +2,14 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
-import Profile from '../../assets/photo-1633332755192-727a05c4013d.jpg';
+import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
+import {FaUserEdit} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const Instructors = () => {
-
-
+const Profile = () => {
 
   return (
 
@@ -28,13 +28,19 @@ const Instructors = () => {
         <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Profile</Typography>
         <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                <img src={Profile} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
+                <img src={ProfileImg} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
             </Box>
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", marginLeft:"0%", justifyContent:"center"}}>
                 
-                <Typography variant="h5" style={{ fontWeight: 700, textAlign:"left", marginLeft:"-5rem" }}><PiMedalFill style={{marginTop: "1rem"}}/>  Personal Information</Typography>
+                <Link to="/member/editprofile" style={{textDecoration:"none", color:"black"}}>
+                  <Box style={{display:"flex"}}>
+                    <Typography variant="h5" style={{ fontWeight: 700, textAlign:"left", marginLeft:"-5rem" }}><PiMedalFill style={{marginTop: "1rem"}}/>  Personal Information</Typography>
+                    <FaUserEdit size={20} style={{marginTop:"3.5%", marginLeft:"40%", marginRight:"1%"}}/>
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 700, textAlign:"right", marginLeft:"0%", marginTop:"3.2%" }}> Edit Profile</Typography>
+                  </Box>  
+                </Link>
                 <Box sx={{display: "flex", marginLeft:"4rem"}}>
-                    <Box>
+                    <Box >
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: Tharindu Gunawardhana</Typography>
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: 29</Typography>
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>NIC: 986542135V</Typography>
@@ -85,4 +91,4 @@ const Instructors = () => {
   );
 };
 
-export default Instructors;
+export default Profile;

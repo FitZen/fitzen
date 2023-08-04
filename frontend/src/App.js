@@ -18,6 +18,7 @@ import Notification from './pages/member/Notification';
 import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
+import EditProfile from './pages/member/EditProfile';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -27,17 +28,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/homePage" element={<HomePage />} />
-        <Route path="/instructors" element={<Instructors />} />
-        <Route path="/progress" element={<Progress />} />
-        <Route path="/shakebar" element={<Shakebar />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/notification" element={<Notification />} />
-        <Route path="/profile" element={<Profile />} />
-
-        
+        <Route path="/member/dashboard" element={<Dashboard />} />
+        <Route path="/member/homePage" element={<HomePage />} />
+        <Route path="/member/instructors" element={<Instructors />} />
+        <Route path="/member/progress" element={<Progress />} />
+        <Route path="/member/shakebar" element={<Shakebar />} />
+        <Route path="/member/reports" element={<Reports />} />
+        <Route path="/member/schedule" element={<Schedule />} />
+        <Route path="/member/notification" element={<Notification />} />
+        <Route path="/member/profile" element={<Profile />} />
+        <Route path="/member/editProfile" element={<EditProfile />} />
 
       </Routes>
     </>
