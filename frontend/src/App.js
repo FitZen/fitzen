@@ -22,6 +22,7 @@ import EditProfile from './pages/member/EditProfile';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
+import AdminMembers from './pages/admin/Members';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -44,6 +45,7 @@ function App() {
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
+        <Route path="/admin/members" element={<AdminMembers />} />
       </Routes>
     </>
    

@@ -201,7 +201,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
+              <Link to="/admin/members" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
                 <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Members' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
