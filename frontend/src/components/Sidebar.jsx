@@ -114,6 +114,11 @@ const SidebarLink = styled(Typography)({
   lineHeight: 2, // Set the line height
 });
 
+const activeLinkStyle = {
+  backgroundColor: '#cccccc', // Add the background color for the hovered state
+  color:'#000000'
+};
+
 
 const ListItemButtonStyled = styled(ListItemButton)(({ theme, open }) => ({
   minHeight: 48,
@@ -144,15 +149,13 @@ const footerIcons = {
 }
 
 
-const activeLinkStyle = {
-  backgroundColor: '#cccccc', // Add the background color for the hovered state
-};
+
 
 
 export default function Sidebar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-  const [activePage, setActivePage] = useState();
+  const [open, setOpen] = useState(true);
+  const [activePage, setActivePage] = useState('Dashboard');
 
 
   const handleDrawerClose = () => {
@@ -166,6 +169,7 @@ export default function Sidebar() {
   const handleMenuItemClick = (page) => {
     setActivePage(page);
   };
+
 
 
 
@@ -186,8 +190,8 @@ export default function Sidebar() {
             </DrawerHeader>
             <Divider />
             <List>
-              <Link to="/member/dashboard" style={{textDecoration:"none"}}> 
-                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Dashboard')}>
+              <Link to="/member/dashboard" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
+                <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaTachometerAlt />
@@ -197,8 +201,8 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="/member/instructors" style={{textDecoration:"none"}}>
-                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
+              <Link to="/member/instructors" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Instructors')}>
+                <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaUsers />
