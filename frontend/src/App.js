@@ -20,6 +20,9 @@ import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
 import EditProfile from './pages/member/EditProfile';
 
+import AdminDashboard from './pages/admin/Dashboard';
+import AdminProfile from './pages/admin/Profile';
+
 import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -39,6 +42,8 @@ function App() {
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
 
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/profile" element={<AdminProfile />} />
       </Routes>
     </>
    
