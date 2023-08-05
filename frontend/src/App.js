@@ -19,6 +19,7 @@ import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
 import EditProfile from './pages/member/EditProfile';
+import Packages from './pages/member/Packages';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/member/notification" element={<Notification />} />
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
+        <Route path="/member/packages" element={<Packages />} />
 
 
         <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />
