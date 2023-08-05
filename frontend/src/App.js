@@ -24,6 +24,9 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
 import AdminMembers from './pages/admin/Members';
 
+import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
+import ReceiptionistProfile from './pages/receiptionist/Profile';
+
 import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -46,6 +49,9 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
         <Route path="/admin/members" element={<AdminMembers />} />
+
+        <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
+        <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
       </Routes>
     </>
    
