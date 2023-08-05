@@ -5,14 +5,14 @@ import {
     logoutUser,
     getUserProfile,
 } from "../controllers/userController.js";
-import { protect } from "../middleware/authMiddleware.js";
+import { protect, permit } from "../middleware/authMiddleware.js";
 
 
 // '/api/users' is connected to this file
 // therefore no need to add '/api/users' in the routes
 router.post("/login", loginUser);
 router.post("/logout", protect, logoutUser);
-router.get("/profile", protect, getUserProfile);
+router.get("/profile", protect, permit('Admin', 'Trainer'), getUserProfile);
 
 
 export default router;
