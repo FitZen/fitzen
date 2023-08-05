@@ -27,6 +27,13 @@ import AdminMembers from './pages/admin/Members';
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
 
+import SDashboard from './pages/shakebarmanager/Dashboard';
+import Orders from './pages/shakebarmanager/Orders';
+import Items from './pages/shakebarmanager/Items';
+import SReports from './pages/shakebarmanager/Reports';
+import SProfile from './pages/shakebarmanager/Profile';
+import AddnewItem from './pages/shakebarmanager/AddnewItem';
+
 import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -45,6 +52,15 @@ function App() {
         <Route path="/member/notification" element={<Notification />} />
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
+
+
+        <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />
+        <Route path="/shakebarmanager/orders" element={<Orders />} />
+        <Route path="/shakebarmanager/items" element={<Items />} />
+        <Route path="/shakebarmanager/reports" element={<SReports />} />
+        <Route path="/shakebarmanager/profile" element={<SProfile />} />
+        <Route path="/shakebarmanager/addnewitem" element={<AddnewItem />} />
+
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
