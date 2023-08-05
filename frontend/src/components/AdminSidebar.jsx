@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaTachometerAlt, FaUsers, FaCalendarAlt, FaChartLine, FaCocktail, FaClipboardList, FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
+import { FaBars, FaTachometerAlt, FaUsers, FaUserEdit, FaUserFriends, FaCocktail, FaBullhorn, FaBookmark, FaBookOpen, FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 import Logo from '../assets/logo.png';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -190,7 +190,7 @@ export default function Sidebar() {
             </DrawerHeader>
             <Divider />
             <List>
-              <Link to="/member/dashboard" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
+              <Link to="/admin/dashboard" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
                 <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -201,40 +201,40 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="/member/instructors" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Instructors')}>
+              <Link to="/admin/members" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
                 <ListItem disablePadding sx={{ display: 'block' }} >
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Members' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaUsers />
+                    </ListItemIconStyled>
+                    {open && <SidebarLink variant="subtitle1" component="span">Members</SidebarLink>}
+                  </ListItemButtonStyled>
+                </ListItem>
+              </Link>
+              
+              <Link to="" style={{textDecoration:"none"}}>
+                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
+                    <ListItemIconStyled open={open}>
+                      <FaUserFriends />
                     </ListItemIconStyled>
                     {open && <SidebarLink variant="subtitle1" component="span">Instructors</SidebarLink>}
                   </ListItemButtonStyled>
                 </ListItem>
               </Link>
-              
-              <Link to="/member/schedule" style={{textDecoration:"none"}}>
-                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Schedule')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Schedule' ? activeLinkStyle : {}}>
+
+              <Link to="" style={{textDecoration:"none"}}>
+                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Employee')}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Employee' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
-                      <FaCalendarAlt />
+                      <FaUserEdit/>
                     </ListItemIconStyled>
-                    {open && <SidebarLink variant="subtitle1" component="span">Schedule</SidebarLink>}
+                    {open && <SidebarLink variant="subtitle1" component="span">Employee</SidebarLink>}
                   </ListItemButtonStyled>
                 </ListItem>
               </Link>
 
-              <Link to="/member/progress" style={{textDecoration:"none"}}>
-                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Progress')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Progress' ? activeLinkStyle : {}}>
-                    <ListItemIconStyled open={open}>
-                      <FaChartLine />
-                    </ListItemIconStyled>
-                    {open && <SidebarLink variant="subtitle1" component="span">Progress</SidebarLink>}
-                  </ListItemButtonStyled>
-                </ListItem>
-              </Link>
-
-              <Link to="/member/shakebar" style={{textDecoration:"none"}}>
+              <Link to="" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -245,11 +245,33 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="/member/reports" style={{textDecoration:"none"}}>
+              <Link to="" style={{textDecoration:"none"}}>
+                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Announcement')}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Announcement' ? activeLinkStyle : {}}>
+                    <ListItemIconStyled open={open}>
+                      <FaBullhorn />
+                    </ListItemIconStyled>
+                    {open && <SidebarLink variant="subtitle1" component="span">Announcement</SidebarLink>}
+                  </ListItemButtonStyled>
+                </ListItem>
+              </Link>
+
+              <Link to="" style={{textDecoration:"none"}}>
+                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Complaints')}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Complaints' ? activeLinkStyle : {}}>
+                    <ListItemIconStyled open={open}>
+                      <FaBookmark />
+                    </ListItemIconStyled>
+                    {open && <SidebarLink variant="subtitle1" component="span">Complaints</SidebarLink>}
+                  </ListItemButtonStyled>
+                </ListItem>
+              </Link>
+
+              <Link to="" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
                 <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
-                    <FaClipboardList />
+                    <FaBookOpen />
                   </ListItemIconStyled>
                   {open && <SidebarLink variant="subtitle1" component="span">Reports</SidebarLink>}
                 </ListItemButtonStyled>
@@ -257,7 +279,7 @@ export default function Sidebar() {
               </Link>
             </List>
 
-            <Box sx={{ display: open? 'flex' : 'none', marginTop: '120%',width:"100%", justifyContent:"center", alignItems:"center",textAlign:"center", marginLeft:"0.5rem"}}>
+            <Box sx={{ display: open? 'flex' : 'none', marginTop: '90%',width:"100%", justifyContent:"center", alignItems:"center",textAlign:"center", marginLeft:"0.5rem"}}>
 
               <FaFacebook style={footerIcons}/>
               <FaInstagramSquare style={footerIcons}/>

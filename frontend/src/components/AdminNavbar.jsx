@@ -59,7 +59,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     > 
-      <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/admin/profile" style={{textDecoration:"none", color:"black"}}>
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
@@ -92,7 +92,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p style={{fontSize:"13px"}}>Messages</p>
       </MenuItem>
-      <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+      <Link to="" style={{textDecoration:"none", color:"black"}}>
         <MenuItem>
             <IconButton
               size="1rem"
@@ -105,7 +105,7 @@ export default function PrimarySearchAppBar() {
             <p style={{fontSize:"13px"}}>Notifications</p>
         </MenuItem>
       </Link>
-      <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/admin/profile" style={{textDecoration:"none", color:"black"}}>
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             size="1rem"
@@ -135,7 +135,7 @@ export default function PrimarySearchAppBar() {
                 <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
               </Badge>
             </IconButton>
-            <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+            <Link to="" style={{textDecoration:"none", color:"black"}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -148,9 +148,9 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
             <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
-                Tharindu Gunawardhana
+                Adheesha Chamod
                 <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
-                  Physical Member
+                  Admin
                 </Typography>
             </Typography>
             <IconButton
