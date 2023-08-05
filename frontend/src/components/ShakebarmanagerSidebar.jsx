@@ -231,7 +231,7 @@ export default function Sidebar() {
               </Link>
             </List>
 
-            <Box sx={{ display: open? 'flex' : 'none', marginTop: '120%',width:"100%", justifyContent:"center", alignItems:"center",textAlign:"center", marginLeft:"0.5rem"}}>
+            <Box sx={{ display: open? 'flex' : 'none', marginTop: '140%',width:"100%", justifyContent:"center", alignItems:"center",textAlign:"center", marginLeft:"0.5rem"}}>
 
               <FaFacebook style={footerIcons}/>
               <FaInstagramSquare style={footerIcons}/>
