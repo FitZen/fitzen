@@ -10,7 +10,7 @@ import Menu from '@mui/material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Typography } from '@mui/material';
-import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
+import Profile from '../assets/Shakebarmanager/shakebarmanager.jpg';
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 

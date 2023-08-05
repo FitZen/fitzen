@@ -49,7 +49,7 @@ const Orders = () => {
             <Table style={{ marginTop: '30px', fontSize: '15px' }}>
               <TableHead>
                 <TableRow>
-                  <TableCell style={{ fontSize: '15px' }}><b>Order Id</b></TableCell>
+                  <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Quantity</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
@@ -103,9 +103,9 @@ const Orders = () => {
      
         <div>
           <Tabs style={{ backgroundColor: '#D7D7D7' }} value={value} onChange={handleChange}>
-            <Tab style={{ fontSize: '15px', margin: '0 250px 0 100px' }} label="Pending" />
-            <Tab style={{ fontSize: '15px', marginRight: '250px' }} label="Completed" />
-            <Tab style={{ fontSize: '15px' }} label="Canceled" />
+            <Tab style={{ fontSize: '15px', margin: '0 250px 0 100px',fontWeight: '700' }} label="Pending" />
+            <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Completed" />
+            <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Canceled" />
           </Tabs>
           {value === 0 && renderTable(pendingItems)}
           {value === 1 && renderTable(completedItems)}

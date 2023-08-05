@@ -23,6 +23,8 @@ import SDashboard from './pages/shakebarmanager/Dashboard';
 import Orders from './pages/shakebarmanager/Orders';
 import Items from './pages/shakebarmanager/Items';
 import SReports from './pages/shakebarmanager/Reports';
+import SProfile from './pages/shakebarmanager/Profile';
+import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -47,6 +49,9 @@ function App() {
         <Route path="/shakebarmanager/orders" element={<Orders />} />
         <Route path="/shakebarmanager/items" element={<Items />} />
         <Route path="/shakebarmanager/reports" element={<SReports />} />
+        <Route path="/shakebarmanager/profile" element={<SProfile />} />
+        <Route path="/shakebarmanager/addnewitem" element={<AddnewItem />} />
+
 
       </Routes>
     </>
