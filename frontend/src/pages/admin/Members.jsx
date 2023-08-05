@@ -143,7 +143,7 @@ const Members = () => {
                             width={500}
                             height={400}
                             series={[
-                                { data: pData, label: 'Income (Rs)', color: color2 , curve: 'linear'  },
+                                { data: pData, label: 'Members', color: color2 , curve: 'linear'  },
                                 
                             ]}
                             xAxis={[{ scaleType: 'point', data: xLabels }]}
@@ -171,7 +171,7 @@ const Members = () => {
                             width={500}
                             height={400}
                             series={[
-                                { data: pData, label: 'Income (Rs)', color: color1 , curve: 'linear'  },
+                                { data: pData, label: 'Members', color: color1 , curve: 'linear'  },
                                 
                             ]}
                             xAxis={[{ scaleType: 'point', data: xLabels }]}
