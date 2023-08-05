@@ -4,7 +4,7 @@ import { Typography, Grid, Button } from "@mui/material";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend,  DoughnutController, ArcElement } from 'chart.js';
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Bar, Doughnut } from 'react-chartjs-2';
-import {FaUsers, FaUserClock, FaMoneyBillWave} from 'react-icons/fa';
+import {FaUsers, FaRunning, FaUserMd} from 'react-icons/fa';
 import ReceiptionistSidebar from "../../components/ReceiptionistSidebar";
 import ReceiptionistNavbar from "../../components/ReceiptionistNavbar";
 
@@ -68,19 +68,18 @@ const Dashboard = () => {
     }
   };
 
-  const pData = [100000, 120000, 125000, 150000, 200000, 220000, 230000, 150000 ];
+  const memberData = [200, 120, 125, 90, 150, 200, 200];
+
+  const trainerData = [15, 8, 10, 9, 14, 14, 15];
    
     const xLabels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        
-        
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
     ];
 
   return (
@@ -97,10 +96,10 @@ const Dashboard = () => {
         <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
           
             <Box sx={{ display:"flex", marginTop:"2rem" }}>
-                <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+                <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"6%", width:"27%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>167</Typography>
-                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Total Users</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>53</Typography>
+                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Available Members</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
                          <FaUsers size={40}/>
@@ -108,24 +107,24 @@ const Dashboard = () => {
                     
                 </Grid>    
 
-                <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+                <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"6%", width:"27%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>102</Typography>
-                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Logged in Users</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>07</Typography>
+                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Available Trainers</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
-                         <FaUserClock size={40}/>
+                         <FaRunning size={40}/>
                     </Box>
                     
                 </Grid>    
 
-                <Grid md={4} sx={{display:"flex", padding:"1%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+                <Grid md={4} sx={{display:"flex", padding:"1%", width:"27%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>1.34 M</Typography>
-                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Total Income</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>02</Typography>
+                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Available Physiotherapists</Typography>
                     </Box>
-                    <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
-                         <FaMoneyBillWave size={40}/>
+                    <Box sx={{marginTop:"10%", marginLeft:"5%"}}>
+                         <FaUserMd size={40}/>
                     </Box>
                     
                 </Grid>    
@@ -133,74 +132,60 @@ const Dashboard = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Total Users</Typography>
-                    <Button variant="containedned" style={{marginLeft:"73.2%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+              
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
-                    <Box sx={{ width: "50%", height: "50%", padding: "20px",  mt:1 }}>
-                       
-                        <Bar data={data} options={options} />
-                    </Box>
-                    
-                    <Box sx={{ width: "350px", height: "100%", borderRadius: "10px", mt: 1, ml:8, justifyContent: "center", alignItems: "center" }}>
+
+                    <Box sx={{ width: "350px", height: "100%", borderRadius: "10px", mt: 0, ml:4, justifyContent: "center", alignItems: "center" }}>
                         <div style={{ textAlign: "center",justifyContent:"center", height: "55%", width: "100%",padding: "1.5rem"}}>
-                           
-                            <Doughnut data={DoughnutData} options={DoughnutOptions} style={{marginLeft:"3.2rem", height:"15rem"}}/>
+                            <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Session Stats</Typography>
+                            <Doughnut data={DoughnutData} options={DoughnutOptions} style={{marginLeft:"0", height:"15rem"}}/>
                         </div>
                     
                     </Box>
+                    <Box sx={{ width: "50%", height: "80%", padding: "20px",  mt:1, ml:8 }}>
+                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000", textAlign:"center" }}>Current Week Impact </Typography>
+                        <Bar data={data} options={options} />
+                    </Box>
+                    
                 </Box>
             </Box>   
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
-                <Box sx={{display:"flex", marginBottom:"3%"}}>
-                    <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Logged in Users</Typography>
-                    <Button variant="containedned" style={{marginLeft:"69%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                <Box sx={{display:"flex", marginBottom:"1%"}}>
+                    <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Session Interactions</Typography>
+                   
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
                     <Box sx={{ width: "50%", height: "50%", padding: "20px",  mt:1 }}>
                        
-                        <Bar data={data} options={options} />
+                      <LineChart
+                              width={500}
+                              height={400}
+                              series={[
+                                  { data: memberData, label: 'Last Week Members Interaction', color: color3 , curve: 'linear'  },
+                                  
+                              ]}
+                              xAxis={[{ scaleType: 'point', data: xLabels }]}
+                      />
                     </Box>
                     
-                    <Box sx={{ width: "350px", height: "100%", borderRadius: "10px", mt: 1, ml:8, justifyContent: "center", alignItems: "center" }}>
-                        <div style={{ textAlign: "center",justifyContent:"center", height: "55%", width: "100%",padding: "1.5rem"}}>
-                           
-                            <Doughnut data={DoughnutData} options={DoughnutOptions} style={{marginLeft:"3.2rem", height:"15rem"}}/>
-                        </div>
+                    <Box sx={{ width: "50%", height: "50%", padding: "20px",  mt:1 }}>
+                      <LineChart
+                              width={500}
+                              height={400}
+                              series={[
+                                  { data: trainerData, label: 'Last Week Trainers Interaction', color: color3 , curve: 'linear'  },
+                                  
+                              ]}
+                              xAxis={[{ scaleType: 'point', data: xLabels }]}
+                        />
                     
                     </Box>
                 </Box>
             </Box>  
-            <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
-                <Box sx={{display:"flex", marginBottom:"3%"}}>
-                    <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Income</Typography>
-                    <Button variant="containedned" style={{marginLeft:"76.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
-                </Box>
-                
-                <Box sx={{display:"flex"}}>
-                    <Box sx={{ width: "50%", height: "50%", padding: "20px",  ml:1 , mt:-10}}>
-                       
-                        <LineChart
-                            width={500}
-                            height={400}
-                            series={[
-                                { data: pData, label: 'Income (Rs)', color: color3 , curve: 'linear'  },
-                                
-                            ]}
-                            xAxis={[{ scaleType: 'point', data: xLabels }]}
-                        />
-                    </Box>
-                    
-                    <Box sx={{ width: "350px", height: "100%", borderRadius: "10px", mt: 1, ml:8, justifyContent: "center", alignItems: "center" }}>
-                        <div style={{ textAlign: "center",justifyContent:"center", height: "55%", width: "100%",padding: "1.5rem"}}>
-                           
-                            <Doughnut data={DoughnutData} options={DoughnutOptions} style={{marginLeft:"3.2rem", height:"15rem"}}/>
-                        </div>
-                    
-                    </Box>
-                </Box>
-            </Box>    
+           
           
         </Box>
       </Box>
