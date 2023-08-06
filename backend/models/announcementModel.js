@@ -19,6 +19,7 @@ const addAnnouncement = asyncHandler(async (announcement) => {
     return result.rows[0];
 });
 
+
 export {
     getAnnouncements,
     addAnnouncement,
