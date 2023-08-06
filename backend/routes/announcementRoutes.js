@@ -10,4 +10,5 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 router.get("/announcement",protect, getAllAnnouncements);
 router.post("/announcement",protect, permit('Admin'), addNewAnnouncement);
 
+
 export default router;

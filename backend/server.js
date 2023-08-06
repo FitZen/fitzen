@@ -33,6 +33,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/announcements', announcementRoutes);
 
 
+// route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
     res.send('Server is ready')
 });
