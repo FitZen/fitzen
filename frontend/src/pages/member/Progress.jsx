@@ -37,7 +37,7 @@ const Progress = () => {
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
             
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Progress</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Progress</Typography>
         <Box sx={{display:"flex", width:"100%"}}>
             <Box sx={{width:"50%", marginRight:"5rem"}}>
                 <Box>

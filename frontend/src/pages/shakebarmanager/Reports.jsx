@@ -17,7 +17,7 @@ const Reports = () => {
             <ShakebarmanagerNavbar />
           </Box>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Reports</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Reports</Typography>
             
     
               
