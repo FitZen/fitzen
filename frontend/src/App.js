@@ -35,6 +35,7 @@ import SProfile from './pages/shakebarmanager/Profile';
 import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
 import TrainerReports from './pages/trainer/Report';
+import TrainerSchedule from './pages/trainer/Schedule';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -72,6 +73,7 @@ function App() {
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
 
         <Route path="/trainer/reports" element={<TrainerReports />} />
+        <Route path="/trainer/schedule" element={<TrainerSchedule />} />
       </Routes>
     </>
    

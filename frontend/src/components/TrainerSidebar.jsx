@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaTachometerAlt, FaUsers, FaCalendarAlt, FaHamburger, FaClipboardList, FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
+import { FaBars, FaTachometerAlt, FaUsers, FaCalendarAlt, FaHamburger, FaCocktail, FaClipboardList, FaFacebook, FaInstagramSquare, FaTwitter } from 'react-icons/fa';
 import Logo from '../assets/logo.png';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -190,7 +190,7 @@ export default function Sidebar() {
             </DrawerHeader>
             <Divider />
             <List>
-              <Link to="" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
+              <Link to="/trainer/dashboard" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
                 <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -201,7 +201,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Students')}>
+              <Link to="/trainer/students" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Students')}>
                 <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Students' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -212,7 +212,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
               
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/trainer/schedule" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Schedule')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Schedule' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -223,7 +223,18 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/trainer/shakebar" style={{textDecoration:"none"}}>
+                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shake Bar')}>
+                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shake Bar' ? activeLinkStyle : {}}>
+                    <ListItemIconStyled open={open}>
+                      <FaCocktail />
+                    </ListItemIconStyled>
+                    {open && <SidebarLink variant="subtitle1" component="span">Shake Bar</SidebarLink>}
+                  </ListItemButtonStyled>
+                </ListItem>
+              </Link>
+
+              <Link to="/trainer/mealplans" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Meal Plans')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Meal Plans' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
