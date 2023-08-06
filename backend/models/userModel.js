@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 
 
-// find use datails by id
+// find use details by id
 const findUserById = asyncHandler(async (id) => {
     const sql = 'SELECT * FROM users WHERE id = $1';
     const result = await query(sql, [id]);
@@ -12,7 +12,7 @@ const findUserById = asyncHandler(async (id) => {
 });
 
 
-// find use datails by email
+// find use details by email
 const findUserByEmail = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
     const result = await query(sql, [email]);
