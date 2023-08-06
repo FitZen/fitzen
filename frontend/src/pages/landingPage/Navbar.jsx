@@ -7,6 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../../assets/logo.png";
 import { Container } from "@mui/material";
+import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 
@@ -175,7 +176,9 @@ const Navbar = () => {
 
       {/* Login and Signup Links */}
       <LoginSignupBox>
-        <NavLink variant="body2"  style={{marginLeft: "-25%"}}>LOGIN</NavLink>
+        <Link to="/login">
+          <NavLink variant="body2"  style={{marginLeft: "-25%"}}>LOGIN</NavLink>
+        </Link>
         <NavLinkSign
           variant="body2"
           style={{

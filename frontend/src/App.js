@@ -41,10 +41,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/member/dashboard" element={<Dashboard />} />
-        <Route path="/member/homePage" element={<HomePage />} />
         <Route path="/member/instructors" element={<Instructors />} />
         <Route path="/member/progress" element={<Progress />} />
         <Route path="/member/shakebar" element={<Shakebar />} />

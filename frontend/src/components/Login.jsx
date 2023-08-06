@@ -74,7 +74,7 @@ export default function SignInSide() {
       } else if(userRole === 'Receiptionist') {
         navigate('/receiptionist/dashboard');
       } else if(userRole === 'Shakebar Manager'){
-        navigate('/shakebar/dashboard');
+        navigate('/shakebarmanager/dashboard');
       }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
