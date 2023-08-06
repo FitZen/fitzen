@@ -6,6 +6,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import { connectDB } from "./config/db.js";
 const port = process.env.PORT || 5000;
 import userRoutes from "./routes/userRoutes.js";
+import announcementRoutes from "./routes/announcementRoutes.js";
 
 
 // start DB connection
@@ -28,6 +29,8 @@ app.use(cookieParser());
 
 // user routes
 app.use('/api/users', userRoutes);
+//announcement routes
+app.use('/api/announcements', announcementRoutes);
 
 
 app.get('/', (req, res) => {

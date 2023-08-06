@@ -1,0 +1,29 @@
+import asyncHandler from 'express-async-handler';
+import {
+    getAnnouncements,
+    addAnnouncement,
+} from "../models/announcementModel.js";
+
+
+// get all announcements
+const getAllAnnouncements = asyncHandler(async (req, res) => {
+    const announcements = await getAnnouncements();
+
+    res.status(200).json(announcements);
+});
+
+
+//add announcement
+const addNewAnnouncement = asyncHandler(async (req, res) => {
+    const announcement = req.body;
+
+    //res.status(200).json(announcement);
+    const result = await addAnnouncement(announcement);
+    console.log(result);
+});
+
+
+export {
+    getAllAnnouncements,
+    addNewAnnouncement,
+};
