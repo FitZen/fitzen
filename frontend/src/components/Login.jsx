@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +20,8 @@ import axios from 'axios';
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+  const navigate = useNavigate();
 
   function Copyright(props) {
     return (
@@ -54,6 +57,25 @@ export default function SignInSide() {
     try {
       const response = await axios.post('http://localhost:8000/api/users/login', formData);
       console.log('Response from the backend:', response.data);
+      const userRole = response.data.type;
+
+      // Redirect user based on their role
+      if (userRole === 'Admin') {
+        // Redirect to the admin dashboard
+        navigate('/admin/dashboard');
+      } else if (userRole === 'Virtual Member') {
+        // Redirect to the user dashboard
+        navigate('/member/dashboard');
+      } else if(userRole === 'Trainer') {
+        navigate('/trainer/dashboard');
+        // Handle other roles or scenarios
+      } else if(userRole === 'Physical Member') {
+        navigate('/member/dashboard');
+      } else if(userRole === 'Receiptionist') {
+        navigate('/receiptionist/dashboard');
+      } else if(userRole === 'Shakebar Manager'){
+        navigate('/shakebar/dashboard');
+      }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
       console.error('Error sending data to the backend:', error.message);
