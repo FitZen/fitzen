@@ -2,7 +2,6 @@ import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
 import CustomButton from "./CustomButton";
-import Navbar from "./Navbar";
 
 // Import the background image
 import firstImg from "../../assets/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg";
@@ -14,7 +13,7 @@ const color3 = "#FF0000"; // Red
 const Hero = () => {
   const CustomBackgroundBox = styled(Box)(({ theme }) => ({
     position: "relative",
-    minHeight: "90vh",
+    minHeight: "100vh",
     backgroundImage: `url(${firstImg})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -73,9 +72,9 @@ const Hero = () => {
 
   return (
     <Box>
-      <Navbar /> {/* Navbar is now at the top of the page */}
+      {/* <Navbar /> Navbar is now at the top of the page */}
       <CustomBackgroundBox>
-        <Container>
+        <Container id="home">
           <CustomContentBox>
             <Box sx={{ flex: "1", mt: 12, ml:9 }}>
               <Title variant="h1" style={{fontSize:"4rem"}}>
@@ -95,7 +94,7 @@ const Hero = () => {
                 virtual gym experience with the best trainers in the country.
               </Typography>
               <CustomButton 
-                  backgroundColor="yellow" 
+                  backgroundColor="red" 
                   color="black" 
                   buttonText="Get Started" 
                   heroBtn={true}

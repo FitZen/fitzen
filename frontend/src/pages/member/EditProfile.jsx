@@ -43,7 +43,7 @@ const Profile = () => {
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1, width:"100%"}}>
            
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Edit Profile</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Edit Profile</Typography>
         <Grid container spacing={2} style={{marginTop:"1rem", width:"100%"}}>
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={5} sx={{marginRight:"20%", display:"flex"}}>

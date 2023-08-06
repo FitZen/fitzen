@@ -81,7 +81,7 @@ const Reports = () => {
           <Navbar />
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>Reports</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>Reports</Typography>
         
         <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
             <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>

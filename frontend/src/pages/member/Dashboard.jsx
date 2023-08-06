@@ -81,7 +81,7 @@ const Dashboard = () => {
           <Navbar />
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
           <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
 
             <Box>
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
             </Box>
             <Box sx={{ width: "62%", height: "50%", padding: "20px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "2rem" }}>
-              <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000" }}>Current Week Schedule</Typography>
+              <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000", textAlign:"center" }}>Current Week Schedule</Typography>
               <Bar data={data} options={options} />
             </Box>
 

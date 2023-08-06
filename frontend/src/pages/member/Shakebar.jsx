@@ -93,7 +93,7 @@ const Shakebar = () => {
         {/* Main content */}
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           {/* Heading */}
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>
             Shakebar
           </Typography>
 

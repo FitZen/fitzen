@@ -125,7 +125,7 @@ const Instructors = () => {
         </Box>
 
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Instructors</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Instructors</Typography>
 
           <Box sx={{ display: "flex", marginTop: "1rem" }}>
             <FormControl style={{ width: "15%" }}>
