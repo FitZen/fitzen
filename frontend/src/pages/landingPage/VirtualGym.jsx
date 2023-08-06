@@ -32,7 +32,7 @@ function VirtualGym() {
   }, []);
 
   return (
-    <Container maxWidth="">
+    <Container id="discover" maxWidth="">
       <Box sx={{ height: "100vh", display: "flex" }} >
         <StyledBox>
           <Typography variant="h3" sx={{ textAlign: "left", fontWeight: "bold", marginTop: "1.5rem" }}>Virtual Gym Experience</Typography>
