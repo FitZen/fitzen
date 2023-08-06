@@ -13,7 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Link } from 'react-router-dom';
-// import Dashboard from '../pages/member/Dashboard';
+// import Trainer_Dashboard from '../pages/member/Trainer_Dashboard';
 // import Instructors from '../pages/member/Instructors';
 // import Schedule from '../pages/member/Schedule';
 // import Progress from '../pages/member/Progress';

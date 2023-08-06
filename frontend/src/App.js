@@ -21,6 +21,12 @@ import Login from './components/Login';
 import EditProfile from './pages/member/EditProfile';
 
 import { Route, Routes, Navigate } from "react-router-dom";
+import TrainerDashboard from "./pages/trainer/Dashboard";
+import TrainerProfile from './pages/trainer/Profile';
+import TrainerEditProfile from './pages/trainer/EditProfile';
+import Students from './pages/trainer/Students';
+import TrainerShakebar from './pages/trainer/Shakebar';
+import StudentProgress from './pages/trainer/Progress';
 
 function App() {
   return (
@@ -39,6 +45,12 @@ function App() {
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
 
+        <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
+        <Route path="/trainer/profile" element={<TrainerProfile />} />
+        <Route path="/trainer/editProfile" element={<TrainerEditProfile />} />
+        <Route path="/trainer/Students" element={<Students />} />
+        <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
+        <Route path="/trainer/progress" element={<StudentProgress />} />
       </Routes>
     </>
    
