@@ -55,9 +55,8 @@ const matchPassword = asyncHandler(async (email, password) => {
 // set login date and time
 const setLoginDateTime = asyncHandler(async (id) => {
     const sql = 'UPDATE users SET last_login = NOW() WHERE id = $1';
-    const currTime = new Date().toISOString();
 
-    /*const result = await query(sql, [currTime, id]);
+    /*const result = await query(sql, [id]);
 
     if (result.rowCount === 0) {
         throw new Error('No user found with this ID');
