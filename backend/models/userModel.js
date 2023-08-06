@@ -54,7 +54,7 @@ const matchPassword = asyncHandler(async (email, password) => {
 
 // set login date and time
 const setLoginDateTime = asyncHandler(async (id) => {
-    const sql = 'UPDATE users SET last_login = $1 WHERE id = $2';
+    const sql = 'UPDATE users SET last_login = NOW() WHERE id = $1';
     const currTime = new Date().toISOString();
 
     /*const result = await query(sql, [currTime, id]);
@@ -65,7 +65,7 @@ const setLoginDateTime = asyncHandler(async (id) => {
 
     return result.rowCount > 0;*/
 
-    return await query(sql, [currTime, id]);
+    return await query(sql, [id]);
 });
 
 
