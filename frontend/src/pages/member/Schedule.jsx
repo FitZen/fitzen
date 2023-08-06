@@ -97,7 +97,7 @@ const Schedule = () => {
         </Box>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography
-            variant="h3"
+            variant="h4"
             style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}
           >
             Schedule
