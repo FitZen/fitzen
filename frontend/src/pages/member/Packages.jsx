@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
-import Rating from '@mui/material/Rating';
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 import {FaBitbucket} from "react-icons/fa";
 
@@ -12,36 +11,41 @@ const instructorsData = [
         month: "One Month",
         type: "Bronze Package",
         price: "15000",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
+        fact1: "Full physical gym experience",
+        fact2: "Personalized training",
+        fact3: "Diet plan & workout plans",
+        fact4: "Access to all gym facilities",
+
        
       },
       {
         month: "Three Month",
         type: "Silver Package",
         price: "45000",
-        workoutsFor: "Both",
-        mode: "Onsite only",
-        rating: 4,
+        fact1: "Full physical gym experience",
+        fact2: "Personalized training",
+        fact3: "Diet plan & workout plans",
+        fact4: "Access to all gym facilities",
      
       },
       {
         month: "Six Month",
         type: "Gold Package",
         price: "65000",
-        workoutsFor: "Female only",
-        mode: "Onsite only",
-        rating: 4,
+        fact1: "Full physical gym experience",
+        fact2: "Personalized training",
+        fact3: "Diet plan & workout plans",
+        fact4: "Access to all gym facilities",
      
       },
       {
         month: "One Year",
         type: "Platinum Package",
         price: "110000",
-        workoutsFor: "Female only",
-        mode: "Onsite only",
-        rating: 4,
+        fact1: "Full physical gym experience",
+        fact2: "Personalized training",
+        fact3: "Diet plan & workout plans",
+        fact4: "Access to all gym facilities",
        
       },
     
@@ -81,9 +85,9 @@ const Packages = () => {
                 label="All"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>Vitamins</MenuItem>
-                <MenuItem value={20}>Proteins</MenuItem>
-                <MenuItem value={30}>Shakes</MenuItem>
+                <MenuItem value={10}>All</MenuItem>
+                <MenuItem value={20}>Membership packages</MenuItem>
+                <MenuItem value={30}>Trainer packages</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -109,13 +113,13 @@ const Packages = () => {
                     '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
                   }}
                 >
-                  <Typography variant="h6" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
-                  <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 500 }}>({instructor.type})</Typography><br />
-                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> Workouts for: {instructor.workoutsFor}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> Mode: {instructor.mode}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> Workouts for: {instructor.workoutsFor}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> Mode: {instructor.mode}</span><br /><br />
+                  <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
+                  <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>({instructor.type})</Typography><br />
+                  <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
+                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact1}</span><br />
+                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
+                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
+                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
                   <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
                 </Box>
               ))}

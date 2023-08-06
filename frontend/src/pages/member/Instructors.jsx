@@ -138,9 +138,9 @@ const Instructors = () => {
                 label="All"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>Vitamins</MenuItem>
-                <MenuItem value={20}>Proteins</MenuItem>
-                <MenuItem value={30}>Shakes</MenuItem>
+                <MenuItem value={10}>All</MenuItem>
+                <MenuItem value={20}>Trainers</MenuItem>
+                <MenuItem value={30}>Physiotherapists</MenuItem>
               </Select>
             </FormControl>
           </Box>
