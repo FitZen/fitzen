@@ -4,10 +4,11 @@ import {
     getAllAnnouncements,
     addNewAnnouncement,
 } from "../controllers/announcementController.js";
-import { protect } from "../middleware/authMiddleware.js";
+import { protect, permit } from "../middleware/authMiddleware.js";
 
 
 router.get("/announcement",protect, getAllAnnouncements);
-router.post("/announcement",protect, addNewAnnouncement);
+router.post("/announcement",protect, permit('Admin'), addNewAnnouncement);
+
 
 export default router;
