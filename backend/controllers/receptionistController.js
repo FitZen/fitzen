@@ -11,6 +11,13 @@ const getAllReceptionists = asyncHandler(async (req, res) => {
 });
 
 
+// add receptionist
+const addReceptionist = asyncHandler(async (req, res) => {
+    res.status(200).json(req.body);
+});
+
+
 export {
     getAllReceptionists,
+    addReceptionist,
 }

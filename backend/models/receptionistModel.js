@@ -15,6 +15,12 @@ const getReceptionists = asyncHandler(async () => {
 });
 
 
+// add a receptionist
+const addReceptionist = asyncHandler(async (receptionist) => {
+
+});
+
+
 export {
     getReceptionists,
 }
