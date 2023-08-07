@@ -1,0 +1,14 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #f0f0f0;
+    padding: 0;
+    /* Add other styles as needed */
+  }
+  
+  .content {
+    margin-top: 60px; /* Adjust this margin based on your navbar's height */
+  }

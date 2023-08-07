@@ -4,8 +4,8 @@ import { Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill} from 'react-icons/pi';
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
+import AdminSidebar from "../../components/AdminSidebar";
+import AdminNavbar from "../../components/AdminNavbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -16,12 +16,12 @@ const Profile = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <Sidebar />
+        <AdminSidebar />
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
         <Box>
-          <Navbar />
+          <AdminNavbar />
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
            

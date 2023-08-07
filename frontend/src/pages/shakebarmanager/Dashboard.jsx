@@ -4,11 +4,10 @@ import { Typography } from "@mui/material";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend,  DoughnutController, ArcElement } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import {FaClock, FaCalendarCheck, FaRegAddressCard, FaDotCircle, FaCheckCircle, FaTimesCircle} from 'react-icons/fa';
-import {Link} from 'react-router-dom';
 import {IoFastFoodOutline}  from 'react-icons/io5';
 import {GoGoal} from 'react-icons/go';
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
+import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
+import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -73,12 +72,12 @@ const Dashboard = () => {
   return (
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <Sidebar />
+        <ShakebarmanagerSidebar />
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
         <Box>
-          <Navbar />
+          <ShakebarmanagerNavbar />
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
@@ -100,7 +99,7 @@ const Dashboard = () => {
 
             </Box>
             <Box sx={{ width: "62%", height: "50%", padding: "20px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "2rem" }}>
-              <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000", textAlign:"center" }}>Current Week Schedule</Typography>
+              <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000" }}>Current Week Schedule</Typography>
               <Bar data={data} options={options} />
             </Box>
 
@@ -109,19 +108,17 @@ const Dashboard = () => {
           
           
           <Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem"}}>
-            <Link to="/member/packages" style={{textDecoration:"none", color:"#000000", mr:50}}>	
-              <Box sx={{width:"100%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:26, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
-                <FaRegAddressCard size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
-                <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Membership</Typography>
-              </Box>
-            </Link>
-            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  ml:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:4, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
+              <FaRegAddressCard size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
+              <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Membership</Typography>
+            </Box>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
               <IoFastFoodOutline size={120} style={{textAlign:"left", marginLeft:"5", marginTop:"5%"}}/>
               <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Meal Plan</Typography>
             </Box>
-            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , ml:4,cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+            <Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
               <GoGoal size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
-              <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Goals</Typography>
+              <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Membership</Typography>
             </Box>
           </Box>
 
@@ -153,7 +150,7 @@ const Dashboard = () => {
               <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
               <Box style={{display:"flex", backgroundColor:`${color4}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
                 <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Cancelled </Typography>
-                <FaTimesCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
+                <FaTimesCircle style={{ fontSize: '1rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
               </Box>
             
             </Box>

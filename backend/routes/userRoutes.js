@@ -5,7 +5,7 @@ import {
     logoutUser,
     getUserProfile,
 } from "../controllers/userController.js";
-import { protect } from "../middleware/authMiddleware.js";
+import { protect, permit } from "../middleware/authMiddleware.js";
 
 
 // '/api/users' is connected to this file

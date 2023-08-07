@@ -23,17 +23,19 @@ const loginUser = asyncHandler(async (req, res) => {
             await setLoginDateTime(user.id);
             await setLoginStatus(user.id, 'Active');
 
-            res.status(201).json({
+            res.status(200).json({
                 id: user.id,
                 type: user.type
             });
         } else {
-            res.status(400);
+            res.status(401);
             throw new Error('Incorrect password');
+            //res.status(401).json({ message: 'Incorrect password' });
         }
     } else {
-        res.status(400);
+        res.status(401);
         throw new Error('User doesn\'t exist');
+        //res.status(401).json({ message: 'User doesn\'t exist' });
     }
 });
 

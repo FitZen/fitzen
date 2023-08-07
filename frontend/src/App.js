@@ -19,6 +19,21 @@ import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
 import EditProfile from './pages/member/EditProfile';
+import Packages from './pages/member/Packages';
+
+import AdminDashboard from './pages/admin/Dashboard';
+import AdminProfile from './pages/admin/Profile';
+import AdminMembers from './pages/admin/Members';
+
+import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
+import ReceiptionistProfile from './pages/receiptionist/Profile';
+
+import SDashboard from './pages/shakebarmanager/Dashboard';
+import Orders from './pages/shakebarmanager/Orders';
+import Items from './pages/shakebarmanager/Items';
+import SReports from './pages/shakebarmanager/Reports';
+import SProfile from './pages/shakebarmanager/Profile';
+import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import TrainerDashboard from "./pages/trainer/Dashboard";
@@ -32,10 +47,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/member/dashboard" element={<Dashboard />} />
-        <Route path="/member/homePage" element={<HomePage />} />
         <Route path="/member/instructors" element={<Instructors />} />
         <Route path="/member/progress" element={<Progress />} />
         <Route path="/member/shakebar" element={<Shakebar />} />
@@ -44,6 +58,21 @@ function App() {
         <Route path="/member/notification" element={<Notification />} />
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
+        <Route path="/member/packages" element={<Packages />} />
+
+
+        <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />
+        <Route path="/shakebarmanager/orders" element={<Orders />} />
+        <Route path="/shakebarmanager/items" element={<Items />} />
+        <Route path="/shakebarmanager/reports" element={<SReports />} />
+        <Route path="/shakebarmanager/profile" element={<SProfile />} />
+        <Route path="/shakebarmanager/addnewitem" element={<AddnewItem />} />
+
+
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/profile" element={<AdminProfile />} />
+        <Route path="/admin/members" element={<AdminMembers />} />
+
 
         <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
         <Route path="/trainer/profile" element={<TrainerProfile />} />
@@ -51,6 +80,10 @@ function App() {
         <Route path="/trainer/Students" element={<Students />} />
         <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
         <Route path="/trainer/progress" element={<StudentProgress />} />
+
+        <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
+        <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
+
       </Routes>
     </>
    
