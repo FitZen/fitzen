@@ -100,9 +100,9 @@ export default function SignUpSide() {
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1, width:"90%", textAlign:"center" }}>
                 <Box sx={{display:"flex", width:"100%", justifyContent:"space-between"}}>
                     <Box sx={{marginRight:"2%"}}>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>First Name:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left",color:"black" }}>First Name:</InputLabel>
                         <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Gender:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left", color:"black" }}>Gender:</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -121,9 +121,9 @@ export default function SignUpSide() {
                        
                     </Box>
                     <Box >
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Last Name:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", color:"black" }}>Last Name:</InputLabel>
                         <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Date of Birth:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left", color:"black" }}>Date of Birth:</InputLabel>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker 
                                 label=""
@@ -141,26 +141,26 @@ export default function SignUpSide() {
                    
                 </Box>
                 <Box>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left" }}>Contact No:</InputLabel>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Contact No:</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left" }}>Address:</InputLabel>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Address:</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left" }}>NIC:</InputLabel>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>NIC:</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left" }}>Email:</InputLabel>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Email:</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Box>
                 <Box sx={{display:"flex", width:"100%", justifyContent:"space-between"}}>
                     <Box sx={{marginRight:"2%"}}>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Height:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", color:"black" }}>Height:</InputLabel>
                         <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Password:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", color:"black" }}>Password:</InputLabel>
                         <TextField type='password' variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     </Box>
                     <Box>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Weight:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", color:"black" }}>Weight:</InputLabel>
                         <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Confirm Password:</InputLabel>
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left",color:"black" }}>Confirm Password:</InputLabel>
                         <TextField type='password' variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     </Box>
                 </Box>

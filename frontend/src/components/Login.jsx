@@ -116,7 +116,7 @@ export default function SignInSide() {
               <LockOutlinedIcon xs={false} />
             </Avatar>
             <Box component="img" src={Logo} sx={{ width: 200, height: 100 }} />
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" fontWeight={500}>
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
