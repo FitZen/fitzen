@@ -91,8 +91,8 @@ const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({
 
 const NavbarLogo = styled("img")(({ theme }) => ({
   cursor: "pointer",
-  width: "10rem",
-  marginLeft: "10rem",
+  width: "8rem",
+  marginLeft: "12rem",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -170,7 +170,7 @@ const Navbar = () => {
         >
           {list("left")}
         </Drawer>
-        <NavbarLogo src={logoImg} alt="logo" style={{ marginLeft: "50%" }} />
+        <NavbarLogo src={logoImg} alt="logo" style={{ marginLeft: "60%" }} />
       </Box>
 
       {/* Links */}
@@ -193,20 +193,22 @@ const Navbar = () => {
 
       {/* Login and Signup Links */}
       <LoginSignupBox>
-        <Link to="/login">
+        <Link to="/login" style={{textDecoration:"none"}}>
           <NavLink variant="body2" style={{ marginLeft: "-25%" }}>
             LOGIN
           </NavLink>
         </Link>
-        <NavLinkSign
-          variant="body2"
-          style={{
-            padding: "0.6rem",
-            borderRadius: "100px",
-          }}
-        >
-          SIGN UP
-        </NavLinkSign>
+        <Link to="/signup" style={{textDecoration:"none"}}>
+          <NavLinkSign
+            variant="body2"
+            style={{
+              padding: "0.6rem",
+              borderRadius: "100px",
+            }}
+          >
+            SIGN UP
+          </NavLinkSign>
+        </Link>
       </LoginSignupBox>
     </NavbarContainer>
   );
