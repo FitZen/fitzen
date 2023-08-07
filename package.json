@@ -13,6 +13,7 @@
   "author": "FitZen Team",
   "license": "ISC",
   "dependencies": {
+    "@mui/x-charts": "^6.0.0-alpha.6",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
