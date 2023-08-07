@@ -60,22 +60,32 @@ const logoutUser = asyncHandler(async (req, res) => {
 // desc    get user profile
 // route   GET /api/users/profile
 // access  private
-const getUserProfile = asyncHandler(async (req, res) => {
-    const user = {
-        id: req.user.id,
-        nic: req.user.nic,
-        email: req.user.email,
-        contact_no: req.user.contact_no,
-        type: req.user.type,
-        status: req.user.status
-    };
+const getUserDetails = asyncHandler(async (req, res) => {
+    // const user = {
+    //     id: req.user.id,
+    //     nic: req.user.nic,
+    //     email: req.user.email,
+    //     contact_no: req.user.contact_no,
+    //     type: req.user.type,
+    //     status: req.user.status
+    // };
+    //
+    // res.status(200).json(user);
 
-    res.status(200).json(user);
+    const {id, first_name, last_name, profile_pic, type} = req.user;
+
+    res.status(200).json({
+        id: id,
+        first_name: first_name,
+        last_name: last_name,
+        profile_pic: profile_pic,
+        type: type
+    });
 });
 
 
 export {
     loginUser,
     logoutUser,
-    getUserProfile,
+    getUserDetails,
 }
