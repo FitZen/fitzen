@@ -36,6 +36,12 @@ import SProfile from './pages/shakebarmanager/Profile';
 import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
 import { Route, Routes, Navigate } from "react-router-dom";
+import TrainerDashboard from "./pages/trainer/Dashboard";
+import TrainerProfile from './pages/trainer/Profile';
+import TrainerEditProfile from './pages/trainer/EditProfile';
+import Students from './pages/trainer/Students';
+import TrainerShakebar from './pages/trainer/Shakebar';
+import StudentProgress from './pages/trainer/Progress';
 
 function App() {
   return (
@@ -67,8 +73,17 @@ function App() {
         <Route path="/admin/profile" element={<AdminProfile />} />
         <Route path="/admin/members" element={<AdminMembers />} />
 
+
+        <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
+        <Route path="/trainer/profile" element={<TrainerProfile />} />
+        <Route path="/trainer/editProfile" element={<TrainerEditProfile />} />
+        <Route path="/trainer/Students" element={<Students />} />
+        <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
+        <Route path="/trainer/progress" element={<StudentProgress />} />
+
         <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
+
       </Routes>
     </>
    
