@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, InputLabel, TextField, Button} from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../../styles/member/ScheduleStyles.css";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from "@mui/x-date-pickers";
+
+
+const color2 = "#346E93" //light blue
 
 const Schedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
+  const [value, setValue] = React.useState(null);
 
   const months = [
     "January",
@@ -102,7 +110,7 @@ const Schedule = () => {
           >
             Schedule
           </Typography>
-          <Box sx={{marginTop:"4%"}}>
+          <Box sx={{marginTop:"4%", display:"flex"}}>
             <Box sx={{ width: "50%", justifyContent: "center" }}>
               <div className="wrapper">
                 <header>
@@ -142,6 +150,37 @@ const Schedule = () => {
                 </div>
               </div>
             </Box>
+
+            <Box sx={{ width: "50%", height:"75vh", justifyContent: "center", alignItems:"center" }}>
+              <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"6%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
+                
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
+                <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Date:</InputLabel>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker 
+                        label=""
+                        value={value}
+                        onChange={(newValue) => setValue(newValue)} 
+                        renderInput={(params) => <TextField {...params}  />}
+                    />
+                </LocalizationProvider>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Time:</InputLabel>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimePicker
+                    label="Select Time"
+                    value={value} // Your value state for the selected time
+                    onChange={(newValue) => setValue(newValue)} // Your onChange handler
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Description:</InputLabel>
+                <TextField variant="outlined" multiline rows="4" inputProps={{style: {height: 100, width:250, borderRadius:"5px", outline:"none"}}}/>
+
+                <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
+              </Box>
+            </Box>
+
           </Box>
         </Box>
       </Box>
