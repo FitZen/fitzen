@@ -62,19 +62,19 @@ export default function SignInSide() {
       // Redirect user based on their role
       if (userRole === 'Admin') {
         // Redirect to the admin dashboard
-        navigate('/admin/dashboard');
+        navigate('/admin/dashboard', { state: response.data });
       } else if (userRole === 'Virtual Member') {
         // Redirect to the user dashboard
-        navigate('/member/dashboard');
+        navigate('/member/dashboard', { state: response.data });
       } else if(userRole === 'Trainer') {
-        navigate('/trainer/dashboard');
+        navigate('/trainer/dashboard', { state: response.data });
         // Handle other roles or scenarios
       } else if(userRole === 'Physical Member') {
-        navigate('/member/dashboard');
-      } else if(userRole === 'Receiptionist') {
-        navigate('/receiptionist/dashboard');
-      } else if(userRole === 'Shakebar Manager'){
-        navigate('/shakebarmanager/dashboard');
+        navigate('/member/dashboard', { state: response.data });
+      } else if(userRole === 'Receptionist') {
+        navigate('/receiptionist/dashboard', { state: response.data });
+      } else if(userRole === 'Shake Bar Manager'){
+        navigate('/shakebarmanager/dashboard', { state: response.data });
       }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
