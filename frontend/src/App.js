@@ -36,6 +36,7 @@ import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
 import TrainerReports from './pages/trainer/Report';
 import TrainerSchedule from './pages/trainer/Schedule';
+import TrainerShakebar from './pages/trainer/Shakebar';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -74,6 +75,7 @@ function App() {
 
         <Route path="/trainer/reports" element={<TrainerReports />} />
         <Route path="/trainer/schedule" element={<TrainerSchedule />} />
+        <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
       </Routes>
     </>
    
