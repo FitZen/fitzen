@@ -6,11 +6,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import {Link} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {Typography, InputLabel, Select, MenuItem} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from '../assets/logo.png';
@@ -32,19 +31,6 @@ export default function SignUpSide() {
     setGender(event.target.value);
   };
 
-  function Copyright(props) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-
 
   const [formData, setFormData] = useState({
     email: '',
@@ -59,10 +45,6 @@ export default function SignUpSide() {
     }));
   };
 
-  const datePickerStyle = {
-    border: '2px solid red', // Change the border style here
-    color: 'red', // Change the text color here
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,23 +55,7 @@ export default function SignUpSide() {
       console.log('Response from the backend:', response.data);
       const userRole = response.data.type;
 
-      // Redirect user based on their role
-      if (userRole === 'Admin') {
-        // Redirect to the admin dashboard
-        navigate('/admin/dashboard');
-      } else if (userRole === 'Virtual Member') {
-        // Redirect to the user dashboard
-        navigate('/member/dashboard');
-      } else if(userRole === 'Trainer') {
-        navigate('/trainer/dashboard');
-        // Handle other roles or scenarios
-      } else if(userRole === 'Physical Member') {
-        navigate('/member/dashboard');
-      } else if(userRole === 'Receiptionist') {
-        navigate('/receiptionist/dashboard');
-      } else if(userRole === 'Shakebar Manager'){
-        navigate('/shakebarmanager/dashboard');
-      }
+     
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
       console.error('Error sending data to the backend:', error.message);
@@ -161,7 +127,6 @@ export default function SignUpSide() {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker 
                                 label=""
-                                style={datePickerStyle}
                                 value={value}
                                 onChange={(newValue) => setValue(newValue)} 
                                 renderInput={(params) => <TextField {...params}  />}
@@ -201,14 +166,16 @@ export default function SignUpSide() {
                 </Box>
                 
              
-              <Button
-                type="submit"
-                
-                variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#000000", justifyContent:"center", alignItems:"center" }}
-              >
-                Next
-              </Button>
+              <Link to="/medical" style={{ textDecoration: 'none' }}>	
+                <Button
+                    type="submit"
+                    
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2, backgroundColor: "#000000", justifyContent:"center", alignItems:"center" }}
+                >
+                    Next
+                </Button>
+              </Link>
              
             </Box>
           </Box>
