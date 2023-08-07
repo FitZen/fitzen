@@ -67,7 +67,7 @@ const Profile = () => {
                         id="demo-simple-select"
                         value={gender}
                         size="small"
-                        style={{marginTop:"0.5rem", width:"97%", height:"", marginBottom:"0.5rem", borderRadius:"5px", border:"0.01px solid"}}
+                        style={{marginTop:"0.5rem", width:"97%", height:"17%", marginBottom:"0.5rem", borderRadius:"5px", border:"0.01px solid"}}
                         
                         onChange={handleChange}
                     >

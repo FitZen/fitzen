@@ -18,6 +18,8 @@ import Notification from './pages/member/Notification';
 import Profile from './pages/member/Profile';
 import HomePage from './pages/landingPage/HomePage';
 import Login from './components/Login';
+import SignUP from './components/SignUP';
+import Medical from './components/Medical';
 import EditProfile from './pages/member/EditProfile';
 import Packages from './pages/member/Packages';
 
@@ -49,6 +51,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUP />} />
+        <Route path="/medical" element={<Medical />} />
         <Route path="/member/dashboard" element={<Dashboard />} />
         <Route path="/member/instructors" element={<Instructors />} />
         <Route path="/member/progress" element={<Progress />} />
