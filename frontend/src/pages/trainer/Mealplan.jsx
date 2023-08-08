@@ -1,14 +1,10 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import { Icon, Typography } from "@mui/material";
+import { Typography, Select, MenuItem, InputLabel, FormControl, Button } from "@mui/material";
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import "../../styles/member/ScheduleStyles.css";
 
-// card components
-import { Card, CardContent } from "@mui/material";
-import { color } from "@mui/system";
-import Button from '@mui/material/Button';
 
 const Schedule = () => {
   const bull = (
@@ -19,6 +15,21 @@ const Schedule = () => {
       •
     </Box>
   );
+
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
+
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
+  };
+
+  const selectStyle = {
+    marginBottom: "0rem",
+    color: "black",
+    backgroundColor: "white",
+    width: "11rem",
+    height: "3rem",
+  };
 
   return (
     <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
@@ -276,7 +287,7 @@ const Schedule = () => {
                 width: "50%",
                 height: "60px",
                 position: "absolute",
-                top: "20%",
+                top: "17%",
                 right: "0",
                 // transform: "translate(0, -10%)", // Vertically center the box
               }}
@@ -301,7 +312,7 @@ const Schedule = () => {
                 width: "50%",
                 height: "60px",
                 position: "absolute",
-                top: "36%",
+                top: "32%",
                 right: "0",
                 // transform: "translate(0, -10%)", // Vertically center the box
               }}
@@ -326,7 +337,7 @@ const Schedule = () => {
                 width: "50%",
                 height: "60px",
                 position: "absolute",
-                top: "52%",
+                top: "46.5%",
                 right: "0",
                 // transform: "translate(0, -10%)", // Vertically center the box
               }}
@@ -351,7 +362,7 @@ const Schedule = () => {
                 width: "50%",
                 height: "60px",
                 position: "absolute",
-                top: "68%",
+                top: "61%",
                 right: "0",
                 // transform: "translate(0, -10%)", // Vertically center the box
               }}
@@ -366,9 +377,29 @@ const Schedule = () => {
                 Brown rice, peas paneer curry, sprouts vegetable salad
 
               </Typography>{" "}
-            </Box>
+            </Box><br /><br />
             
-            <Button variant="contained" >Contained</Button>
+            <Box sx={{ width: "25%", height: "100%", marginLeft: "20%" }}>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label" >Search Member</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedYear}
+                  label="Year"
+                  onChange={handleYearChange}
+                  style={selectStyle}
+                >
+                  <MenuItem value="Peter">Peter</MenuItem>
+                  <MenuItem value="Anne">Anne</MenuItem>
+                  <MenuItem value="Bob">Bob</MenuItem>
+                  <MenuItem value="Alan">Alan</MenuItem>
+                </Select>
+              </FormControl>
+              </Box>
+              <Button 
+              variant="contained" >Send</Button>
+            
           </Box>
         </Box>
       </Box>
