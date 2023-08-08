@@ -115,7 +115,7 @@ const Profile = () => {
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={12} sx={{marginRight:"14%"}}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Medical Conditions:</InputLabel>
-                    <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:1000,border:"1px solid", borderRadius:"5px", outline:"none"}}/>
+                    <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:1000, borderRadius:"5px", outline:"none"}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", marginBottom:"5%", marginTop:"2%"}}>

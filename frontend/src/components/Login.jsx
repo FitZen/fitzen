@@ -41,6 +41,11 @@ export default function SignInSide() {
     email: '',
     password: '',
   });
+  const [formErrors, setFormErrors] = useState({
+    email: '',
+    password: '',
+  });
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,6 +64,13 @@ export default function SignInSide() {
       console.log('Response from the backend:', response.data);
       const userRole = response.data.type;
 
+      localStorage.setItem('userType', JSON.stringify(response.data.type));
+
+      setFormErrors({
+        email: '',
+        password: '',
+      });
+
       // Redirect user based on their role
       if (userRole === 'Admin') {
         // Redirect to the admin dashboard
@@ -71,14 +83,25 @@ export default function SignInSide() {
         // Handle other roles or scenarios
       } else if(userRole === 'Physical Member') {
         navigate('/member/dashboard');
-      } else if(userRole === 'Receiptionist') {
+      } else if(userRole === 'Receptionist') {
         navigate('/receiptionist/dashboard');
-      } else if(userRole === 'Shakebar Manager'){
+      } else if(userRole === 'Shake Bar Manager'){
         navigate('/shakebarmanager/dashboard');
       }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
-      console.error('Error sending data to the backend:', error.message);
+      console.error('Error sending data to the backend:', error.response.data);
+      if (error.response.data.message === 'Incorrect password') {
+        setFormErrors({
+          ...formErrors,
+          password: 'Incorrect password',
+        });
+      } else if (error.response.data.message === "User doesn't exist") {
+        setFormErrors({
+          ...formErrors,
+          email: "User doesn't exist",
+        });
+      }
       // Handle the error appropriately (e.g., display error message to the user)
     }
   };
@@ -131,6 +154,8 @@ export default function SignInSide() {
                 autoFocus
                 value={formData.email}
                 onChange={handleChange}
+                error={formErrors.email !== ''}
+                helperText={formErrors.email}
               />
               <TextField
                 margin="normal"
@@ -143,6 +168,8 @@ export default function SignInSide() {
                 autoComplete="current-password"
                 value={formData.password}
                 onChange={handleChange}
+                error={formErrors.password !== ''}
+                helperText={formErrors.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
