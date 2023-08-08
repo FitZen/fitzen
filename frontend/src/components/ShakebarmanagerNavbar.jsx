@@ -24,6 +24,8 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const actor = JSON.parse(localStorage.getItem('userType'));
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -139,7 +141,7 @@ export default function PrimarySearchAppBar() {
             <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
                 Dulashi Arunoda
                 <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
-                  Shakebar manager
+                  {actor}
                 </Typography>
             </Typography>
             <IconButton

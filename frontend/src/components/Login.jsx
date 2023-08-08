@@ -64,6 +64,8 @@ export default function SignInSide() {
       console.log('Response from the backend:', response.data);
       const userRole = response.data.type;
 
+      localStorage.setItem('userType', JSON.stringify(response.data.type));
+
       setFormErrors({
         email: '',
         password: '',
