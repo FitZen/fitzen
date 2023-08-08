@@ -371,10 +371,10 @@ const Reports = () => {
                     series={[
                       {
                         data: [
-                          { id: 0, value: 10, label: "Series A" },
-                          { id: 1, value: 15, label: "series B" },
-                          { id: 2, value: 20, label: "series C" },
-                          { id: 3, value: 20, label: "series D" },
+                          { id: 0, value: 10, label: "Week 01" },
+                          { id: 1, value: 15, label: "Week 02" },
+                          { id: 2, value: 20, label: "Week 03" },
+                          { id: 3, value: 20, label: "Week 04" },
                         ],
                       },
                     ]}
