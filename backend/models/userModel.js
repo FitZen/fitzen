@@ -85,6 +85,43 @@ const setLoginStatus = asyncHandler(async (id, status) => {
 });
 
 
+// get user details for top navbar
+const getUserDetails = asyncHandler(async (id, type) => {
+    switch (type) {
+        case 'Admin':
+            type = 'admin';
+            break;
+        case 'Receptionist':
+            type = 'receptionist';
+            break;
+        case 'Shake Bar Manager':
+            type = 'shakeBarManager';
+            break;
+        case 'Trainer':
+            type = 'trainer';
+            break;
+        case 'Physiotherapist':
+            type = 'physiotherapist';
+            break;
+        case 'Virtual Member':
+            type = 'virtualMember';
+            break;
+        case 'Physical Member':
+            type = 'physicalMember';
+            break;
+    }
+
+    const sql = 'SELECT first_name, last_name, profile_pic FROM ' + type + ' WHERE id = $1';
+    const result = await query(sql, [id]);
+
+    if (result.rowCount === 0) {
+        return null;
+    }
+
+    return result.rows[0];
+});
+
+
 // register user
 // const registerUsers = asyncHandler(async (nic, name, email, password) => {
 //     const salt = await bcrypt.genSalt(10);
@@ -103,4 +140,5 @@ export {
     matchPassword,
     setLoginDateTime,
     setLoginStatus,
+    getUserDetails,
 };
