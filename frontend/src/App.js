@@ -45,6 +45,10 @@ import Students from './pages/trainer/Students';
 import TrainerShakebar from './pages/trainer/Shakebar';
 import StudentProgress from './pages/trainer/Progress';
 
+import TrainerReports from "./pages/trainer/Report";
+import TrainerSchedule from "./pages/trainer/Schedule";
+import TrainerMealplan from "./pages/trainer/Mealplan";
+
 function App() {
   return (
     <>
@@ -84,6 +88,10 @@ function App() {
         <Route path="/trainer/Students" element={<Students />} />
         <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
         <Route path="/trainer/progress" element={<StudentProgress />} />
+
+        <Route path="/trainer/reports" element={<TrainerReports />} />
+        <Route path="/trainer/schedule" element={<TrainerSchedule />} />
+        <Route path="/trainer/mealplans" element={<TrainerMealplan />} />
 
         <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
