@@ -8,6 +8,7 @@ import { connectDB } from "./config/db.js";
 const port = process.env.PORT || 5000;
 import userRoutes from "./routes/userRoutes.js";
 import announcementRoutes from "./routes/announcementRoutes.js";
+import complaintRoutes from "./routes/complaintRoutes.js";
 
 // start DB connection
 connectDB();
@@ -32,6 +33,8 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 //announcement routes
 app.use('/api/announcements', announcementRoutes);
+//complaint routes
+app.use('/api/complaints', complaintRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
