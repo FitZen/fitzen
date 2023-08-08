@@ -28,6 +28,11 @@ const addNewComplaint = asyncHandler(async (req, res) => {
     const complaint = req.body;
     const addByUserId = req.user.id;
 
+    if (!complaint.subject.trim() || !complaint.content.trim()) {
+        res.status(400).json({ message: "Subject and content are required." });
+        return;
+    }
+
     res.status(200).json(complaint);
     const result = await addComplaint(complaint, addByUserId);
 });
