@@ -16,10 +16,16 @@ const getAllAnnouncements = asyncHandler(async (req, res) => {
 //add announcement
 const addNewAnnouncement = asyncHandler(async (req, res) => {
     const announcement = req.body;
+    const addByUserId = req.user.id;
 
-    //res.status(200).json(announcement);
-    const result = await addAnnouncement(announcement);
-    console.log(result);
+    if (!announcement.title.trim() || !announcement.content.trim()) {
+        res.status(400).json({ message: "Title and content are required." });
+        return;
+    }
+
+    res.status(200).json(announcement);
+    const result = await addAnnouncement(announcement, addByUserId);
+
 });
 
 
