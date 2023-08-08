@@ -14,15 +14,13 @@ import { Typography } from '@mui/material';
 import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useLocation } from 'react-router-dom';
+
 
 
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const location = useLocation();
-  const userData = location.state;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -153,7 +151,7 @@ export default function PrimarySearchAppBar() {
             <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
                 Anjana Silva
                 <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
-                  {userData.type}
+                  Receptionist
                 </Typography>
             </Typography>
             <IconButton

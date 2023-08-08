@@ -28,9 +28,9 @@ const loginUser = asyncHandler(async (req, res) => {
                 type: user.type
             });
         } else {
-            res.status(401);
-            throw new Error('Incorrect password');
-            //res.status(401).json({ message: 'Incorrect password' });
+            // res.status(401);
+            // throw new Error('Incorrect password');
+            res.status(401).json({ message: 'Incorrect password' });
         }
     } else {
         res.status(401);
