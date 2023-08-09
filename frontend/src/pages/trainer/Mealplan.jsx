@@ -17,7 +17,6 @@ const Schedule = () => {
   );
 
   const [selectedYear, setSelectedYear] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
@@ -66,6 +65,10 @@ const Schedule = () => {
                 margin: "1rem",
                 width: "90%",
                 height: "100px",
+                display: "flex",
+                alignItems: "center", 
+                justifyContent: "center", 
+                position: "relative",
               }}
             >
               <Typography
@@ -73,7 +76,8 @@ const Schedule = () => {
                 style={{
                   fontSize: "18px",
                   // marginTop: "10px",
-                  textAlign: "center",
+                textAlign: "center",
+                fontWeight: 600,
                 }}
               >
                 Meal Plan 1
@@ -88,6 +92,10 @@ const Schedule = () => {
                 margin: "1rem",
                 width: "90%",
                 height: "100px",
+                display: "flex",
+                alignItems: "center", 
+                justifyContent: "center", 
+                position: "relative",
               }}
             >
               <Typography
@@ -96,6 +104,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Meal Plan 2
@@ -110,6 +119,10 @@ const Schedule = () => {
                 margin: "1rem",
                 width: "90%",
                 height: "100px",
+                display: "flex",
+                alignItems: "center", 
+                justifyContent: "center", 
+                position: "relative",
               }}
             >
               <Typography
@@ -118,6 +131,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Meal Plan 3
@@ -132,6 +146,10 @@ const Schedule = () => {
                 margin: "1rem",
                 width: "90%",
                 height: "100px",
+                display: "flex",
+                alignItems: "center", 
+                justifyContent: "center", 
+                position: "relative",
               }}
             >
               <Typography
@@ -140,6 +158,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Meal Plan 4
@@ -154,6 +173,10 @@ const Schedule = () => {
                 margin: "1rem",
                 width: "90%",
                 height: "100px",
+                display: "flex",
+                alignItems: "center", 
+                justifyContent: "center", 
+                position: "relative",
               }}
             >
               <Typography
@@ -162,6 +185,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Meal Plan 5
