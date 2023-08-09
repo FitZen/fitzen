@@ -421,8 +421,25 @@ const Schedule = () => {
                 </Select>
               </FormControl>
               </Box>
-              <Button 
-              variant="contained" >Send</Button>
+              <Button
+      variant="contained"
+      sx={{
+        backgroundColor: "black", 
+        color: "white",
+        borderRadius: "60px",
+        padding: "10px 20px",
+        height: "40px",
+        position: "absolute", // Position the button absolutely
+        bottom: "25px", // Distance from the bottom
+        right: "180px", // Distance from the right
+        fontSize: "16px", 
+        '&:hover': {
+        backgroundColor: "#808080", // Hover background color
+        },
+      }}
+    >
+      Send
+    </Button>
             
           </Box>
         </Box>
