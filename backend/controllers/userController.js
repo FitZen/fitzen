@@ -28,9 +28,9 @@ const loginUser = asyncHandler(async (req, res) => {
                 type: user.type
             });
         } else {
-            // res.status(401);
-            // throw new Error('Incorrect password');
-            res.status(401).json({ message: 'Incorrect password' });
+            res.status(401);
+            throw new Error('Incorrect password');
+            // res.status(401).json({ message: 'Incorrect password' });
         }
     } else {
         res.status(401);
@@ -45,7 +45,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // route   POST /api/users/logout
 // access  private (users who only has login/token can access => protected route)
 const logoutUser = asyncHandler(async (req, res) => {
-    await setLoginStatus(req.user.id, 'Inactive');
+    await setLoginStatus(req.body.userID, 'Inactive');
 
     res.cookie('jwt', '', {
         httpOnly: true,
@@ -71,7 +71,6 @@ const getUserDetails = asyncHandler(async (req, res) => {
     // };
     //
     // res.status(200).json(user);
-
     const {id, first_name, last_name, profile_pic, type} = req.user;
 
     res.status(200).json({
