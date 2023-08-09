@@ -65,6 +65,7 @@ export default function SignInSide() {
       const userRole = response.data.type;
 
       localStorage.setItem('userType', JSON.stringify(response.data.type));
+      localStorage.setItem('userID', JSON.stringify(response.data.id));
 
       setFormErrors({
         email: '',
@@ -106,6 +107,7 @@ export default function SignInSide() {
     }
   };
 
+  console.log('Form Errors:', localStorage);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
