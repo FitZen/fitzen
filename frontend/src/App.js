@@ -22,6 +22,7 @@ import SignUP from './components/SignUP';
 import Medical from './components/Medical';
 import EditProfile from './pages/member/EditProfile';
 import Packages from './pages/member/Packages';
+import MealPlan from './pages/member/MealPlan';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/member/profile" element={<Profile />} />
         <Route path="/member/editProfile" element={<EditProfile />} />
         <Route path="/member/packages" element={<Packages />} />
+        <Route path="/member/mealplan" element={<MealPlan />} />
 
 
         <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />
