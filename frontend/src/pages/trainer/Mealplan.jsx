@@ -4,9 +4,8 @@ import { Typography, Select, MenuItem, InputLabel, FormControl, Button } from "@
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import "../../styles/member/ScheduleStyles.css";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Schedule = () => {
   const bull = (
@@ -76,6 +75,27 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+<Box
+          sx={{
+            position: "absolute",
+            top: "-25px",
+            right: "0.5rem",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <AddBoxIcon sx={{ color: "black", fontSize: "20px", marginRight: "4px", cursor: "pointer" }} />
+          <Typography
+            variant="body2"
+            style={{
+              fontSize: "14px",
+              fontWeight: 600,
+            }}
+          >
+            Add New Meal Plan
+          </Typography>
+        </Box>
 
             <DeleteIcon
              sx={{
