@@ -4,7 +4,9 @@ import { Typography, Select, MenuItem, InputLabel, FormControl, Button } from "@
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import "../../styles/member/ScheduleStyles.css";
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 
 const Schedule = () => {
   const bull = (
@@ -59,6 +61,7 @@ const Schedule = () => {
               alignItems: "center",
             }}
           >
+            
             <Box
               sx={{
                 backgroundColor: "#FA8072",
@@ -73,6 +76,28 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+            <DeleteIcon
+             sx={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+             }}
+          />
+            <EditIcon
+             sx={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+              
+              }}
+      />
               <Typography
                 variant="h6"
                 style={{
@@ -100,6 +125,28 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+          <DeleteIcon
+             sx={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+             }}
+          />
+            <EditIcon
+             sx={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+              
+              }}
+      />
               <Typography
                 variant="h6"
                 style={{
@@ -127,6 +174,28 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+          <DeleteIcon
+             sx={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+             }}
+          />
+            <EditIcon
+             sx={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+              
+              }}
+      />
               <Typography
                 variant="h6"
                 style={{
@@ -154,6 +223,28 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+          <DeleteIcon
+             sx={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+             }}
+          />
+            <EditIcon
+             sx={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+              
+              }}
+      />
               <Typography
                 variant="h6"
                 style={{
@@ -181,6 +272,28 @@ const Schedule = () => {
                 position: "relative",
               }}
             >
+
+          <DeleteIcon
+             sx={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+             }}
+          />
+            <EditIcon
+             sx={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              color: "black",
+              cursor: "pointer",
+              fontSize: "28px",
+              
+              }}
+      />
               <Typography
                 variant="h6"
                 style={{
