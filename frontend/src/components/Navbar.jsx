@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,19 +15,36 @@ import { Typography } from '@mui/material';
 import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [userID, setUserID] = useState('');
 
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const actor = JSON.parse(localStorage.getItem('userType'));
+  
+  //console.log(userID);
+  useEffect(() => {
+    
+    if(!localStorage.getItem('userID')){
+      console.log("userID::");
+      navigate('/login');
+    }else{
+      setUserID(JSON.parse(localStorage.getItem('userID')));
+    }
+
+    getUserDetails();	
+  }, []);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,6 +61,47 @@ export default function PrimarySearchAppBar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+  
+ 
+
+  //load user details
+  const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: userID,
+        userType: actor,
+      };
+      console.log("reqdata::",reqData);
+      const res = await axios.get('http://localhost:8000/api/users/details',reqData);
+      console.log(res.data);
+      localStorage.setItem('userDetails', JSON.stringify(res.data));
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+
+  };
+
+  
+  //handle logout
+  const handleLogout = async () => {
+    try {
+
+      const reqData = {
+        userID: userID,
+        userType: actor,
+      };
+
+      await axios.post('http://localhost:8000/api/users/logout', reqData);
+      localStorage.clear();
+      navigate('/login');
+      
+      console.log('Logout successful');
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Handle error scenarios here
+    }
   };
 
   
@@ -66,7 +125,7 @@ export default function PrimarySearchAppBar() {
       <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
