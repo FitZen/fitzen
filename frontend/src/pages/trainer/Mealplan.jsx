@@ -28,6 +28,8 @@ const Schedule = () => {
     backgroundColor: "white",
     width: "11rem",
     height: "3rem",
+    borderRadius: "20px",
+    
   };
 
   return (
@@ -209,7 +211,7 @@ const Schedule = () => {
 <          Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography
             variant="h5"
-            style={{ fontWeight: 700, marginTop: "1rem", textAlign: "center" }}
+            style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "120px", }}
           >
             Meal Plan - 1
           </Typography>{" "}
@@ -230,6 +232,8 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
+                  
                 }}
               >
                 Breakfast
@@ -252,6 +256,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Lunch
@@ -274,6 +279,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Pre - Workout
@@ -296,6 +302,7 @@ const Schedule = () => {
                   fontSize: "18px",
                   // marginTop: "10px",
                   textAlign: "center",
+                  fontWeight: 600,
                 }}
               >
                 Dinner
