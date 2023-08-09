@@ -6,6 +6,7 @@ import {
     setLoginDateTime,
     setLoginStatus,
 } from "../models/userModel.js";
+import sendEmail from "../utils/sendEmail.js";
 
 
 // desc    login user
@@ -22,6 +23,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
             await setLoginDateTime(user.id);
             await setLoginStatus(user.id, 'Active');
+
+            const result = await sendEmail("adheesha.1999@gmail.com", "Subject Test", "Body test", "<b>Body test - html</b>");
+            console.log(result);
 
             res.status(200).json({
                 id: user.id,

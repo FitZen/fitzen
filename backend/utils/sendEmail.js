@@ -1,13 +1,11 @@
 import nodemailer from 'nodemailer';
-// import dotenv from 'dotenv';
-// dotenv.config();
 
 
 // set up nodemailer transporter
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
     port: process.env.MAIL_PORT,
-    secure: true,  // Ensure this is true if you are using port 465, otherwise false
+    secure: false,  // Ensure this is true if you are using port 465, otherwise false
     auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASSWORD
@@ -40,10 +38,6 @@ const sendEmail = async (to, subject, text, html) => {
         console.error("Error sending email: ", error);
     }
 };
-
-
-// Example Usage:
-// sendEmail("bar@example.com", "Hello ✔", "Hello world?", "<b>Hello world?</b>");
 
 
 export default sendEmail;
