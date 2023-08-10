@@ -11,13 +11,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-import Meal1 from '../../assets/meal1.png';
-import Meal2 from '../../assets/meal2.png';
-import Meal3 from '../../assets/meal3.png';
-import Meal4 from '../../assets/meal4.png';
+import Meal1 from '../../assets/Meals//meal1.png';
+import Meal2 from '../../assets/Meals//meal2.png';
+import Meal3 from '../../assets/Meals//meal3.png';
+import Meal4 from '../../assets/Meals//meal4.png';
+import Meal5 from '../../assets/Meals//meal5.png';
+import Meal6 from '../../assets/Meals//meal6.png';
+import Meal7 from '../../assets/Meals//meal7.png';
+import Meal8 from '../../assets/Meals//meal8.png';
 //import Meal5 from '../../assets/meal5.png';
 
-const images = [Meal1, Meal2, Meal3, Meal4];
+const images = [Meal1, Meal2, Meal3, Meal4, Meal5, Meal6, Meal7, Meal8];
 
 const MealPlan = () => {
 
@@ -75,11 +79,11 @@ const MealPlan = () => {
                       <Box sx={{flexDirection:"column", justifyContent:"center", alignItems:"center", marginTop:"2rem", width:"70%", height:"15%", marginLeft:"15%", cursor:"pointer", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
                           <Typography variant="h5" style={{ fontWeight: 600, textAlign:"center", marginTop:"1.8rem" }}>Trainers' Plan</Typography>
                       </Box>
-                      <Box sx={{width:"70%", height:"70%"}}>
+                      <Box sx={{width:"70%", height:"70%", justifyContent:"center", alignItems:"center", padding:"2%"}}>
                         <motion.img
                           src={images[currentImage]}
                           alt="Virtual Gym"
-                          style={{ width: "100%", height: "80%", marginTop: "1.5rem", marginLeft:"15%" }}
+                          style={{ width: "100%", height: "auto", marginTop: "4.5rem", marginLeft:"15%", objectFit:"cover" }}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
