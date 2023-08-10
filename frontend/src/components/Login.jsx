@@ -87,6 +87,8 @@ export default function SignInSide() {
         navigate('/receiptionist/dashboard');
       } else if(userRole === 'Shake Bar Manager'){
         navigate('/shakebarmanager/dashboard');
+      }else if(userRole === 'Physiotherapist'){
+        navigate('/physiotherapist/dashboard');
       }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {
