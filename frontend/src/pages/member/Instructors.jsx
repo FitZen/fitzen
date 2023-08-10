@@ -17,6 +17,7 @@ import item9 from "../../assets/Trainers/stephanie-liverani-Zz5LQe-VSMY-unsplash
 import item10 from "../../assets/Trainers/jd-mason-2oUiUu5QAys-unsplash.jpg"
 import item11 from "../../assets/Trainers/tamarcus-brown-29pFbI_D1Sc-unsplash.jpg"
 import item12 from "../../assets/Trainers/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg"
+import { Link } from "react-router-dom";
 
 const instructorsData = [
       {
@@ -171,7 +172,9 @@ const Instructors = () => {
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
                   <Rating name="read-only" value={instructor.rating} readOnly /><br />
-                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
+                  <Link to="/member/instructorprofile" style={{ textDecoration: "none" }}>
+                    <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
+                  </Link>
                 </Box>
               ))}
             </Box>
