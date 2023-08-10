@@ -11,6 +11,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {GoGoal} from 'react-icons/go';
+import {FaRegTimesCircle} from 'react-icons/fa';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -128,6 +129,16 @@ const Goals = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={modalStyle}>
+                        <FaRegTimesCircle onClick={handleClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                            onMouseEnter={(e) => {
+                                e.target.style.color = "#D71313";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.color = "#D8D9DA";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                        />
                         <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
                             <GoGoal  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
                             <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
