@@ -121,7 +121,7 @@ const Dashboard = () => {
                 <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Meal Plan</Typography>
               </Box>
             </Link>
-            <Link style={{textDecoration:"none", color:"#000000", mr:50}}>
+            <Link to="/member/goals" style={{textDecoration:"none", color:"#000000", mr:50}}>
               <Box sx={{width:"100%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , ml:8, mr:20.5, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                 <GoGoal size={120} style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
                 <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>Goals</Typography>
