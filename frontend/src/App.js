@@ -49,6 +49,15 @@ import TrainerReports from "./pages/trainer/Report";
 import TrainerSchedule from "./pages/trainer/Schedule";
 import TrainerMealplan from "./pages/trainer/Mealplan";
 
+import PhysiotherapistDashboard from "./pages/physiotherapist/Dashboard";
+import PhysiotherapistProfile from "./pages/physiotherapist/Profile";
+import PhysiotherapistEditProfile from "./pages/physiotherapist/EditProfile";
+import PhysiotherapistStudents from "./pages/physiotherapist/Students";
+import PhysiotherapistShakebar from "./pages/physiotherapist/Shakebar";
+import PhysiotherapistSchedule from "./pages/physiotherapist/Schedule";
+import PhysiotherapistReports from "./pages/physiotherapist/Reports";
+import StudentHistory from "./pages/physiotherapist/StudentHistory";
+
 function App() {
   return (
     <>
@@ -95,6 +104,15 @@ function App() {
 
         <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
+
+        <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
+        <Route path="/physiotherapist/profile" element={<PhysiotherapistProfile />} />
+        <Route path="/physiotherapist/editProfile" element={<PhysiotherapistEditProfile />} />
+        <Route path="/physiotherapist/Students" element={<PhysiotherapistStudents />} />
+        <Route path="/physiotherapist/shakebar" element={<PhysiotherapistShakebar />} />
+        <Route path="/physiotherapist/schedule" element={<PhysiotherapistSchedule />} />
+        <Route path="/physiotherapist/reports" element={<PhysiotherapistReports />} />
+        <Route path="/physiotherapist/StudentHistory" element={<StudentHistory />} />
 
       </Routes>
     </>
