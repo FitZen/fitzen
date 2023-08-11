@@ -53,6 +53,7 @@ import StudentProgress from './pages/trainer/Progress';
 import TrainerReports from "./pages/trainer/Report";
 import TrainerSchedule from "./pages/trainer/Schedule";
 import TrainerMealplan from "./pages/trainer/Mealplan";
+import TrainerReportVirtual from './pages/trainer/Report_v';
 
 import PhysiotherapistDashboard from "./pages/physiotherapist/Dashboard";
 import PhysiotherapistProfile from "./pages/physiotherapist/Profile";
@@ -111,6 +112,7 @@ function App() {
         <Route path="/trainer/reports" element={<TrainerReports />} />
         <Route path="/trainer/schedule" element={<TrainerSchedule />} />
         <Route path="/trainer/mealplans" element={<TrainerMealplan />} />
+        <Route path="/trainer/reports_virtual" element={<TrainerReportVirtual />} />
 
         <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
