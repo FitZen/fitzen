@@ -4,7 +4,6 @@ import {
     getUnhandledComplaints,
     addComplaint,
 } from "../models/complaintModel.js";
-import {addAnnouncement} from "../models/announcementModel.js";
 
 
 // get all handled complaints
@@ -12,10 +11,10 @@ const getAllHandledComplaints = asyncHandler(async (req, res) => {
     const handledBy = req.user.id;
     const handledComplaints = await getHandledComplaints(handledBy);
 
-    res.status(200).json({
+    res.status(handledComplaints !== undefined ? 200 : 500).json({
         status: handledComplaints !== undefined ? "success" : "fail",
-        data: handledComplaints !== undefined ? handledComplaints : "",
-        message: handledComplaints !== undefined ? "" : "Something went wrong!",
+        data: handledComplaints !== undefined ? handledComplaints : null,
+        message: handledComplaints !== undefined ? "Handled complaints fetched successfully." : "Something went wrong!",
     });
 });
 
@@ -24,10 +23,10 @@ const getAllHandledComplaints = asyncHandler(async (req, res) => {
 const getAllUnhandledComplaints = asyncHandler(async (req, res) => {
     const unHandledComplaints = await getUnhandledComplaints();
 
-    res.status(200).json({
+    res.status(unHandledComplaints !== undefined ? 200 : 500).json({
         status: unHandledComplaints !== undefined ? "success" : "fail",
-        data: unHandledComplaints !== undefined ? unHandledComplaints : "",
-        message: unHandledComplaints !== undefined ? "" : "Something went wrong!",
+        data: unHandledComplaints !== undefined ? unHandledComplaints : null,
+        message: unHandledComplaints !== undefined ? "Unhandled complaints fetched successfully." : "Something went wrong!",
     });
 });
 
@@ -39,7 +38,7 @@ const addNewComplaint = asyncHandler(async (req, res) => {
 
     const result = await addComplaint(subject, content, addedBy);
 
-    res.status(200).json({
+    res.status(result !== undefined ? 201 : 500).json({
         status: result !== undefined ? "success" : "fail",
         data: result !== undefined ? result : null,
         message: result !== undefined ? "Complaint added successfully." : "Adding complaint unsuccessful.",

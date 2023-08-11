@@ -8,12 +8,7 @@ const findUserById = asyncHandler(async (id) => {
     const sql = 'SELECT * FROM users WHERE id = $1';
     const result = await query(sql, [id]);
 
-    /*
-    if (result.rows.length === 0) {
-        throw new Error('No user found with this ID');
-    }*/
-
-    return result.rows[0];
+    return result.rowCount > 0 ? result.rows[0] : null;
 });
 
 
@@ -22,12 +17,7 @@ const findUserByEmail = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
     const result = await query(sql, [email]);
 
-    /*
-    if (result.rows.length === 0) {
-        throw new Error('No user found with this email');
-    }*/
-
-    return result.rows[0];
+    return result.rowCount > 0 ? result.rows[0] : null;
 });
 
 
@@ -36,89 +26,60 @@ const matchPassword = asyncHandler(async (email, password) => {
     const sql = 'SELECT password FROM users WHERE email = $1';
     const result = await query(sql, [email]);
 
-    /*
-    if (result.rows.length === 0) {
-        throw new Error('No user found with this email');
-    }
-
-    const match = await bcrypt.compare(password, result.rows[0].password);
-    if (!match) {
-        throw new Error('Password does not match');
-    }
-
-    return match; */
-
-    return await bcrypt.compare(password, result.rows[0].password);
+    return (result.rowCount > 0 && await bcrypt.compare(password, result.rows[0].password));
 });
 
 
 // set login date and time
 const setLoginDateTime = asyncHandler(async (id) => {
-    const sql = 'UPDATE users SET last_login = NOW() WHERE id = $1';
+    const sql = 'UPDATE users SET last_login = NOW() WHERE id = $1 RETURNING id';
+    const result = await query(sql, [id]);
 
-    /*const result = await query(sql, [id]);
-
-    if (result.rowCount === 0) {
-        throw new Error('No user found with this ID');
-    }
-
-    return result.rowCount > 0;*/
-
-    return await query(sql, [id]);
+    return result.rows[0].id;
 });
 
 
 // set login status
 const setLoginStatus = asyncHandler(async (id, status) => {
-    const sql = 'UPDATE users SET status = $1 WHERE id = $2';
-
-    /*
+    const sql = 'UPDATE users SET status = $1 WHERE id = $2 RETURNING id';
     const result = await query(sql, [status, id]);
 
-    if (result.rowCount === 0) {
-        throw new Error('No user found with this ID');
-    }
-
-    return result.rowCount > 0;*/
-
-    return await query(sql, [status, id]);
+    return result.rows[0].id;
 });
 
 
 // get user details for top navbar
 const getUserDetails = asyncHandler(async (id, type) => {
+    let table;
+
     switch (type) {
         case 'Admin':
-            type = 'admin';
+            table = 'admin';
             break;
         case 'Receptionist':
-            type = 'receptionist';
+            table = 'receptionist';
             break;
         case 'Shake Bar Manager':
-            type = 'shakeBarManager';
+            table = 'shakeBarManager';
             break;
         case 'Trainer':
-            type = 'trainer';
+            table = 'trainer';
             break;
         case 'Physiotherapist':
-            type = 'physiotherapist';
+            table = 'physiotherapist';
             break;
         case 'Virtual Member':
-            type = 'virtualMember';
+            table = 'virtualMember';
             break;
         case 'Physical Member':
-            type = 'physicalMember';
+            table = 'physicalMember';
             break;
     }
 
-    const sql = 'SELECT first_name, last_name, profile_pic FROM ' + type + ' WHERE id = $1';
+    const sql = 'SELECT * FROM ' + table + ' WHERE id = $1';
     const result = await query(sql, [id]);
 
-    if (result.rowCount === 0) {
-        return null;
-    }
-
-    return result.rows[0];
+    return result.rowCount > 0 ? result.rows[0] : null;
 });
 
 

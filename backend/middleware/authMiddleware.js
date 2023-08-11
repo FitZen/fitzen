@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
-//import { findUserById } from '../models/userModel.js';
-import { getUserDetails } from '../models/userModel.js';
+import { findUserById } from '../models/userModel.js';
 
 
 // protect routes by checking the token
@@ -14,13 +13,9 @@ const protect = asyncHandler(async (req, res, next) => {
             const id = decoded.id;
             const type = decoded.type;
 
-            // req.user = await findUserById(id);
+            req.user = await findUserById(id);
 
-            req.user = await getUserDetails(id, type);
-            req.user.id = id;
-            req.user.type = type;
-
-            next();     // call the next middleware
+            next();         // call the next middleware
         } catch (error) {
             res.status(401);
             throw new Error('Not authorized, invalid token');

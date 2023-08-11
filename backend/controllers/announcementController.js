@@ -9,10 +9,10 @@ import {
 const getAllAnnouncements = asyncHandler(async (req, res) => {
     const announcements = await getAnnouncements();
 
-    res.status(200).json({
+    res.status(announcements !== undefined ? 200 : 500).json({
         status: announcements !== undefined ? "success" : "fail",
-        data: announcements !== undefined ? announcements : "",
-        message: announcements !== undefined ? "" : "Something went wrong!",
+        data: announcements !== undefined ? announcements : null,
+        message: announcements !== undefined ? "Announcements fetched successfully." : "Something went wrong!",
     });
 });
 
@@ -24,7 +24,7 @@ const addNewAnnouncement = asyncHandler(async (req, res) => {
 
     const result = await addAnnouncement(title, content, addedBy);
 
-    res.status(200).json({
+    res.status(result !== undefined ? 201 : 500).json({
         status: result !== undefined ? "success" : "fail",
         data: result !== undefined ? result : null,
         message: result !== undefined ? "Announcement added successfully." : "Adding announcement unsuccessful.",
