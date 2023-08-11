@@ -11,13 +11,8 @@ import {
 import { Bar } from "react-chartjs-2";
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
-import { PieChart } from "@mui/x-charts/PieChart";
-import { LineChart } from "@mui/x-charts/LineChart";
 
-const color1 = "#102B4C"; //dark blue
-const color2 = "#346E93"; //light blue
-const color3 = "#96CDEF"; //lighter blue
-const color4 = "#DC1E2A"; //red
+const color1 = "#346E93"; //light blue
 
 const Reports = () => {
   const [selectedYear, setSelectedYear] = useState("");
@@ -67,28 +62,28 @@ const Reports = () => {
     ],
     datasets: [
       {
-        label: "Sales",
+        label: "Sessions",
         data: [
-          5, 2, 3, 1, 4, 2, 3, 1, 2, 0, 1, 1, 2, 1, 3, 0, 4, 1, 2, 5, 4, 3, 1,
-          2, 0, 1, 2, 3, 0, 0, 1,
+          5, 2, 3, 1, 4, 2, 3, 1, 2, 8, 1, 1, 2, 1, 3, 4, 4, 1, 2, 5, 4, 3, 1,
+          2, 0, 1, 2, 3, 0, 2, 1,
         ],
         backgroundColor: [
           `${color1}`,
-          `${color3}`,
-          `${color4}`,
-          `${color2}`,
           `${color1}`,
-          `${color3}`,
-          `${color4}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
         ],
         borderColor: [
           `${color1}`,
-          `${color3}`,
-          `${color4}`,
-          `${color2}`,
           `${color1}`,
-          `${color3}`,
-          `${color4}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
+          `${color1}`,
         ],
         borderWidth: 1,
       },
@@ -169,7 +164,7 @@ const Reports = () => {
                   textAlign: "center",
                 }}
               >
-                Monthly Session Overview
+                Monthly Session Overview - Physical Sessions
               </Typography>
               <Box sx={{}}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -366,33 +361,6 @@ const Reports = () => {
                     </Typography>
                   </Box>
                 </Box>
-                <Box padding="20px">
-                  <PieChart
-                    series={[
-                      {
-                        data: [
-                          { id: 0, value: 10, label: "Week 01" },
-                          { id: 1, value: 15, label: "Week 02" },
-                          { id: 2, value: 20, label: "Week 03" },
-                          { id: 3, value: 20, label: "Week 04" },
-                        ],
-                      },
-                    ]}
-                    width={400}
-                    height={200}
-                  />
-
-                  <LineChart
-                    xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-                    series={[
-                      {
-                        data: [2, 5.5, 2, 8.5, 1.5, 5],
-                      },
-                    ]}
-                    width={500}
-                    height={300}
-                  />
-                </Box>
               </Box>
               <Box>
                 <Bar
@@ -447,7 +415,7 @@ const Reports = () => {
               </FormControl>
               <br />
 
-              <Button variant="contained" style={{ marginTop: "70rem" }}>
+              <Button variant="contained" style={{ marginTop: "38rem" }}>
                 Contained
               </Button>
             </Box>
