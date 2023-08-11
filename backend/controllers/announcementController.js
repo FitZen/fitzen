@@ -17,7 +17,7 @@ const getAllAnnouncements = asyncHandler(async (req, res) => {
 });
 
 
-//add announcement
+// add announcement
 const addNewAnnouncement = asyncHandler(async (req, res) => {
     const { title, content } = req.body;
     const addedBy = req.user.id;

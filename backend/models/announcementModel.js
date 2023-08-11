@@ -11,7 +11,7 @@ const getAnnouncements = asyncHandler(async () => {
 });
 
 
-//add announcement
+// add announcement
 const addAnnouncement = asyncHandler(async (title, content, addedBy) => {
     const sql = 'INSERT INTO announcement (title, content, posted_by) VALUES ($1, $2, $3) RETURNING id';
     const result = await query(sql, [title, content, addedBy]);
