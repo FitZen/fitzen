@@ -12,6 +12,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {GoGoal} from 'react-icons/go';
 import {FaRegTimesCircle} from 'react-icons/fa';
+import {useEffect, useState} from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -29,6 +30,26 @@ const Goals = () => {
     const handleClose = () => setOpen(false);
     const [valueStart, setValueStart] = React.useState(null);
     const [valueEnd, setValueEnd] = React.useState(null);
+    const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
     const color1 = "#102B4C" //dark blue
     const color2 = "#346E93" //light blue
@@ -114,12 +135,15 @@ const Goals = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
            
-            <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Goals</Typography>
+            <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Goals</Typography>
             <Box sx={{ width:"95%", height:"80vh", padding:"1%", marginTop:"2%", borderRadius:"10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
                 <Button variant="contained" onClick={handleOpen} style={{backgroundColor:color1, color:"white", float:"right", marginTop:"1%", marginRight:"1%", marginBottom:"1%"}}><FaPlus style={{marginRight:"5px"}}/>Add Goals</Button>
                 <Modal

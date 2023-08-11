@@ -6,10 +6,32 @@ import {GiBodyHeight, GiWeight} from 'react-icons/gi';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
+import {useEffect, useState} from 'react';
 
 
 import BMI from "../../assets/BMI-Calculator.png";
 const Progress = () => {
+
+    const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
     const pData = [80,80,79,75,70,70 ];
    
@@ -32,12 +54,15 @@ const Progress = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
             
-        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Progress</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Progress</Typography>
         <Box sx={{display:"flex", width:"100%"}}>
             <Box sx={{width:"50%", marginRight:"5rem"}}>
                 <Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Typography, InputLabel, TextField, Button} from "@mui/material";
 import Sidebar from "../../components/Sidebar";
@@ -18,6 +18,27 @@ const Schedule = () => {
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
   const [value, setValue] = React.useState(null);
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const months = [
     "January",
@@ -100,13 +121,16 @@ const Schedule = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography
             variant="h4"
-            style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}
+            style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}
           >
             Schedule
           </Typography>
@@ -157,14 +181,18 @@ const Schedule = () => {
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
                 <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Date:</InputLabel>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker 
-                        label=""
-                        value={value}
-                        onChange={(newValue) => setValue(newValue)} 
-                        renderInput={(params) => <TextField {...params}  />}
-                    />
-                </LocalizationProvider>
+                <Box sx={{maxWidth:"450px"}}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs} >
+                      <DatePicker 
+                          label=""
+                          value={value}
+                          style={{width:"100px"}}
+                          onChange={(newValue) => setValue(newValue)} 
+                          renderInput={(params) => <TextField {...params}  />}
+                      />
+                  </LocalizationProvider>
+                </Box>
+                
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Time:</InputLabel>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimePicker
