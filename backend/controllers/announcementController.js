@@ -9,23 +9,26 @@ import {
 const getAllAnnouncements = asyncHandler(async (req, res) => {
     const announcements = await getAnnouncements();
 
-    res.status(200).json(announcements);
+    res.status(200).json({
+        status: announcements !== undefined ? "success" : "fail",
+        data: announcements !== undefined ? announcements : "",
+        message: announcements !== undefined ? "" : "Something went wrong!",
+    });
 });
 
 
 //add announcement
 const addNewAnnouncement = asyncHandler(async (req, res) => {
-    const announcement = req.body;
-    const addByUserId = req.user.id;
+    const { title, content } = req.body;
+    const addedBy = req.user.id;
 
-    if (!announcement.title.trim() || !announcement.content.trim()) {
-        res.status(400).json({ message: "Title and content are required." });
-        return;
-    }
+    const result = await addAnnouncement(title, content, addedBy);
 
-    res.status(200).json(announcement);
-    const result = await addAnnouncement(announcement, addByUserId);
-
+    res.status(200).json({
+        status: result !== undefined ? "success" : "fail",
+        data: result !== undefined ? result : null,
+        message: result !== undefined ? "Announcement added successfully." : "Adding announcement unsuccessful.",
+    });
 });
 
 
