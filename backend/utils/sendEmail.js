@@ -1,43 +1,40 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 
-// set up nodemailer transporter
+// configure the email transport using nodemailer
 const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
-    secure: false,  // Ensure this is true if you are using port 465, otherwise false
+    service: "gmail",
     auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
 
-/**
- * Send an email.
- * @param {string} to - The sender's email address.
- * @param {string} to - The recipient's email address.
- * @param {string} subject - The email subject.
- * @param {string} text - The plain text email body.
- * @param {string} html - The HTML email body.
- */
-
-// mail sender
-const sendEmail = async (to, subject, text, html) => {
+// send email using configured transport object
+const sendEmail = async (recipient, subject, htmlBody) => {
     try {
-        const info = await transporter.sendMail({
-            from: process.env.MAIL_USER,
-            to: to,
+        await transporter.sendMail({
+            from: `"FitZen Support" <${process.env.EMAIL_USER}>`,
+            to: recipient,
             subject: subject,
-            text: text,
-            html: html
+            html: htmlBody
         });
 
-        console.log("Message sent: %s", info.messageId);
+        console.log("Email sent successfully!");
+        return "Success";
     } catch (error) {
-        console.error("Error sending email: ", error);
+        console.error("Error sending email.");
+        throw error;
     }
 };
 
 
 export default sendEmail;
+
+
+// Call
+// const result = await sendEmail("adheesha.1999@gmail.com", "Subject Test", "<b>Body test - html</b>");
+// console.log(result);
