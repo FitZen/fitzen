@@ -19,12 +19,10 @@ const protect = asyncHandler(async (req, res, next) => {
         } catch (error) {
             res.status(401);
             throw new Error('Not authorized, invalid token');
-            //res.status(401).json({ message: 'Not authorized, invalid token' });
         }
     } else {
         res.status(401);
         throw new Error('Not authorized, no token');
-        //res.status(401).json({ message: 'Not authorized, no token' });
     }
 });
 
@@ -40,7 +38,6 @@ const permit = (...allowedRoles) => {
         } else {
             res.status(403);
             throw new Error('Forbidden');
-            //res.status(403).json({message: 'Forbidden'});
         }
     }
 }
