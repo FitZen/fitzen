@@ -26,6 +26,7 @@ import MealPlan from './pages/member/MealPlan';
 import Goals from './pages/member/Goals';
 import InstructorProfile from './pages/member/InstructorProfile';
 import OwnMembership from './pages/member/OwnMembership';
+import AllocatedInstructorProfile from './pages/member/AllocatedTrainerProfile';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
@@ -84,6 +85,7 @@ function App() {
         <Route path="/member/goals" element={<Goals />} />
         <Route path="/member/instructorprofile" element={<InstructorProfile />} />
         <Route path="/member/ownmembership" element={<OwnMembership />} />
+        <Route path="/member/allocatedinstructorprofile" element={<AllocatedInstructorProfile />} />
 
 
         <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />

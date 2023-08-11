@@ -4,6 +4,9 @@ import { Typography, Button } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+import {FaRegTimesCircle} from 'react-icons/fa';
+import Modal from '@mui/material/Modal';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,6 +20,9 @@ import Paper from '@mui/material/Paper';
 const OwnMembership = () => {
  
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     // Function to handle scroll event
@@ -64,6 +70,20 @@ const OwnMembership = () => {
   
     
   ]
+
+  const modalStyle = {
+    position: 'absolute',
+    justifyContent: 'center',
+    textAlign: 'center',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "20%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 3,
+  };
 
 
 
@@ -127,8 +147,10 @@ const OwnMembership = () => {
           </Box>
 
           <Box sx={{display:"flex", marginTop:"3%", marginLeft:"45%"}}>
-                <Button variant="contained" style={{backgroundColor:color2, marginRight:"3%"}}>View Your Trainers' Profile</Button>
-                <Button variant="contained" style={{backgroundColor:color2}}>Renew/Change Membership</Button>
+            <Link to="/member/allocatedinstructorprofile" style={{textDecoration:"none"}}>
+                <Button variant="contained" style={{backgroundColor:color2, marginRight:"5%", width:"100%"}}>View Your Trainers' Profile</Button>
+            </Link>
+                <Button variant="contained" onClick={handleOpen} style={{backgroundColor:color2, marginLeft:"3%"}}>Renew/Change Membership</Button>
           </Box>
           <Typography variant="h6" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"left" }}>Payment History </Typography>
           <Box sx={{ padding: "1%", marginTop:"3%", overflowY: "auto", width: "90%", flexWrap: "wrap", border:"1px solid #346E93", borderRadius:"10px", height: "35vh", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
@@ -168,6 +190,46 @@ const OwnMembership = () => {
 
         </Box>
       </Box>
+
+      <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={modalStyle}>
+                        <Box sx={{marginBottom:"5%"}}>
+                            <FaRegTimesCircle onClick={handleClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA", marginLeft:"-7%" ,}}  
+                                onMouseEnter={(e) => {
+                                    e.target.style.color = "#D71313";
+                                    e.target.style.transform = "scale(1)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.target.style.color = "#D8D9DA";
+                                    e.target.style.transform = "scale(1)";
+                                }}
+                            />
+                        </Box>
+                       
+                        <Box sx={{textAlign:"center", justifyContent:"center"}}>
+                           
+                            <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                                Do you really want to change or renew your membership?
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>(Request will send to receptionist)</Typography>
+                           
+                        </Box>
+                        <Box sx={{marginTop:"3%"}}>
+                            
+                        </Box>
+
+                       <Box sx={{display:"flex", justifyContent:"center", textAlign:"center"}}>
+                            <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", textAlign:"center", marginRight:"2%"}}>Yes</Button>
+                            <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", textAlign:"center"}}>No</Button>
+                       </Box>
+                        
+                    </Box>
+      </Modal>
      
     </Box>
   );
