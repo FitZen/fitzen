@@ -232,12 +232,12 @@ const Shakebar = () => {
                     <Box>
                       <img src={item1} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                     </Box>
-                    <Box sx={{marginTop:"20%"}}>
-                      <Typography variant="body1"  textAlign="left">Price: Rs 2300</Typography>
+                    <Box sx={{marginTop:"15%"}}>
+                      <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> Rs 2300</Typography><br />
                       <Typography variant="body1" textAlign="left">
-                         Description:  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </Typography>
-                      <Typography variant="body1" textAlign="left">Ingredients: Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
+                        <span style={{fontWeight:"600"}}>Description:</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      </Typography><br />
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Ingredients: </span> Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
                     </Box>
                   </Box>
                   
