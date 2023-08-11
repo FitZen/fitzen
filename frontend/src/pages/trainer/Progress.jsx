@@ -9,6 +9,7 @@ import Navbar from "../../components/TrainerNavbar";
 import ProfileImg from '../../assets/Members/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill,PiVideoCameraFill} from 'react-icons/pi';
 import { AiFillSchedule } from "react-icons/ai";
+import {useEffect, useState} from 'react';
 
 
 import BMI from "../../assets/BMI-Calculator.png";
@@ -17,6 +18,26 @@ import {FaCalendarCheck, FaUserEdit} from "react-icons/fa";
 const StudentProgress = () => {
 
 	const [item, setItem] = React.useState('');
+	const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 	const handleChange = (event) => {
 		setItem(event.target.value);
@@ -43,9 +64,12 @@ const StudentProgress = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
+				<div
+					className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+					style={{ width: "100%" }}
+					>
 					<Navbar />
-				</Box>
+				</div>
 				<Box sx={{ paddingTop:"2rem",paddingLeft:"62rem", flex:1 }}>
 					<Button variant="contained" style={{backgroundColor:"#102B4C", color:"white", fontWeight:"600",}}><PiVideoCameraFill style={{marginRight: "0.5rem"}}/>  Start Virtual Session</Button>
 				</Box>

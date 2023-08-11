@@ -9,6 +9,7 @@ import Icon2 from '../../assets/icon2.png'
 import Icon3 from '../../assets/icon3.png'
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
+import {useEffect, useState} from 'react';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -19,6 +20,27 @@ const color4 = "#DC1E2A" //red
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
 const TrainerDashboard = () => {
+
+	const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 	const data = {
 		labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
@@ -77,11 +99,14 @@ const TrainerDashboard = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
+				<div
+					className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+					style={{ width: "100%" }}
+					>
 					<Navbar />
-				</Box>
+				</div>
 				<Box sx={{ paddingLeft:"5rem", flex:1 }}>
-					<Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+					<Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
 					<Box sx={{ display:"flex", width: "100%", height:"100%"}}>
 
 						<Box>

@@ -54,6 +54,7 @@ import TrainerReports from "./pages/trainer/Report";
 import TrainerSchedule from "./pages/trainer/Schedule";
 import TrainerMealplan from "./pages/trainer/Mealplan";
 
+
 import PhysiotherapistDashboard from "./pages/physiotherapist/Dashboard";
 import PhysiotherapistProfile from "./pages/physiotherapist/Profile";
 import PhysiotherapistEditProfile from "./pages/physiotherapist/EditProfile";

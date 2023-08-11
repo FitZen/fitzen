@@ -8,8 +8,30 @@ import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const TrainerProfile = () => {
+
+	const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 	return (
 
@@ -20,12 +42,15 @@ const TrainerProfile = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
+				<div
+					className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+					style={{ width: "100%" }}
+					>
 					<Navbar />
-				</Box>
+				</div>
 				<Box sx={{ paddingLeft:"5rem", flex:1 }}>
 
-					<Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Profile</Typography>
+					<Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Profile</Typography>
 					<Box sx={{ display:"flex", width: "100%", height:"100%"}}>
 						<Box sx={{ width: "50%", height:"100%", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
 							<img src={ProfileImg} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
