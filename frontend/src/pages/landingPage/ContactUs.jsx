@@ -26,8 +26,7 @@ const NavLink = styled("a")(({ theme }) => ({
     
     "&:hover": {
       color: color2,
-      border: "2px solid red",
-      backgroundColor: color1 // Only the bottom border will be red on hover
+      backgroundColor: "#E74C3C" // Only the bottom border will be red on hover
       
     },
   }));

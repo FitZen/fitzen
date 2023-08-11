@@ -24,6 +24,7 @@ import EditProfile from './pages/member/EditProfile';
 import Packages from './pages/member/Packages';
 import MealPlan from './pages/member/MealPlan';
 import Goals from './pages/member/Goals';
+import InstructorProfile from './pages/member/InstructorProfile';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
@@ -80,6 +81,7 @@ function App() {
         <Route path="/member/packages" element={<Packages />} />
         <Route path="/member/mealplan" element={<MealPlan />} />
         <Route path="/member/goals" element={<Goals />} />
+        <Route path="/member/instructorprofile" element={<InstructorProfile />} />
 
 
         <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />

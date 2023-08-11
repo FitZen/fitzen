@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 import { Bar } from 'react-chartjs-2';
@@ -16,6 +16,27 @@ const Reports = () => {
 
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
@@ -77,11 +98,14 @@ const Reports = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>Reports</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left"}}>Reports</Typography>
         
         <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
             <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>

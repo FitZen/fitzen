@@ -15,9 +15,8 @@ const CustomButton = (backgroundColor, color, buttonText, heroBtn, guideBtn, get
         display: "block",
         border: "2px solid transparent",
         "&:hover": {
-            backgroundColor: "black",
+            backgroundColor: "#E74C3C",
             color: "white",
-            border: "red 2px solid"
         },
 
         [theme.breakpoints.down("md")]: {
