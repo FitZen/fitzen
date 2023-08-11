@@ -7,7 +7,7 @@ const getHandledComplaints = asyncHandler(async (handledBy) => {
     const sql = 'SELECT * FROM complaint WHERE is_handled=true AND handled_by=$1 ORDER BY handled_on DESC;';
     const result = await query(sql, [handledBy]);
 
-    return result.rowCount !== 0 ? result.rows : null;
+    return result.rows;
 });
 
 
@@ -16,7 +16,7 @@ const getUnhandledComplaints = asyncHandler(async (handledByUserId) => {
     const sql = 'SELECT * FROM complaint WHERE is_handled=false ORDER BY added_on DESC;'
     const result = await query(sql);
 
-    return result.rowCount !== 0 ? result.rows : null;
+    return result.rows;
 });
 
 

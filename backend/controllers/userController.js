@@ -23,34 +23,24 @@ const loginUser = asyncHandler(async (req, res) => {
 
             if (await setLoginStatus(user.id, 'Active') && await setLoginDateTime(user.id)) {
                 res.status(200).json({
-                    status: "success",
-                    data: await findUserByEmail(email),         // to get the latest updated data
-                    message: "User logged in successfully.",
+                    data: {
+                        id: user.id,
+                        type: user.type,
+                    },
                 });
             } else {
-                res.status(500).json({
-                    status: "fail",
-                    data: null,
-                    message: "Something went wrong!",
-                });
+                res.status(500);
+                throw new Error("Something went wrong!");
             }
-
         } else {
-            res.status(401).json({
-                status: "fail",
-                data: null,
-                message: 'Incorrect password',
-            });
+            res.status(401);
+            throw new Error('Incorrect password');
         }
     } else {
-        res.status(401).json({
-            status: "fail",
-            data: null,
-            message: 'User doesn\'t exist',
-        });
+        res.status(404);
+        throw new Error('User doesn\'t exist');
     }
 });
-
 
 
 // desc    logout user
@@ -64,16 +54,11 @@ const logoutUser = asyncHandler(async (req, res) => {
         });
 
         res.status(200).json({
-            status: "success",
-            data: null,
             message: 'User logged out successfully.'},
         );
     } else {
-        res.status(500).json({
-            status: "fail",
-            data: null,
-            message: 'Something went wrong!',
-        });
+        res.status(500);
+        throw new Error("Something went wrong!");
     }
 });
 
@@ -85,10 +70,13 @@ const logoutUser = asyncHandler(async (req, res) => {
 const getUserAllDetails = asyncHandler(async (req, res) => {
     const user = await getUserDetails(req.user.id, req.user.type);
 
-    res.status(user !== undefined ? 200 : 500).json({
-        status: user !== undefined ? "success" : "fail",
-        data: user !== undefined ? user : null,
-        message: user !== undefined ? "User details fetched successfully." : "Something went wrong!",
+    if (! user) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: user,
     });
 });
 

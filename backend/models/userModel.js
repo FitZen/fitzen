@@ -8,7 +8,7 @@ const findUserById = asyncHandler(async (id) => {
     const sql = 'SELECT * FROM users WHERE id = $1';
     const result = await query(sql, [id]);
 
-    return result.rowCount > 0 ? result.rows[0] : null;
+    return result.rows[0];
 });
 
 
@@ -17,7 +17,7 @@ const findUserByEmail = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
     const result = await query(sql, [email]);
 
-    return result.rowCount > 0 ? result.rows[0] : null;
+    return result.rows[0];
 });
 
 
@@ -26,7 +26,7 @@ const matchPassword = asyncHandler(async (email, password) => {
     const sql = 'SELECT password FROM users WHERE email = $1';
     const result = await query(sql, [email]);
 
-    return (result.rowCount > 0 && await bcrypt.compare(password, result.rows[0].password));
+    return await bcrypt.compare(password, result.rows[0].password);
 });
 
 
@@ -79,7 +79,7 @@ const getUserDetails = asyncHandler(async (id, type) => {
     const sql = 'SELECT * FROM ' + table + ' WHERE id = $1';
     const result = await query(sql, [id]);
 
-    return result.rowCount > 0 ? result.rows[0] : null;
+    return result.rows[0];
 });
 
 
