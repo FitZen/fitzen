@@ -1,31 +1,40 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
+// configure the email transport using nodemailer
+const transporter = nodemailer.createTransport({
+    service: "gmail",
     auth: {
-        user: 'your-email@gmail.com',
-        pass: 'your-password'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
 
-const sendEmail = async (to, subject, text) => {
-    let mailOptions = {
-        from: 'your-email@gmail.com',
-        to: to,
-        subject: subject,
-        text: text
-    };
+// send email using configured transport object
+const sendEmail = async (recipient, subject, htmlBody) => {
+    try {
+        await transporter.sendMail({
+            from: `"FitZen Support" <${process.env.EMAIL_USER}>`,
+            to: recipient,
+            subject: subject,
+            html: htmlBody
+        });
 
-    transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.error('Error sending email: ', err);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-}
+        console.log("Email sent successfully!");
+        return "Success";
+    } catch (error) {
+        console.error("Error sending email.");
+        throw error;
+    }
+};
 
 
 export default sendEmail;
+
+
+// Call
+// const result = await sendEmail("adheesha.1999@gmail.com", "Subject Test", "<b>Body test - html</b>");
+// console.log(result);
