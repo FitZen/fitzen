@@ -175,11 +175,11 @@ const Schedule = () => {
               </div>
             </Box>
 
-            <Box sx={{ width: "50%", height:"75vh", justifyContent: "center", alignItems:"center" }}>
-              <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"6%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
-                
+            <Box sx={{ width: "50%", height:"77vh", justifyContent: "center", alignItems:"center" }}>
+              <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"3%", paddingLeft:"8%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
+                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Task</Typography>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
-                <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                <TextField variant="outlined" inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Date:</InputLabel>
                 <Box sx={{maxWidth:"450px"}}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -203,7 +203,7 @@ const Schedule = () => {
                   />
                 </LocalizationProvider>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Description:</InputLabel>
-                <TextField variant="outlined" multiline rows="4" inputProps={{style: {height: 100, width:250, borderRadius:"5px", outline:"none"}}}/>
+                <TextField variant="outlined" multiline rows="4" inputProps={{style: {height: 100, width:230, borderRadius:"5px", outline:"none"}}}/>
 
                 <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
               </Box>
