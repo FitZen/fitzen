@@ -72,17 +72,18 @@ const Schedule = () => {
                 display: "flex",
                 alignItems: "center", 
                 justifyContent: "center", 
-                position: "relative",
+                position: "relative", 
+                
               }}
             >
 
-<Box
-          sx={{
-            position: "absolute",
-            top: "-25px",
-            right: "0.5rem",
-            display: "flex",
-            alignItems: "center",
+           <Box
+            sx={{
+             position: "absolute",
+             top: "-25px",
+             right: "0.5rem",
+             display: "flex",
+             alignItems: "center", 
           }}
         >
           <AddBoxIcon sx={{ color: "black", fontSize: "20px", marginRight: "4px", cursor: "pointer" }} />
