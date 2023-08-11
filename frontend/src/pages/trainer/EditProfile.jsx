@@ -13,6 +13,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
+import {useEffect, useState} from 'react';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -23,6 +24,27 @@ const TrainerEditProfile = () => {
 
     const [gender, setGender] = React.useState('');
     const [value, setValue] = React.useState(null);
+
+    const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
     const handleChange = (event) => {
@@ -38,12 +60,15 @@ const TrainerEditProfile = () => {
             </Box>
 
             <Box component="main" sx={{flex:1 }}>
-                <Box>
+                <div
+                    className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+                    style={{ width: "100%" }}
+                    >
                     <Navbar />
-                </Box>
+                </div>
                 <Box sx={{ paddingLeft:"5rem", flex:1, width:"100%"}}>
 
-                    <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Edit Profile</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Edit Profile</Typography>
                     <Grid container spacing={2} style={{marginTop:"1rem", width:"100%"}}>
                         <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                             <Grid md={5} sx={{marginRight:"20%", display:"flex"}}>

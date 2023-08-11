@@ -5,9 +5,31 @@ import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import "../../styles/member/ScheduleStyles.css";
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-
+import { useEffect } from "react";
 
 const MealPlan = () => {
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const bull = (
     <Box
       component="span"
@@ -54,12 +76,15 @@ const MealPlan = () => {
     </Box>
     
     <Box component="main" sx={{flex:1 }}>
-      <Box>
-        <Navbar />
-      </Box>
+        <div
+            className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+            style={{ width: "100%" }}
+          >
+            <Navbar />
+        </div>
       <Box sx={{ paddingLeft:"5rem", flex:1 }}>
          
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Meal Plans</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Meal Plans</Typography>
           <Box sx={{ backgroundColor: "#E5E8E8", width:"95%", padding:"0.5%", marginTop:"2%", borderRadius:"10px"}}>
             <Box sx={{ display:"flex",flexWrap: "wrap", backgroundColor:"white", width: "100%", height:"80vh", padding:"2%"}}> 
                 

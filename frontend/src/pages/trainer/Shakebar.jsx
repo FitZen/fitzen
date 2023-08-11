@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
+import {useEffect} from 'react';
 
 
 import item1 from "../../assets/images (3).jpg"
@@ -18,6 +19,26 @@ import item8 from "../../assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c13
 const TrainerShakebar = () => {
 
     const [item, setItem] = React.useState('');
+    const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
     const handleChange = (event) => {
         setItem(event.target.value);
@@ -32,13 +53,16 @@ const TrainerShakebar = () => {
             </Box>
 
             <Box component="main" sx={{flex:1 }}>
-                <Box>
+                <div
+                    className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+                    style={{ width: "100%" }}
+                >
                     <Navbar />
-                </Box>
+                </div>
 
                 <Box sx={{ paddingLeft:"5rem", flex:1 }}>
 
-                    <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Shakebar</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Shakebar</Typography>
 
                     <Box sx={{display:"flex", marginTop:"1rem"}}>
                         <FormControl style={{width:"15%"}}>
