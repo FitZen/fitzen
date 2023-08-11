@@ -58,20 +58,21 @@ const Schedule = () => {
               width: "40%",
               padding: "20px",
               alignItems: "center",
+              
             }}
           >
             
             <Box
               sx={{
-                backgroundColor: "#FA8072",
+                backgroundColor: "#ffffff",
                 padding: "0.7rem",
                 borderRadius: "10px",
                 margin: "1rem",
-                width: "90%",
-                height: "100px",
+                width: "70%",
+                height: "70px",
                 display: "flex",
                 alignItems: "center", 
-                justifyContent: "center", 
+                justifyContent: "left", 
                 position: "relative", 
                 
               }}
@@ -86,22 +87,12 @@ const Schedule = () => {
              alignItems: "center", 
           }}
         >
-          <AddBoxIcon sx={{ color: "black", fontSize: "20px", marginRight: "4px", cursor: "pointer" }} />
-          <Typography
-            variant="body2"
-            style={{
-              fontSize: "14px",
-              fontWeight: 600,
-            }}
-          >
-            Add New Meal Plan
-          </Typography>
         </Box>
 
             <DeleteIcon
              sx={{
               position: "absolute",
-              top: "1rem",
+              textAlign: "center",
               right: "1rem",
               color: "black",
               cursor: "pointer",
@@ -111,8 +102,8 @@ const Schedule = () => {
             <EditIcon
              sx={{
               position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
+              textAlign: "center",
+              right: "4rem",
               color: "black",
               cursor: "pointer",
               fontSize: "28px",
@@ -126,6 +117,7 @@ const Schedule = () => {
                   // marginTop: "10px",
                 textAlign: "center",
                 fontWeight: 600,
+                marginLeft: "20px",
                 }}
               >
                 Meal Plan 1
@@ -134,23 +126,23 @@ const Schedule = () => {
 
             <Box
               sx={{
-                backgroundColor: "#FA8072",
+                backgroundColor: "#ffffff",
                 padding: "0.7rem",
                 borderRadius: "10px",
                 margin: "1rem",
-                width: "90%",
-                height: "100px",
+                width: "70%",
+                height: "70px",
                 display: "flex",
                 alignItems: "center", 
-                justifyContent: "center", 
-                position: "relative",
+                justifyContent: "left", 
+                position: "relative", 
               }}
             >
 
           <DeleteIcon
              sx={{
               position: "absolute",
-              top: "1rem",
+              textAlign: "center",
               right: "1rem",
               color: "black",
               cursor: "pointer",
@@ -160,8 +152,8 @@ const Schedule = () => {
             <EditIcon
              sx={{
               position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
+              textAlign: "center",
+              right: "4rem",
               color: "black",
               cursor: "pointer",
               fontSize: "28px",
@@ -175,6 +167,7 @@ const Schedule = () => {
                   // marginTop: "10px",
                   textAlign: "center",
                   fontWeight: 600,
+                  marginLeft: "20px",
                 }}
               >
                 Meal Plan 2
@@ -183,15 +176,15 @@ const Schedule = () => {
 
             <Box
               sx={{
-                backgroundColor: "#FA8072",
+                backgroundColor: "#ffffff",
                 padding: "0.7rem",
                 borderRadius: "10px",
                 margin: "1rem",
-                width: "90%",
-                height: "100px",
+                width: "70%",
+                height: "70px",
                 display: "flex",
                 alignItems: "center", 
-                justifyContent: "center", 
+                justifyContent: "left", 
                 position: "relative",
               }}
             >
@@ -199,7 +192,7 @@ const Schedule = () => {
           <DeleteIcon
              sx={{
               position: "absolute",
-              top: "1rem",
+              textAlign: "center",
               right: "1rem",
               color: "black",
               cursor: "pointer",
@@ -209,8 +202,8 @@ const Schedule = () => {
             <EditIcon
              sx={{
               position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
+              textAlign: "center",
+              right: "4rem",
               color: "black",
               cursor: "pointer",
               fontSize: "28px",
@@ -224,6 +217,7 @@ const Schedule = () => {
                   // marginTop: "10px",
                   textAlign: "center",
                   fontWeight: 600,
+                  marginLeft: "20px",
                 }}
               >
                 Meal Plan 3
@@ -232,15 +226,15 @@ const Schedule = () => {
 
             <Box
               sx={{
-                backgroundColor: "#FA8072",
+                backgroundColor: "#ffffff",
                 padding: "0.7rem",
                 borderRadius: "10px",
                 margin: "1rem",
-                width: "90%",
-                height: "100px",
+                width: "70%",
+                height: "70px",
                 display: "flex",
                 alignItems: "center", 
-                justifyContent: "center", 
+                justifyContent: "left", 
                 position: "relative",
               }}
             >
@@ -248,7 +242,7 @@ const Schedule = () => {
           <DeleteIcon
              sx={{
               position: "absolute",
-              top: "1rem",
+              textAlign: "center",
               right: "1rem",
               color: "black",
               cursor: "pointer",
@@ -258,8 +252,8 @@ const Schedule = () => {
             <EditIcon
              sx={{
               position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
+              textAlign: "center",
+              right: "4rem",
               color: "black",
               cursor: "pointer",
               fontSize: "28px",
@@ -273,6 +267,7 @@ const Schedule = () => {
                   // marginTop: "10px",
                   textAlign: "center",
                   fontWeight: 600,
+                  marginLeft: "20px",
                 }}
               >
                 Meal Plan 4
@@ -281,15 +276,15 @@ const Schedule = () => {
 
             <Box
               sx={{
-                backgroundColor: "#FA8072",
+                backgroundColor: "#ffffff",
                 padding: "0.7rem",
                 borderRadius: "10px",
                 margin: "1rem",
-                width: "90%",
-                height: "100px",
+                width: "70%",
+                height: "70px",
                 display: "flex",
                 alignItems: "center", 
-                justifyContent: "center", 
+                justifyContent: "left", 
                 position: "relative",
               }}
             >
@@ -297,7 +292,7 @@ const Schedule = () => {
           <DeleteIcon
              sx={{
               position: "absolute",
-              top: "1rem",
+              textAlign: "center",
               right: "1rem",
               color: "black",
               cursor: "pointer",
@@ -307,8 +302,8 @@ const Schedule = () => {
             <EditIcon
              sx={{
               position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
+              textAlign: "center",
+              right: "4rem",
               color: "black",
               cursor: "pointer",
               fontSize: "28px",
@@ -322,6 +317,7 @@ const Schedule = () => {
                   // marginTop: "10px",
                   textAlign: "center",
                   fontWeight: 600,
+                  marginLeft: "20px",
                 }}
               >
                 Meal Plan 5
