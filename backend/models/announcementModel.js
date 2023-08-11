@@ -7,7 +7,7 @@ const getAnnouncements = asyncHandler(async () => {
     const sql = 'SELECT * FROM announcement ORDER BY posted_on DESC;';
     const result = await query(sql);
 
-    return result.rowCount !== 0 ? result.rows : null;
+    return result.rows.length ? result.rows : null;
 });
 
 
