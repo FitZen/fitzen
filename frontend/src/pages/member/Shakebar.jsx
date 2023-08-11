@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
+import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
+import Modal from '@mui/material/Modal';
+import {FaRegTimesCircle} from 'react-icons/fa';
 
 // Import the images
 import item1 from "../../assets/images (3).jpg"
@@ -17,6 +19,48 @@ import item8 from "../../assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c13
 const Shakebar = () => {
   // State to store the selected item from the Select component
   const [item, setItem] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [valueStart, setValueStart] = React.useState(null);
+  const [valueEnd, setValueEnd] = React.useState(null);
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const color1 = "#102B4C" //dark blue
+  const color2 = "#346E93" //light blue
+  const color3 = "#96CDEF" //lighter blue
+
+  const modalStyle = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: "35%",
+      bgcolor: 'background.paper',
+      borderRadius: '10px',
+      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+      p: 4,
+    };
 
   // Event handler for handling the Select component's value change
   const handleChange = (event) => {
@@ -86,14 +130,17 @@ const Shakebar = () => {
 
       <Box component="main" sx={{ flex: 1 }}>
         {/* Navbar */}
-        <Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
 
         {/* Main content */}
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           {/* Heading */}
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>
             Shakebar
           </Typography>
 
@@ -146,16 +193,64 @@ const Shakebar = () => {
                   <Typography variant="h6" style={{ fontWeight: 500 }}>
                     {itemData.price}
                   </Typography>
-                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
+                  <Button variant="contained" onClick={handleOpen} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
                     Buy
                   </Button>
+                  
                 </Box>
               ))}
             </Box>
           </Box>
         </Box>
       </Box>
+      <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+      >
+          <Box sx={modalStyle}>
+              <FaRegTimesCircle onClick={handleClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                  onMouseEnter={(e) => {
+                      e.target.style.color = "#D71313";
+                      e.target.style.transform = "scale(1)";
+                  }}
+                  onMouseLeave={(e) => {
+                      e.target.style.color = "#D8D9DA";
+                      e.target.style.transform = "scale(1)";
+                  }}
+              />
+              <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                  
+                  <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                      Dymatize Iso 100
+                  </Typography>
+              </Box>
+              
+              <Box sx={{textAlign:"center", padding:"1%", justifyContent:"center"}}>
+                  <Box sx={{display:"flex", height:"40vh"}}>
+                    <Box>
+                      <img src={item1} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
+                    </Box>
+                    <Box sx={{marginTop:"20%"}}>
+                      <Typography variant="body1"  textAlign="left">Price: Rs 2300</Typography>
+                      <Typography variant="body1" textAlign="left">
+                         Description:  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      </Typography>
+                      <Typography variant="body1" textAlign="left">Ingredients: Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
+                    </Box>
+                  </Box>
+                  
+                 
+                  <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Pay Online</Button>
+                
+              </Box>
+              
+          </Box>
+      </Modal>
     </Box>
+
+    
   );
 };
 
