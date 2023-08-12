@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react';
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [userDetails, setUserDetails] = useState({});
 
   const [userID, setUserID] = useState('');
   const [actor, setActor] = useState('');
@@ -55,6 +56,24 @@ export default function PrimarySearchAppBar() {
     }else{
       setUserID(JSON.parse(localStorage.getItem('userID')));
       setActor(JSON.parse(localStorage.getItem('userType')));
+
+      //load user details
+      const getUserDetails = async () => {
+        try {
+          const reqData = {
+            userID: JSON.parse(localStorage.getItem('userID')),
+            userType: JSON.parse(localStorage.getItem('userType')),
+          };
+          console.log("reqdata from frontend:",reqData);
+          const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+          console.log("res2 from frontend:",res2.data.data);
+          
+        } catch (error) {
+          console.log('error message: ',error.data);
+        }
+      
+      };
+
       getUserDetails();
     }
   
@@ -68,7 +87,8 @@ export default function PrimarySearchAppBar() {
         userID: userID,
         userType: actor,
       };
-      await axios.post("http://localhost:8000/api/users/logout",reqData);
+      
+      const res1 = await axios.post("http://localhost:8000/api/users/logout",reqData);
       localStorage.clear();
       navigate("/login");
 
@@ -79,24 +99,6 @@ export default function PrimarySearchAppBar() {
     }
   };
 
-  //load user details
-  const getUserDetails = async () => {
-    try {
-      const reqData = {
-        userID: userID,
-        userType: actor,
-      };
-      console.log("reqdata from frontend:",reqData);
-      const res = await axios.get('http://localhost:8000/api/users/details',reqData);
-      console.log(res.data);
-      localStorage.setItem('userDetails', JSON.stringify(res.data.data));
-    } catch (error) {
-      console.log('error message: ',error.data);
-    }
-  
-  };
-
-  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
