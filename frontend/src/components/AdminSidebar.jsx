@@ -212,7 +212,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
               
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/instructors" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -223,7 +223,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/employees" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Employee')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Employee' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -234,7 +234,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/shakebar" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -245,7 +245,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/announcement" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Announcement')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Announcement' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -256,7 +256,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/complaint" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Complaints')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Complaints' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -267,7 +267,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/admin/report" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
                 <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
