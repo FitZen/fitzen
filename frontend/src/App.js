@@ -31,6 +31,14 @@ import AllocatedInstructorProfile from './pages/member/AllocatedTrainerProfile';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
 import AdminMembers from './pages/admin/Members';
+import AdminInstructors from './pages/admin/Instructors';
+import AdminEmployees from './pages/admin/Employees';
+import AdminShakebar from './pages/admin/Shakebar';
+import AdminAnnouncement from './pages/admin/Announcement';
+import Admincomplaint from './pages/admin/Complaint';
+import Adminreport from './pages/admin/Report';
+import MembershipPlans from './pages/admin/MembershipPlans';
+import TrainerPackages from './pages/admin/TrainerPackages';
 
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
@@ -100,6 +108,14 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
         <Route path="/admin/members" element={<AdminMembers />} />
+        <Route path="/admin/instructors" element={<AdminInstructors />} />
+        <Route path="/admin/employees" element={<AdminEmployees />} />
+        <Route path="/admin/shakebar" element={<AdminShakebar />} />
+        <Route path="/admin/announcement" element={<AdminAnnouncement />} />
+        <Route path="/admin/complaint" element={<Admincomplaint />} />
+        <Route path="/admin/report" element={<Adminreport />} />
+        <Route path="/admin/membershipplans" element={<MembershipPlans />} />
+        <Route path="/admin/trainerpackages" element={<TrainerPackages />} />
 
 
         <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
