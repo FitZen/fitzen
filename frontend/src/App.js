@@ -75,6 +75,8 @@ import PhysiotherapistShakebar from "./pages/physiotherapist/Shakebar";
 import PhysiotherapistSchedule from "./pages/physiotherapist/Schedule";
 import PhysiotherapistReports from "./pages/physiotherapist/Reports";
 import StudentHistory from "./pages/physiotherapist/StudentHistory";
+import PNewRequests from "./pages/physiotherapist/NewRequests";
+import PNotifications from "./pages/physiotherapist/Notifications";
 
 
 function App() {
@@ -148,6 +150,8 @@ function App() {
         <Route path="/physiotherapist/schedule" element={<PhysiotherapistSchedule />} />
         <Route path="/physiotherapist/reports" element={<PhysiotherapistReports />} />
         <Route path="/physiotherapist/StudentHistory" element={<StudentHistory />} />
+        <Route path="/physiotherapist/NewRequests" element={<PNewRequests />} />
+        <Route path="/physiotherapist/Notifications" element={<PNotifications />} />
 
       </Routes>
     </>
