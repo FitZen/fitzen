@@ -7,8 +7,8 @@ import {
 import { protect, permit } from "../middleware/authMiddleware.js";
 
 
-router.get("/announcement",protect, getAllAnnouncements);
-router.post("/announcement",protect, permit('Admin'), addNewAnnouncement);
+router.get("/getannouncements",protect, getAllAnnouncements);
+router.post("/addannouncement",protect, permit('Admin'), addNewAnnouncement);
 
 
 export default router;
