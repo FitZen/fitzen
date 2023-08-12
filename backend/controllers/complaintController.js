@@ -1,44 +1,64 @@
 import asyncHandler from 'express-async-handler';
 import {
-    getComplaints,
     getHandledComplaints,
+    getUnhandledComplaints,
     addComplaint,
 } from "../models/complaintModel.js";
 
 
-//get all complaints
-const getAllComplaints = asyncHandler(async (req, res) => {
-    const complaints = await getComplaints();
+// get all handled complaints
+const getAllHandledComplaints = asyncHandler(async (req, res) => {
+    const handledBy = req.user.id;
+    const handledComplaints = await getHandledComplaints(handledBy);
 
-    res.status(200).json(complaints);
+    if (handledComplaints === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: handledComplaints,
+    });
 });
 
 
-//get all handled complaints
-const getAllHandledComplaints = asyncHandler(async (req, res) => {
-    const handledByUserId = req.user.id;
-    const complaints = await getHandledComplaints(handledByUserId);
+// get all unhandled complaints
+const getAllUnhandledComplaints = asyncHandler(async (req, res) => {
+    const unHandledComplaints = await getUnhandledComplaints();
 
-    res.status(200).json(complaints);
+
+    if (unHandledComplaints === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: unHandledComplaints,
+    });
 });
 
 
 //add complaint
 const addNewComplaint = asyncHandler(async (req, res) => {
-    const complaint = req.body;
-    const addByUserId = req.user.id;
+    const { subject, content } = req.body;
+    const addedBy = req.user.id;
 
-    if (!complaint.subject.trim() || !complaint.content.trim()) {
-        res.status(400).json({ message: "Subject and content are required." });
-        return;
+    const result = await addComplaint(subject, content, addedBy);
+
+    if (! result) {
+        res.status(500);
+        throw new Error("Something went wrong!");
     }
 
-    res.status(200).json(complaint);
-    const result = await addComplaint(complaint, addByUserId);
+    res.status(201).json({
+        data: result,
+        message: "Complaint added successfully.",
+    });
 });
 
+
 export {
-    getAllComplaints,
     getAllHandledComplaints,
+    getAllUnhandledComplaints,
     addNewComplaint,
 };

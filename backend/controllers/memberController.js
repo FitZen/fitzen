@@ -10,7 +10,14 @@ import {
 const getAllViewMembers = asyncHandler(async (req, res) => {
     const members = await getViewMembers();
 
-    res.status(200).json(members);
+    if (members === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: members,
+    });
 });
 
 
@@ -18,7 +25,14 @@ const getAllViewMembers = asyncHandler(async (req, res) => {
 const getAllViewPhysicalMembers = asyncHandler(async (req, res) => {
     const members = await getViewPhysicalMembers();
 
-    res.status(200).json(members);
+    if (members === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: members,
+    });
 });
 
 
@@ -26,8 +40,16 @@ const getAllViewPhysicalMembers = asyncHandler(async (req, res) => {
 const getAllViewVirtualMembers = asyncHandler(async (req, res) => {
     const members = await getViewVirtualMembers();
 
-    res.status(200).json(members);
+    if (members === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: members,
+    });
 });
+
 
 
 export {
