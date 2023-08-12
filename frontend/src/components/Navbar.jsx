@@ -55,9 +55,10 @@ export default function PrimarySearchAppBar() {
     }else{
       setUserID(JSON.parse(localStorage.getItem('userID')));
       setActor(JSON.parse(localStorage.getItem('userType')));
+      getUserDetails();
     }
   
-    //getUserDetails();
+    
   }, []);
 
   const handleLogout = async (event) => {
@@ -76,6 +77,23 @@ export default function PrimarySearchAppBar() {
       console.error("Logout failed:", error);
       // Handle error scenarios here
     }
+  };
+
+  //load user details
+  const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: userID,
+        userType: actor,
+      };
+      console.log("reqdata from frontend:",reqData);
+      const res = await axios.get('http://localhost:8000/api/users/details',reqData);
+      console.log(res.data);
+      localStorage.setItem('userDetails', JSON.stringify(res.data.data));
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
   };
 
   
