@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Sidebar from "../../components/TrainerSidebar";
@@ -10,6 +10,27 @@ const Schedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const months = [
     "January",
@@ -92,13 +113,16 @@ const Schedule = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
-          <Navbar />
-        </Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
+            <Navbar />
+        </div>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography
-            variant="h3"
-            style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}
+            variant="h4"
+            style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}
           >
             Schedule
           </Typography>

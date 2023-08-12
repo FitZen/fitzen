@@ -16,7 +16,7 @@ connectDB();
 // create express app
 const app = express();
 
-// Allow requests from 'http://localhost:3000'
+// allow requests from 'http://localhost:3000'
 app.use(cors({
   origin: 'http://localhost:3000',
 }));
@@ -29,11 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 // middleware to parse cookies from request header
 app.use(cookieParser());
 
-// user routes
+// routes
 app.use('/api/users', userRoutes);
-//announcement routes
 app.use('/api/announcements', announcementRoutes);
-//complaint routes
 app.use('/api/complaints', complaintRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
@@ -45,6 +43,7 @@ app.get('/', (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
+// set up server to listen on port 5000
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 });

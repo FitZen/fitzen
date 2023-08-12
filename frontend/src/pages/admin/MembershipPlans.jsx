@@ -1,11 +1,13 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
-import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
+import Sidebar from "../../components/AdminSidebar";
+import Navbar from "../../components/AdminNavbar";
+import { Typography, Select, MenuItem, Button, InputLabel, FormControl, TextField } from "@mui/material";
 import {FaBitbucket} from "react-icons/fa";
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+import {FaRegTimesCircle} from 'react-icons/fa';
 
 
 const instructorsData = [
@@ -55,9 +57,13 @@ const instructorsData = [
     ];
     
 
-const Packages = () => {
+const MembershipPlans = () => {
   const [item, setItem] = React.useState('');
   const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
 
   const color2 = "#346E93" //light blue
@@ -80,6 +86,18 @@ const Packages = () => {
     };
   }, []);
 
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 4,
+  };
+
   const handleChange = (event) => {
     setItem(event.target.value);
   };
@@ -99,7 +117,7 @@ const Packages = () => {
         </div>
 
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Membership & Trainer Packages</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Membership Plans</Typography>
 
           <Box sx={{ display: "flex", marginTop: "1rem", justifyContent:"space-between", width:"96%" }}>
             <FormControl style={{ width: "15%" }}>
@@ -117,11 +135,11 @@ const Packages = () => {
                 <MenuItem value={30}>Trainer packages</MenuItem>
               </Select>
             </FormControl>
-            <Link to="/member/ownmembership">
+           
               <Box sx={{}}>
-                <Button variant="contained" style={{backgroundColor:color2}}>View Your Membership</Button>
+                <Button variant="contained" onClick={handleOpen} style={{backgroundColor:color2}}> Add New Membership Plan</Button>
               </Box>
-            </Link>
+     
           </Box>
 
           <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
@@ -152,15 +170,58 @@ const Packages = () => {
                   <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
                   <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
                   <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
-                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
+                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Edit</Button>
                 </Box>
               ))}
             </Box>
           </Box>
         </Box>
       </Box>
+        
+            <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={modalStyle}>
+                        <FaRegTimesCircle onClick={handleClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                            onMouseEnter={(e) => {
+                                e.target.style.color = "#D71313";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.color = "#D8D9DA";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                        />
+                        <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                            
+                        </Box>
+                        
+                        <Box sx={{textAlign:"center", padding:"1%"}}>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Title:</InputLabel>
+                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Sub Title:</InputLabel>
+                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Price:</InputLabel>
+                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Description:</InputLabel>
+                            <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+                            
+                            <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
+                              <Button variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Add Plan</Button>
+                              
+                            </Box>
+                            
+                           
+                        </Box>
+                        
+                    </Box>
+            </Modal>
+
     </Box>
   );
 };
 
-export default Packages;
+export default MembershipPlans;
