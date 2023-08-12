@@ -11,6 +11,16 @@ const getGoals = asyncHandler(async (createdBy) => {
 });
 
 
+// add goal
+const addGoal = asyncHandler(async (title, description, startDate, endDate, createdBy, status) => {
+    const sql = 'INSERT INTO goal (title, description, start_date, end_date, created_by, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+    const result = await query(sql, [title, description, startDate, endDate, createdBy, status]);
+
+    return result.rows[0].id;
+});
+
+
 export {
     getGoals,
+    addGoal,
 };
