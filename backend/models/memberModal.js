@@ -29,8 +29,8 @@ const getViewVirtualMembers = asyncHandler(async () => {
 });
 
 
-//add new physical member
-
+// add new physical member
+const addNewPhysicalMember = asyncHandler(async(member))
 
 export{
     getViewMembers,

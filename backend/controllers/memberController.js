@@ -51,6 +51,8 @@ const getAllViewVirtualMembers = asyncHandler(async (req, res) => {
 });
 
 
+// add new physical member
+
 
 export {
     getAllViewMembers,
