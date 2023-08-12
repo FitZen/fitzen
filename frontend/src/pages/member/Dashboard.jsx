@@ -10,6 +10,7 @@ import {GoGoal} from 'react-icons/go';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -23,7 +24,13 @@ const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
+    if(!localStorage.getItem('userID')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

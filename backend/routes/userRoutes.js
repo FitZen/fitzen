@@ -11,7 +11,7 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 // '/api/users' is connected to this file
 // therefore no need to add '/api/users' in the routes
 router.post("/login", loginUser);
-router.post("/logout", protect, logoutUser);
+router.post("/logout", logoutUser);
 router.get("/details", protect, getUserAllDetails);
 
 

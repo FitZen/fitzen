@@ -14,18 +14,24 @@ import { Typography } from '@mui/material';
 import Profile from '../assets/photo-1535713875002-d1d0cf377fde.jpeg'
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+    const [userID, setUserID] = useState('');
+    const [actor, setActor] = useState('');
+
+    const navigate = useNavigate();
+
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-    const actor = JSON.parse(localStorage.getItem('userType'));
-
+    
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -43,6 +49,36 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+
+    useEffect(() => {
+  
+        if(!localStorage.getItem('userID')){
+          navigate('/login');
+        }else{
+          setUserID(JSON.parse(localStorage.getItem('userID')));
+          setActor(JSON.parse(localStorage.getItem('userType')));
+        }
+      
+        //getUserDetails();
+      }, []);
+    
+      const handleLogout = async (event) => {
+        event.preventDefault();
+        try {
+          const reqData = {
+            userID: userID,
+            userType: actor,
+          };
+          await axios.post("http://localhost:8000/api/users/logout",reqData);
+          localStorage.clear();
+          navigate("/login");
+    
+          // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+        } catch (error) {
+          console.error("Logout failed:", error);
+          // Handle error scenarios here
+        }
+      };
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -64,7 +100,7 @@ export default function PrimarySearchAppBar() {
             <Link to="/physiotherapist/profile" style={{textDecoration:"none", color:"black"}}>
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             </Link>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
 

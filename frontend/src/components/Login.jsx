@@ -65,6 +65,7 @@ export default function SignInSide() {
       const userRole = response.data.data.type;
 
       localStorage.setItem('userType', JSON.stringify(response.data.data.type));
+      localStorage.setItem('userID', JSON.stringify(response.data.data.id));
 
       setFormErrors({
         email: '',
