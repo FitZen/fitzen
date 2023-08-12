@@ -57,6 +57,10 @@ import TrainerEditProfile from './pages/trainer/EditProfile';
 import Students from './pages/trainer/Students';
 import TrainerShakebar from './pages/trainer/Shakebar';
 import StudentProgress from './pages/trainer/Progress';
+import NewRequests from './pages/trainer/NewRequests';
+import StudentProfile from './pages/trainer/StudentProfile';
+import TrainerNotification from './pages/trainer/Notification';
+
 
 import TrainerReports from "./pages/trainer/Report";
 import TrainerSchedule from "./pages/trainer/Schedule";
@@ -71,6 +75,7 @@ import PhysiotherapistShakebar from "./pages/physiotherapist/Shakebar";
 import PhysiotherapistSchedule from "./pages/physiotherapist/Schedule";
 import PhysiotherapistReports from "./pages/physiotherapist/Reports";
 import StudentHistory from "./pages/physiotherapist/StudentHistory";
+
 
 function App() {
   return (
@@ -124,6 +129,9 @@ function App() {
         <Route path="/trainer/Students" element={<Students />} />
         <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
         <Route path="/trainer/progress" element={<StudentProgress />} />
+        <Route path="/trainer/NewRequests" element={<NewRequests />} />
+        <Route path="/trainer/StudentProfile" element={<StudentProfile />} />
+        <Route path="/trainer/Notification" element={<TrainerNotification />} />
 
         <Route path="/trainer/reports" element={<TrainerReports />} />
         <Route path="/trainer/schedule" element={<TrainerSchedule />} />
