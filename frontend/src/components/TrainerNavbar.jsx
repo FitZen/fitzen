@@ -94,7 +94,7 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
                 <p style={{fontSize:"13px"}}>Messages</p>
             </MenuItem>
-            <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+            <Link to="/trainer/notification" style={{textDecoration:"none", color:"black"}}>
                 <MenuItem>
                     <IconButton
                         size="1rem"
@@ -137,7 +137,7 @@ export default function PrimarySearchAppBar() {
                                 <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
                             </Badge>
                         </IconButton>
-                        <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+                        <Link to="/trainer/notification" style={{textDecoration:"none", color:"black"}}>
                             <IconButton
                                 size="large"
                                 aria-label="show 17 new notifications"
