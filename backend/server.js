@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 import userRoutes from "./routes/userRoutes.js";
 import announcementRoutes from "./routes/announcementRoutes.js";
 import complaintRoutes from "./routes/complaintRoutes.js";
+import memberRoutes from "./routes/memberRoutes.js";
 
 // start DB connection
 connectDB();
@@ -35,6 +36,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/announcements', announcementRoutes);
 //complaint routes
 app.use('/api/complaints', complaintRoutes);
+//member routes
+app.use('/api/members', memberRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
