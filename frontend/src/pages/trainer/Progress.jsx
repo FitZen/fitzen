@@ -10,7 +10,7 @@ import ProfileImg from '../../assets/Members/photo-1633332755192-727a05c4013d.jp
 import {PiMedalFill,PiVideoCameraFill} from 'react-icons/pi';
 import { AiFillSchedule } from "react-icons/ai";
 import { SiProgress } from "react-icons/si";
-import {useEffect, useState} from 'react';
+
 
 
 import BMI from "../../assets/BMI-Calculator.png";
@@ -67,26 +67,6 @@ const StudentProgress = () => {
 
 
 	const [item, setItem] = React.useState('');
-	const [fixedNavbar, setFixedNavbar] = useState(false);
-
-  useEffect(() => {
-    // Function to handle scroll event
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setFixedNavbar(true);
-      } else {
-        setFixedNavbar(false);
-      }
-    };
-
-    // Attach the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener when component unmounts
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
 	const handleChange = (event) => {
 		setItem(event.target.value);
