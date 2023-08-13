@@ -206,29 +206,29 @@ const Reports = () => {
                       <Box sx={{}}>
                           <Box sx={{display:"flex", justifyContent:"center"}}>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled personal <br /> Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled<br /> Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.totalSessions} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed personal <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed <br />Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.completedSessions} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled personal <br /> Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled <br /> Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.cancelledSessions} </Typography>
                               </Box>
                           </Box>
                           <Box sx={{display:"flex", justifyContent:"center"}}>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Scheduled training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>New <br />Requests </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>{item.newReq} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Completed training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Accepted <br />Requests </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.acceptedReq} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Cancelled training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Average Session <br />Duration </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>{item.sessionDuration}hrs </Typography>
                               </Box>
                           </Box>
