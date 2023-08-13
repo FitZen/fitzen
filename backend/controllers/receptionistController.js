@@ -9,6 +9,8 @@ import {
     findUserByEmail,
     findUserByContactNo,
 } from "../models/userModel.js";
+import generateUserId from "../utils/generateUserId.js";
+import generatePassword from "../utils/generatePassword.js";
 
 
 // get details of all receptionists
@@ -43,31 +45,35 @@ const addNewReceptionist = asyncHandler(async (req, res) => {
     //     message: "Complaint added successfully.",
     // });
 
-    const { nic, first_name, last_name, email, contact_no } = req.body;
+    const { nic, first_name, last_name, email, contact_no} = req.body;
 
-    try {
-        if (await findUserByNIC(nic)) {
-            res.status(409);    // conflict
-            throw new Error("User with this NIC already exists.");
-        }
-
-        if (await findUserByEmail(email)) {
-            res.status(409);    // conflict
-            throw new Error("User with this email already exists.");
-        }
-
-        if (await findUserByContactNo(contact_no)) {
-            res.status(409);    // conflict
-            throw new Error("User with this contact no already exists.");
-        }
-    } catch {
-        res.status(500);
-        throw new Error("Something went wrong!");
+    if (await findUserByNIC(nic)) {
+        res.status(409);    // status code for conflict
+        throw new Error("NIC already exists.");
     }
 
+    if (await findUserByEmail(email)) {
+        res.status(409);
+        throw new Error("Email already exists.");
+    }
 
+    if (await findUserByContactNo(contact_no)) {
+        res.status(409);
+        throw new Error("Contact no already exists.");
+    }
 
-    //res.json(req.body);
+    const addedBy = req.user.id;
+
+    let id;
+    do {
+        id = generateUserId('Receptionist');
+    } while (await findUserById(id));
+
+    const password = generatePassword();
+
+    console.log(addedBy);
+    console.log(id);
+    console.log(password);
 });
 
 
