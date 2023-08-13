@@ -13,6 +13,10 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {GoGoal} from 'react-icons/go';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import {useEffect, useState} from 'react';
+import axios from 'axios';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -32,9 +36,29 @@ const Goals = () => {
     const [valueEnd, setValueEnd] = React.useState(null);
     const [fixedNavbar, setFixedNavbar] = useState(false);
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+
+    const [goalData, setGoalData] = useState([]);
+
+    const [newGoal, setNewGoal] = useState({
+        title: "",
+        content: "",
+      });
+
+    //for dates picking
+    const [startDateError, setStartDateError] = useState("");
+    const [endDateError, setEndDateError] = useState("");
+
+    const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
+
+    viewGoals();
+    //setCurrentDate(new Date());
     // Function to handle scroll event
     const handleScroll = () => {
+
       if (window.scrollY > 0) {
         setFixedNavbar(true);
       } else {
@@ -50,6 +74,102 @@ const Goals = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  
+
+  const viewGoals = async () => {
+
+
+    const reqData = {
+        userID : JSON.parse(localStorage.getItem('userID'))
+    };
+        
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/goals/getgoals",{params:reqData});
+     // console.log(res.data.data);
+      setGoalData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+   //get form inputs
+   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      [name]: value,
+    }));
+
+  };
+
+  const handleSubmit = async () => {
+
+    console.log("handleSubmit called");
+
+    if (!newGoal.title || !newGoal.content || !valueStart || !valueEnd) {
+      // Display error messages or styles for empty fields
+      setSubmitted(true);
+      return;
+    }
+
+    if (!valueStart && !valueEnd) {
+        setStartDateError("Start date is required");
+        setEndDateError("End date is required");
+        return;
+    }else if(!valueStart && valueEnd){	
+        setStartDateError("Start date is required");
+        return;
+    }else if(valueStart && !valueEnd){
+        setEndDateError("End date is required");
+        return;
+    }
+
+    console.log("hello from before going to try")
+    try {
+      const payload = {
+        title: newGoal.title,
+        content: newGoal.content,
+        start_date: valueStart,
+        end_date: valueEnd,
+        userID: JSON.parse(localStorage.getItem('userID')),
+      };
+      console.log("Hi from under payload");
+      console.log("payload : ", payload);
+
+      const res2 = await axios.post(
+        "http://localhost:8000/api/goals/addgoal",
+        payload
+      );
+  
+      if (res2.status === 201) {
+        handleClose(); // Close the modal
+        viewGoals(); // Refresh the announcement list
+        setNewGoal({ title: "", content: "" }); // Clear the form
+        setSubmitted(false);
+        setStartDateError(""); // Clear any previous errors
+        setEndDateError("");
+        setValueStart(null);
+        setValueEnd(null);
+      }
+    } catch (error) {
+      console.error("Adding Adding failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
 
     const color1 = "#102B4C" //dark blue
     const color2 = "#346E93" //light blue
@@ -67,65 +187,6 @@ const Goals = () => {
         p: 4,
       };
   
-
-  const Goals = [
-    {
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake",
-      startDate: "2021-10-01",
-      endDate: "2021-10-01",
-
-    },
-    {
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake",
-      startDate: "2021-10-01",
-      endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    },
-    {
-        title: "Breakfast",
-        description: "Oats Banana Pancakes with Protein Shake",
-        startDate: "2021-10-01",
-        endDate: "2021-10-01",
-    }
-  ];
-
   return (
 
 
@@ -172,9 +233,9 @@ const Goals = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Goal Title:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="title" value={newGoal.title} onChange={handleInputChange} error={submitted && !newGoal.title} helperText={submitted && !newGoal.title ? "Title is required" : ""}  inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Goal Description:</InputLabel>
-                            <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+                            <TextField variant="outlined" name="content" value={newGoal.content} onChange={handleInputChange} error={submitted && !newGoal.content} helperText={submitted && !newGoal.content ? "Content is required" : ""}  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%"}}>
                                 <Box sx={{width:"40%", marginLeft:"4%"}}>
@@ -184,10 +245,25 @@ const Goals = () => {
                                             style={{width:"50%"}}
                                             label=""
                                             value={valueStart}
-                                            onChange={(newValue) => setValueStart(newValue)} 
-                                            renderInput={(params) => <TextField  {...params}  />}
+                                            onChange={(newValue) => {
+                                            setValueStart(newValue);
+                                            setStartDateError(""); // Clear the error message
+                                            }} 
+                                            disablePast // Disable dates in the past
+                                            renderInput={(params) => (
+                                            <TextField 
+                                                name="start_date"
+                                                error={submitted && !valueStart} 
+                                                helperText={(submitted && !valueStart) ? "Start date is required" : ""}  
+                                                {...params}  
+                                            />
+                                            )}
                                         />
-                                    </LocalizationProvider>
+                                        </LocalizationProvider>
+
+                                    {startDateError && (
+                                        <Typography variant="body2" style={{fontSize:"12px", color: "red" }}>{startDateError}</Typography>
+                                    )}
                                 </Box>
                                 <Box sx={{width:"40%", marginLeft:"12%"}}>
                                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black", textAlign:"left" }}>End Date:</InputLabel>
@@ -195,13 +271,29 @@ const Goals = () => {
                                         <DatePicker 
                                             label=""
                                             value={valueEnd}
-                                            onChange={(newValue) => setValueEnd(newValue)} 
-                                            renderInput={(params) => <TextField {...params}  />}
+                                            onChange={(newValue) => {
+                                            setValueEnd(newValue);
+                                            setEndDateError(""); // Clear the error message
+                                            }} 
+                                             disablePast // Disable dates in the past
+                                            minDate={valueStart} // Set the minimum date to be equal to or greater than the start date
+                                            renderInput={(params) => (
+                                            <TextField 
+                                                name="end_date" 
+                                                error={submitted && !valueEnd} 
+                                                helperText={(submitted && !valueEnd) ? "End date is required" : ""}
+                                                {...params}  
+                                            />
+                                            )}
                                         />
-                                    </LocalizationProvider>
+                                        </LocalizationProvider>
+
+                                    {endDateError && (
+                                        <Typography variant="body2" style={{fontSize:"12px", color: "red" }}>{endDateError}</Typography>
+                                    )}
                                 </Box>
                             </Box>
-                            <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Add Goal</Button>
+                            <Button onClick={handleSubmit} variant="contained"  style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Add Goal</Button>
                            
                         </Box>
                         
@@ -211,32 +303,60 @@ const Goals = () => {
                     <TableContainer component={Paper} sx={{ marginTop: "2%", width: "100%" }}>
                         <Table sx={{ minWidth: 650, boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }} aria-label="simple table">
                             <TableHead>
-                                <TableRow>
-                                    <TableCell align="center">Title</TableCell>
-                                    <TableCell align="center">Description</TableCell>
-                                    <TableCell align="center">Start Date</TableCell>
-                                    <TableCell align="center">End Date</TableCell>
-                                    <TableCell align="center">Current Status</TableCell>
+                                <TableRow >
+                                    <TableCell align="left" sx={{fontWeight:"600"}}>Title</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"600"}}>Description</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"600"}}>Start Date</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"600"}}>End Date</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"600"}}>Current Status</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Goals.map((row) => (
+                                {goalData.map((row) => (
                                     <TableRow
                                         key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell component="th" scope="row" align="center">
+                                        <TableCell component="th" scope="row" align="left">
                                             {row.title}
                                         </TableCell>
-                                        <TableCell align="center">{row.description}</TableCell>
-                                        <TableCell align="center">{row.startDate}</TableCell>
-                                        <TableCell align="center">{row.endDate}</TableCell>
-                                        <TableCell align="center">
-                                            <Box style={{display:"flex", backgroundColor:`${color2}`, borderRadius:"50px", width: "80%%", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
-                                                <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "#ffffff", marginLeft: "1rem", marginTop: '0.3rem'}}>Pending </Typography>
-                                                <FiMoreVertical style={{ fontSize: '1.2rem',  color: '#ffffff', marginTop: '0.3rem', marginLeft:"30%",}}/>
-                                                
-                                            </Box>
+                                        <TableCell align="left">{row.description}</TableCell>
+                                        <TableCell align="left" sx={{ width: "12%" }}>{new Date(row.start_date).toLocaleDateString()}</TableCell>
+                                        <TableCell align="left">{new Date(row.end_date).toLocaleDateString()}</TableCell>
+                                        <TableCell align="left" sx={{ width: "16%" }}>
+                                        <Box style={{ display: 'flex', backgroundColor: `${color2}`, borderRadius: '50px', width: '100%', height: '70%', marginTop: '0.4rem', textAlign: 'center', cursor: 'pointer', padding: '1%' }}>
+                                            <Typography variant="h6" style={{ fontSize: '15px', fontWeight: 500, color: '#ffffff', marginLeft: '1rem', marginTop: '0.6rem' }}>
+                                                {row.status}
+                                            </Typography>
+                                            <IconButton
+                                                aria-label="more"
+                                                aria-controls={`menu-${row.id}`} // Add a unique ID for each menu
+                                                aria-haspopup="true"
+                                                onClick={(e) => handleMenuOpen(e, row.id)} // Pass the row id to the handler
+                                            >
+                                                <FiMoreVertical style={{ fontSize: '1.2rem', color: '#ffffff', marginTop: '0.3rem', marginLeft: '10%' }} />
+                                            </IconButton>
+                                            <Menu
+                                                id={`menu-${row.id}`} // Use the unique ID for each menu
+                                                anchorEl={anchorEl}
+                                                keepMounted
+                                                open={Boolean(anchorEl)}
+                                                onClose={handleMenuClose}
+                                                PaperProps={{
+                                                    style: {
+                                                      border:"none",
+                                                      borderRadius: '8px', // Customize border radius
+                                                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                                                      marginLeft:"-5rem",
+                                                      marginTop:"-2rem"
+                                                    },
+                                                  }}
+                                            >
+                                                <MenuItem onClick={handleMenuClose}>In Progress</MenuItem>
+                                                <MenuItem onClick={handleMenuClose}>Completed</MenuItem>
+                                            </Menu>
+                                        </Box>
+
                                         </TableCell>
                                     </TableRow>
                                 ))}
