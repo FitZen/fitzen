@@ -7,6 +7,7 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 import {FaUsers, FaUserClock, FaMoneyBillWave} from 'react-icons/fa';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
+import {useEffect, useState} from 'react';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -17,6 +18,27 @@ const color4 = "#DC1E2A" //red
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
 const Dashboard = () => {
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const data = {
     labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
@@ -90,11 +112,14 @@ const Dashboard = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <AdminNavbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
           
             <Box sx={{ display:"flex", marginTop:"2rem" }}>
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>

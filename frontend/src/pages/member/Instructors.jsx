@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Rating from '@mui/material/Rating';
+import {useEffect, useState} from 'react';
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 
 import item1 from "../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg"
@@ -17,6 +18,7 @@ import item9 from "../../assets/Trainers/stephanie-liverani-Zz5LQe-VSMY-unsplash
 import item10 from "../../assets/Trainers/jd-mason-2oUiUu5QAys-unsplash.jpg"
 import item11 from "../../assets/Trainers/tamarcus-brown-29pFbI_D1Sc-unsplash.jpg"
 import item12 from "../../assets/Trainers/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg"
+import { Link } from "react-router-dom";
 
 const instructorsData = [
       {
@@ -107,6 +109,27 @@ const instructorsData = [
     
 
 const Instructors = () => {
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const [item, setItem] = React.useState('');
 
   const handleChange = (event) => {
@@ -120,12 +143,15 @@ const Instructors = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
 
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Instructors</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Instructors</Typography>
 
           <Box sx={{ display: "flex", marginTop: "1rem" }}>
             <FormControl style={{ width: "15%" }}>
@@ -171,7 +197,9 @@ const Instructors = () => {
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
                   <Rating name="read-only" value={instructor.rating} readOnly /><br />
-                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
+                  <Link to="/member/instructorprofile" style={{ textDecoration: "none" }}>
+                    <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
+                  </Link>
                 </Box>
               ))}
             </Box>

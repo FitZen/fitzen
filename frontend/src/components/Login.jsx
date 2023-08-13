@@ -61,10 +61,11 @@ export default function SignInSide() {
 
     try {
       const response = await axios.post('http://localhost:8000/api/users/login', formData);
-      console.log('Response from the backend:', response.data);
-      const userRole = response.data.type;
+      console.log('Response from the backend:', response.data.data);
+      const userRole = response.data.data.type;
 
-      localStorage.setItem('userType', JSON.stringify(response.data.type));
+      localStorage.setItem('userType', JSON.stringify(response.data.data.type));
+      localStorage.setItem('userID', JSON.stringify(response.data.data.id));
 
       setFormErrors({
         email: '',
@@ -87,6 +88,8 @@ export default function SignInSide() {
         navigate('/receiptionist/dashboard');
       } else if(userRole === 'Shake Bar Manager'){
         navigate('/shakebarmanager/dashboard');
+      }else if(userRole === 'Physiotherapist'){
+        navigate('/physiotherapist/dashboard');
       }
       // Handle the response from the backend as needed (e.g., redirect user, set authentication state)
     } catch (error) {

@@ -4,6 +4,8 @@ import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 import {FaBitbucket} from "react-icons/fa";
+import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
 
 const instructorsData = [
@@ -55,6 +57,28 @@ const instructorsData = [
 
 const Packages = () => {
   const [item, setItem] = React.useState('');
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+
+  const color2 = "#346E93" //light blue
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -67,14 +91,17 @@ const Packages = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
 
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Membership & Trainer Packages</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Membership & Trainer Packages</Typography>
 
-          <Box sx={{ display: "flex", marginTop: "1rem" }}>
+          <Box sx={{ display: "flex", marginTop: "1rem", justifyContent:"space-between", width:"96%" }}>
             <FormControl style={{ width: "15%" }}>
               <InputLabel id="demo-simple-select-label">All</InputLabel>
               <Select
@@ -90,6 +117,11 @@ const Packages = () => {
                 <MenuItem value={30}>Trainer packages</MenuItem>
               </Select>
             </FormControl>
+            <Link to="/member/ownmembership">
+              <Box sx={{}}>
+                <Button variant="contained" style={{backgroundColor:color2}}>View Your Membership</Button>
+              </Box>
+            </Link>
           </Box>
 
           <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>

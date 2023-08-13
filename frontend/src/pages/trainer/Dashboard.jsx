@@ -9,6 +9,8 @@ import Icon2 from '../../assets/icon2.png'
 import Icon3 from '../../assets/icon3.png'
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
+import {Link} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -20,13 +22,34 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 
 const TrainerDashboard = () => {
 
+	const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 	const data = {
 		labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
 		datasets: [{
 			label: 'Sales',
 			data: [5, 2, 3, 1, 4, 2, 3],
-			backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
-			borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+			backgroundColor: [`${color2}`],
+			borderColor: [`${color2}`],
 			borderWidth: 1
 		}]
 	};
@@ -77,11 +100,14 @@ const TrainerDashboard = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
+				<div
+					className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+					style={{ width: "100%" }}
+					>
 					<Navbar />
-				</Box>
+				</div>
 				<Box sx={{ paddingLeft:"5rem", flex:1 }}>
-					<Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+					<Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
 					<Box sx={{ display:"flex", width: "100%", height:"100%"}}>
 
 						<Box>
@@ -109,15 +135,17 @@ const TrainerDashboard = () => {
 
 
 					<Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem"}}>
-						<Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:4, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
+						<Link to="/trainer/NewRequests" style={{textDecoration:"none", color:"#000000", mr:50}}>
+							<Box sx={{width:"90%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:26, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
 							<img src={Icon1} alt="Icon1" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
-							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>2 New Requests</Typography>
+							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>2 New Student Requests</Typography>
 						</Box>
-						<Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+						</Link>
+						<Box sx={{width:"36%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 							<img src={Icon3} alt="Icon3" style={{textAlign:"left", marginLeft:"5", marginTop:"5%"}}/>
 							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>30 Physical Students</Typography>
 						</Box>
-						<Box sx={{width:"29.5%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+						<Box sx={{width:"36%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 							<img src={Icon2} alt="Icon2" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
 							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>15 Virtual Students</Typography>
 						</Box>

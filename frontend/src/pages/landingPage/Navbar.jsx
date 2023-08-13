@@ -63,8 +63,7 @@ const NavLinkSign = styled("a")(({ theme }) => ({
   zIndex: 1,
   "&:hover": {
     color: color2,
-    border: "2px solid red", // Only the bottom border will be red on hover
-    backgroundColor: color1,
+    backgroundColor: "#E74C3C",
   },
 }));
 

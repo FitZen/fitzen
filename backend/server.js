@@ -10,6 +10,8 @@ import userRoutes from "./routes/userRoutes.js";
 import announcementRoutes from "./routes/announcementRoutes.js";
 import complaintRoutes from "./routes/complaintRoutes.js";
 import memberRoutes from "./routes/memberRoutes.js";
+import mealPlanRoutes from "./routes/mealPlanRoutes.js";
+import goalRoutes from "./routes/goalRoutes.js";
 
 // start DB connection
 connectDB();
@@ -17,7 +19,7 @@ connectDB();
 // create express app
 const app = express();
 
-// Allow requests from 'http://localhost:3000'
+// allow requests from 'http://localhost:3000'
 app.use(cors({
   origin: 'http://localhost:3000',
 }));
@@ -30,14 +32,14 @@ app.use(express.urlencoded({ extended: true }));
 // middleware to parse cookies from request header
 app.use(cookieParser());
 
-// user routes
+// routes
 app.use('/api/users', userRoutes);
-//announcement routes
 app.use('/api/announcements', announcementRoutes);
-//complaint routes
 app.use('/api/complaints', complaintRoutes);
 //member routes
 app.use('/api/members', memberRoutes);
+app.use('/api/mealplans', mealPlanRoutes);
+app.use('/api/goals', goalRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
@@ -48,6 +50,7 @@ app.get('/', (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
+// set up server to listen on port 5000
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 });
