@@ -145,7 +145,7 @@ const MealPlan = () => {
                     </Box><br />
                     
                 </Box>
-                <Button variant="contained" onClick={handleOpen} sx={{ backgroundColor: "black", color: "white", borderRadius: "60px", padding: "10px 20px", height: "30px", width: "170px", position: "absolute", bottom: "75%", right: "7%", fontSize: "10px", '&:hover': { backgroundColor: "#808080" } }}>Add New Meal Plan</Button>
+                <Button variant="contained" onClick={handleOpen} sx={{ backgroundColor: "black", color: "white", padding: "10px 20px", height: "30px", width: "170px", position: "absolute", bottom: "75%", right: "7%", fontSize: "10px", '&:hover': { backgroundColor: "#808080" } }}>Add New Meal Plan</Button>
                 <Box sx={{marginTop: "40px", width:"57%", height:"93%", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', justifyContent:"center", alignItems:"center", padding:"2%"}}>
                     <Typography variant="h5" style={{ fontWeight: 600, textAlign:"center", marginTop:"0.5rem" }}>Meal Plan - 01</Typography>
                     {Meals.map((meal, index) => (
@@ -180,7 +180,7 @@ const MealPlan = () => {
                               </Select>
                             </FormControl>
                             </Box>
-                            <Button variant="contained" sx={{ backgroundColor: "black", color: "white", borderRadius: "60px", padding: "10px 20px", height: "40px", position: "absolute", bottom: "7%", right: "19%", fontSize: "16px", '&:hover': { backgroundColor: "#808080" } }}>Send</Button>
+                            <Button variant="contained" sx={{ backgroundColor: "black", color: "white", padding: "10px 20px", height: "40px", position: "absolute", bottom: "6.9%", right: "19%", fontSize: "16px", '&:hover': { backgroundColor: "#808080" } }}>Send</Button>
                 </Box>
             
             </Box>
