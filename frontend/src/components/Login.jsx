@@ -61,10 +61,11 @@ export default function SignInSide() {
 
     try {
       const response = await axios.post('http://localhost:8000/api/users/login', formData);
-      console.log('Response from the backend:', response.data);
-      const userRole = response.data.type;
+      console.log('Response from the backend:', response.data.data);
+      const userRole = response.data.data.type;
 
-      localStorage.setItem('userType', JSON.stringify(response.data.type));
+      localStorage.setItem('userType', JSON.stringify(response.data.data.type));
+      localStorage.setItem('userID', JSON.stringify(response.data.data.id));
 
       setFormErrors({
         email: '',

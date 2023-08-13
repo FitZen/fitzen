@@ -31,6 +31,14 @@ import AllocatedInstructorProfile from './pages/member/AllocatedTrainerProfile';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
 import AdminMembers from './pages/admin/Members';
+import AdminInstructors from './pages/admin/Instructors';
+import AdminEmployees from './pages/admin/Employees';
+import AdminShakebar from './pages/admin/Shakebar';
+import AdminAnnouncement from './pages/admin/Announcement';
+import Admincomplaint from './pages/admin/Complaint';
+import Adminreport from './pages/admin/Report';
+import MembershipPlans from './pages/admin/MembershipPlans';
+import TrainerPackages from './pages/admin/TrainerPackages';
 
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
@@ -49,6 +57,10 @@ import TrainerEditProfile from './pages/trainer/EditProfile';
 import Students from './pages/trainer/Students';
 import TrainerShakebar from './pages/trainer/Shakebar';
 import StudentProgress from './pages/trainer/Progress';
+import NewRequests from './pages/trainer/NewRequests';
+import StudentProfile from './pages/trainer/StudentProfile';
+import TrainerNotification from './pages/trainer/Notification';
+
 
 import TrainerReports from "./pages/trainer/Report";
 import TrainerSchedule from "./pages/trainer/Schedule";
@@ -63,6 +75,9 @@ import PhysiotherapistShakebar from "./pages/physiotherapist/Shakebar";
 import PhysiotherapistSchedule from "./pages/physiotherapist/Schedule";
 import PhysiotherapistReports from "./pages/physiotherapist/Reports";
 import StudentHistory from "./pages/physiotherapist/StudentHistory";
+import PNewRequests from "./pages/physiotherapist/NewRequests";
+import PNotifications from "./pages/physiotherapist/Notifications";
+
 
 function App() {
   return (
@@ -100,6 +115,14 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
         <Route path="/admin/members" element={<AdminMembers />} />
+        <Route path="/admin/instructors" element={<AdminInstructors />} />
+        <Route path="/admin/employees" element={<AdminEmployees />} />
+        <Route path="/admin/shakebar" element={<AdminShakebar />} />
+        <Route path="/admin/announcement" element={<AdminAnnouncement />} />
+        <Route path="/admin/complaint" element={<Admincomplaint />} />
+        <Route path="/admin/report" element={<Adminreport />} />
+        <Route path="/admin/membershipplans" element={<MembershipPlans />} />
+        <Route path="/admin/trainerpackages" element={<TrainerPackages />} />
 
 
         <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
@@ -108,6 +131,9 @@ function App() {
         <Route path="/trainer/Students" element={<Students />} />
         <Route path="/trainer/shakebar" element={<TrainerShakebar />} />
         <Route path="/trainer/progress" element={<StudentProgress />} />
+        <Route path="/trainer/NewRequests" element={<NewRequests />} />
+        <Route path="/trainer/StudentProfile" element={<StudentProfile />} />
+        <Route path="/trainer/Notification" element={<TrainerNotification />} />
 
         <Route path="/trainer/reports" element={<TrainerReports />} />
         <Route path="/trainer/schedule" element={<TrainerSchedule />} />
@@ -124,6 +150,8 @@ function App() {
         <Route path="/physiotherapist/schedule" element={<PhysiotherapistSchedule />} />
         <Route path="/physiotherapist/reports" element={<PhysiotherapistReports />} />
         <Route path="/physiotherapist/StudentHistory" element={<StudentHistory />} />
+        <Route path="/physiotherapist/NewRequests" element={<PNewRequests />} />
+        <Route path="/physiotherapist/Notifications" element={<PNotifications />} />
 
       </Routes>
     </>
