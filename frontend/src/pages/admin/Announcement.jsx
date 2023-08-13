@@ -10,6 +10,7 @@ import {FaPlus} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
+import axios from 'axios';
 import {useEffect, useState} from 'react';
 
 const Announcement = () => {
@@ -23,6 +24,7 @@ const Announcement = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [announcementData, setAnnouncementData] = useState([]);
 
   const [item, setItem] = React.useState('');
 
@@ -44,6 +46,8 @@ const Announcement = () => {
 
 
   useEffect(() => {
+
+    viewAnnouncement();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -61,6 +65,23 @@ const Announcement = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const viewAnnouncement = async () => {
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/announcements/getannouncements");
+      console.log(res.data.data);
+      setAnnouncementData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+
 
   const Announcements = [
     {
@@ -174,18 +195,18 @@ const Announcement = () => {
                           </TableRow>
                       </TableHead>
                       <TableBody>
-                          {Announcements.map((row) => (
+                          {announcementData.map((row) => (
                               <TableRow
                                   key={row.name}
                                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                               >
                                   <TableCell component="th" scope="row" align="left">
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.date}</Typography>
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.time}</Typography>
+                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.posted_on).toLocaleDateString()}</Typography>
+                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.posted_on).toLocaleTimeString()}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.title}</Typography>
-                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.description}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.content}</Typography>
                                   </TableCell>
                       
                                   <TableCell align="left">
