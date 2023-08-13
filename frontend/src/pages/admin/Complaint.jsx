@@ -7,6 +7,7 @@ import {Tabs,Tab} from '@mui/material';
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import {useEffect, useState} from 'react';
+import axios from 'axios';
 
 const Complaints = () => {
 
@@ -19,6 +20,8 @@ const Complaints = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [unHandleComplaintsData, setUnHandleComplaintsData] = useState([]);
 
   const [item, setItem] = React.useState('');
 
@@ -44,6 +47,8 @@ const Complaints = () => {
 
 
   useEffect(() => {
+
+    viewUnHandleComplaints();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -62,63 +67,48 @@ const Complaints = () => {
     };
   }, []);
 
+  const viewUnHandleComplaints = async () => {
+    
+    try {
+     
+      const res1 = await axios.get("http://localhost:8000/api/complaints/unhandledcomplaints");
+      console.log(res1.data.data);
+      setUnHandleComplaintsData(res1.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed unhandle complaints:", error);
+      // Handle error scenarios here
+    }
+  }
+
   const [value, setValue] = useState(0);
 
   const [handleComplaints,setHandleComplaint] = useState([
     {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
+      added_on: "2023-08-12 23:12:03.390954",
+      subject: "Breakfast",
+      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
     },
     {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
+      added_on: "2023-08-12 23:12:03.390954",
+      subject: "Breakfast",
+      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
     },
     {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
+      added_on: "2023-08-12 23:12:03.390954",
+      subject: "Breakfast",
+      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
     },
     {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
+      added_on: "2023-08-12 23:12:03.390954",
+      subject: "Breakfast",
+      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
     },
     {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
+      added_on: "2023-08-12 23:12:03.390954",
+      subject: "Breakfast",
+      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
     },
     
   ]);
@@ -166,12 +156,12 @@ const Complaints = () => {
                                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                               >
                                   <TableCell component="th" scope="row" align="left">
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.date}</Typography>
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.time}</Typography>
+                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleDateString()}</Typography>
+                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleTimeString()}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
-                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.title}</Typography>
-                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.description}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.subject}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{row.content}</Typography>
                                   </TableCell>
                       
                                   <TableCell align="left">
@@ -246,7 +236,7 @@ const Complaints = () => {
             </Box>
             
             {value === 0 && renderTable(handleComplaints)}
-            {value === 1 && renderTable(toHandleComplaints)}
+            {value === 1 && renderTable(unHandleComplaintsData)}
           </div>
 
         
