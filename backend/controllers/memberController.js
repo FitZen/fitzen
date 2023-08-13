@@ -3,6 +3,7 @@ import {
     getViewMembers,
     getViewPhysicalMembers,
     getViewVirtualMembers,
+    addNewPhysicalMember
 } from "../models/memberModal.js";
 
 
@@ -52,10 +53,26 @@ const getAllViewVirtualMembers = asyncHandler(async (req, res) => {
 
 
 // add new physical member
+const addPhysicalMember = asyncHandler(async (req, res) => {
+    const memberData = req.body;
+    const addedByUserId = req.user.id;
 
+    const result = await addNewPhysicalMember(memberData, addedByUserId);
+
+    if (! result) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(201).json({
+        data: result,
+        message: "Member added successfully.",
+    });
+});
 
 export {
     getAllViewMembers,
     getAllViewPhysicalMembers,
     getAllViewVirtualMembers,
+    addPhysicalMember,
 };
