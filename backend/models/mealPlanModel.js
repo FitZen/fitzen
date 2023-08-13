@@ -11,6 +11,15 @@ const getMealPlans = asyncHandler(async (createdBy) => {
 });
 
 
+const addMealPlan = asyncHandler(async (name, breakfast, lunch, dinner, preWorkout, postWorkout, note, createdBy) => {
+    const sql = 'INSERT INTO mealPlan (name, breakfast, lunch, dinner, pre_workout, post_workout, note, created_by) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;';
+    const result = await query(sql, [name, breakfast, lunch, dinner, preWorkout, postWorkout, note, createdBy]);
+
+    return result.rows[0].id;
+});
+
+
 export {
     getMealPlans,
+    addMealPlan,
 }
