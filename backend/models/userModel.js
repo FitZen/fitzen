@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 
 
-// find use details by id
+// find user by id
 const findUserById = asyncHandler(async (id) => {
     const sql = 'SELECT * FROM users WHERE id = $1';
     const result = await query(sql, [id]);
@@ -12,10 +12,28 @@ const findUserById = asyncHandler(async (id) => {
 });
 
 
-// find use details by email
+// find user by nic
+const findUserByNIC = asyncHandler(async (nic) => {
+    const sql = 'SELECT * FROM users WHERE nic = $1;';
+    const result = await query(sql, [nic]);
+
+    return result.rows[0];
+});
+
+
+// find user by email
 const findUserByEmail = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
     const result = await query(sql, [email]);
+
+    return result.rows[0];
+});
+
+
+// find user by contact no
+const findUserByContactNo = asyncHandler(async (contactNo) => {
+    const sql = 'SELECT * FROM users WHERE contact_no = $1;';
+    const result = await query(sql, [contactNo]);
 
     return result.rows[0];
 });
@@ -97,7 +115,9 @@ const getUserDetails = asyncHandler(async (id, type) => {
 
 export {
     findUserById,
+    findUserByNIC,
     findUserByEmail,
+    findUserByContactNo,
     matchPassword,
     setLoginDateTime,
     setLoginStatus,
