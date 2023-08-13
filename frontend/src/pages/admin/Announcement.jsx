@@ -25,6 +25,13 @@ const Announcement = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [announcementData, setAnnouncementData] = useState([]);
+  
+  const [newAnnouncement, setNewAnnouncement] = useState({
+    title: "",
+    content: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
 
   const [item, setItem] = React.useState('');
 
@@ -77,6 +84,47 @@ const Announcement = () => {
       // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
     } catch (error) {
       console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  //get form inputs
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewAnnouncement((prevAnnouncement) => ({
+      ...prevAnnouncement,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+
+    if (!newAnnouncement.title || !newAnnouncement.content) {
+      // Display error messages or styles for empty fields
+      setSubmitted(true);
+      return;
+    }  
+
+    try {
+      const payload = {
+        title: newAnnouncement.title,
+        content: newAnnouncement.content,
+        userID: JSON.parse(localStorage.getItem('userID')),
+      };
+
+      const res = await axios.post(
+        "http://localhost:8000/api/announcements/addannouncement",
+        payload
+      );
+  
+      if (res.status === 201) {
+        handleClose(); // Close the modal
+        viewAnnouncement(); // Refresh the announcement list
+        setNewAnnouncement({ title: "", content: "" }); // Clear the form
+        setSubmitted(false);
+      }
+    } catch (error) {
+      console.error("Adding announcement failed:", error);
       // Handle error scenarios here
     }
   };
@@ -252,12 +300,12 @@ const Announcement = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Title:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="title" value={newAnnouncement.title} onChange={handleInputChange} error={submitted && !newAnnouncement.title} helperText={submitted && !newAnnouncement.title ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Description:</InputLabel>
-                            <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+                            <TextField variant="outlined" name="content" value={newAnnouncement.content} onChange={handleInputChange} error={submitted && !newAnnouncement.content} helperText={submitted && !newAnnouncement.content ? "Content is required" : ""}   multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
-                              <Button variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Announcement</Button>
+                              <Button onClick={handleSubmit} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Announcement</Button>
                             </Box>
                             
                            
