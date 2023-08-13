@@ -70,7 +70,9 @@ const logoutUser = asyncHandler(async (req, res) => {
 // route   GET /api/users/profile
 // access  private
 const getUserAllDetails = asyncHandler(async (req, res) => {
-    const user = await getUserDetails(req.user.id, req.user.type);
+
+    //const user = await getUserDetails(req.user.id, req.user.type);
+    const user = await getUserDetails(req.query.userID, req.query.userType);
 
     if (! user) {
         res.status(500);
