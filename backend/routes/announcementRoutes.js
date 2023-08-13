@@ -11,4 +11,5 @@ router.get("/getannouncements", getAllAnnouncements);
 router.post("/addannouncement", addNewAnnouncement);
 
 
+
 export default router;
