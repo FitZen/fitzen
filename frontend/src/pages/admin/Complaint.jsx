@@ -21,6 +21,7 @@ const Complaints = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [handledComplaintsData, setHandledComplaintsData] = useState([]); 
   const [unHandleComplaintsData, setUnHandleComplaintsData] = useState([]);
 
   const [item, setItem] = React.useState('');
@@ -49,6 +50,7 @@ const Complaints = () => {
   useEffect(() => {
 
     viewUnHandleComplaints();
+    viewHandledComplaints();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -72,7 +74,7 @@ const Complaints = () => {
     try {
      
       const res1 = await axios.get("http://localhost:8000/api/complaints/unhandledcomplaints");
-      console.log(res1.data.data);
+      
       setUnHandleComplaintsData(res1.data.data);
 
       // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
@@ -80,6 +82,26 @@ const Complaints = () => {
       console.error("Retrieving failed unhandle complaints:", error);
       // Handle error scenarios here
     }
+  }
+
+  const viewHandledComplaints = async () => {
+      
+      const reqData = {
+        userID: JSON.parse(localStorage.getItem('userID')),
+        userType: JSON.parse(localStorage.getItem('userType')),
+      };
+      
+      try {
+      
+        const res2 = await axios.get("http://localhost:8000/api/complaints/handledcomplaints", {params:reqData});
+        
+        setHandledComplaintsData(res2.data.data);
+  
+        // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+      } catch (error) {
+        console.error("Retrieving failed handled complaints:", error);
+        // Handle error scenarios here
+      }
   }
 
   const [value, setValue] = useState(0);
@@ -156,8 +178,8 @@ const Complaints = () => {
                                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                               >
                                   <TableCell component="th" scope="row" align="left">
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleDateString()}</Typography>
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleTimeString()}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500, color: "black", textAlign:"left", marginTop: '0.3rem'}}>{value === 1 ? new Date(row.added_on).toLocaleDateString() : new Date(row.handled_on).toLocaleDateString()}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500, color: "black", textAlign:"left", marginTop: '0.3rem'}}>{value === 1 ? new Date(row.added_on).toLocaleTimeString() : new Date(row.handled_on).toLocaleTimeString()}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.subject}</Typography>
@@ -235,7 +257,7 @@ const Complaints = () => {
               </Box>
             </Box>
             
-            {value === 0 && renderTable(handleComplaints)}
+            {value === 0 && renderTable(handledComplaintsData)}
             {value === 1 && renderTable(unHandleComplaintsData)}
           </div>
 
