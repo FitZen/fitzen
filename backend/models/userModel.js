@@ -92,6 +92,8 @@ const getUserDetails = asyncHandler(async (id, type) => {
         case 'Physical Member':
             table = 'physicalMember';
             break;
+        default:
+            throw new Error("Invalid role provided");  // Handle unexpected roles
     }
 
     const sql = 'SELECT * FROM ' + table + ' WHERE id = $1';
