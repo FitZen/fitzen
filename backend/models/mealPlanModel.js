@@ -3,13 +3,11 @@ import asyncHandler from 'express-async-handler';
 
 
 // get meal plans from specific trainer
-const getMealPlans = asyncHandler(async () => {
-    // const sql = 'SELECT * FROM announcement ORDER BY posted_on DESC;';
-    // const result = await query(sql);
-    //
-    // return result.rows;
+const getMealPlans = asyncHandler(async (createdBy) => {
+    const sql = 'SELECT * FROM mealPlan WHERE created_by=$1 ORDER BY created_on DESC;';
+    const result = await query(sql, [createdBy]);
 
-    console.log("getMealPlans: model");
+    return result.rows;
 });
 
 

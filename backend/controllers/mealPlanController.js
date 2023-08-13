@@ -6,19 +6,16 @@ import {
 
 // get meal plans from specific trainer
 const getAllMealPlans = asyncHandler(async (req, res) => {
-    // const announcements = await getAnnouncements();
-    //
-    // if (announcements === undefined) {
-    //     res.status(500);
-    //     throw new Error("Something went wrong!");
-    // }
-    //
-    // res.status(200).json({
-    //     data: announcements,
-    // });
+    const mealPlans = await getMealPlans(req.user.id);
 
-    await getMealPlans();
-    console.log("getMealPlans: controller");
+    if (mealPlans === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: mealPlans,
+    });
 });
 
 
