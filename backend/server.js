@@ -10,6 +10,7 @@ import userRoutes from "./routes/userRoutes.js";
 import announcementRoutes from "./routes/announcementRoutes.js";
 import complaintRoutes from "./routes/complaintRoutes.js";
 import goalRoutes from "./routes/goalRoutes.js";
+import shakebarRoutes from "./routes/shakebarRoutes.js";
 
 // start DB connection
 connectDB();
@@ -35,6 +36,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/goals', goalRoutes);
+app.use('/api/shakebarItems', shakebarRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
