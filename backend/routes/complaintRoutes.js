@@ -10,7 +10,9 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 
 router.get("/handledcomplaints",protect, permit('Admin'), getAllHandledComplaints);
 router.get("/unhandledcomplaints",protect, permit('Admin'), getAllUnhandledComplaints);
-router.post("/addcomplaint",protect, permit('Trainer','Physiotherapist','Physical Member','Virtual Member') ,addNewComplaint);
+
+// router.post("/addcomplaint",protect, permit('Trainer','Physiotherapist','Physical Member','Virtual Member') ,addNewComplaint);
+router.post("/addcomplaint",addNewComplaint);
 
 
 export default router;
