@@ -23,7 +23,7 @@ const getBody = (firstName, email, password) => {
             <strong>Temporary Password:</strong> ${password}
         </p>
 
-        <p>Please log in to FitZen using the provided credentials.</p>
+        <p>Please log in to <a href="http://localhost:3000/">FitZen</a> using the provided credentials.</p>
 
         <p>For your security, please follow these best practices:</p>
 
