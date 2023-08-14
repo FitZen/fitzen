@@ -30,11 +30,6 @@ const getAllReceptionists = asyncHandler(async (req, res) => {
 
 //add receptionist
 const addNewReceptionist = asyncHandler(async (req, res) => {
-    // const { subject, content } = req.body;
-    // const addedBy = req.user.id;
-    //
-    // const result = await addComplaint(subject, content, addedBy);
-    //
     // if (! result) {
     //     res.status(500);
     //     throw new Error("Something went wrong!");
@@ -71,9 +66,9 @@ const addNewReceptionist = asyncHandler(async (req, res) => {
 
     const password = generatePassword();
 
-    console.log(addedBy);
-    console.log(id);
-    console.log(password);
+    const result = await addReceptionist(id, nic, first_name, last_name, email, password, contact_no, addedBy);
+
+    console.log(result);
 });
 
 
