@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 
 // send email using configured transport object
-const sendEmail = async (recipient, subject, htmlBody) => {
+const sendEmail = async (subject, htmlBody, recipient) => {
     try {
         await transporter.sendMail({
             from: `"FitZen Support" <${process.env.EMAIL_USER}>`,
