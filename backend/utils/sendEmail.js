@@ -24,7 +24,7 @@ const sendEmail = async (subject, htmlBody, recipient) => {
         });
 
         console.log("Email sent successfully!");
-        return "Success";
+        return true;
     } catch (error) {
         console.error("Error sending email.");
         throw error;
@@ -33,8 +33,3 @@ const sendEmail = async (subject, htmlBody, recipient) => {
 
 
 export default sendEmail;
-
-
-// Call
-// const result = await sendEmail("adheesha.1999@gmail.com", "Subject Test", "<b>Body test - html</b>");
-// console.log(result);

@@ -11,6 +11,8 @@ import {
 } from "../models/userModel.js";
 import generateUserId from "../utils/generateUserId.js";
 import generatePassword from "../utils/generatePassword.js";
+import sendEmail from "../utils/sendEmail.js";
+import { getSubject, getBody } from "../utils/EmpRegMailTemplate.js";
 
 
 // get details of all receptionists
@@ -30,16 +32,6 @@ const getAllReceptionists = asyncHandler(async (req, res) => {
 
 //add receptionist
 const addNewReceptionist = asyncHandler(async (req, res) => {
-    // if (! result) {
-    //     res.status(500);
-    //     throw new Error("Something went wrong!");
-    // }
-    //
-    // res.status(201).json({
-    //     data: result,
-    //     message: "Complaint added successfully.",
-    // });
-
     const { nic, first_name, last_name, email, contact_no} = req.body;
 
     if (await findUserByNIC(nic)) {
@@ -66,9 +58,18 @@ const addNewReceptionist = asyncHandler(async (req, res) => {
 
     const password = generatePassword();
 
-    const result = await addReceptionist(id, nic, first_name, last_name, email, password, contact_no, addedBy);
+    const subject = getSubject();
+    const body = getBody(first_name, email, password);
 
-    console.log(result);
+    if (await addReceptionist(id, nic, first_name, last_name, email, password, contact_no, addedBy) &&
+        await sendEmail(subject, body, email)) {
+        res.status(201).json({
+            message: "Receptionist added successfully.",
+        });
+    } else {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
 });
 
 
