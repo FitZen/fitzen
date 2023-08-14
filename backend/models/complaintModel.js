@@ -19,6 +19,7 @@ const getUnhandledComplaints = asyncHandler(async (handledByUserId) => {
     return result.rows;
 });
 
+// meke aulak thiye handledByUserId eka use wela na
 
 // add complaint
 const addComplaint = asyncHandler(async (subject, content, addedBy) => {
