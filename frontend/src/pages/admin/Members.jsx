@@ -7,6 +7,8 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 import {FaUsers, FaUserClock, FaAddressCard} from 'react-icons/fa';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
+import {useEffect, useState} from 'react';
+import { Link } from "react-router-dom";
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -17,6 +19,27 @@ const color4 = "#DC1E2A" //red
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
 const Members = () => {
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const data = {
     labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
@@ -90,11 +113,20 @@ const Members = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <AdminNavbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Members</Typography>
+          <Box sx={{display:"flex", marginTop:"5rem"}}>
+            <Typography variant="h4" style={{ fontWeight: 700, textAlign:"left", marginRight:"63%" }}>Members</Typography>
+            <Link to="/admin/membershipplans" sx={{textDecoration:"none",}}>
+              <Button variant="contained" sx={{backgroundColor: color2, width:"100%", '&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaAddressCard />&nbsp; Membership plans</Button>
+            </Link>
+          </Box>
+        
           
             <Box sx={{ display:"flex", marginTop:"2rem" }}>
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
@@ -118,22 +150,14 @@ const Members = () => {
                     </Box>
                     
                 </Grid>    
-
-                <Grid md={4} sx={{display:"flex", padding:"1%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
-                    <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Membership</Typography>
-                        <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Plans</Typography>
-                    </Box>
-                    <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
-                         <FaAddressCard size={40}/>
-                    </Box>
-                    
-                </Grid>    
+ 
             </Box>  
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Physical Members</Typography>
-                    <Button variant="containedned" style={{marginLeft:"68%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                    <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
+                    <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%" }}>47 are logged in </Typography>
+                    <Button variant="outlined" style={{marginLeft:"53.5%",  color:color2, fontWeight: 700}}>View All</Button>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
@@ -160,8 +184,10 @@ const Members = () => {
             </Box>    
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
-                    <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Virtual Members</Typography>
-                    <Button variant="containedned" style={{marginLeft:"70%", backgroundColor:color1, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                      <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Virtual Members</Typography>
+                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
+                      <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%" }}>23 are logged in </Typography>
+                      <Button variant="outlined" style={{marginLeft:"55%",  color:color1 ,border:"1px solid #102B4C", fontWeight: 700}}>View All</Button>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
@@ -189,8 +215,9 @@ const Members = () => {
             
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
-                    <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Income from Members</Typography>
-                    <Button variant="containedned" style={{marginLeft:"65%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                      <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Income from Members</Typography>
+                      <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+ LKR 34,500</Box>
+                      <Button variant="outlined" style={{marginLeft:"53%",  color:color2 , fontWeight: 700}}>View All</Button>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>

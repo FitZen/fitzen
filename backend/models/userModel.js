@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 
 
-// find use datails by id
+// find use details by id
 const findUserById = asyncHandler(async (id) => {
     const sql = 'SELECT * FROM users WHERE id = $1';
     const result = await query(sql, [id]);
@@ -12,7 +12,7 @@ const findUserById = asyncHandler(async (id) => {
 });
 
 
-// find use datails by email
+// find use details by email
 const findUserByEmail = asyncHandler(async (email) => {
     const sql = 'SELECT * FROM users WHERE email = $1';
     const result = await query(sql, [email]);
@@ -32,18 +32,54 @@ const matchPassword = asyncHandler(async (email, password) => {
 
 // set login date and time
 const setLoginDateTime = asyncHandler(async (id) => {
-    const sql = 'UPDATE users SET last_login = $1 WHERE id = $2';
-    const currTime = new Date().toISOString();
+    const sql = 'UPDATE users SET last_login = NOW() WHERE id = $1 RETURNING id';
+    const result = await query(sql, [id]);
 
-    return await query(sql, [currTime, id]);
+    return result.rows[0].id;
 });
 
 
 // set login status
 const setLoginStatus = asyncHandler(async (id, status) => {
-    const sql = 'UPDATE users SET status = $1 WHERE id = $2';
+    const sql = 'UPDATE users SET status = $1 WHERE id = $2 RETURNING id';
+    const result = await query(sql, [status, id]);
 
-    return await query(sql, [status, id]);
+    return result.rows[0].id;
+});
+
+
+// get user details for top navbar
+const getUserDetails = asyncHandler(async (id, type) => {
+    let table;
+
+    switch (type) {
+        case 'Admin':
+            table = 'admin';
+            break;
+        case 'Receptionist':
+            table = 'receptionist';
+            break;
+        case 'Shake Bar Manager':
+            table = 'shakeBarManager';
+            break;
+        case 'Trainer':
+            table = 'trainer';
+            break;
+        case 'Physiotherapist':
+            table = 'physiotherapist';
+            break;
+        case 'Virtual Member':
+            table = 'virtualMember';
+            break;
+        case 'Physical Member':
+            table = 'physicalMember';
+            break;
+    }
+
+    const sql = 'SELECT * FROM ' + table + ' WHERE id = $1';
+    const result = await query(sql, [id]);
+
+    return result.rows[0];
 });
 
 
@@ -65,4 +101,5 @@ export {
     matchPassword,
     setLoginDateTime,
     setLoginStatus,
+    getUserDetails,
 };

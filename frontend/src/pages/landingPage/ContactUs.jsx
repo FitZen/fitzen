@@ -26,15 +26,14 @@ const NavLink = styled("a")(({ theme }) => ({
     
     "&:hover": {
       color: color2,
-      border: "2px solid red",
-      backgroundColor: color1 // Only the bottom border will be red on hover
+      backgroundColor: "#E74C3C" // Only the bottom border will be red on hover
       
     },
   }));
 
 function ContactUs() {
   return (
-    <Container style={{maxWidth:"100%", height:"90vh"}}>
+    <Container id="contactUS" style={{maxWidth:"100%", height:"90vh"}}>
       <Typography variant="h3" sx={{ textAlign: "left", fontWeight: "bold", marginTop: "1rem", marginLeft: "5rem" }}>
         Contact us
       </Typography>

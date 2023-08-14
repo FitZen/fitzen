@@ -7,7 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../../assets/logo.png";
 import { Container } from "@mui/material";
-import CustomButton from "./CustomButton";
+import { Link } from "react-router-dom";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 
 import {
@@ -19,6 +19,8 @@ import {
   ListItemText,
   styled,
 } from "@mui/material";
+
+
 
 const color1 = "#000000"; // Black
 const color2 = "#FFFFFF"; // White
@@ -48,7 +50,6 @@ const NavLink = styled("a")(({ theme }) => ({
   "&:hover": {
     color: color2,
     borderBottom: "4px solid red", // Only the bottom border will be red on hover
-    
   },
 }));
 
@@ -62,8 +63,7 @@ const NavLinkSign = styled("a")(({ theme }) => ({
   zIndex: 1,
   "&:hover": {
     color: color2,
-    border: "2px solid red", // Only the bottom border will be red on hover
-    backgroundColor: color1,
+    backgroundColor: "#E74C3C",
   },
 }));
 
@@ -90,8 +90,8 @@ const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({
 
 const NavbarLogo = styled("img")(({ theme }) => ({
   cursor: "pointer",
-  width: "10rem",
-  marginLeft: "10rem",
+  width: "8rem",
+  marginLeft: "12rem",
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -109,13 +109,23 @@ const Navbar = () => {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.type === "Tab" || event.type === "Shift")
-    ) {
+    if (event.type === "keydown" && (event.type === "Tab" || event.type === "Shift")) {
       return;
     }
     setMobileMenu({ ...mobileMenu, [anchor]: open });
+  };
+
+  const handleScrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      setTimeout(() => {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "start",
+        });
+      }, 100); 
+    }
   };
 
   const list = (anchor) => (
@@ -131,15 +141,12 @@ const Navbar = () => {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index === 0 && <HomeIcon style={{color: color2}}/>}
-                {index === 1 && <FeaturedPlayListIcon style={{color:color2}}/>}
-                {index === 2 && <ListAtIcon style={{color:color2}}/>}
-                {index === 3 && <ContactsIcon style={{color:color2}}/>}
+                {index === 0 && <HomeIcon style={{ color: color2 }} />}
+                {index === 1 && <FeaturedPlayListIcon style={{ color: color2 }} />}
+                {index === 2 && <ListAtIcon style={{ color: color2 }} />}
+                {index === 3 && <ContactsIcon style={{ color: color2 }} />}
               </ListItemIcon>
-              <ListItemText
-                primary={text}
-                primaryTypographyProps={{ style: { color: color2 } }}
-              />
+              <ListItemText primary={text} primaryTypographyProps={{ style: { color: color2 } }} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -162,30 +169,45 @@ const Navbar = () => {
         >
           {list("left")}
         </Drawer>
-        <NavbarLogo src={logoImg} alt="logo" style={{ marginLeft: "50%" }} />
+        <NavbarLogo src={logoImg} alt="logo" style={{ marginLeft: "60%" }} />
       </Box>
 
       {/* Links */}
       <NavbarLinkBox>
-        <NavLink variant="body1">HOME</NavLink>
-        <NavLink variant="body2">DISCOVER</NavLink>
-        <NavLink variant="body2">ABOUT</NavLink>
-        <NavLink variant="body2">CONTACT US</NavLink>
+        <NavLink onClick={() => handleScrollToSection("home")} variant="body1">
+          HOME
+        </NavLink>
+        <NavLink onClick={() => handleScrollToSection("discover")} variant="body2">
+          DISCOVER
+        </NavLink>
+        <NavLink onClick={() => handleScrollToSection("about")} variant="body2">
+          ABOUT
+        </NavLink>
+        
+          <NavLink onClick={() => handleScrollToSection("contactUS")} variant="body2">
+            CONTACT US
+          </NavLink>
+  
       </NavbarLinkBox>
 
       {/* Login and Signup Links */}
       <LoginSignupBox>
-        <NavLink variant="body2"  style={{marginLeft: "-25%"}}>LOGIN</NavLink>
-        <NavLinkSign
-          variant="body2"
-          style={{
-            padding: "0.6rem",
-            borderRadius: "100px",
-            
-          }}
-        >
-          SIGN UP
-        </NavLinkSign>
+        <Link to="/login" style={{textDecoration:"none"}}>
+          <NavLink variant="body2" style={{ marginLeft: "-25%" }}>
+            LOGIN
+          </NavLink>
+        </Link>
+        <Link to="/signup" style={{textDecoration:"none"}}>
+          <NavLinkSign
+            variant="body2"
+            style={{
+              padding: "0.6rem",
+              borderRadius: "100px",
+            }}
+          >
+            SIGN UP
+          </NavLinkSign>
+        </Link>
       </LoginSignupBox>
     </NavbarContainer>
   );

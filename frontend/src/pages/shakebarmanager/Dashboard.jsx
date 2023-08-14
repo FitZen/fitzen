@@ -69,7 +69,7 @@ const Dashboard = () => {
           <ShakebarmanagerNavbar />
         </Box>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
           <Box sx={{ display:"flex", width: "100%", height:"100%",marginTop:"2rem"}}> 
 
           <Box sx={{ width: "40%", height: "50%", padding: "20px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "0.5rem" }}>

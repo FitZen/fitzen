@@ -114,7 +114,6 @@ const Reports = () => {
           </TableContainer>
             </Typography>
           )}
-
         </Box>
       </Box>
 

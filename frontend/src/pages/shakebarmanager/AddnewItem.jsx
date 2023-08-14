@@ -37,7 +37,7 @@ const AddnewItem = () => {
             <ShakebarmanagerNavbar />
           </Box>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" ,marginBottom:'2rem'}}>Items</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left",marginBottom:"2rem"}}>Items</Typography>
             
           <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>

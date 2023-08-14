@@ -45,3 +45,8 @@ npm i
 ```console
 npm start
 ```
+
+### 9. Run frontend and backend simultaneously
+```console
+npm run dev
+```

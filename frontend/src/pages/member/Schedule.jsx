@@ -1,15 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, InputLabel, TextField, Button} from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../../styles/member/ScheduleStyles.css";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from "@mui/x-date-pickers";
+
+
+const color2 = "#346E93" //light blue
 
 const Schedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
+  const [value, setValue] = React.useState(null);
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const months = [
     "January",
@@ -92,17 +121,20 @@ const Schedule = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <Navbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography
-            variant="h3"
-            style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}
+            variant="h4"
+            style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}
           >
             Schedule
           </Typography>
-          <Box sx={{marginTop:"4%"}}>
+          <Box sx={{marginTop:"4%", display:"flex"}}>
             <Box sx={{ width: "50%", justifyContent: "center" }}>
               <div className="wrapper">
                 <header>
@@ -142,6 +174,41 @@ const Schedule = () => {
                 </div>
               </div>
             </Box>
+
+            <Box sx={{ width: "50%", height:"77vh", justifyContent: "center", alignItems:"center" }}>
+              <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"3%", paddingLeft:"8%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
+                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Task</Typography>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
+                <TextField variant="outlined" inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Date:</InputLabel>
+                <Box sx={{maxWidth:"450px"}}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs} >
+                      <DatePicker 
+                          label=""
+                          value={value}
+                          style={{width:"100px"}}
+                          onChange={(newValue) => setValue(newValue)} 
+                          renderInput={(params) => <TextField {...params}  />}
+                      />
+                  </LocalizationProvider>
+                </Box>
+                
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Time:</InputLabel>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimePicker
+                    label="Select Time"
+                    value={value} // Your value state for the selected time
+                    onChange={(newValue) => setValue(newValue)} // Your onChange handler
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Description:</InputLabel>
+                <TextField variant="outlined" multiline rows="4" inputProps={{style: {height: 100, width:230, borderRadius:"5px", outline:"none"}}}/>
+
+                <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
+              </Box>
+            </Box>
+
           </Box>
         </Box>
       </Box>
