@@ -104,15 +104,12 @@ const getUserDetails = asyncHandler(async (id, type) => {
 
 
 // register user
-// const registerUsers = asyncHandler(async (nic, name, email, password) => {
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-//
-//     const sql = 'INSERT INTO users (nic, name, email, password_hash) VALUES ($1, $2, $3, $4) RETURNING nic, name, email';
-//     const result = await query(sql, [nic, name, email, hashedPassword]);
-//
-//     return result;
-// });
+const registerUser = asyncHandler(async (id, nic, email, hashedPassword, contact_no, type) => {
+    const sql = 'INSERT INTO users (id, nic, email, password, contact_no, type) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+    const result = await query(sql, [id, nic, email, hashedPassword, contact_no, type]);
+
+    return result.rows[0].id;
+});
 
 
 export {
@@ -124,4 +121,5 @@ export {
     setLoginDateTime,
     setLoginStatus,
     getUserDetails,
+    registerUser,
 };
