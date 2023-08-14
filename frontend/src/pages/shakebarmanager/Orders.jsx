@@ -14,6 +14,12 @@ const Orders = () => {
       { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
       { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
       { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
+      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
+      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
+      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
+      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
+      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
+      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
     ]);
     const [completedItems, setCompletedItems] = useState([
         { orderId: 1, itemName: 'Item 1', quantity: 2, totalPrice: 10000, orderedDate: '2023-08-10',issuedDate:'2023-08-15' },
@@ -45,8 +51,8 @@ const Orders = () => {
     
     const renderTable = (data) => {
         return (
-          <TableContainer component={Paper}>
-            <Table style={{ marginTop: '30px', fontSize: '15px' }}>
+          <TableContainer component={Paper} style={{ fontSize: '15px',width:'95%'}}>
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
@@ -71,7 +77,7 @@ const Orders = () => {
                     {value === 2 && <TableCell style={{ fontSize: '14px' }}>{item.canceledDate}</TableCell>}
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
-                        <Button variant="contained" color="primary" size="small" onClick={() => handleDone(item)}>
+                        <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(item)}>
                           Done
                         </Button>
                       </TableCell>
@@ -102,7 +108,7 @@ const Orders = () => {
               
      
         <div>
-          <Tabs style={{ backgroundColor: '#D7D7D7' }} value={value} onChange={handleChange}>
+          <Tabs style={{ backgroundColor: '#D7D7D7'  ,marginRight:'4rem',position:'sticky'}} value={value} onChange={handleChange}>
             <Tab style={{ fontSize: '15px', margin: '0 250px 0 100px',fontWeight: '700' }} label="Pending" />
             <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Completed" />
             <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Canceled" />
