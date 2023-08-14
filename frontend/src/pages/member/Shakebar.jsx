@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Import the images
 import item1 from "../../assets/images (3).jpg"
@@ -27,7 +28,13 @@ const Shakebar = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

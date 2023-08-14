@@ -4,6 +4,7 @@ import { Typography, Button } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import {FaRegTimesCircle} from 'react-icons/fa';
 import Modal from '@mui/material/Modal';
@@ -24,7 +25,13 @@ const OwnMembership = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

@@ -12,7 +12,8 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {GoGoal} from 'react-icons/go';
 import {FaRegTimesCircle} from 'react-icons/fa';
-import {useEffect, useState} from 'react';
+import {useEffect, useState,} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -37,7 +38,7 @@ const Goals = () => {
     const [fixedNavbar, setFixedNavbar] = useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const navigate = useNavigate();
 
     const [goalData, setGoalData] = useState([]);
 
@@ -53,6 +54,10 @@ const Goals = () => {
     const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
 
     viewGoals();
     //setCurrentDate(new Date());

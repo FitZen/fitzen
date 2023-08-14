@@ -8,6 +8,7 @@ import {FaUsers, FaUserClock, FaMoneyBillWave} from 'react-icons/fa';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -20,8 +21,13 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

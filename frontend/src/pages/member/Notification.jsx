@@ -25,11 +25,11 @@ const Notification = () => {
 
   useEffect(() => {
 
-    viewNotifications();
-
-    if(!localStorage.getItem('userID')){
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    viewNotifications();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

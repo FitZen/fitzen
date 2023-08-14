@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Rating from '@mui/material/Rating';
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 
 import item1 from "../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg"
@@ -110,8 +111,13 @@ const instructorsData = [
 
 const Instructors = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

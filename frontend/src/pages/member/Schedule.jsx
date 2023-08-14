@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import { Typography, InputLabel, TextField, Button} from "@mui/material";
 import Sidebar from "../../components/Sidebar";
@@ -20,8 +21,13 @@ const Schedule = () => {
   const [value, setValue] = React.useState(null);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
