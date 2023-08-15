@@ -8,7 +8,7 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 
 
 router.get("/getmealplans", getAllMealPlans);
-router.post("/addmealplan",protect, permit('Trainer'), addNewMealPlan);
+router.post("/addmealplan", addNewMealPlan);
 
 
 export default router;
