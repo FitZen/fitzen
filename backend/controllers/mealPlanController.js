@@ -27,10 +27,13 @@ const getAllMealPlans = asyncHandler(async (req, res) => {
 
 // add new meal plan
 const addNewMealPlan = asyncHandler(async (req, res) => {
-    const { name, breakfast, lunch, dinner, pre_workout, post_workout, note } = req.body;
-    const createdBy = req.user.id;
+    // const { name, breakfast, lunch, dinner, pre_workout, post_workout, note } = req.body;
+    // const createdBy = req.user.id;
+    const { name, breakfast, lunch, dinner, pre_workout, post_workout, note, userID } = req.body;
 
-    const result = await addMealPlan(name, breakfast, lunch, dinner, pre_workout, post_workout, note, createdBy);
+    console.log("respond from be : ", req.body)
+
+    const result = await addMealPlan(name, breakfast, lunch, dinner, pre_workout, post_workout, note, userID);
 
     if (! result) {
         res.status(500);
