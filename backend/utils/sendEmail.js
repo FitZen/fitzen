@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 
 // send email using configured transport object
-const sendEmail = async (recipient, subject, htmlBody) => {
+const sendEmail = async (subject, htmlBody, recipient) => {
     try {
         await transporter.sendMail({
             from: `"FitZen Support" <${process.env.EMAIL_USER}>`,
@@ -24,7 +24,7 @@ const sendEmail = async (recipient, subject, htmlBody) => {
         });
 
         console.log("Email sent successfully!");
-        return "Success";
+        return true;
     } catch (error) {
         console.error("Error sending email.");
         throw error;
@@ -33,8 +33,3 @@ const sendEmail = async (recipient, subject, htmlBody) => {
 
 
 export default sendEmail;
-
-
-// Call
-// const result = await sendEmail("adheesha.1999@gmail.com", "Subject Test", "<b>Body test - html</b>");
-// console.log(result);
