@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react';
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [userData, setUserData] = useState({});
 
   const [userID, setUserID] = useState('');
   const [actor, setActor] = useState('');
@@ -55,10 +56,28 @@ export default function PrimarySearchAppBar() {
     }else{
       setUserID(JSON.parse(localStorage.getItem('userID')));
       setActor(JSON.parse(localStorage.getItem('userType')));
+
+      getUserDetails();
     }
   
-    //getUserDetails();
+    
   }, []);
+
+   //load user details
+   const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: JSON.parse(localStorage.getItem('userID')),
+        userType: JSON.parse(localStorage.getItem('userType')),
+      };
+      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      setUserData(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
 
   const handleLogout = async (event) => {
     event.preventDefault();
@@ -67,7 +86,8 @@ export default function PrimarySearchAppBar() {
         userID: userID,
         userType: actor,
       };
-      await axios.post("http://localhost:8000/api/users/logout",reqData);
+      
+      const res1 = await axios.post("http://localhost:8000/api/users/logout",reqData);
       localStorage.clear();
       navigate("/login");
 
@@ -78,7 +98,6 @@ export default function PrimarySearchAppBar() {
     }
   };
 
-  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -163,73 +182,80 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'white', height:"60px" }}>
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}>
-              <Badge variant="dot" color="error">
-                <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
-              </Badge>
-            </IconButton>
-            <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+      {userData && (
+        <AppBar position="static" sx={{ backgroundColor: 'white', height: '60px' }}>
+          <Toolbar>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton
                 size="large"
-                aria-label="show 17 new notifications"
+                aria-label="show 4 new mails"
                 color="inherit"
-                style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}
+                style={{
+                  borderRadius: '50%',
+                  width: '60px',
+                  height: '60px',
+                  marginTop: '5px',
+                }}
               >
-                <Badge variant="dot" color="error" style={{marginRight:"10px"}}>
-                <NotificationsIcon style={{ fontSize: "1.2rem", color: "black" }} />
+                <Badge variant="dot" color="error">
+                  <MailIcon style={{ fontSize: '1.2rem', color: 'black' }} />
                 </Badge>
               </IconButton>
-            </Link>
-            <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
-                Tharindu Gunawardhana
-                <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
+              <Link to="/member/notification" style={{ textDecoration: 'none', color: 'black' }}>
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  style={{
+                    borderRadius: '50%',
+                    width: '60px',
+                    height: '60px',
+                    marginTop: '5px',
+                  }}
+                >
+                  <Badge variant="dot" color="error" style={{ marginRight: '10px' }}>
+                    <NotificationsIcon style={{ fontSize: '1.2rem', color: 'black' }} />
+                  </Badge>
+                </IconButton>
+              </Link>
+              <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, mt: 2, mr: 1, fontSize: '14px', color: 'black', fontWeight: 700 }}>
+                {userData.first_name} {userData.last_name}
+                <Typography variant="subtitle2" gutterBottom sx={{ flexGrow: 1, fontSize: '12px', color: 'grey', fontWeight: 500, textAlign: 'right' }}>
                   {actor}
                 </Typography>
-            </Typography>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-       
-              color="inherit"
-            >
-              {/* <AccountCircle /> */}
-              <img src={Profile} alt="Profile" width="40px" height="40px" style={{borderRadius:"50px"}}/>
-            </IconButton>
-           
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              {/* <AccountCircle /> */}
-              <ArrowDropDownIcon style={{color:"#000000"}}/>
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon style={{color:"black"}}/>
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
+              </Typography>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                color="inherit"
+              >
+                <img src={Profile} alt="Profile" width="40px" height="40px" style={{ borderRadius: '50px' }} />
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <ArrowDropDownIcon style={{ color: '#000000' }} />
+              </IconButton>
+            </Box>
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon style={{ color: 'black' }} />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      )}
 
       {renderMobileMenu}
       {renderMenu}

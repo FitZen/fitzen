@@ -8,7 +8,8 @@ import {
 
 // get all handled complaints
 const getAllHandledComplaints = asyncHandler(async (req, res) => {
-    const handledBy = req.user.id;
+    //const handledBy = req.user.id;
+    const handledBy = req.query.userID;
     const handledComplaints = await getHandledComplaints(handledBy);
 
     if (handledComplaints === undefined) {
@@ -40,10 +41,13 @@ const getAllUnhandledComplaints = asyncHandler(async (req, res) => {
 
 //add complaint
 const addNewComplaint = asyncHandler(async (req, res) => {
-    const { subject, content } = req.body;
-    const addedBy = req.user.id;
+    const { subject, content,userID } = req.body;
 
-    const result = await addComplaint(subject, content, addedBy);
+    //const addedBy = req.body.id;
+
+    console.log("req data: ",req.body)
+
+    const result = await addComplaint(subject, content, userID);
 
     if (! result) {
         res.status(500);

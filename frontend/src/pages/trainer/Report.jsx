@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import {
   Typography,
@@ -8,18 +8,36 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
-import {Tabs,Tab} from '@mui/material';
+import {Tabs,Tab, TextField} from '@mui/material';
 import { Bar } from "react-chartjs-2";
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
+import { BiSolidMessageEdit,BiSolidMessageSquareAdd } from "react-icons/bi";
+import { FaRegTimesCircle} from "react-icons/fa";
+import Modal from "@mui/material/Modal";
+import axios from 'axios';
 
 const color1 = "#346E93"; //light blue
 
 const Reports = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [openComplaintPopup, setOpenComplaintPopup] = React.useState(false);
+
+  const handleOpenComplaintPopup = () => setOpenComplaintPopup(true);
+	const handleCloseComplaintPopup = () => setOpenComplaintPopup(false);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  const [newComplaint, setNewComplaint] = useState({
+    title: "",
+    content: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     // Function to handle scroll event
@@ -39,6 +57,18 @@ const Reports = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const modalStyle = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		width: "35%",
+		bgcolor: 'background.paper',
+		borderRadius: '10px',
+		boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+		p: 4,
+	};
 
   const [value, setValue] = useState(0);
   const [physicalSessions, setPhysical] = useState([
@@ -77,6 +107,51 @@ const Reports = () => {
   const handleMonthChange = (event) => {
     setSelectedMonth(event.target.value);
   };
+
+    //get form inputs
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setNewComplaint((prevComplaint) => ({
+        ...prevComplaint,
+        [name]: value,
+      }));
+    };
+
+    const handleSubmit = async () => {
+
+      if (!newComplaint.title || !newComplaint.content) {
+        // Display error messages or styles for empty fields
+        setSubmitted(true);
+        return;
+      }  
+  
+      try {
+        const payload = {
+          subject: newComplaint.title,
+          content: newComplaint.content,
+          userID: JSON.parse(localStorage.getItem('userID')),
+        };
+
+        console.log("payload : ", payload);
+  
+        const res = await axios.post(
+          "http://localhost:8000/api/complaints/addcomplaint",
+          payload
+        );
+    
+        if (res.status === 201) {
+          console.log("res from backend :", res.data.data)
+          handleClose(); // Close the modal
+          setNewComplaint({ title: "", content: "" }); // Clear the form
+          setSubmitted(false);
+        }
+      } catch (error) {
+        console.error("Adding announcement failed:", error);
+        // Handle error scenarios here
+      }
+    };
+  
+
 
   const data = {
     labels: [
@@ -206,29 +281,29 @@ const Reports = () => {
                       <Box sx={{}}>
                           <Box sx={{display:"flex", justifyContent:"center"}}>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled personal <br /> Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled<br /> Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.totalSessions} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed personal <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed <br />Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.completedSessions} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled personal <br /> Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled <br /> Sessions </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.cancelledSessions} </Typography>
                               </Box>
                           </Box>
                           <Box sx={{display:"flex", justifyContent:"center"}}>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Scheduled training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>New <br />Requests </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>{item.newReq} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Completed training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Accepted <br />Requests </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>{item.acceptedReq} </Typography>
                               </Box>
                               <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Cancelled training <br />Workouts </Typography>
+                                  <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Average Session <br />Duration </Typography>
                                   <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>{item.sessionDuration}hrs </Typography>
                               </Box>
                           </Box>
@@ -315,11 +390,20 @@ const Reports = () => {
           >
             Reports
           </Typography>
+              
           <div>
-            <Tabs style={{ backgroundColor: '#ffffff', width:"32%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }} value={value} onChange={handleChange}>
-              <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Physical Sessions" />
-              <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Virtual Sessions" />
-            </Tabs>
+            <Box sx={{display:"flex"}}>
+              <Tabs style={{ backgroundColor: '#ffffff', width:"32%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }} value={value} onChange={handleChange}>
+                
+                <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Physical Sessions" />
+                <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Virtual Sessions" />
+    
+              </Tabs>
+              <Box>
+                <Button variant="contained" onClick={handleOpenComplaintPopup} style={{height:"30%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "2rem",marginLeft: "5.5rem"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints and feedbacks</Button>
+              </Box>
+            </Box>
+              
             {value === 0 && renderReport(physicalSessions)}
             {value === 1 && renderReport(onlineSessions)}
           </div>
@@ -327,6 +411,45 @@ const Reports = () => {
           
         </Box>
       </Box>
+
+      <Modal
+							open={openComplaintPopup}
+							onClose={handleCloseComplaintPopup}
+							aria-labelledby="modal-modal-title"
+							aria-describedby="modal-modal-description"
+						>
+							<Box sx={modalStyle}>
+								<FaRegTimesCircle onClick={handleCloseComplaintPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+												  onMouseEnter={(e) => {
+													  e.target.style.color = "#D71313";
+													  e.target.style.transform = "scale(1)";
+												  }}
+												  onMouseLeave={(e) => {
+													  e.target.style.color = "#D8D9DA";
+													  e.target.style.transform = "scale(1)";
+												  }}
+								/>
+								<Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+									<BiSolidMessageSquareAdd  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+									<Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+										&nbsp; Add Complaints And Feedbacks
+									</Typography>
+								</Box>
+
+								<Box sx={{textAlign:"center", padding:"1%"}}>
+
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Title:</InputLabel>
+                    <TextField variant="outlined" name="title" value={newComplaint.title} onChange={handleInputChange} error={submitted && !newComplaint.title} helperText={submitted && !newComplaint.title ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Description:</InputLabel>
+                    <TextField variant="outlined" name="content" value={newComplaint.content} onChange={handleInputChange} error={submitted && !newComplaint.content} helperText={submitted && !newComplaint.content ? "Content is required" : ""}   multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+
+									<Button variant="contained" onClick={handleSubmit} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Add</Button>
+
+								</Box>
+
+							</Box>
+						</Modal>
+
     </Box>
   );
 };

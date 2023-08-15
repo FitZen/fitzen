@@ -22,10 +22,11 @@ const getAllAnnouncements = asyncHandler(async (req, res) => {
 
 // add announcement
 const addNewAnnouncement = asyncHandler(async (req, res) => {
-    const { title, content } = req.body;
-    const addedBy = req.user.id;
-
-    const result = await addAnnouncement(title, content, addedBy);
+   //const { title, content } = req.body;
+    const { title, content, userID } = req.body;
+    //const addedBy = req.user.id;
+    //comst result = await addAnnouncement(title, content, addedBy);
+    const result = await addAnnouncement(title, content, userID);
 
     if (! result) {
         res.status(500);

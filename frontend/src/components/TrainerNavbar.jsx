@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react';
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [userData, setUserData] = useState({});
 
     const [userID, setUserID] = useState('');
     const [actor, setActor] = useState('');
@@ -55,10 +56,27 @@ export default function PrimarySearchAppBar() {
         }else{
           setUserID(JSON.parse(localStorage.getItem('userID')));
           setActor(JSON.parse(localStorage.getItem('userType')));
+
+          getUserDetails();
         }
-      
-        //getUserDetails();
+        
       }, []);
+
+      //load user details
+        const getUserDetails = async () => {
+            try {
+            const reqData = {
+                userID: JSON.parse(localStorage.getItem('userID')),
+                userType: JSON.parse(localStorage.getItem('userType')),
+            };
+            const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+            setUserData(res2.data.data);
+            
+            } catch (error) {
+            console.log('error message: ',error.data);
+            }
+        
+        };
     
       const handleLogout = async (event) => {
         event.preventDefault();
@@ -163,7 +181,8 @@ export default function PrimarySearchAppBar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: 'white', height:"60px" }}>
+            {userData && (
+                <AppBar position="static" sx={{ backgroundColor: 'white', height:"60px" }}>
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -185,7 +204,7 @@ export default function PrimarySearchAppBar() {
                             </IconButton>
                         </Link>
                         <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
-                            Dhanush Perera
+                            {userData.first_name} {userData.last_name}
                             <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
                                 {actor}
                             </Typography>
@@ -230,6 +249,7 @@ export default function PrimarySearchAppBar() {
                     </Box>
                 </Toolbar>
             </AppBar>
+            )}
 
             {renderMobileMenu}
             {renderMenu}
