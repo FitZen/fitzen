@@ -1,7 +1,6 @@
 import { query } from '../config/db.js';
 import asyncHandler from 'express-async-handler';
 import hashPassword from "../utils/hashPassword.js";
-import { registerUser } from "./userModel.js";
 
 
 // get details of all receptionists
@@ -20,9 +19,7 @@ const addReceptionist = asyncHandler(async (id, nic, firstName, lastName, email,
     const sql = 'INSERT INTO receptionist (id, nic, first_name, last_name, email, password, contact_no, added_by) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id';
     const result = await query(sql, [id, nic, firstName, lastName, email, hashedPassword, contactNo, addedBy]);
 
-    const userId = await registerUser(id, nic, email, hashedPassword, contactNo, 'Receptionist');
-
-    return userId;
+    return result.rows[0].id;
 });
 
 

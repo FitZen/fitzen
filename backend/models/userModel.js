@@ -121,5 +121,4 @@ export {
     setLoginDateTime,
     setLoginStatus,
     getUserDetails,
-    registerUser,
 };
