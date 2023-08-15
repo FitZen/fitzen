@@ -7,8 +7,10 @@ import {
 import { protect, permit } from "../middleware/authMiddleware.js";
 
 
-router.get("/getreceptionists",protect, permit('Admin'), getAllReceptionists);
-router.post("/addreceptionist",protect, permit('Admin'), addNewReceptionist);
+// router.get("/getreceptionists",protect, permit('Admin'), getAllReceptionists);
+// router.post("/addreceptionist",protect, permit('Admin'), addNewReceptionist);
+router.get("/getreceptionists", getAllReceptionists);
+router.post("/addreceptionist", addNewReceptionist);
 
 
 export default router;
