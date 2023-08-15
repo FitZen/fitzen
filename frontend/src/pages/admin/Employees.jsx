@@ -8,6 +8,7 @@ import { FaAddressCard, FaUserEdit, FaUserTie} from 'react-icons/fa';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -153,7 +154,9 @@ const Employees = () => {
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Receptionists</Typography>
                     <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
                     <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%" }}>47 are logged in </Typography>
-                    <Button variant="outlined" style={{marginLeft:"57%",  color:color2, fontWeight: 700}}>View All</Button>
+                    <Link to="/admin/receptionView" style={{textDecoration:"none", color:"black", marginLeft:"57%"}}>
+                        <Button variant="outlined" style={{ color:color2, fontWeight: 700}}>View All</Button>
+                    </Link>
                 </Box>
                 
             </Box>    
