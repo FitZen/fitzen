@@ -9,6 +9,18 @@ import { useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
+import { motion } from "framer-motion";
+
+import Meal1 from '../../assets/Meals//meal1.png';
+import Meal2 from '../../assets/Meals//meal2.png';
+import Meal3 from '../../assets/Meals//meal3.png';
+import Meal4 from '../../assets/Meals//meal4.png';
+import Meal5 from '../../assets/Meals//meal5.png';
+import Meal6 from '../../assets/Meals//meal6.png';
+import Meal7 from '../../assets/Meals//meal7.png';
+import Meal8 from '../../assets/Meals//meal8.png';
+
+const images = [Meal1, Meal2, Meal3, Meal4, Meal5, Meal6, Meal7, Meal8];
 
 const MealPlan = () => {
 
@@ -34,7 +46,8 @@ const MealPlan = () => {
     pre_workout: "",
     post_workout: "",
     note: ""
-  })
+  });
+  const [currentImage, setCurrentImage] = useState(0);
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -62,6 +75,12 @@ const MealPlan = () => {
   useEffect(() => {
 
     viewMealPlans();
+
+    const timer = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    }, 3000); // 3 seconds interval
+
+    return () => clearInterval(timer);
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -229,6 +248,21 @@ const MealPlan = () => {
             </Box>
                 <Box sx={{width:"55%"}}>
                 <Button variant="contained" onClick={handleOpen} sx={{ backgroundColor: color2, color: "white", padding: "10px 20px", height: "30px", width: "170px", marginLeft:"72%", fontSize: "10px", '&:hover': { backgroundColor: "#808080" } }}>Add New Meal Plan</Button>
+
+                {!selectedMealPlan && (
+                  <Box sx={{width:"70%", height:"70%", justifyContent:"center", alignItems:"center", marginLeft:"10%", marginTop:"3%",padding:"2%"}}>
+                        <motion.img
+                          src={images[currentImage]}
+                          alt="Virtual Gym"
+                          style={{ width: "100%", height: "auto", marginTop: "4.5rem", marginLeft:"15%", objectFit:"cover" }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 2 }}
+                          key={currentImage} // Ensure proper animation when image changes
+                        />
+                </Box>
+                )}
                 {selectedMealPlan && (
                   <Box sx={{marginTop: "2%", width:"100%", height:"94.5%", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', justifyContent:"center", alignItems:"center", padding:"2%"}}>
                       <Typography variant="h5" style={{ fontWeight: 600, textAlign:"center", marginTop:"0.5rem" }}>{selectedMealPlan.name}</Typography>
