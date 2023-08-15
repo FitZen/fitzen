@@ -330,17 +330,17 @@ const Goals = () => {
                                         <TableCell align="left">{new Date(row.end_date).toLocaleDateString()}</TableCell>
                                         <TableCell align="left" sx={{ width: "16%" }}>
                                         <Box style={{ display: 'flex', backgroundColor: `${color2}`, borderRadius: '50px', width: '100%', height: '70%', marginTop: '0.4rem', textAlign: 'center', cursor: 'pointer', padding: '1%' }}>
-                                            <Typography variant="h6" style={{ fontSize: '15px', fontWeight: 500, color: '#ffffff', marginLeft: '1rem', marginTop: '0.6rem' }}>
+                                            <Typography variant="h6" style={{ fontSize: '15px', fontWeight: 500, color: '#ffffff', marginLeft: '2rem',padding:"2%", marginTop: '0rem' }}>
                                                 {row.status}
                                             </Typography>
-                                            <IconButton
+                                            {/* <IconButton
                                                 aria-label="more"
                                                 aria-controls={`menu-${row.id}`} // Add a unique ID for each menu
                                                 aria-haspopup="true"
                                                 onClick={(e) => handleMenuOpen(e, row.id)} // Pass the row id to the handler
                                             >
                                                 <FiMoreVertical style={{ fontSize: '1.2rem', color: '#ffffff', marginTop: '0.3rem', marginLeft: '10%' }} />
-                                            </IconButton>
+                                            </IconButton> */}
                                             <Menu
                                                 id={`menu-${row.id}`} // Use the unique ID for each menu
                                                 anchorEl={anchorEl}
