@@ -10,9 +10,6 @@ import ProfileImg from '../../assets/Members/photo-1633332755192-727a05c4013d.jp
 import {PiMedalFill,PiVideoCameraFill} from 'react-icons/pi';
 import { AiFillSchedule } from "react-icons/ai";
 import { SiProgress } from "react-icons/si";
-import { BiSolidMessageEdit,BiSolidMessageSquareAdd } from "react-icons/bi";
-
-
 
 import BMI from "../../assets/BMI-Calculator.png";
 import {Link} from "react-router-dom";
@@ -31,12 +28,9 @@ const StudentProgress = () => {
 	};
 
 	const [openFirstPopup, setOpenFirstPopup] = React.useState(false);
-	const [openSecondPopup, setOpenSecondPopup] = React.useState(false);
 
 	const handleOpenFirstPopup = () => setOpenFirstPopup(true);
 	const handleCloseFirstPopup = () => setOpenFirstPopup(false);
-	const handleOpenSecondPopup = () => setOpenSecondPopup(true);
-	const handleCloseSecondPopup = () => setOpenSecondPopup(false);
 	const [valueStart, setValueStart] = React.useState(null);
 	const [fixedNavbar, setFixedNavbar] = useState(false);
 
@@ -206,45 +200,6 @@ const StudentProgress = () => {
 
 								</Box>
 							</Modal>
-						<Button variant="contained" onClick={handleOpenSecondPopup} style={{height:"10%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "1.5rem",marginLeft: "1.5rem"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints and feedbacks</Button>
-						<Modal
-							open={openSecondPopup}
-							onClose={handleCloseSecondPopup}
-							aria-labelledby="modal-modal-title"
-							aria-describedby="modal-modal-description"
-						>
-							<Box sx={modalStyle}>
-								<FaRegTimesCircle onClick={handleCloseSecondPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
-												  onMouseEnter={(e) => {
-													  e.target.style.color = "#D71313";
-													  e.target.style.transform = "scale(1)";
-												  }}
-												  onMouseLeave={(e) => {
-													  e.target.style.color = "#D8D9DA";
-													  e.target.style.transform = "scale(1)";
-												  }}
-								/>
-								<Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
-									<BiSolidMessageSquareAdd  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
-									<Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-										&nbsp; Add Complaints And Feedbacks
-									</Typography>
-								</Box>
-
-								<Box sx={{textAlign:"center", padding:"1%"}}>
-
-									<InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Title:</InputLabel>
-									<TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
-
-									<InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Description:</InputLabel>
-									<TextField variant="outlined" inputProps={{style: {height: 125, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
-
-									<Button variant="contained" onClick={handleCloseSecondPopup} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Add</Button>
-
-								</Box>
-
-							</Box>
-						</Modal>
 					</Box>
 					<Box sx={{display:"flex", width:"100%"}}>
 						<Box sx={{width:"50%", marginRight:"5rem"}}>
