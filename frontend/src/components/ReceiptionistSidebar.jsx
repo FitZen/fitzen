@@ -234,7 +234,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="/receiptionist/reports" style={{textDecoration:"none"}}>
+              <Link  style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
                 <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>

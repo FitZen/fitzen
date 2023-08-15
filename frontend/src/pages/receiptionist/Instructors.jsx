@@ -169,7 +169,7 @@ const Instructors = () => {
                   <img src={instructor.image} alt="item" style={{ width: "80%", height: "60%", objectFit: "cover" }} />
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 700 }}>{instructor.name}</Typography>
                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography><br />
-                  <Link to="/member/instructorprofile" style={{ textDecoration: "none" }}>
+                  <Link style={{ textDecoration: "none" }}>
                     <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
                   </Link>
                 </Box>

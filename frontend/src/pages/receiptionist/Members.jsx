@@ -110,7 +110,7 @@ const Members= () => {
                                 <img src={item13} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
                                 <br/><Button variant="contained" style={{backgroundColor:"#96CDEF",borderColor:"black", color:"black", fontWeight:"700",marginBottom:'10px'}}>Payment</Button>
-                                <Link to="/trainer/progress" style={{textDecoration:"none", color:"black"}}>
+                                <Link  style={{textDecoration:"none", color:"black"}}>
                                 <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                 </Link>
                             </Box>
