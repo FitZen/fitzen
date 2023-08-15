@@ -8,7 +8,11 @@ import {addComplaint} from "../models/complaintModel.js";
 
 // get meal plans from specific trainer
 const getAllMealPlans = asyncHandler(async (req, res) => {
-    const mealPlans = await getMealPlans(req.user.id);
+    //const mealPlans = await getMealPlans(req.user.id);
+    console.log("userID from be:", req.query.userID)
+    const mealPlans = await getMealPlans(req.query.userID);
+
+    //console.log("mealPlans from be:", mealPlans)
 
     if (mealPlans === undefined) {
         res.status(500);
