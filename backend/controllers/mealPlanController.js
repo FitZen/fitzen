@@ -8,7 +8,11 @@ import {addComplaint} from "../models/complaintModel.js";
 
 // get meal plans from specific trainer
 const getAllMealPlans = asyncHandler(async (req, res) => {
-    const mealPlans = await getMealPlans(req.user.id);
+    //const mealPlans = await getMealPlans(req.user.id);
+    console.log("userID from be:", req.query.userID)
+    const mealPlans = await getMealPlans(req.query.userID);
+
+    //console.log("mealPlans from be:", mealPlans)
 
     if (mealPlans === undefined) {
         res.status(500);
@@ -23,10 +27,13 @@ const getAllMealPlans = asyncHandler(async (req, res) => {
 
 // add new meal plan
 const addNewMealPlan = asyncHandler(async (req, res) => {
-    const { name, breakfast, lunch, dinner, pre_workout, post_workout, note } = req.body;
-    const createdBy = req.user.id;
+    // const { name, breakfast, lunch, dinner, pre_workout, post_workout, note } = req.body;
+    // const createdBy = req.user.id;
+    const { name, breakfast, lunch, dinner, pre_workout, post_workout, note, userID } = req.body;
 
-    const result = await addMealPlan(name, breakfast, lunch, dinner, pre_workout, post_workout, note, createdBy);
+    console.log("respond from be : ", req.body)
+
+    const result = await addMealPlan(name, breakfast, lunch, dinner, pre_workout, post_workout, note, userID);
 
     if (! result) {
         res.status(500);
