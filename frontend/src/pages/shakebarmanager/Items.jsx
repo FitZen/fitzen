@@ -61,7 +61,7 @@ const Items = () => {
           <ShakebarmanagerNavbar />
         </Box>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Items</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Items</Typography>
 
           <Button variant="contained"  size="small" style={{ marginLeft: '65rem',marginTop:'-5rem',backgroundColor:"#346E93"  }} onClick={handleAddNewItemClick}>Add New</Button>
 

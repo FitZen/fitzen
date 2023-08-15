@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Box from "@mui/material/Box";
 import {Typography,Tabs,Tab,Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper,Button} from '@mui/material';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
+import { positions } from '@mui/system';
 
 const Orders = () => {
+
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
     const [value, setValue] = useState(0);
     const [pendingItems, setPendingItems] = useState([
@@ -51,9 +74,13 @@ const Orders = () => {
     
     const renderTable = (data) => {
         return (
-          <TableContainer component={Paper} style={{ fontSize: '15px',width:'95%'}}>
+
+          
+ <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
+            <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
+            <TableContainer component={Paper} style={{ fontSize: '15px',width:'95%'}}>
             <Table>
-              <TableHead>
+              <TableHead style={{positions:'fixed'}}>
                 <TableRow>
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
@@ -87,6 +114,9 @@ const Orders = () => {
               </TableBody>
             </Table>
           </TableContainer>
+            </Box>
+          </Box>
+         
         );
       };
 
@@ -104,7 +134,7 @@ const Orders = () => {
             <ShakebarmanagerNavbar />
           </Box>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem",marginBottom:'3rem', textAlign:"left" }}>Orders</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem",marginBottom:'3rem', textAlign:"left" }}>Orders</Typography>
               
      
         <div>
@@ -121,7 +151,9 @@ const Orders = () => {
           </Box>
         </Box>
        
-      </Box>  );
+      </Box>  
+     
+    );
 
 };
 
