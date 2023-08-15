@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar";
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 import {FaBitbucket} from "react-icons/fa";
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 
@@ -59,9 +60,14 @@ const Packages = () => {
   const [item, setItem] = React.useState('');
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
+  const navigate = useNavigate();
 
   const color2 = "#346E93" //light blue
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

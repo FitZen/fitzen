@@ -9,12 +9,18 @@ import Navbar from "../../components/Navbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

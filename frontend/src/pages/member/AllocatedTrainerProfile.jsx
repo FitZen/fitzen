@@ -13,6 +13,7 @@ import Rating from '@mui/material/Rating';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import Modal from '@mui/material/Modal';
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AllocatedInstructorProfile = () => {
 
@@ -23,7 +24,13 @@ const AllocatedInstructorProfile = () => {
 
     const color2 = "#346E93" //light blue
 
+    const navigate = useNavigate();
+
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+        navigate('/login');
+      }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

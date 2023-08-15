@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 import { Bar } from 'react-chartjs-2';
@@ -18,8 +19,13 @@ const Reports = () => {
   const [selectedMonth, setSelectedMonth] = useState('');
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

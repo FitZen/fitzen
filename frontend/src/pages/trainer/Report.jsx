@@ -141,7 +141,7 @@ const Reports = () => {
     
         if (res.status === 201) {
           console.log("res from backend :", res.data.data)
-          handleClose(); // Close the modal
+          handleCloseComplaintPopup();
           setNewComplaint({ title: "", content: "" }); // Clear the form
           setSubmitted(false);
         }

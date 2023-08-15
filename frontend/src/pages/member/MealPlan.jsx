@@ -8,7 +8,8 @@ import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 
 import Meal1 from '../../assets/Meals//meal1.png';
@@ -26,8 +27,13 @@ const images = [Meal1, Meal2, Meal3, Meal4, Meal5, Meal6, Meal7, Meal8];
 const MealPlan = () => {
 
   const [currentImage, setCurrentImage] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
+
     const timer = setInterval(() => {
       setCurrentImage((prevImage) => (prevImage + 1) % images.length);
     }, 3000); // 3 seconds interval

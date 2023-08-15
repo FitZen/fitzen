@@ -7,14 +7,19 @@ import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVer
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {useEffect, useState} from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 import BMI from "../../assets/BMI-Calculator.png";
 const Progress = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

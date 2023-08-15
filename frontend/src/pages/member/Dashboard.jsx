@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   useEffect(() => {
 
-    if(!localStorage.getItem('userID')){
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
     // Function to handle scroll event

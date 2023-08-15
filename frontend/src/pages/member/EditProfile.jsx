@@ -14,6 +14,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -26,7 +27,13 @@ const Profile = () => {
   const [value, setValue] = React.useState(null);
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
