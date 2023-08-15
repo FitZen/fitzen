@@ -47,6 +47,8 @@ import AddMember from './pages/receiptionist/Members';
 import ViewInstructors from './pages/receiptionist/Instructors';
 import ViewMembership from './pages/receiptionist/Membership';
 import ReceptionistReports from './pages/receiptionist/Reports';
+import MemberProfile from './pages/receiptionist/MemberProfile';
+import ReceptionViaInstructorProfile from './pages/receiptionist/InstructorProfile';
 
 import SDashboard from './pages/shakebarmanager/Dashboard';
 import Orders from './pages/shakebarmanager/Orders';
@@ -151,6 +153,8 @@ function App() {
         <Route path="/receiptionist/instructors" element={<ViewInstructors />} />
         <Route path="/receiptionist/membership" element={<ViewMembership />} />
         <Route path="/receiptionist/reports" element={<ReceptionistReports />} />
+        <Route path="/receiptionist/memberprofile" element={<MemberProfile />} />
+        <Route path="/receiptionist/instructorprofile" element={<ReceptionViaInstructorProfile />} />
 
         <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
         <Route path="/physiotherapist/profile" element={<PhysiotherapistProfile />} />
