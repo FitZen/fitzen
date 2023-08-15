@@ -103,15 +103,6 @@ const getUserDetails = asyncHandler(async (id, type) => {
 });
 
 
-// register user
-const registerUser = asyncHandler(async (id, nic, email, hashedPassword, contact_no, type) => {
-    const sql = 'INSERT INTO users (id, nic, email, password, contact_no, type) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
-    const result = await query(sql, [id, nic, email, hashedPassword, contact_no, type]);
-
-    return result.rows[0].id;
-});
-
-
 export {
     findUserById,
     findUserByNIC,
