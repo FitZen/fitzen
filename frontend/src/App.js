@@ -42,6 +42,10 @@ import TrainerPackages from './pages/admin/TrainerPackages';
 
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
+import AddMember from './pages/receiptionist/Members';
+import ViewInstructors from './pages/receiptionist/Instructors';
+import ViewMembership from './pages/receiptionist/Membership';
+import ReceptionistReports from './pages/receiptionist/Reports';
 
 import SDashboard from './pages/shakebarmanager/Dashboard';
 import Orders from './pages/shakebarmanager/Orders';
@@ -141,6 +145,10 @@ function App() {
 
         <Route path="/receiptionist/dashboard" element={<ReceiptionistDashboard />} />
         <Route path="/receiptionist/profile" element={<ReceiptionistProfile />} />
+        <Route path="/receiptionist/members" element={<AddMember />} />
+        <Route path="/receiptionist/instructors" element={<ViewInstructors />} />
+        <Route path="/receiptionist/membership" element={<ViewMembership />} />
+        <Route path="/receiptionist/reports" element={<ReceptionistReports />} />
 
         <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
         <Route path="/physiotherapist/profile" element={<PhysiotherapistProfile />} />

@@ -201,7 +201,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link> 
 
-              <Link to="" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
+              <Link to="/receiptionist/members" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
                 <ListItem disablePadding sx={{ display: 'block' }} >
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Members' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -212,7 +212,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
               
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/receiptionist/instructors" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -223,7 +223,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link to="/receiptionist/membership" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Membership')}>
                   <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Membership' ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
@@ -234,18 +234,7 @@ export default function Sidebar() {
                 </ListItem>
               </Link>
 
-              <Link to="" style={{textDecoration:"none"}}>
-                <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
-                    <ListItemIconStyled open={open}>
-                      <FaCocktail />
-                    </ListItemIconStyled>
-                    {open && <SidebarLink variant="subtitle1" component="span">Shakebar</SidebarLink>}
-                  </ListItemButtonStyled>
-                </ListItem>
-              </Link>
-
-              <Link to="" style={{textDecoration:"none"}}>
+              <Link  style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
                 <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
