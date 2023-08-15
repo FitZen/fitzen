@@ -55,8 +55,16 @@ const MealPlan = () => {
       description: "Protein Shake with 1 Banana"
     },
     {
+      title: "Post-Workout",
+      description: "Protein Shake with 1 Banana",
+    },
+    {
       title: "Dinner",
       description: "Brown rice, peas paneer curry, sprouts vegetable salad",
+    },
+    {
+      title: "Note",
+      description: "Drink 3-4 litres of water daily",
     }
   ];
 
@@ -76,7 +84,7 @@ const MealPlan = () => {
            
             <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Meal Plan</Typography>
             <Box sx={{ backgroundColor: "#E5E8E8", width:"95%", padding:"0.5%", marginTop:"2%", borderRadius:"10px"}}>
-              <Box sx={{ display:"flex",flexWrap: "wrap", backgroundColor:"white", width: "100%", height:"80vh", padding:"2%"}}> 
+              <Box sx={{ display:"flex",flexWrap: "wrap", backgroundColor:"white", width: "100%", height:"95vh", padding:"2%"}}> 
                   
                   <Box sx={{width:"40%", height:"100%",justifyContent:"center", alignItems:"center"}}>
                       <Box  sx={{flexDirection:"column", justifyContent:"center", alignItems:"center", width:"70%", height:"15%", marginLeft:"15%", cursor:"pointer", borderRadius:"10px",boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
