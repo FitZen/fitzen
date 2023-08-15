@@ -13,6 +13,7 @@ import axios from 'axios';
 const MealPlan = () => {
 
   const color2 = "#346E93" //light blue
+  const color4 = "#DC1E2A" //red 
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -24,6 +25,27 @@ const MealPlan = () => {
   const [selectedMealPlan, setSelectedMealPlan] = useState(null);
   //to selected display meal plan details
   const [selectedMealPlanDetails, setSelectedMealPlanDetails] = useState(null);
+  //to add new meal plan
+  const [newMealPlan, setNewMealPlan] = useState({
+    name: "",
+    breakfast: "",
+    lunch: "",
+    dinner: "",
+    pre_workout: "",
+    post_workout: "",
+    note: ""
+  })
+
+  const [submitted, setSubmitted] = useState(false);
+
+  //get form inputs
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewMealPlan((prevMealPlan) => ({
+      ...prevMealPlan,
+      [name]: value,
+    }));
+  };
 
   const modalStyle = {
     position: 'absolute',
@@ -83,6 +105,44 @@ const MealPlan = () => {
       setSelectedMealPlanDetails(response.data.data);
     } catch (error) {
       console.error("Error retrieving meal plan details:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  const handleSubmit = async () => {
+
+    if (!newMealPlan.name || !newMealPlan.breakfast || !newMealPlan.lunch || !newMealPlan.dinner || !newMealPlan.pre_workout || !newMealPlan.post_workout || !newMealPlan.note) {
+      // Display error messages or styles for empty fields
+      setSubmitted(true);
+      return;
+    }  
+
+    try {
+      const payload = {
+        name: newMealPlan.name,
+        breakfast: newMealPlan.breakfast,
+        lunch: newMealPlan.lunch,
+        dinner: newMealPlan.dinner,
+        pre_workout: newMealPlan.pre_workout,
+        post_workout: newMealPlan.post_workout,
+        note: newMealPlan.note,
+        userID: JSON.parse(localStorage.getItem('userID')),
+      };
+      console.log("from fe: ", payload)
+
+      const res = await axios.post(
+        "http://localhost:8000/api/mealplans//addmealplan",
+        payload
+      );
+  
+      if (res.status === 201) {
+        handleClose(); // Close the modal
+        viewMealPlans(); // Refresh the announcement list
+        setNewMealPlan({ name: "", breakfast: "", lunch: "", dinner: "", pre_workout: "", post_workout: "", note: "" }); // Clear the form
+        setSubmitted(false);
+      }
+    } catch (error) {
+      console.error("Adding mealPlan failed:", error);
       // Handle error scenarios here
     }
   };
@@ -155,10 +215,15 @@ const MealPlan = () => {
                 
             <Box sx={{ width: "40%", height: "100%", borderRadius: "10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', justifyContent: "center", alignItems: "center", padding: "2%", marginRight: "25px", overflowY: "scroll" }}>
               {mealPlanName.map((mealPlan) => (
-                <Box key={mealPlan.id} onClick={() => setSelectedMealPlan(mealPlan)} sx={{ flexDirection: "column", justifyContent: "center", alignItems: "center", position: "relative", width: "80%", height: "10%", marginLeft: "10%",marginBottom:"5%", cursor: "pointer", borderRadius: "10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', border: '2px solid white', '&:hover': { boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s" } }}>
-                  <Typography variant="h6" style={{ fontWeight: 600, textAlign: "center", marginTop: "0.7rem", marginRight: "5rem" }}>{mealPlan.name}</Typography>
-                  <DeleteIcon sx={{ position: "absolute", top: "50%", right: "5px", transform: "translateY(-50%)", color: "white", backgroundColor: 'black', borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px" }} />
-                  <EditIcon sx={{ position: "absolute", top: "50%", right: "45px", transform: "translateY(-50%)", color: "white", backgroundColor: 'black', borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px" }} />
+                <Box  key={mealPlan.id} onClick={() => setSelectedMealPlan(mealPlan)} sx={{display:"flex",padding:"0 2%", justifyContent: "space-between", alignItems: "center", width: "80%", height: "10%", marginLeft: "10%",marginBottom:"5%", cursor: "pointer", borderRadius: "10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', border: '2px solid white', '&:hover': { boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s" } }}>
+                  <Typography variant="h6" style={{ fontWeight: 600, textAlign: "left", marginRight: "2rem" }}>{mealPlan.name}</Typography>
+                  <Box sx={{display:"flex"}}>
+                    <EditIcon sx={{ color: "black", borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px", marginRight:"5%", '&:hover': {backgroundColor:color2, color:"white",transition: "ease 0.5s" } }} />
+                    <DeleteIcon sx={{ color: "black", borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px", '&:hover': {backgroundColor:color4, color:"white",transition: "ease 0.5s" }  }} />
+
+                  </Box>
+                 
+                  
                 </Box>
               ))}
             </Box>
@@ -301,21 +366,21 @@ const MealPlan = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Meal Plan Name:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="name" value={newMealPlan.name} onChange={handleInputChange} error={submitted && !newMealPlan.name} helperText={submitted && !newMealPlan.name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Breakfast:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="breakfast" value={newMealPlan.breakfast} onChange={handleInputChange} error={submitted && !newMealPlan.breakfast} helperText={submitted && !newMealPlan.breakfast ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Lunch:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="lunch" value={newMealPlan.lunch} onChange={handleInputChange} error={submitted && !newMealPlan.lunch} helperText={submitted && !newMealPlan.lunch ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Pre Workout:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="pre_workout" value={newMealPlan.pre_workout} onChange={handleInputChange} error={submitted && !newMealPlan.pre_workout} helperText={submitted && !newMealPlan.pre_workout ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Dinner:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="dinner" value={newMealPlan.dinner} onChange={handleInputChange} error={submitted && !newMealPlan.dinner} helperText={submitted && !newMealPlan.dinner ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Post Workout:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="post_workout" value={newMealPlan.post_workout} onChange={handleInputChange} error={submitted && !newMealPlan.post_workout} helperText={submitted && !newMealPlan.post_workout ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Note:</InputLabel>
-                            <TextField variant="outlined" inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="note" value={newMealPlan.note} onChange={handleInputChange} error={submitted && !newMealPlan.note} helperText={submitted && !newMealPlan.note ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
-                              <Button variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Meal Plan</Button>
+                              <Button variant="contained" onClick={handleSubmit} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Meal Plan</Button>
                             </Box>
                             
                            
