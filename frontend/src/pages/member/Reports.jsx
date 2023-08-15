@@ -58,8 +58,8 @@ const Reports = () => {
         datasets: [{
           label: 'Sales',
           data: [5, 2, 3, 1, 4, 2, 3,1,2,0,1,1,2,1,3,0,4,1,2,5,4,3,1,2,0,1,2,3,0,0,1],
-          backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
-          borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+          backgroundColor: [`${color2}`],
+          borderColor: [`${color2}`],
           borderWidth: 1
         }]
       };
@@ -199,7 +199,7 @@ const Reports = () => {
             </FormControl>
              <br />
                 
-                <Button variant="contained" style={{marginTop:"38rem"}}>Contained</Button>
+                <Button variant="contained" style={{marginTop:"36rem", backgroundColor:color2}}>Download</Button>
             </Box>
           </Box>
         </Box>
