@@ -55,7 +55,7 @@ const Progress = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <Sidebar />
+        <Sidebar sidebarLinkId = "4"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>

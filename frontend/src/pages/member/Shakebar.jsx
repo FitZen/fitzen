@@ -132,7 +132,7 @@ const Shakebar = () => {
     <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
       {/* Sidebar */}
       <Box>
-        <Sidebar />
+        <Sidebar sidebarLinkId = "5"/>
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
@@ -239,12 +239,13 @@ const Shakebar = () => {
                     <Box>
                       <img src={item1} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                     </Box>
-                    <Box sx={{marginTop:"15%"}}>
+                    <Box sx={{marginTop:"10%"}}>
                       <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> Rs 2300</Typography><br />
                       <Typography variant="body1" textAlign="left">
                         <span style={{fontWeight:"600"}}>Description:</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       </Typography><br />
-                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Ingredients: </span> Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Ingredients: </span> Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography><br />
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> In Stock.</Typography>
                     </Box>
                   </Box>
                   
