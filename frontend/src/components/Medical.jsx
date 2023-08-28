@@ -82,16 +82,17 @@ export default function SignUpMedicalSide() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectFit: 'cover',
+            height:"100vh"
           }}
         />
-        <Grid item xs={12} sm={12} md={6} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={12} md={6} component={Paper} elevation={6} square sx={{height:"100vh"}}>
           <Box
             sx={{
-              my: 1,
-              mx: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              overflowY: "auto",
+              height:"100vh"
             }}
           >
             
