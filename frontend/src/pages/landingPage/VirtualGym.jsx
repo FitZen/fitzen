@@ -45,10 +45,11 @@ function VirtualGym() {
           <motion.img
             src={images[currentImage]}
             alt="Virtual Gym"
-            style={{ width: "90%", height: "80%", marginTop: "2rem" }}
+            style={{ width: "90%", height: "80%", marginTop: "2rem", cursor: "pointer" }}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 2 }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
           />
         </Box>
       </Box>
