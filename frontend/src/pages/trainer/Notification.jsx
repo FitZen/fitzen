@@ -61,47 +61,11 @@ const TrainerNotification = () => {
         // Handle error scenarios here
       }
     };
-  
-  
-    const notifications = [
-      {
-        id: 1,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-      {
-        id: 2,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-      {
-        id: 3,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-      {
-        id: 4,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-      {
-        id: 5,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-      {
-        id: 6,
-        title: "Your Payments",
-        description: "You have to pay this amount of money on or before 28th of August. Please consider this and pay the fees.",
-      },
-    ]
-  
-  
-  
+    
     return (
       <Box sx={{ flex: "1", display:"flex", mb:2}}>
         <Box>
-          <Sidebar />
+          <Sidebar sidebarLinkId = "1"/>
         </Box>
         
         <Box component="main" sx={{flex:1 }}>
