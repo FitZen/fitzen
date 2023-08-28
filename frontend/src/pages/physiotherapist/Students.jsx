@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Sidebar from "../../components/PhysiotherapistSidebar";
-import Navbar from "../../components/PhysiotherapistNavbar";
-import Rating from '@mui/material/Rating';
+import Sidebar from "../../components/TrainerSidebar";
+import Navbar from "../../components/TrainerNavbar";
+import {useEffect, useState} from 'react';
 import {Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 
 import item1 from "../../assets/Members/7.jpg"
@@ -19,13 +19,31 @@ import item11 from "../../assets/Members/9.jpg"
 import item12 from "../../assets/Members/10.jpg"
 import item13 from "../../assets/Members/photo-1633332755192-727a05c4013d.jpg"
 import {Link} from "react-router-dom";
-import PhysiotherapistDashboard from "./Dashboard";
-import PhysiotherapistSchedule from "./Schedule";
 
 
-const PhysiotherapistStudents = () => {
+const Students = () => {
 
     const [item, setItem] = React.useState('');
+    const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
     const handleChange = (event) => {
         setItem(event.target.value);
@@ -40,13 +58,16 @@ const PhysiotherapistStudents = () => {
             </Box>
 
             <Box component="main" sx={{flex:1 }}>
-                <Box>
+                <div
+                    className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+                    style={{ width: "100%" }}
+                >
                     <Navbar />
-                </Box>
+                </div>
 
                 <Box sx={{ paddingLeft:"5rem", flex:1 }}>
 
-                    <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Students</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Students</Typography>
 
                     <Box sx={{display:"flex", marginTop:"1rem"}}>
                         <FormControl style={{width:"15%"}}>
@@ -71,81 +92,94 @@ const PhysiotherapistStudents = () => {
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item13} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Virtual</Typography>
+                                <br/><br />
                                 <Link to="/physiotherapist/studenthistory" style={{textDecoration:"none", color:"black"}}>
-                                    <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                                 </Link>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item2} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Anne Fernando</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Virtual</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item3} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item4} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item5} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                               <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item6} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item7} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item8} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item9} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                               <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item10} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item11} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                               <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <img src={item12} alt="item"  style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
-                                <br />
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View More</Button>
+                                <Typography variant="h6" style={{fontSize:"16px",fontWeight: 500}}>Type : Physical</Typography>
+                                <br/><br />
+                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Progress</Button>
                             </Box>
 
 
@@ -167,4 +201,4 @@ const PhysiotherapistStudents = () => {
     );
 };
 
-export default PhysiotherapistStudents;
+export default Students;

@@ -108,7 +108,7 @@ const PhysiotherapistDashboard = () => {
 					<Navbar />
 				</div>
                 <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-                    <Typography variant="h3" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
                     <Box sx={{ display:"flex", width: "100%", height:"100%"}}>
 
                         <Box>
