@@ -129,73 +129,12 @@ const Announcement = () => {
     }
   };
 
-
-
-  const Announcements = [
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    
-  ];
-
   return (
 
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <AdminSidebar />
+        <AdminSidebar sidebarLinkId = "6"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>

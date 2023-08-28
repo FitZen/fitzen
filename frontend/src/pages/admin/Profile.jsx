@@ -38,7 +38,7 @@ const Profile = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <AdminSidebar />
+        <AdminSidebar sidebarLinkId = "1"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
@@ -57,7 +57,7 @@ const Profile = () => {
             </Box>
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", marginLeft:"0%", justifyContent:"center"}}>
                 
-                <Link to="/member/editprofile" style={{textDecoration:"none", color:"black"}}>
+                <Link to="" style={{textDecoration:"none", color:"black"}}>
                   <Box style={{display:"flex"}}>
                     <Typography variant="h5" style={{ fontWeight: 700, textAlign:"left", marginLeft:"-5rem" }}><PiMedalFill style={{marginTop: "1rem"}}/>  Personal Information</Typography>
                     <FaUserEdit size={20} style={{marginTop:"3.5%", marginLeft:"40%", marginRight:"1%"}}/>

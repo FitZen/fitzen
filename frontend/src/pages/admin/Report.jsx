@@ -38,7 +38,7 @@ const Report = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <AdminSidebar />
+        <AdminSidebar sidebarLinkId = "8"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
