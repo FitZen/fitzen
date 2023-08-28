@@ -57,6 +57,7 @@ const Reports = () => {
     const lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
     const days = [];
 
+
     for (let i = firstDayofMonth; i > 0; i--) {
       days.push(
         <li key={`prev-${i}`} className="inactive">
@@ -133,11 +134,14 @@ const Reports = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <ShakebarmanagerNavbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" ,marginBottom:'1rem'}}>Reports</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" ,marginBottom:'1rem'}}>Reports</Typography>
 
           <Tabs value={selectedTab} onChange={handleTabChange} aria-label="Report Tabs" style={{marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', width:"32%"}}>
             <Tab label="Income" />

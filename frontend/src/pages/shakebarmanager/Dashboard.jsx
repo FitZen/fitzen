@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend,  DoughnutController, ArcElement } from 'chart.js';
@@ -14,6 +14,27 @@ const color2 = "#346E93" //light blue
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
 const Dashboard = () => {
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const data = {
     labels: ['Whey Isolate', 'Calcium', 'Nytrowhey', 'Whey Protine', 'Gold Whey', 'Nytro Tech'],
@@ -65,11 +86,14 @@ const Dashboard = () => {
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <ShakebarmanagerNavbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Dashboard</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
           <Box sx={{ display:"flex", width: "100%", height:"100%",marginTop:"2rem"}}> 
 
           <Box sx={{ width: "40%", height: "50%", padding: "20px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "0.5rem" }}>

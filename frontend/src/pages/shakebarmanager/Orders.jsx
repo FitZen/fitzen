@@ -130,11 +130,14 @@ const Orders = () => {
         </Box>
         
         <Box component="main" sx={{flex:1 }}>
-          <Box>
-            <ShakebarmanagerNavbar />
-          </Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
+          <ShakebarmanagerNavbar />
+        </div>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem",marginBottom:'3rem', textAlign:"left" }}>Orders</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem",marginBottom:'3rem', textAlign:"left" }}>Orders</Typography>
               
      
         <div>

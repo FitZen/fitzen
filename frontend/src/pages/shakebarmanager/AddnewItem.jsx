@@ -1,8 +1,7 @@
-import  { useState } from 'react';
+import  React, { useState, useEffect } from 'react';
 import Box from "@mui/material/Box";
 import {Typography,Grid,Paper,Button} from '@mui/material';
 import Addnew from '../../assets/Shakebarmanager/addnew.png';
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
@@ -21,6 +20,27 @@ const Item = styled(Paper)(({ theme }) => ({
 const AddnewItem = () => {
   
   const navigate = useNavigate();
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   const clickCancle=()=>{
     navigate('/shakebarmanager/items'); 
@@ -33,11 +53,14 @@ const AddnewItem = () => {
         </Box>
         
         <Box component="main" sx={{flex:1 }}>
-          <Box>
-            <ShakebarmanagerNavbar />
-          </Box>
+        <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
+          <ShakebarmanagerNavbar />
+        </div>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left",marginBottom:"2rem"}}>Items</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left",marginBottom:"2rem"}}>Items</Typography>
             
           <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>

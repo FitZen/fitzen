@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from "@mui/material/Box";
 import { Typography,Grid,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Modal, IconButton } from '@mui/material';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
@@ -23,6 +23,28 @@ const Items = () => {
 
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setFixedNavbar(true);
+      } else {
+        setFixedNavbar(false);
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   const color1 = "#102B4C" //dark blue
   const color2 = "#346E93" //light blue
@@ -57,11 +79,14 @@ const Items = () => {
       </Box>
 
       <Box component="main" sx={{ flex: 1 }}>
-        <Box>
+      <div
+          className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+          style={{ width: "100%" }}
+        >
           <ShakebarmanagerNavbar />
-        </Box>
+        </div>
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "1rem", textAlign: "left" }}>Items</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Items</Typography>
 
           <Button variant="contained"  size="small" style={{ marginLeft: '65rem',marginTop:'-5rem',backgroundColor:"#346E93"  }} onClick={handleAddNewItemClick}>Add New</Button>
 
