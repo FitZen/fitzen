@@ -16,7 +16,7 @@ const PhysiotherapistProfile = () => {
 
         <Box sx={{ flex: "1", display:"flex", mb:2}}>
             <Box>
-                <Sidebar />
+                <Sidebar sidebarLinkId = "1"/>
             </Box>
 
             <Box component="main" sx={{flex:1 }}>

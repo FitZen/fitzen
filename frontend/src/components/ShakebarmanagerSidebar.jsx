@@ -149,7 +149,7 @@ const activeLinkStyle = {
 };
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [activePage, setActivePage] = useState();
@@ -188,7 +188,8 @@ export default function Sidebar() {
             <List>
               <Link to="/shakebarmanager/dashboard" style={{textDecoration:"none"}}> 
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Dashboard')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "1" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaTachometerAlt />
                     </ListItemIconStyled>
@@ -199,7 +200,8 @@ export default function Sidebar() {
 
               <Link to="/shakebarmanager/items" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Items')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Items' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Items' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "2" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaCocktail />
                     </ListItemIconStyled>
@@ -210,7 +212,8 @@ export default function Sidebar() {
 
               <Link to="/shakebarmanager/orders" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Orders')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Orders' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Orders' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "3" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaShoppingCart />
                     </ListItemIconStyled>
@@ -221,7 +224,8 @@ export default function Sidebar() {
 
               <Link to="/shakebarmanager/reports" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
-                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
+                {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}> */}
+                <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "4" ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaClipboardList />
                   </ListItemIconStyled>

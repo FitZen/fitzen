@@ -97,7 +97,7 @@ const PhysiotherapistDashboard = () => {
     return (
         <Box sx={{ flex: "1", display:"flex", mb:2}}>
             <Box>
-                <Sidebar />
+                <Sidebar sidebarLinkId = "1"/>
             </Box>
 
             <Box component="main" sx={{flex:1 }}>
@@ -108,7 +108,7 @@ const PhysiotherapistDashboard = () => {
 					<Navbar />
 				</div>
                 <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-                    <Typography variant="h3" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Dashboard</Typography>
                     <Box sx={{ display:"flex", width: "100%", height:"100%"}}>
 
                         <Box>
@@ -144,7 +144,7 @@ const PhysiotherapistDashboard = () => {
                         </Link>
                         <Box sx={{width:"35%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", marginLeft:"25%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                             <img src={Icon3} alt="Icon3" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
-                            <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>12 Students</Typography>
+                            <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>12 Trainees</Typography>
                         </Box>
                     </Box>
 

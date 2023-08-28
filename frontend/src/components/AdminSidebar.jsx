@@ -152,7 +152,7 @@ const footerIcons = {
 
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [activePage, setActivePage] = useState('Dashboard');
@@ -192,7 +192,8 @@ export default function Sidebar() {
             <List>
               <Link to="/admin/dashboard" style={{textDecoration:"none"}}onClick={() => handleMenuItemClick('Dashboard')}> 
                 <ListItem disablePadding sx={{ display: 'block' }} >
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Dashboard' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "1" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaTachometerAlt />
                     </ListItemIconStyled>
@@ -203,7 +204,8 @@ export default function Sidebar() {
 
               <Link to="/admin/members" style={{textDecoration:"none"}} onClick={() => handleMenuItemClick('Members')}>
                 <ListItem disablePadding sx={{ display: 'block' }} >
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Members' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Members' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "2" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaUsers />
                     </ListItemIconStyled>
@@ -214,7 +216,8 @@ export default function Sidebar() {
               
               <Link to="/admin/instructors" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Instructors')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Instructors' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "3" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaUserFriends />
                     </ListItemIconStyled>
@@ -225,7 +228,8 @@ export default function Sidebar() {
 
               <Link to="/admin/employees" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Employee')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Employee' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Employee' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "4" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaUserEdit/>
                     </ListItemIconStyled>
@@ -236,7 +240,8 @@ export default function Sidebar() {
 
               <Link to="/admin/shakebar" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Shakebar')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Shakebar' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "5" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaCocktail />
                     </ListItemIconStyled>
@@ -247,7 +252,8 @@ export default function Sidebar() {
 
               <Link to="/admin/announcement" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Announcement')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Announcement' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Announcement' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "6" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaBullhorn />
                     </ListItemIconStyled>
@@ -258,7 +264,8 @@ export default function Sidebar() {
 
               <Link to="/admin/complaint" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Complaints')}>
-                  <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Complaints' ? activeLinkStyle : {}}>
+                  {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Complaints' ? activeLinkStyle : {}}> */}
+                  <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "7" ? activeLinkStyle : {}}>
                     <ListItemIconStyled open={open}>
                       <FaBookmark />
                     </ListItemIconStyled>
@@ -269,7 +276,8 @@ export default function Sidebar() {
 
               <Link to="/admin/report" style={{textDecoration:"none"}}>
                 <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleMenuItemClick('Reports')}>
-                <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}>
+                {/* <ListItemButtonStyled theme={theme} open={open} style={activePage === 'Reports' ? activeLinkStyle : {}}> */}
+                <ListItemButtonStyled theme={theme} open={open} style={props.sidebarLinkId === "8" ? activeLinkStyle : {}}>
                   <ListItemIconStyled open={open}>
                     <FaBookOpen />
                   </ListItemIconStyled>
