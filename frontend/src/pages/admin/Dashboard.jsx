@@ -51,8 +51,8 @@ const Dashboard = () => {
     datasets: [{
       label: 'Sales',
       data: [50, 90, 150, 200, 260, 300, 400, 500],
-      backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
-      borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+      backgroundColor: [`${color2}`],
+      borderColor: [`${color2}`],
       borderWidth: 1
     }]
   };

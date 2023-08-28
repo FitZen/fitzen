@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import Typewriter from "typewriter-effect";
 import { styled } from "@mui/system";
 import React from "react";
 import CustomButton from "./CustomButton";
@@ -33,19 +34,18 @@ const Hero = () => {
   const CustomContentBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
-    width: "68%",
+    width: "80%",
     gap: theme.spacing(5),
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(4),
     
     position: "relative",
     zIndex: 1, // Ensure the content appears above the background image
-    maxWidth: "800px", // Limit the width on larger screens
-    textAlign: "left", // Align the content to the left
-    marginLeft: "-15%", // Add a negative margin-left to shift it to the left
-    padding: theme.spacing(0, 2), // Add horizontal padding for smaller screens
+    maxWidth: "900px", // Limit the width on larger screens
+    textAlign: "left", // Align the content to the left 
+    padding: theme.spacing(6, 2), // Add horizontal padding for smaller screens
     [theme.breakpoints.down("md")]: {
-      marginLeft: "30%", // Center the content box on smaller screens
-      padding: 0, // Remove padding on smaller screens
+      marginLeft: "50%", // Center the content box on smaller screens
+      width: "90%",
     },
     [theme.breakpoints.down("sm")]: {
       marginLeft: "5%"
@@ -54,19 +54,22 @@ const Hero = () => {
       marginLeft: "50%"
     },
     [theme.breakpoints.down("xl")]: {
-      marginLeft: "16%"
+      marginLeft: "-15%"
     }
     
     
   }));
 
   const Title = styled(Typography)(({ theme }) => ({
-    fontSize: "64px",
+    fontSize: "3.5rem",
     color: color2,
     fontWeight: "bold",
     margin: theme.spacing(10, 0, 4, 0),
     [theme.breakpoints.down("sm")]: {
-      fontSize: "48px",
+      fontSize: "2rem",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "3rem",
     },
   }));
 
@@ -77,8 +80,20 @@ const Hero = () => {
         <Container id="home">
           <CustomContentBox>
             <Box sx={{ flex: "1", mt: 12, ml:9 }}>
-              <Title variant="h1" style={{fontSize:"4rem"}}>
-                Get the best virtual gym experience with us
+              <Title variant="h1">
+                Get the best physical & virtual
+                <Typewriter 
+                  options={{ 
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    strings: [
+                      "gym experience with us",
+                    ],
+                  }}
+
+                />
+                
               </Title>
               <Typography
                 variant="body1" // Changed from "body" to "body1" to use Material-UI typography variants
@@ -91,7 +106,7 @@ const Hero = () => {
                 }}
               >
                 Get the superior Gym experience with us. We provide the best
-                virtual gym experience with the best trainers in the country.
+                physical & virtual gym experience with the best trainers in the country.
               </Typography>
               <CustomButton 
                   backgroundColor="red" 

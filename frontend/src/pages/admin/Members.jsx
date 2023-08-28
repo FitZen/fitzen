@@ -150,6 +150,7 @@ const Members = () => {
                     </Box>
                     
                 </Grid>    
+                <Button variant="contained" sx={{backgroundColor: color4, width:"25%", height:"10%", marginLeft:"2%", '&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaAddressCard />&nbsp; Trainer Changing Requests</Button>
  
             </Box>  
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 

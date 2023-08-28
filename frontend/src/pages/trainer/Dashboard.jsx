@@ -135,19 +135,19 @@ const TrainerDashboard = () => {
 
 
 					<Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem"}}>
-						<Link to="/trainer/NewRequests" style={{textDecoration:"none", color:"#000000", mr:50}}>
-							<Box sx={{width:"90%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:26, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
+						<Link to="/trainer/NewRequests" style={{textDecoration:"none", color:"#000000"}}>
+							<Box sx={{width:"98%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:9, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
 							<img src={Icon1} alt="Icon1" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
-							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>2 New Student Requests</Typography>
+							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"10%"}}>2 New Student Requests</Typography>
 						</Box>
 						</Link>
-						<Box sx={{width:"36%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px",  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+						<Box sx={{width:"30%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", ml:4,  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 							<img src={Icon3} alt="Icon3" style={{textAlign:"left", marginLeft:"5", marginTop:"5%"}}/>
-							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>30 Physical Students</Typography>
+							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"0%"}}>30 Physical Students</Typography>
 						</Box>
-						<Box sx={{width:"36%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+						<Box sx={{width:"29%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px" , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 							<img src={Icon2} alt="Icon2" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}}/>
-							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"35%"}}>15 Virtual Students</Typography>
+							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"0%"}}>15 Virtual Students</Typography>
 						</Box>
 					</Box>
 

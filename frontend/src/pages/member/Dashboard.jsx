@@ -54,8 +54,8 @@ const Dashboard = () => {
     datasets: [{
       label: 'Sales',
       data: [5, 2, 3, 1, 4, 2, 3],
-      backgroundColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
-      borderColor: [`${color1}`, `${color3}`, `${color4}`, `${color2}`, `${color1}`, `${color3}`, `${color4}`],
+      backgroundColor: [`${color2}`],
+      borderColor: [`${color2}`],
       borderWidth: 1
     }]
   };
@@ -102,7 +102,7 @@ const Dashboard = () => {
   return (
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <Sidebar />
+        <Sidebar sidebarLinkId = "1"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>

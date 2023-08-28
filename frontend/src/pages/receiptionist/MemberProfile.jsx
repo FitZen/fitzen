@@ -4,21 +4,21 @@ import { Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill} from 'react-icons/pi';
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/ReceiptionistSidebar";
+import Navbar from "../../components/ReceiptionistNavbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+const MemberProfile = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
 
-    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+    if((localStorage.getItem('userType') !== '"Receptionist"')){
       navigate('/login');
     }
     // Function to handle scroll event
@@ -44,7 +44,7 @@ const Profile = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <Sidebar sidebarLinkId = "1"/>
+        <Sidebar />
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
@@ -122,4 +122,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MemberProfile;

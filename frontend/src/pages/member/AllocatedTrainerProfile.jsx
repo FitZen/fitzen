@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, InputLabel, TextField } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import ProfileImg from '../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg';
 import {PiMedalFill} from 'react-icons/pi';
@@ -22,7 +22,12 @@ const AllocatedInstructorProfile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [openSecond, setOpenSecond] = React.useState(false); //for second modal [request for change trainer
+    const handleSecondOpen = () => setOpenSecond(true);
+    const handleSecondClose = () => setOpenSecond(false);
+
     const color2 = "#346E93" //light blue
+    const color4 = "#DC1E2A" //red 
 
     const navigate = useNavigate();
 
@@ -63,12 +68,27 @@ const AllocatedInstructorProfile = () => {
     p: 3,
   };
 
+  const modalStyleSecond = {
+    position: 'absolute',
+    justifyContent: 'center',
+    textAlign: 'center',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 3,
+  };
+  
+
   return (
 
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
         <Box>
-            <Sidebar />
+            <Sidebar sidebarLinkId = "1"/>
         </Box>
       
         <Box component="main" sx={{flex:1 }}>
@@ -87,15 +107,22 @@ const AllocatedInstructorProfile = () => {
                             <img src={ProfileImg} alt="profile img" style={{width:"80%", borderRadius:"5px", objectFit:"cover"}} />
                         </Box>
                         <Box sx={{display:"flex", width:"50%"}}>
-                            <Box sx={{display:"flex", flexDirection:"column", backgroundColor:"#000000", width:"0.2rem", borderRadius:"5px", marginRight:"15%"}}></Box>
+                            <Box sx={{display:"flex", flexDirection:"column", backgroundColor:"#000000", width:"0.2rem", borderRadius:"5px", marginRight:"7%"}}></Box>
                             <Box>
                                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1%", marginLeft: "1rem", marginBottom:"2rem" }}> Dhanush Perera</Typography>
-                                <Box sx={{width:"400px", height:"auto", textAlign:"center", justifyContent:"center", borderRadius:"10px", marginLeft:"5%", padding:"7%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', }}>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Country: Sri Lanka</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Languages: Sinahala/English</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mod: Onsite/Online</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Packages: Usual Packages</Typography>
+                                <Box sx={{display:"flex"}}>
+                                    <Box sx={{width:"400px", height:"auto", textAlign:"center", justifyContent:"center", borderRadius:"10px", marginLeft:"3%", padding:"7%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', }}>
+                                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Country: Sri Lanka</Typography>
+                                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Languages: Sinahala/English</Typography>
+                                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mod: Onsite/Online</Typography>
+                                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Packages: Usual Packages</Typography>
+                                    </Box>
+                                    <Box>
+                                        <Button variant="contained" onClick={handleSecondOpen} style={{backgroundColor: color4, color:"#ffffff", width:"300px", height:"15%", marginTop:"1%", marginLeft:"10%"}}> Request for change trainer</Button>
+                                    </Box>
+                                    
                                 </Box>
+                                
                             </Box>
                         </Box>
                         <Button variant="contained" style={{backgroundColor:"#000000", color:"#ffffff", width:"10%", height:"10%", marginTop:"1%", marginLeft:"5%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp;  Chat</Button>
@@ -130,6 +157,43 @@ const AllocatedInstructorProfile = () => {
             
             </Box>
         </Box>
+
+        <Modal
+                    open={openSecond}
+                    onClose={handleSecondClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={modalStyleSecond}>
+                        <FaRegTimesCircle onClick={handleSecondClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                            onMouseEnter={(e) => {
+                                e.target.style.color = "#D71313";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.color = "#D8D9DA";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                        />
+                        <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                            
+                        </Box>
+                        
+                        <Box sx={{textAlign:"center", padding:"1%"}}>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Title:</InputLabel>
+                            <TextField variant="outlined" name="title"  inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Description:</InputLabel>
+                            <TextField variant="outlined" name="content"  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+                            
+                            <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
+                              <Button onClick={handleSecondClose} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Send</Button>
+                            </Box>
+                            
+                           
+                        </Box>
+                        
+                    </Box>
+                </Modal>
 
         <Modal
                     open={open}

@@ -207,7 +207,7 @@ export default function Sidebar() {
 									<ListItemIconStyled open={open}>
 										<FaUsers />
 									</ListItemIconStyled>
-									{open && <SidebarLink variant="subtitle1" component="span">Students</SidebarLink>}
+									{open && <SidebarLink variant="subtitle1" component="span">Trainees</SidebarLink>}
 								</ListItemButtonStyled>
 							</ListItem>
 						</Link>

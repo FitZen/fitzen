@@ -297,7 +297,7 @@ const ReceptionView = () => {
                             <TextField variant="outlined" name="contact_no" value={newReception.contact_no} onChange={handleInputChange} error={submitted && !newReception.contact_no} helperText={submitted && !newReception.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
-                              <Button onClick={handleSubmit} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Announcement</Button>
+                              <Button onClick={handleSubmit} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Receptionist</Button>
                             </Box>
                             
                            

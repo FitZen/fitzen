@@ -110,8 +110,8 @@ const Members= () => {
                                 <img src={item13} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
                                 <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>Tharindu Gunawardhane</Typography>
                                 <br/><Button variant="contained" style={{backgroundColor:"#96CDEF",borderColor:"black", color:"black", fontWeight:"700",marginBottom:'10px'}}>Payment</Button>
-                                <Link  style={{textDecoration:"none", color:"black"}}>
-                                <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
+                                <Link to="/receiptionist/memberprofile" style={{textDecoration:"none", color:"black"}}>
+                                    <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                 </Link>
                             </Box>
                             <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>

@@ -187,10 +187,15 @@ const Complaints = () => {
                                   </TableCell>
                       
                                   <TableCell align="left">
-                                      <Box style={{display:"flex" }}>
+                                      <Box style={{display:"flex", marginLeft:"30%" }}>
                                           <Button variant="outlined" onClick={handleOpen}  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
-                                          <Button variant="outlined"sx={{color:color4, border:"1px solid #DC1E2A"}}>Delete</Button>
-                                          
+                                          {(value === 1) ? (
+                                            <Button variant="outlined" sx={{ color: color1, border: "1px solid #102B4C" }}>
+                                              Handle
+                                            </Button>
+                                          ) : (
+                                            null
+                                          )} 
                                       </Box>
                                   </TableCell>
                               </TableRow>
