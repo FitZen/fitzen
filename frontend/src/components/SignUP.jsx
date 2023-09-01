@@ -80,16 +80,18 @@ export default function SignUpSide() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectFit: 'cover',
+            height: '100vh',
           }}
         />
-        <Grid item xs={12} sm={12} md={6} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={12} md={6} component={Paper} elevation={6} square sx={{ heightL:"100vh"}}>
           <Box
             sx={{
-              my: 1,
-              mx: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              overflowY: 'auto',
+              flexWrap: 'wrep',
+              height: '100vh',
             }}
           >
             
@@ -142,13 +144,13 @@ export default function SignUpSide() {
                 </Box>
                 <Box>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Contact No:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Address:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>NIC:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Email:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:625,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Box>
                 <Box sx={{display:"flex", width:"100%", justifyContent:"space-between"}}>
                     <Box sx={{marginRight:"2%"}}>

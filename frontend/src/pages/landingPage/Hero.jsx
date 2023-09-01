@@ -1,21 +1,45 @@
 import { Box, Container, Typography } from "@mui/material";
 import Typewriter from "typewriter-effect";
 import { styled } from "@mui/system";
-import React from "react";
+import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
 import CustomButton from "./CustomButton";
 
 // Import the background image
-import firstImg from "../../assets/karsten-winegeart-0Wra5YYVQJE-unsplash.jpg";
+import Img1 from "../../assets/Homepage/home1.jpg";
+import Img2 from "../../assets/Homepage/home2.jpg";
+import Img3 from "../../assets/Homepage/home3.jpg";
+import Img4 from "../../assets/Homepage/home4.jpg";
+import Img5 from "../../assets/Homepage/home5.jpg";
+import Img6 from "../../assets/Homepage/home6.jpg";
+
+const images = [Img1, Img2, Img3, Img4, Img5, Img6];
 
 const color1 = "#000000"; // Black
 const color2 = "#FFFFFF"; // White
 const color3 = "#FF0000"; // Red
 
 const Hero = () => {
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        setIsTransitioning(false);
+      }, 5000); // Transition duration is 0.5 seconds
+    }, 5000); // 3 seconds interval
+
+    return () => clearInterval(timer);
+  }, []);
+
   const CustomBackgroundBox = styled(Box)(({ theme }) => ({
     position: "relative",
     minHeight: "100vh",
-    backgroundImage: `url(${firstImg})`,
+    backgroundImage: `url(${images[currentImage]})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -29,6 +53,7 @@ const Hero = () => {
       height: "100%",
       backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust the opacity here (0.5 means 50% darkness)
     },
+    transition: "background-image 0.5s ease",
   }));
 
   const CustomContentBox = styled(Box)(({ theme }) => ({
@@ -78,6 +103,7 @@ const Hero = () => {
       {/* <Navbar /> Navbar is now at the top of the page */}
       <CustomBackgroundBox>
         <Container id="home">
+          
           <CustomContentBox>
             <Box sx={{ flex: "1", mt: 12, ml:9 }}>
               <Title variant="h1">
