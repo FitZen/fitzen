@@ -39,7 +39,7 @@ const InstructorList = () => {
     if(instructorType === "Trainer"){
         viewTrainerList();
     }
-    else{
+    else if(instructorType === "Physiotherapist"){
         viewPhysiotherapistList();
     }
         
@@ -80,8 +80,7 @@ const InstructorList = () => {
   const viewPhysiotherapistList = async () => {
     
     try {
-     
-      const res = await axios.get("http://localhost:8000/api/members/member/virtual");
+      const res = await axios.get("http://localhost:8000/api/physiotherapists/viewphysiotherapists");
       console.log(res.data.data);
       setInstructorData(res.data.data);
 
@@ -124,6 +123,7 @@ const InstructorList = () => {
                               <TableCell align="left" sx={{fontWeight:"600"}}>Email</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Contact No</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Added On</TableCell>
+                              {instructorType === "Trainer" ? <TableCell align="left" sx={{fontWeight:"600"}}>Training Mode</TableCell> : null}
                           </TableRow>
                       </TableHead>
                       <TableBody>
@@ -147,6 +147,9 @@ const InstructorList = () => {
                                   <TableCell align="left">
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleDateString()}</Typography>
                                   </TableCell>  
+                                  {instructorType === "Trainer" ? <TableCell align="left" sx={{fontWeight:"600"}}>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.mode}</Typography>
+                                  </TableCell> : null}
                               </TableRow>
                           ))}
                       </TableBody>
