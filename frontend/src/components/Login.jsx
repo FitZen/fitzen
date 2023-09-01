@@ -14,10 +14,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from '../assets/logo.png';
-import BGImg from '../assets/Trainers/valery-sysoev-LDAirERNzew-unsplash.jpg';
+import BGImg from '../assets/Trainers/Login_img.jpg';
 import axios from 'axios';
 
 const defaultTheme = createTheme();
+const color1 = "#102B4C" //dark blue
 
 export default function SignInSide() {
 
@@ -111,14 +112,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={{ display: "none" }}
-          md={7}
-          sx={{
+      <Grid container component="main" sx={{
             backgroundImage: `url(${BGImg})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
@@ -126,17 +120,36 @@ export default function SignInSide() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectFit: 'cover',
-          }}
-        />
-        <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
-          <Box
+            height: '100vh',
+            justifyContent: 'right',
+            alignItems: 'right',
+          }}>
+      
+        <CssBaseline />
+        <Box
             sx={{
-              my: 8,
-              mx: 12,
+              height: "90%",
+              width:"40%",
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              backgroundColor:"#EAF2F8",
+              padding: "3%",
+              borderRadius: "10px",
+              marginTop: "2%",
+              marginRight: "2%",
+              opacity: "0.9",
+              '@media (max-width:800px)': {
+                width: '100%',
+                height:'100%',
+                margin: 0,
+                padding: '2%',
+                opacity: "1",
+              },
+              
             }}
+
+            breakpoint="md"
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} >
               <LockOutlinedIcon xs={false} />
@@ -174,10 +187,20 @@ export default function SignInSide() {
                 error={formErrors.password !== ''}
                 helperText={formErrors.password}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+              <Box sx={{display:"flex"}}>
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Grid item xs sx={{marginTop:"2%", marginLeft:"39%"}}>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+              </Box>
+              
+
+              
               <Button
                 type="submit"
                 fullWidth
@@ -186,22 +209,17 @@ export default function SignInSide() {
               >
                 Log In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+              <Grid container sx={{justifyContent:"center"}}>
+                
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/signup" variant="body2" sx={{cursor:'pointer'}}>
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
-        </Grid>
       </Grid>
     </ThemeProvider>
   );
