@@ -134,67 +134,6 @@ const ReceptionView = () => {
     }
   };
 
-
-
-  const Announcements = [
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    
-  ];
-
   return (
 
 
@@ -213,7 +152,7 @@ const ReceptionView = () => {
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
            
           <Box sx={{display:"flex", marginTop:"5rem", justifyContent:"space-between"}}>
-            <Typography variant="h4" style={{ fontWeight: 700, textAlign:"left" }}>Receptionist</Typography>
+            <Typography variant="h4" style={{ fontWeight: 700, textAlign:"left" }}>Receptionists</Typography>
             <Button variant="contained" onClick={handleOpen} sx={{backgroundColor: color2, marginRight:"7%", marginBottom:"3%",'&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaPlus />&nbsp; Add New</Button>
           </Box>
 
