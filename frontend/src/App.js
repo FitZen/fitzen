@@ -40,6 +40,8 @@ import Adminreport from './pages/admin/Report';
 import MembershipPlans from './pages/admin/MembershipPlans';
 import TrainerPackages from './pages/admin/TrainerPackages';
 import ReceptionView from './pages/admin/ReceptionView';
+import MemberList from './pages/admin/MemberList';
+import InstructorList from './pages/admin/InstructorList';
 
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
@@ -131,6 +133,8 @@ function App() {
         <Route path="/admin/membershipplans" element={<MembershipPlans />} />
         <Route path="/admin/trainerpackages" element={<TrainerPackages />} />
         <Route path="/admin/receptionview" element={<ReceptionView />} />
+        <Route path="/admin/memberlist/:memberType" element={<MemberList />} />
+        <Route path="/admin/instructorlist/:instructorType" element={<InstructorList />} />
 
 
         <Route path="/trainer/dashboard" element={<TrainerDashboard />} />

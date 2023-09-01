@@ -157,8 +157,12 @@ const Members = () => {
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Physical Members</Typography>
                     <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
-                    <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%" }}>47 are logged in </Typography>
-                    <Button variant="outlined" style={{marginLeft:"53.5%",  color:color2, fontWeight: 700}}>View All</Button>
+                    <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%", marginRight:"52.5%" }}>47 are logged in </Typography>
+                    <Link to='/admin/memberList/Physical' sx={{textDecoration:"none",}}>
+                      <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
+                        View All
+                      </Button>
+                    </Link>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
@@ -187,8 +191,12 @@ const Members = () => {
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Virtual Members</Typography>
                       <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
-                      <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%" }}>23 are logged in </Typography>
-                      <Button variant="outlined" style={{marginLeft:"55%",  color:color1 ,border:"1px solid #102B4C", fontWeight: 700}}>View All</Button>
+                      <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"54.5%"}}>23 are logged in </Typography>
+                      <Link to="/admin/memberList/Virtual" sx={{textDecoration:"none",}}>
+                        <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
+                          View All
+                        </Button>
+                      </Link>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
