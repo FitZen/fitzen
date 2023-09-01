@@ -14,6 +14,7 @@ import memberRoutes from "./routes/memberRoutes.js";
 import mealPlanRoutes from "./routes/mealPlanRoutes.js";
 import goalRoutes from "./routes/goalRoutes.js";
 import trainerRoutes from "./routes/trainerRoutes.js";
+import physiotherapistRoutes from "./routes/physiotherapistRoutes.js";
 
 // start DB connection
 connectDB();
@@ -42,7 +43,8 @@ app.use('/api/receptionists', receptionistRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/mealplans', mealPlanRoutes);
 app.use('/api/goals', goalRoutes);
-app.use('/api/trainers', trainerRoutes)
+app.use('/api/trainers', trainerRoutes);
+app.use('/api/physiotherapists', physiotherapistRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
