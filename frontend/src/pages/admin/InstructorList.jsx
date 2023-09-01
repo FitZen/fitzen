@@ -97,7 +97,7 @@ const InstructorList = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
       <Box>
-        <AdminSidebar sidebarLinkId = "2"/>
+        <AdminSidebar sidebarLinkId = "3"/>
       </Box>
       
       <Box component="main" sx={{flex:1 }}>
@@ -145,7 +145,7 @@ const InstructorList = () => {
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.contact_no}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
-                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.joined_on).toLocaleDateString()}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.added_on).toLocaleDateString()}</Typography>
                                   </TableCell>  
                               </TableRow>
                           ))}
