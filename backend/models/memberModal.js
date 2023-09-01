@@ -13,7 +13,7 @@ const getViewMembers = asyncHandler(async () => {
 
 //get all view physical members
 const getViewPhysicalMembers = asyncHandler(async () => {
-    const sql = 'SELECT first_name, last_name, nic FROM physicalMember ORDER BY first_name ASC;';
+    const sql = 'SELECT * FROM physicalMember ORDER BY joined_on DESC;';
     const result = await query(sql);
 
     return result.rows;
@@ -22,7 +22,7 @@ const getViewPhysicalMembers = asyncHandler(async () => {
 
 //get all view virtual members
 const getViewVirtualMembers = asyncHandler(async () => {
-    const sql = 'SELECT first_name, last_name, nic FROM virtualMember ORDER BY first_name ASC;';
+    const sql = 'SELECT * FROM virtualMember ORDER BY joined_on DESC;';
     const result = await query(sql);
 
     return result.rows;
