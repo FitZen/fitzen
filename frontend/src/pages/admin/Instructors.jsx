@@ -191,8 +191,8 @@ const Instructors = () => {
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Physiotherapists</Typography>
                       <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
                       <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"56%" }}>23 are logged in </Typography>
-                      <Link to='/admin/instructorList/Physiotherapist' sx={{textDecoration:"none",}}>
-                        <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
+                      <Link to='/admin/instructorList/Physiotherapist' sx={{textDecoration:"none"}}>
+                        <Button variant="outlined" style={{color:color1, border:"1px solid", fontWeight: 700, width:"7rem"}} >
                           View All
                         </Button>
                       </Link>
