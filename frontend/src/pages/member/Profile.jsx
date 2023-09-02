@@ -10,10 +10,12 @@ import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Profile = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +23,8 @@ const Profile = () => {
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getUserDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -38,6 +42,28 @@ const Profile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: JSON.parse(localStorage.getItem('userID')),
+        userType: JSON.parse(localStorage.getItem('userType')),
+      };
+      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      setUserData(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const birthDate = new Date(userData.dob);
+  const birthYear = birthDate.getFullYear();
+
+  const age = currentYear - birthYear;
 
   return (
 
@@ -72,11 +98,11 @@ const Profile = () => {
                 </Link>
                 <Box sx={{display: "flex", marginLeft:"4rem"}}>
                     <Box >
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: Tharindu Gunawardhana</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: 29</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>NIC: 986542135V</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>DOB: 21-10-1998</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Gender: Male</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: {userData.first_name} {userData.last_name}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: {age}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>NIC: {userData.nic}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>DOB: {new Date(userData.dob).toLocaleDateString()}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Gender: {userData.gender}</Typography>
                     </Box>
                     <Box>
                         <Typography variant="h6" style={{fontSize:"16px", fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-21%" }}>Weight: 70 KG</Typography>
@@ -95,8 +121,9 @@ const Profile = () => {
                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "", }}><FaTelegram style={{marginTop: "1rem"}}/>  Contact Information</Typography>
                 <Box style={{marginLeft:"1%"}}>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: 6th Flr Paul CI Cent 24 Malwatte Road, 11</Typography>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email:tharindu@123gmail.com</Typography>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) (76) 156 2514</Typography>
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email: {userData.email}</Typography>
+                    {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) {(userData.contact_no).slice(1,3)} {(userData.contact_no).slice(3,6)} {(userData.contact_no).slice(6)}</Typography> */}
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) {userData.contact_no}</Typography>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Emergency Contact: (+94) (76) 156 2514</Typography>
                 
                 </Box>
