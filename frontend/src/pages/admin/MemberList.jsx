@@ -9,7 +9,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const MemberList = () => {
 
@@ -25,7 +25,7 @@ const MemberList = () => {
   const handleClose = () => setOpen(false);
   const [MemberData, setMemberData] = useState([]);
  
-  
+  const navigate = useNavigate();
   const [item, setItem] = React.useState('');
 
   const {memberType} = useParams();
@@ -36,6 +36,11 @@ const MemberList = () => {
   };
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+
     if(memberType === "Virtual"){
         viewVirtualMemberList();
     }
