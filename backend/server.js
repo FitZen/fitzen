@@ -15,7 +15,10 @@ import mealPlanRoutes from "./routes/mealPlanRoutes.js";
 import goalRoutes from "./routes/goalRoutes.js";
 import trainerRoutes from "./routes/trainerRoutes.js";
 import physiotherapistRoutes from "./routes/physiotherapistRoutes.js";
+import shakebarRoutes from "./routes/shakebarRoutes.js";
+import uploadRoutes from './routes/uploadRoutes.js';
 import membershipPlansRoutes from "./routes/membershipPlansRoutes.js";
+
 
 // start DB connection
 connectDB();
@@ -46,6 +49,10 @@ app.use('/api/mealplans', mealPlanRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/trainers', trainerRoutes);
 app.use('/api/physiotherapists', physiotherapistRoutes);
+app.use('/api/shakebarItems', shakebarRoutes);
+
+//upload routes
+app.use('/api/upload', uploadRoutes)
 app.use('/api/membershipplans', membershipPlansRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
