@@ -9,6 +9,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import Swal from "sweetalert2";
 
 const ReceptionView = () => {
 
@@ -128,6 +129,14 @@ const ReceptionView = () => {
         setNewReception({ first_name:"", last_name:"", nic:"", email:"",contact_no:"" }); // Clear the form
         setSubmitted(false);
       }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Receptionist Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
     } catch (error) {
       console.error("Adding Reception failed:", error);
       // Handle error scenarios here

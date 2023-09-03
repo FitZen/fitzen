@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
+import Swal from 'sweetalert2'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -169,6 +169,13 @@ const Goals = () => {
         setValueStart(null);
         setValueEnd(null);
       }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Goal Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     } catch (error) {
       console.error("Adding Adding failed:", error);
       // Handle error scenarios here
