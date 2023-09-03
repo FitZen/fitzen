@@ -9,6 +9,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const InstructorList = () => {
@@ -25,7 +26,7 @@ const InstructorList = () => {
   const handleClose = () => setOpen(false);
   const [InstructorData, setInstructorData] = useState([]);
  
-  
+  const navigate = useNavigate();
   const [item, setItem] = React.useState('');
 
   const {instructorType} = useParams();
@@ -36,6 +37,11 @@ const InstructorList = () => {
   };
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+
     if(instructorType === "Trainer"){
         viewTrainerList();
     }

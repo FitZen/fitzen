@@ -16,6 +16,7 @@ import { BiSolidMessageEdit,BiSolidMessageSquareAdd } from "react-icons/bi";
 import { FaRegTimesCircle} from "react-icons/fa";
 import Modal from "@mui/material/Modal";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const color1 = "#346E93"; //light blue
 
@@ -145,6 +146,13 @@ const Reports = () => {
           setNewComplaint({ title: "", content: "" }); // Clear the form
           setSubmitted(false);
         }
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Complaint added successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
         console.error("Adding announcement failed:", error);
         // Handle error scenarios here

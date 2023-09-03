@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import Swal from "sweetalert2";
 
 const Announcement = () => {
 
@@ -123,12 +124,40 @@ const Announcement = () => {
         setNewAnnouncement({ title: "", content: "" }); // Clear the form
         setSubmitted(false);
       }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Announcement added successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
     } catch (error) {
       console.error("Adding announcement failed:", error);
       // Handle error scenarios here
     }
   };
 
+  const showConfirmationDialog = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      }
+    });
+  };
+   
   return (
 
 
@@ -199,7 +228,7 @@ const Announcement = () => {
                                   <TableCell align="left">
                                       <Box style={{display:"flex" }}>
                                           <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
-                                          <Button variant="outlined"sx={{color:color4, border:"1px solid #DC1E2A"}}>Delete</Button>
+                                          <Button variant="outlined"sx={{color:color4, border:"1px solid #DC1E2A"}} onClick={showConfirmationDialog}>Delete</Button>
                                           
                                       </Box>
                                   </TableCell>

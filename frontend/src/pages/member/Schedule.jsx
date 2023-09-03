@@ -61,6 +61,17 @@ const Schedule = () => {
     "December",
   ];
 
+  const handleDateClick = (clickedDay) => {
+    const clickedDate = new Date(currYear, currMonth, clickedDay);
+
+    // Format the clicked date as a string (e.g., "YYYY-MM-DD")
+    const formattedDate = clickedDate.toISOString().split('T')[0];
+
+    // console.log('Clicked date:', formattedDate);
+
+    navigate(`/member/scheduletask/${formattedDate}`);
+  }
+
   const renderCalendar = () => {
     const firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
     const lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
@@ -82,7 +93,7 @@ const Schedule = () => {
         currMonth === currentDate.getMonth() &&
         currYear === currentDate.getFullYear();
       days.push(
-        <li key={`current-${i}`} className={isToday ? "active" : ""}>
+        <li key={`current-${i}`} className={isToday ? "active" : ""} onClick={() => handleDateClick(i)}>
           {i}
         </li>
       );

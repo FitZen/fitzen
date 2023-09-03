@@ -1,5 +1,5 @@
-import Sidebar from './components/Sidebar';
 import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
 // import Navbar from './components/Navbar';
 // import Hero from './pages/landingPage/Hero';
 // import ContactUs from './pages/landingPage/ContactUs';
@@ -27,6 +27,7 @@ import Goals from './pages/member/Goals';
 import InstructorProfile from './pages/member/InstructorProfile';
 import OwnMembership from './pages/member/OwnMembership';
 import AllocatedInstructorProfile from './pages/member/AllocatedTrainerProfile';
+import ScheduleTask from './pages/member/ScheduleTask';
 
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProfile from './pages/admin/Profile';
@@ -59,7 +60,6 @@ import SReports from './pages/shakebarmanager/Reports';
 import SProfile from './pages/shakebarmanager/Profile';
 import AddnewItem from './pages/shakebarmanager/AddnewItem';
 
-import { Route, Routes, Navigate } from "react-router-dom";
 import TrainerDashboard from "./pages/trainer/Dashboard";
 import TrainerProfile from './pages/trainer/Profile';
 import TrainerEditProfile from './pages/trainer/EditProfile';
@@ -111,6 +111,7 @@ function App() {
         <Route path="/member/instructorprofile" element={<InstructorProfile />} />
         <Route path="/member/ownmembership" element={<OwnMembership />} />
         <Route path="/member/allocatedinstructorprofile" element={<AllocatedInstructorProfile />} />
+        <Route path="/member/scheduletask/:clickedDay" element={<ScheduleTask />} />
 
 
         <Route path="/shakebarmanager/dashboard" element={<SDashboard />} />

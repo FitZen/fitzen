@@ -10,6 +10,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import { motion } from "framer-motion";
+import Swal from 'sweetalert2';
 
 import Meal1 from '../../assets/Meals//meal1.png';
 import Meal2 from '../../assets/Meals//meal2.png';
@@ -147,7 +148,7 @@ const MealPlan = () => {
         note: newMealPlan.note,
         userID: JSON.parse(localStorage.getItem('userID')),
       };
-      console.log("from fe: ", payload)
+      //console.log("from fe: ", payload)
 
       const res = await axios.post(
         "http://localhost:8000/api/mealplans//addmealplan",
@@ -160,6 +161,14 @@ const MealPlan = () => {
         setNewMealPlan({ name: "", breakfast: "", lunch: "", dinner: "", pre_workout: "", post_workout: "", note: "" }); // Clear the form
         setSubmitted(false);
       }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Meal Plan Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
     } catch (error) {
       console.error("Adding mealPlan failed:", error);
       // Handle error scenarios here
