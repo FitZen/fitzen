@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
-import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
+import avatar from '../../assets/avatar.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
@@ -65,6 +65,15 @@ const Profile = () => {
 
   const age = currentYear - birthYear;
 
+  let ProfileImage;
+
+  if (userData.profile_pic === null) {
+    ProfileImage = avatar;
+  } else {
+    const img = userData.profile_pic;
+    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+  }
+
   return (
 
 
@@ -85,7 +94,7 @@ const Profile = () => {
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Profile</Typography>
         <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                <img src={ProfileImg} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
+                <img src={ProfileImage} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
             </Box>
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", marginLeft:"0%", justifyContent:"center"}}>
                 
