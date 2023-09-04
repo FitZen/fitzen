@@ -50,10 +50,11 @@ app.use('/api/goals', goalRoutes);
 app.use('/api/trainers', trainerRoutes);
 app.use('/api/physiotherapists', physiotherapistRoutes);
 app.use('/api/shakebarItems', shakebarRoutes);
+app.use('/api/membershipplans', membershipPlansRoutes);
 
 //upload routes
 app.use('/api/upload', uploadRoutes)
-app.use('/api/membershipplans', membershipPlansRoutes);
+
 
 // route handler for root URL ("/") to indicate the server is running
 app.get('/', (req, res) => {
