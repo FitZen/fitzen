@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
-import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
+import avatar from '../../assets/avatar.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import ReceiptionistSidebar from "../../components/ReceiptionistSidebar";
 import ReceiptionistNavbar from "../../components/ReceiptionistNavbar";
@@ -63,6 +63,15 @@ const Instructors = () => {
 
   const age = currentYear - birthYear;
 
+  let ProfileImage;
+
+  if (userData.profile_pic === null) {
+    ProfileImage = avatar;
+  } else {
+    const img = userData.profile_pic;
+    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+  }
+
 
   return (
 
@@ -84,7 +93,7 @@ const Instructors = () => {
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Profile</Typography>
         <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
             <Box sx={{ width: "25%", marginTop:"3rem", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                <img src={ProfileImg} alt="Profile" width="100%" height="300px" style={{borderRadius:"10px"}}/>
+                <img src={ProfileImage} alt="Profile" width="100%" height="300px" style={{borderRadius:"10px"}}/>
             </Box>
             <Box sx={{display:"flex", width: "75%", height:"100%", marginTop:"3rem", marginLeft:"2%", justifyContent:"center"}}>
                 <Box sx={{width:"40%"}}>
