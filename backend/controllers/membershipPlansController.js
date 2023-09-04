@@ -1,6 +1,11 @@
 import asyncHandler from "express-async-handler";
-import { getMembershipPlans } from "../models/membershipPlansModel.js";
+import {
+  getMembershipPlans,
+  addMembershipPlan,
+} from "../models/membershipPlansModel.js";
 
+
+// view all membership plans
 const getAllMembershipPlans = asyncHandler(async (req, res) => {
   const membershipPlans = await getMembershipPlans();
 
@@ -14,4 +19,14 @@ const getAllMembershipPlans = asyncHandler(async (req, res) => {
   });
 });
 
-export { getAllMembershipPlans };
+
+// add new membership plan
+const addNewMembershipPlan = asyncHandler(async (req, res) => {
+  console.log("addNewMembershipPlan");
+  console.log(await addMembershipPlan());
+});
+
+export {
+  getAllMembershipPlans,
+  addNewMembershipPlan,
+};
