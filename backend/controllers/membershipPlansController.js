@@ -22,9 +22,22 @@ const getAllMembershipPlans = asyncHandler(async (req, res) => {
 
 // add new membership plan
 const addNewMembershipPlan = asyncHandler(async (req, res) => {
-  console.log("addNewMembershipPlan");
-  console.log(await addMembershipPlan());
+  const {name, description, price, duration, type} = req.body;
+  const createdBy = req.user.id;
+
+  const result = await addMembershipPlan(name, description, price, duration, type, createdBy);
+
+  if (! result) {
+    res.status(500);
+    throw new Error("Something went wrong!");
+  }
+
+  res.status(201).json({
+    data: result,
+    message: "Membership plan added successfully.",
+  });
 });
+
 
 export {
   getAllMembershipPlans,
