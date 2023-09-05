@@ -1,6 +1,11 @@
 import asyncHandler from "express-async-handler";
-import { getMembershipPlans } from "../models/membershipPlansModel.js";
+import {
+  getMembershipPlans,
+  addMembershipPlan,
+} from "../models/membershipPlansModel.js";
 
+
+// view all membership plans
 const getAllMembershipPlans = asyncHandler(async (req, res) => {
   const membershipPlans = await getMembershipPlans();
 
@@ -14,4 +19,27 @@ const getAllMembershipPlans = asyncHandler(async (req, res) => {
   });
 });
 
-export { getAllMembershipPlans };
+
+// add new membership plan
+const addNewMembershipPlan = asyncHandler(async (req, res) => {
+  const {name, description, price, duration, type} = req.body;
+  const createdBy = req.user.id;
+
+  const result = await addMembershipPlan(name, description, price, duration, type, createdBy);
+
+  if (! result) {
+    res.status(500);
+    throw new Error("Something went wrong!");
+  }
+
+  res.status(201).json({
+    data: result,
+    message: "Membership plan added successfully.",
+  });
+});
+
+
+export {
+  getAllMembershipPlans,
+  addNewMembershipPlan,
+};
