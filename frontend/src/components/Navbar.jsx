@@ -9,14 +9,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import {FaSignOutAlt} from 'react-icons/fa';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Typography } from '@mui/material';
-import Profile from '../assets/photo-1633332755192-727a05c4013d.jpg'
+import avatar from '../assets/avatar.jpg';
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { lineHeight } from '@mui/system';
 
 
 export default function PrimarySearchAppBar() {
@@ -98,6 +100,15 @@ export default function PrimarySearchAppBar() {
     }
   };
 
+  let ProfileImage;
+
+  if (userData.profile_pic === null) {
+    ProfileImage = avatar;
+  } else {
+    const img = userData.profile_pic;
+    ProfileImage = `../assets/${img}`; // Update this line to correctly display the profile image
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -140,30 +151,31 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
       
     >
-      <MenuItem>
+      <MenuItem sx={{lineHeight:"3%"}}>
         <IconButton size="1rem" aria-label="show 4 new mails" color="inherit">
           <Badge variant="dot" color="error">
-            <MailIcon style={{fontSize:"1.5rem"}}/>
+            <MailIcon style={{fontSize:"1.2rem"}}/>
           </Badge>
         </IconButton>
-        <p style={{fontSize:"13px"}}>Messages</p>
-      </MenuItem>
+        <p style={{fontSize:"13px", marginLeft:"0.5rem"}}>Messages</p>
+      </MenuItem >
       <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
-        <MenuItem>
+        <MenuItem  sx={{lineHeight:"3%"}}>
             <IconButton
               size="1rem"
               color="inherit"
             >
               <Badge variant="dot" color="error">
-                <NotificationsIcon style={{fontSize:"1.5rem"}}/>
+                <NotificationsIcon style={{fontSize:"1.2rem"}}/>
               </Badge>
             </IconButton>
-            <p style={{fontSize:"13px"}}>Notifications</p>
+            <p style={{fontSize:"13px", marginLeft:"0.5rem"}}>Notifications</p>
         </MenuItem>
       </Link>
       <Link to="/member/profile" style={{textDecoration:"none", color:"black"}}>
-        <MenuItem onClick={handleProfileMenuOpen}>
+        <MenuItem onClick={handleProfileMenuOpen}  sx={{lineHeight:"2%"}}>
           <IconButton
+            sx={{ml:-0.7}}
             size="1rem"
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
@@ -171,11 +183,21 @@ export default function PrimarySearchAppBar() {
             color="inherit"
           >
             {/* <AccountCircle /> */}
-            <img src={Profile} alt="Profile" width="35px" height="35px"  style={{borderRadius:"50px", marginLeft:"-0.4rem"}}/>
+            <img src={ProfileImage} alt="Profile" width="30px" height="30px"  style={{borderRadius:"50px"}}/>
           </IconButton>
-          <p style={{fontSize:"13px"}}>Profile</p>
+          <p style={{fontSize:"13px", marginLeft:"0.2rem"}}>Profile</p>
         </MenuItem>
       </Link>
+      <MenuItem onClick={handleLogout}  sx={{lineHeight:"3%"}}>
+            <IconButton
+              size="1rem"
+              color="inherit"
+            >
+              
+              <FaSignOutAlt style={{fontSize:"1.2rem"}}/>
+            </IconButton>
+            <p style={{fontSize:"13px", marginLeft:"0.5rem"}}>Logout</p>
+        </MenuItem>
     </Menu>
   );
 
@@ -231,7 +253,7 @@ export default function PrimarySearchAppBar() {
                 aria-label="account of current user"
                 color="inherit"
               >
-                <img src={Profile} alt="Profile" width="40px" height="40px" style={{ borderRadius: '50px' }} />
+                <img src={ProfileImage} alt="Profile" width="40px" height="40px" style={{ borderRadius: '50px' }} />
               </IconButton>
               <IconButton
                 size="large"
