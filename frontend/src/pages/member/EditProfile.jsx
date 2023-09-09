@@ -15,6 +15,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -26,6 +27,7 @@ const Profile = () => {
   const [gender, setGender] = React.useState('');
   const [value, setValue] = React.useState(null);
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
 
@@ -34,6 +36,8 @@ const Profile = () => {
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getUserDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -51,6 +55,21 @@ const Profile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: JSON.parse(localStorage.getItem('userID')),
+        userType: JSON.parse(localStorage.getItem('userType')),
+      };
+      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      setUserData(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
 
 
   const handleChange = (event) => {
@@ -81,60 +100,40 @@ const Profile = () => {
                     <img src={ProfileImg} alt="Profile" width="300px"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
                     <FaCamera size={35} style={{cursor:"pointer"}}/>
                 </Grid>    
-                <Grid md={7}>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>First Name:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>Last Name:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left" }}>NIC:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                <Grid md={7} sx={{marginTop:"5%"}}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>First Name:</InputLabel>
+                    <TextField variant="outlined" value={userData.first_name} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Last Name:</InputLabel>
+                    <TextField variant="outlined" value={userData.last_name} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>NIC:</InputLabel>
+                    <TextField variant="outlined" value={userData.nic} disabled={true} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
-            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
+            <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center", marginTop:"-1%"}}>
                 <Grid md={5} sx={{marginRight:"20%"}}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Gender:</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={gender}
-                        size="small"
-                        style={{marginTop:"0.5rem", width:"97%", height:"17%", marginBottom:"0.5rem", borderRadius:"5px", border:"0.01px solid"}}
-                        
-                        onChange={handleChange}
-                    >
-                        <MenuItem value={10}>Male</MenuItem>
-                        <MenuItem value={20}>Female</MenuItem>
-                      
-                    </Select>
+                    <TextField variant="outlined" value={userData.gender} disabled={true} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Height(cm):</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership ID:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" value={userData.id} disabled={true} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>    
                 <Grid md={7}>
 
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Date of Birth:</InputLabel>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker 
-                            label=""
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)} 
-                            renderInput={(params) => <TextField {...params}  inputProps={{style:{marginTop:"0.5rem", width:"100%", height:"", marginBottom:"0.5rem", borderRadius:"10px", border:"1px solid red"}}} />}
-                        />
-                    </LocalizationProvider>
-                    
+                    <TextField variant="outlined" value={new Date(userData.dob).toLocaleDateString()} disabled={true} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>                    
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Weight(KG):</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Membership Type:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" disabled={true} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={5} sx={{marginRight:"20%"}}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Contact Number:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" value={userData.contact_no} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Email:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
+                    <TextField variant="outlined" value={userData.email} inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>    
                 <Grid md={7}>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Emergency Contact Number:</InputLabel>
@@ -143,8 +142,11 @@ const Profile = () => {
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:350,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                 </Grid>
             </Grid>
+            
             <Grid item xs={12} md={12} sx={{display:"flex", justifyContent:"center"}}>
                 <Grid md={12} sx={{marginRight:"14%"}}>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Bio:</InputLabel>
+                    <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:1000, borderRadius:"5px", outline:"none"}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Medical Conditions:</InputLabel>
                     <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:1000, borderRadius:"5px", outline:"none"}}/>
                 </Grid>

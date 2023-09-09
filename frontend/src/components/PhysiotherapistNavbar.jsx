@@ -11,7 +11,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Typography } from '@mui/material';
-import Profile from '../assets/photo-1535713875002-d1d0cf377fde.jpeg'
+import {FaSignOutAlt} from 'react-icons/fa';
+import avatar from '../assets/avatar.jpg';
 import {Link} from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import axios from 'axios';
@@ -99,6 +100,15 @@ export default function PrimarySearchAppBar() {
         }
       };
 
+      let ProfileImage;
+
+      if (userData.profile_pic === null) {
+        ProfileImage = avatar;
+      } else {
+        const img = userData.profile_pic;
+        ProfileImage = `../assets/${img}`; // Update this line to correctly display the profile image
+      }
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -126,59 +136,62 @@ export default function PrimarySearchAppBar() {
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-
+          anchorEl={mobileMoreAnchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          id={mobileMenuId}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={isMobileMenuOpen}
+          onClose={handleMobileMenuClose}
+          
         >
-            <MenuItem>
-                <IconButton size="1rem" aria-label="show 4 new mails" color="inherit">
-                    <Badge variant="dot" color="error">
-                        <MailIcon style={{fontSize:"1.5rem"}}/>
-                    </Badge>
+          <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+            <MenuItem  sx={{lineHeight:"3%"}}>
+                <IconButton
+                  size="1rem"
+                  color="inherit"
+                >
+                  <Badge variant="dot" color="error">
+                    <NotificationsIcon style={{fontSize:"1.2rem"}}/>
+                  </Badge>
                 </IconButton>
-                <p style={{fontSize:"13px"}}>Messages</p>
+                <p style={{fontSize:"13px", marginLeft:"0.5rem"}}>Notifications</p>
             </MenuItem>
-            <Link to="/physiotherapist/notifications" style={{textDecoration:"none", color:"black"}}>
-                <MenuItem>
-                    <IconButton
-                        size="1rem"
-                        color="inherit"
-                    >
-                        <Badge variant="dot" color="error">
-                            <NotificationsIcon style={{fontSize:"1.5rem"}}/>
-                        </Badge>
-                    </IconButton>
-                    <p style={{fontSize:"13px"}}>Notifications</p>
-                </MenuItem>
-            </Link>
-            <Link to="/physiotherapist/profile" style={{textDecoration:"none", color:"black"}}>
-                <MenuItem onClick={handleProfileMenuOpen}>
-                    <IconButton
-                        size="1rem"
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        {/* <AccountCircle /> */}
-                        <img src={Profile} alt="Profile" width="35px" height="35px"  style={{borderRadius:"50px", marginLeft:"-0.4rem"}}/>
-                    </IconButton>
-                    <p style={{fontSize:"13px"}}>Profile</p>
-                </MenuItem>
-            </Link>
+          </Link>
+          <Link to="/physiotherapist/profile" style={{textDecoration:"none", color:"black"}}>
+            <MenuItem onClick={handleProfileMenuOpen}  sx={{lineHeight:"2%"}}>
+              <IconButton
+                sx={{ml:-0.7}}
+                size="1rem"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                {/* <AccountCircle /> */}
+                <img src={ProfileImage} alt="Profile" width="30px" height="30px"  style={{borderRadius:"50px"}}/>
+              </IconButton>
+              <p style={{fontSize:"13px", marginLeft:"0.2rem"}}>Profile</p>
+            </MenuItem>
+          </Link>
+          <MenuItem onClick={handleLogout}  sx={{lineHeight:"3%"}}>
+                <IconButton
+                  size="1rem"
+                  color="inherit"
+                >
+                  
+                  <FaSignOutAlt style={{fontSize:"1.2rem"}}/>
+                </IconButton>
+                <p style={{fontSize:"13px", marginLeft:"0.5rem"}}>Logout</p>
+            </MenuItem>
         </Menu>
-    );
+      );
 
 
     return (
@@ -187,12 +200,7 @@ export default function PrimarySearchAppBar() {
                 <AppBar position="static" sx={{ backgroundColor: 'white', height:"60px" }}>
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}>
-                            <Badge variant="dot" color="error">
-                                <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
-                            </Badge>
-                        </IconButton>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>   
                         <Link to="/physiotherapist/notifications" style={{textDecoration:"none", color:"black"}}>
                             <IconButton
                                 size="large"
@@ -221,7 +229,7 @@ export default function PrimarySearchAppBar() {
                             color="inherit"
                         >
                             {/* <AccountCircle /> */}
-                            <img src={Profile} alt="Profile" width="40px" height="40px" style={{borderRadius:"50px"}}/>
+                            <img src={ProfileImage} alt="Profile" width="40px" height="40px" style={{borderRadius:"50px"}}/>
                         </IconButton>
 
                         <IconButton
