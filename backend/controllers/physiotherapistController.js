@@ -33,7 +33,6 @@ const getViewAllPhysiotherapists = asyncHandler(async (req, res) => {
 //add physiotherapist
 const addNewPhysiotherapist = asyncHandler(async (req, res) => {
     const { nic, first_name, last_name, email, contact_no, address, dob, gender, qualification } = req.body;
-    // console.log(nic, first_name, last_name, email, contact_no, address, dob, gender, qualification);
 
     if (await findUserByNIC(nic)) {
         res.status(409);    // status code for conflict
@@ -59,12 +58,10 @@ const addNewPhysiotherapist = asyncHandler(async (req, res) => {
 
     const password = generatePassword();
 
-    // console.log(added_by, id, password);
-
     const subject = getSubject();
     const body = getBody(first_name, email, password);
 
-    if (await addPhysiotherapist(id, nic, first_name, last_name, email, password, contact_no, address, dob, gender, qualification) &&
+    if (await addPhysiotherapist(id, nic, first_name, last_name, email, password, contact_no, address, dob, gender, qualification, added_by) &&
         await sendEmail(subject, body, email)) {
         res.status(201).json({
             message: "Trainer added successfully.",
