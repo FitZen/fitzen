@@ -32,7 +32,6 @@ const getAllReceptionists = asyncHandler(async (req, res) => {
 
 //add receptionist
 const addNewReceptionist = asyncHandler(async (req, res) => {
-    console.log(req.body);
     const { nic, first_name, last_name, email, contact_no} = req.body;
 
     if (await findUserByNIC(nic)) {
@@ -50,11 +49,7 @@ const addNewReceptionist = asyncHandler(async (req, res) => {
         throw new Error("Contact no already exists.");
     }
 
-    console.log("error from under the if clauses")
-
     const addedBy = req.body.userID;
-
-    console.log("error from under the addedBy", addedBy)
 
     let id;
     do {
