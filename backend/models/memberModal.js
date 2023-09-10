@@ -1,5 +1,6 @@
 import {query} from '../config/db.js';
 import asyncHandler from 'express-async-handler';
+import hashPassword from "../utils/hashPassword.js";
 
 
 //get all view members
@@ -30,14 +31,16 @@ const getViewVirtualMembers = asyncHandler(async () => {
 
 
 // add new physical member
-
-
 const addNewPhysicalMember = asyncHandler(async (memberData, addedByUserId) => {
     const { id, nic, first_name, last_name, email, password, contact_no, dob, gender, emergency_contact_no, address,
-        membership, height, weight, heart_disease, cardiovascular_condition, dizziness, blood_pressure, gout,
-        family_hx_heart_disease, diabetes, infectious_disease, arthritis, fainting, knees, lower_back,
-        hips_pelvis, neck_shoulders, surgery_info, medication_info, other_health_notes       
+        membership, has_heart_disease, has_cardiovascular_condition, experiences_dizziness, has_blood_pressure, has_gout,
+        has_family_history_heart, has_diabetes, has_infectious_disease, has_arthritis, experiences_fainting, has_knee_issues, has_lower_back_issues,
+        has_hips_pelvis_issues, has_neck_shoulder_issues, surgery_info, medication_info, other_health_notes       
     } = memberData;
+
+    // add height and weight to progress table
+    // membership eka eka membership table ekn enna one
+    const hashedPassword = await hashPassword(password);
 
     const physicalMemberSql = `
         INSERT INTO physicalMember (
@@ -45,21 +48,21 @@ const addNewPhysicalMember = asyncHandler(async (memberData, addedByUserId) => {
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id `;
     
     const physicalMemberResult = await query(physicalMemberSql, [
-        id, nic, first_name, last_name, email, password, contact_no, dob, gender,  emergency_contact_no, address, membership,  addedByUserId
+        id, nic, first_name, last_name, email, hashedPassword, contact_no, dob, gender,  emergency_contact_no, address, membership,  addedByUserId
     ]);
 
     const healthInfoSql = `
-        INSERT INTO healthInformation (
-            id, height, weight, heart_disease, cardiovascular_condition, dizziness,
-            blood_pressure, gout, family_hx_heart_disease, diabetes, infectious_disease,
-            arthritis, fainting, knees, lower_back, hips_pelvis, neck_shoulders, surgery_info, medication_info, other_health_notes
+        INSERT INTO medicalCondition (
+            id, has_heart_disease, has_cardiovascular_condition, experiences_dizziness,
+            has_blood_pressure, has_gout, has_family_history_heart, has_diabetes, has_infectious_disease,
+            has_arthritis, experiences_fainting, has_knee_issues, has_lower_back_issues, has_hips_pelvis_issues, has_neck_shoulder_issues, surgery_info, medication_info, other_health_notes
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING id`;
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING id`;
     
     const healthInfoResult = await query(healthInfoSql, [
-        id, height, weight, heart_disease, cardiovascular_condition,
-        dizziness, blood_pressure, gout, family_hx_heart_disease, diabetes, infectious_disease,
-        arthritis, fainting, knees, lower_back, hips_pelvis, neck_shoulders, surgery_info, medication_info, other_health_notes
+        id, has_heart_disease, has_cardiovascular_condition,
+        experiences_dizziness, has_blood_pressure, has_gout, has_family_history_heart, has_diabetes, has_infectious_disease,
+        has_arthritis, experiences_fainting, has_knee_issues, has_lower_back_issues, has_hips_pelvis_issues, has_neck_shoulder_issues, surgery_info, medication_info, other_health_notes
     ]);
 
     return physicalMemberResult.rows[0].id, healthInfoResult.rows[0].id;
