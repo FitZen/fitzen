@@ -1,26 +1,41 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
-import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
+import avatar from '../../assets/avatar.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import Sidebar from "../../components/ReceiptionistSidebar";
 import Navbar from "../../components/ReceiptionistNavbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const MemberProfile = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [userData, setUserData] = useState({});
   const navigate = useNavigate();
+
+  const { memberID, memberType } = useParams();
+  //console.log(memberID, memberType);
 
   useEffect(() => {
 
     if((localStorage.getItem('userType') !== '"Receptionist"')){
       navigate('/login');
     }
+
+    getUserDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -38,6 +53,60 @@ const MemberProfile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: memberID,
+        userType: memberType,
+      };
+      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      setUserData(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  const Bills = [
+    {
+      id: 1,
+      Date: "2021-08-28",
+      time: "10:00",
+      amount: "Rs. 5000.00",
+      paymentMethod : "Cash payment"
+      
+    },
+    {
+      id: 1,
+      Date: "2021-08-28",
+      time: "10:00",
+      amount: "Rs. 5000.00",
+      paymentMethod : "Cash payment"
+      
+    },
+  
+    
+  ]
+
+  
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const birthDate = new Date(userData.dob);
+  const birthYear = birthDate.getFullYear();
+
+  const age = currentYear - birthYear;
+
+  let ProfileImage;
+
+  if (userData.profile_pic === null) {
+    ProfileImage = avatar;
+  } else {
+    const img = userData.profile_pic;
+    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+  }
+
 
   return (
 
@@ -59,7 +128,7 @@ const MemberProfile = () => {
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Profile</Typography>
         <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                <img src={ProfileImg} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
+                <img src={ProfileImage} alt="Profile" width="45%"  style={{borderRadius:"10px", marginTop:"0.5rem"}}/>
             </Box>
             <Box sx={{ width: "50%", height:"100%", flexDirection:"column", marginLeft:"0%", justifyContent:"center"}}>
                 
@@ -70,11 +139,11 @@ const MemberProfile = () => {
                 </Link>
                 <Box sx={{display: "flex", marginLeft:"4rem"}}>
                     <Box >
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: Tharindu Gunawardhana</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: 29</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>NIC: 986542135V</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>DOB: 21-10-1998</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Gender: Male</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: {userData.first_name} {userData.last_name}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: {age}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>NIC: {userData.nic}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>DOB: {new Date(userData.dob).toLocaleDateString()}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Gender: {userData.gender}</Typography>
                     </Box>
                     <Box>
                         <Typography variant="h6" style={{fontSize:"16px", fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-21%" }}>Weight: 70 KG</Typography>
@@ -93,9 +162,9 @@ const MemberProfile = () => {
                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "", }}><FaTelegram style={{marginTop: "1rem"}}/>  Contact Information</Typography>
                 <Box style={{marginLeft:"1%"}}>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: 6th Flr Paul CI Cent 24 Malwatte Road, 11</Typography>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email:tharindu@123gmail.com</Typography>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) (76) 156 2514</Typography>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Emergency Contact: (+94) (76) 156 2514</Typography>
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email: {userData.email}</Typography>
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) {userData.contact_no}</Typography>
+                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Emergency Contact: (+94) {userData.emergency_contact_no}</Typography>
                 
                 </Box>
             </Box>
@@ -109,7 +178,44 @@ const MemberProfile = () => {
                 </Box>
             </Box>
            
-        </Box>        
+        </Box>   
+
+        <Typography variant="h5" style={{ fontWeight: 600, marginTop: "4rem", textAlign:"left" }}>Payment History </Typography>
+          <Button variant="contained" color="primary" style={{ display: memberType === "Virtual Member" ? "none" : "" , backgroundColor:"#346E93",marginLeft:'83%' }} size="small" >Add New</Button>
+          <Box sx={{ padding: "1%", marginTop:"3%", overflowY: "auto", width: "90%", flexWrap: "wrap", border:"1px solid #346E93", borderRadius:"10px", height: "35vh", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
+                    <TableContainer component={Paper} sx={{ marginTop: "2%", width: "100%" }}>
+                        <Table sx={{ minWidth: 650, boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow style={{backgroundColor:"#B2BABB"}}>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Date</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Time</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Amount</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Method</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {Bills.map((row) => (
+                                    <TableRow
+                                        key={row.name}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row" align="cleft">
+                                            {row.Date}
+                                        </TableCell>
+                                        <TableCell align="left">{row.time}</TableCell>
+                                        <TableCell align="left">{row.amount}</TableCell>
+                                        <TableCell align="left">{row.paymentMethod}</TableCell>
+                                        <TableCell align="left">
+                                            <Button variant="outlined">Bill</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+     
     
         
         </Box>

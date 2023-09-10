@@ -18,6 +18,7 @@ import axios from 'axios';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { style } from '@mui/system';
 
 const defaultTheme = createTheme();
 
@@ -110,7 +111,7 @@ export default function SignUpSide() {
                             id="demo-simple-select"
                             value={gender}
                             size="small"
-                            style={{marginTop:"0.5rem", width:"100%", height:"22%", marginBottom:"0.5rem", borderRadius:"5px", border:"0.1px solid"}}
+                            style={{marginTop:"0.5rem", width:"100%", height:"17%", marginBottom:"0.5rem", borderRadius:"5px", border:"0.1px solid"}}
                             
                             onChange={handleChangeGender}
                         >
@@ -118,7 +119,8 @@ export default function SignUpSide() {
                             <MenuItem value={20}>Female</MenuItem>
                         
                         </Select>
-                        
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Contact No:</InputLabel>
+                        <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                         
                        
                     </Box>
@@ -131,11 +133,11 @@ export default function SignUpSide() {
                                 label=""
                                 value={value}
                                 onChange={(newValue) => setValue(newValue)} 
-                                renderInput={(params) => <TextField {...params}  />}
+                                renderInput={(params) => <TextField {...params} inputProps={{style: {height: 1, width:250,border:"1px solid"}}}/>}
                             />
                         </LocalizationProvider>
-                        
-                        
+                        <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Emergency Contact No:</InputLabel>
+                        <TextField variant="outlined" inputProps={{style: {height: 1, width:250,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                         
                     </Box>
 
@@ -143,8 +145,6 @@ export default function SignUpSide() {
                    
                 </Box>
                 <Box>
-                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Contact No:</InputLabel>
-                    <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>Address:</InputLabel>
                     <TextField variant="outlined" inputProps={{style: {height: 1, width:642,border:"1px solid", borderRadius:"5px", outline:"none"}}}/>
                     <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", color:"black" }}>NIC:</InputLabel>
