@@ -20,7 +20,6 @@ const addPhysiotherapist = asyncHandler(async () => {
     // const result = await query(sql, [id, nic, first_name, last_name, email, hashedPassword, contact_no, address, dob, gender, qualification, mode, addedBy]);
     //
     // return result.rows[0].id;
-    console.log("addPhysiotherapist model");
 });
 
 
