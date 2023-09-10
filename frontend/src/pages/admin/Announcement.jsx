@@ -23,8 +23,14 @@ const Announcement = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [viewAnnouncementModalOpen, setViewAnnouncementModalOpen] = useState(false); 
+  const [announcementToView, setAnnouncementToView] = useState(null);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    // Also close the view announcement modal if it's open
+    setViewAnnouncementModalOpen(false);
+  };
   const [announcementData, setAnnouncementData] = useState([]);
   
   const [newAnnouncement, setNewAnnouncement] = useState({
@@ -79,7 +85,7 @@ const Announcement = () => {
     try {
      
       const res = await axios.get("http://localhost:8000/api/announcements/getannouncements");
-      console.log(res.data.data);
+      console.log("data under axios",res.data.data);
       setAnnouncementData(res.data.data);
 
       // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
@@ -157,6 +163,17 @@ const Announcement = () => {
       }
     });
   };
+
+  const openViewAnnouncementModal = (announcement) => {
+    setAnnouncementToView(announcement);
+    setViewAnnouncementModalOpen(true);
+  };
+
+  // Function to close the view announcement modal
+  const closeViewAnnouncementModal = () => {
+    setAnnouncementToView(null);
+    setViewAnnouncementModalOpen(false);
+  };
    
   return (
 
@@ -218,7 +235,7 @@ const Announcement = () => {
                               >
                                   <TableCell component="th" scope="row" align="left">
                                       <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.posted_on).toLocaleDateString()}</Typography>
-                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.posted_on).toLocaleTimeString()}</Typography>
+                                      <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "grey", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.posted_on).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.title}</Typography>
@@ -227,7 +244,7 @@ const Announcement = () => {
                       
                                   <TableCell align="left">
                                       <Box style={{display:"flex" }}>
-                                          <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
+                                          <Button variant="outlined" onClick={() => openViewAnnouncementModal(row)}  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
                                           <Button variant="outlined"sx={{color:color4, border:"1px solid #DC1E2A"}} onClick={showConfirmationDialog}>Delete</Button>
                                           
                                       </Box>
@@ -280,6 +297,37 @@ const Announcement = () => {
                         </Box>
                         
                     </Box>
+                </Modal>
+
+                {/* To view announcements individually */}
+                <Modal
+                  open={viewAnnouncementModalOpen}
+                  onClose={closeViewAnnouncementModal}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={modalStyle}>
+                    <FaRegTimesCircle onClick={closeViewAnnouncementModal} style={{ float: "right", cursor: "pointer", fontSize: "1.5rem", color: "#D8D9DA" }}
+                      onMouseEnter={(e) => {
+                        e.target.style.color = "#D71313";
+                        e.target.style.transform = "scale(1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.color = "#D8D9DA";
+                        e.target.style.transform = "scale(1)";
+                      }}
+                    />
+                    {announcementToView && (
+                      <Box sx={{ textAlign: "center", padding: "1%" }}>
+                        <Typography variant="body1" style={{ marginTop: "1%", textAlign: "left", fontWeight:"600", marginLeft: "4%", color: "#000000" }}>{announcementToView.title}</Typography>
+                        <Typography variant="body2" style={{ marginTop: "1%", textAlign: "left", marginLeft: "4%", color: "#B2BABB" }}>By: System Administrator - {new Date(announcementToView.posted_on).toLocaleDateString()}, {new Date(announcementToView.posted_on).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Typography><br />
+                        <Box sx={{width:"90%", textAlign:"justify", marginLeft:"4%"}}>
+                          {announcementToView.content}
+                        </Box>
+                        {/* <Typography variant="body1" style={{ marginTop: "1%", textAlign: "left", marginLeft: "4%", color: "#000000" }}>{announcementToView.content}</Typography> */}
+                      </Box>
+                    )}
+                  </Box>
                 </Modal>
      
     </Box>
