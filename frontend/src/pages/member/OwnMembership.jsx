@@ -164,12 +164,12 @@ const OwnMembership = () => {
                     <TableContainer component={Paper} sx={{ marginTop: "2%", width: "100%" }}>
                         <Table sx={{ minWidth: 650, boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }} aria-label="simple table">
                             <TableHead>
-                                <TableRow>
-                                    <TableCell align="center" sx={{fontWeight:"700"}}>Date</TableCell>
-                                    <TableCell align="center" sx={{fontWeight:"700"}}>Time</TableCell>
-                                    <TableCell align="center" sx={{fontWeight:"700"}}>Amount</TableCell>
-                                    <TableCell align="center" sx={{fontWeight:"700"}}>Method</TableCell>
-                                    <TableCell align="center" sx={{fontWeight:"700"}}></TableCell>
+                                <TableRow style={{backgroundColor:"#B2BABB"}}>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Date</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Time</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Amount</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Method</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -178,13 +178,13 @@ const OwnMembership = () => {
                                         key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell component="th" scope="row" align="center">
+                                        <TableCell component="th" scope="row" align="left">
                                             {row.Date}
                                         </TableCell>
-                                        <TableCell align="center">{row.time}</TableCell>
-                                        <TableCell align="center">{row.amount}</TableCell>
-                                        <TableCell align="center">{row.paymentMethod}</TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="left">{row.time}</TableCell>
+                                        <TableCell align="left">{row.amount}</TableCell>
+                                        <TableCell align="left">{row.paymentMethod}</TableCell>
+                                        <TableCell align="left">
                                             <Button variant="outlined">Bill</Button>
                                         </TableCell>
                                     </TableRow>

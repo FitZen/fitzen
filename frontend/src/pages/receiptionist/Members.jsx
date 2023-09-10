@@ -154,13 +154,12 @@ const Members= () => {
                     Add New</Button>
               </Typography>
               <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
-                        <Box sx={{display:"flex",height:"82vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
+                        <Box sx={{display:"flex",height:"77vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
                             {physicalMembers.map((member) => (
                                 <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                   
-                                  <img src={member.profile_pic === null ? avatar : `../../assets/${member.profile_pic}`} alt="item" style={{width:"100%", height:"60%", objectFit:"cover"}}></img>
-                                  <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{member.first_name} {member.last_name}</Typography>
-                                  <br/><Button variant="contained" style={{backgroundColor:"#96CDEF",borderColor:"black", color:"black", fontWeight:"700",marginBottom:'10px'}}>Payment</Button>
+                                  <img src={member.profile_pic === null ? avatar : `../../assets/${member.profile_pic}`} alt="item" style={{width:"100%", height:"60%", objectFit:"cover", marginBottom:"5%"}}></img>
+                                  <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{member.first_name} {member.last_name}</Typography><br />                               
                                   <Link to={`/receiptionist/memberprofile/Physical Member/${member.id}`} style={{textDecoration:"none", color:"black"}}>
                                       <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                   </Link>
@@ -176,12 +175,11 @@ const Members= () => {
   
             {selectedTab === 1 && (
                             <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
-                              <Box sx={{display:"flex",height:"82vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
+                              <Box sx={{display:"flex",height:"77vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
                                   {virtualMembers.map((member) => (
                                     <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"70%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"1rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
-                                      <img src={member.profile_pic === null ? avatar : `../../assets/${member.profile_pic}`} alt="item" style={{width:"80%", height:"60%", objectFit:"cover"}}></img>
-                                      <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{member.first_name} {member.last_name}</Typography>
-                                      <br/><Button variant="contained" style={{backgroundColor:"#96CDEF",borderColor:"black", color:"black", fontWeight:"700",marginBottom:'10px'}}>Payment</Button>
+                                      <img src={member.profile_pic === null ? avatar : `../../assets/${member.profile_pic}`} alt="item" style={{width:"100%", height:"60%", objectFit:"cover", marginBottom:"5%"}}></img>
+                                      <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{member.first_name} {member.last_name}</Typography><br />
                                       <Link to={`/receiptionist/memberprofile/Virtual Member/${member.id}`} style={{textDecoration:"none", color:"black"}}>
                                       <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                       </Link>
@@ -193,8 +191,6 @@ const Members= () => {
             )}
           </Box>
         </Box>
-  
-
         <Modal
           open={open}
           onClose={handleClose}

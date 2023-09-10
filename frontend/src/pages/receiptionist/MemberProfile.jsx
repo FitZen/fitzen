@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import avatar from '../../assets/avatar.jpg';
 import {PiMedalFill} from 'react-icons/pi';
@@ -11,6 +11,14 @@ import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const MemberProfile = () => {
 
@@ -60,6 +68,27 @@ const MemberProfile = () => {
     }
   
   };
+
+  const Bills = [
+    {
+      id: 1,
+      Date: "2021-08-28",
+      time: "10:00",
+      amount: "Rs. 5000.00",
+      paymentMethod : "Cash payment"
+      
+    },
+    {
+      id: 1,
+      Date: "2021-08-28",
+      time: "10:00",
+      amount: "Rs. 5000.00",
+      paymentMethod : "Cash payment"
+      
+    },
+  
+    
+  ]
 
   
   const currentDate = new Date();
@@ -149,7 +178,44 @@ const MemberProfile = () => {
                 </Box>
             </Box>
            
-        </Box>        
+        </Box>   
+
+        <Typography variant="h5" style={{ fontWeight: 600, marginTop: "4rem", textAlign:"left" }}>Payment History </Typography>
+          <Button variant="contained" color="primary" style={{ display: memberType === "Virtual Member" ? "none" : "" , backgroundColor:"#346E93",marginLeft:'83%' }} size="small" >Add New</Button>
+          <Box sx={{ padding: "1%", marginTop:"3%", overflowY: "auto", width: "90%", flexWrap: "wrap", border:"1px solid #346E93", borderRadius:"10px", height: "35vh", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
+                    <TableContainer component={Paper} sx={{ marginTop: "2%", width: "100%" }}>
+                        <Table sx={{ minWidth: 650, boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow style={{backgroundColor:"#B2BABB"}}>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Date</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Time</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Amount</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}>Method</TableCell>
+                                    <TableCell align="left" sx={{fontWeight:"700"}}></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {Bills.map((row) => (
+                                    <TableRow
+                                        key={row.name}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row" align="cleft">
+                                            {row.Date}
+                                        </TableCell>
+                                        <TableCell align="left">{row.time}</TableCell>
+                                        <TableCell align="left">{row.amount}</TableCell>
+                                        <TableCell align="left">{row.paymentMethod}</TableCell>
+                                        <TableCell align="left">
+                                            <Button variant="outlined">Bill</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+     
     
         
         </Box>
