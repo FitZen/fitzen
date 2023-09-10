@@ -18,6 +18,7 @@ import physiotherapistRoutes from "./routes/physiotherapistRoutes.js";
 import shakebarRoutes from "./routes/shakebarRoutes.js";
 import uploadRoutes from './routes/uploadRoutes.js';
 import membershipPlansRoutes from "./routes/membershipPlansRoutes.js";
+import shakebarManagerRoutes from "./routes/shakebarManagerRoutes.js";
 
 
 // start DB connection
@@ -51,6 +52,7 @@ app.use('/api/trainers', trainerRoutes);
 app.use('/api/physiotherapists', physiotherapistRoutes);
 app.use('/api/shakebarItems', shakebarRoutes);
 app.use('/api/membershipplans', membershipPlansRoutes);
+app.use('/api/shakebarmanagers', shakebarManagerRoutes);
 
 //upload routes
 app.use('/api/upload', uploadRoutes)
