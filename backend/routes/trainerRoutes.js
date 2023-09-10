@@ -7,7 +7,6 @@ import {
 import { protect, permit } from "../middleware/authMiddleware.js";
 
 
-// router.get("/viewtrainers",protect, permit('Admin'), getViewAllTrainers);
 router.get("/viewtrainers", getViewAllTrainers);
 // router.get("/viewtrainers", protect, getViewAllTrainers);
 router.post("/addtrainer", protect, permit('Admin'), addNewTrainer);

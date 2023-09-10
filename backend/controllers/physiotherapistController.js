@@ -64,7 +64,7 @@ const addNewPhysiotherapist = asyncHandler(async (req, res) => {
     if (await addPhysiotherapist(id, nic, first_name, last_name, email, password, contact_no, address, dob, gender, qualification, added_by) &&
         await sendEmail(subject, body, email)) {
         res.status(201).json({
-            message: "Trainer added successfully.",
+            message: "Physiotherapist added successfully.",
         });
     } else {
         res.status(500);
