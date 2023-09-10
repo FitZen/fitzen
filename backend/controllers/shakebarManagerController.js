@@ -32,46 +32,44 @@ const getAllShakebarManagers = asyncHandler(async (req, res) => {
 
 // add new shakebar manager
 const addNewShakebarManager = asyncHandler(async (req, res) => {
-    // const { nic, first_name, last_name, email, contact_no, address, dob, gender, qualification, mode} = req.body;
-    //
-    // if (await findUserByNIC(nic)) {
-    //     res.status(409);    // status code for conflict
-    //     throw new Error("NIC already exists.");
-    // }
-    //
-    // if (await findUserByEmail(email)) {
-    //     res.status(409);
-    //     throw new Error("Email already exists.");
-    // }
-    //
-    // if (await findUserByContactNo(contact_no)) {
-    //     res.status(409);
-    //     throw new Error("Contact no already exists.");
-    // }
-    //
-    // const addedBy = req.user.id;
-    //
-    // let id;
-    // do {
-    //     id = generateUserId('Trainer');
-    // } while (await findUserById(id));
-    //
-    // const password = generatePassword();
-    //
-    // const subject = getSubject();
-    // const body = getBody(first_name, email, password);
-    //
-    // if (await addTrainer(id, nic, first_name, last_name, email, password, contact_no, address, dob, gender, qualification, mode, addedBy) &&
-    //     await sendEmail(subject, body, email)) {
-    //     res.status(201).json({
-    //         message: "Trainer added successfully.",
-    //     });
-    // } else {
-    //     res.status(500);
-    //     throw new Error("Something went wrong!");
-    // }
-    console.log("addNewShakebarManager controller");
-    await addShakebarManager();
+    const { nic, first_name, last_name, email, contact_no } = req.body;
+
+    if (await findUserByNIC(nic)) {
+        res.status(409);    // status code for conflict
+        throw new Error("NIC already exists.");
+    }
+
+    if (await findUserByEmail(email)) {
+        res.status(409);
+        throw new Error("Email already exists.");
+    }
+
+    if (await findUserByContactNo(contact_no)) {
+        res.status(409);
+        throw new Error("Contact no already exists.");
+    }
+
+    const added_by = req.user.id;
+
+    let id;
+    do {
+        id = generateUserId('Shake Bar Manager');
+    } while (await findUserById(id));
+
+    const password = generatePassword();
+
+    const subject = getSubject();
+    const body = getBody(first_name, email, password);
+
+    if (await addShakebarManager(id, nic, first_name, last_name, email, password, contact_no, added_by) &&
+        await sendEmail(subject, body, email)) {
+        res.status(201).json({
+            message: "Shakebar Manager added successfully.",
+        });
+    } else {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
 });
 
 
