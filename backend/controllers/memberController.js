@@ -5,6 +5,16 @@ import {
     getViewVirtualMembers,
     addNewPhysicalMember
 } from "../models/memberModal.js";
+import {
+    findUserById,
+    findUserByNIC,
+    findUserByEmail,
+    findUserByContactNo,
+} from "../models/userModel.js";
+import generateUserId from "../utils/generateUserId.js";
+import generatePassword from "../utils/generatePassword.js";
+import sendEmail from "../utils/sendEmail.js";
+import { getSubject, getBody } from "../utils/EmpRegMailTemplate.js";
 
 
 //get all view members
@@ -55,20 +65,51 @@ const getAllViewVirtualMembers = asyncHandler(async (req, res) => {
 // add new physical member
 const addPhysicalMember = asyncHandler(async (req, res) => {
     const memberData = req.body;
+    const {first_name, nic, email, contact_no } = memberData;
     const addedByUserId = req.user.id;
 
-    const result = await addNewPhysicalMember(memberData, addedByUserId);
+    if (await findUserByNIC(nic)) {
+        res.status(409);    // status code for conflict
+        throw new Error("NIC already exists.");
+    }  
 
-    if (! result) {
+    if (await findUserByEmail(email)) {
+        res.status(409);
+        throw new Error("Email already exists.");
+    }
+
+    if (await findUserByContactNo(contact_no)) {
+        res.status(409);
+        throw new Error("Contact no already exists.");
+    }
+
+    let id;
+    do {
+        id = generateUserId('Physical Member');
+    } while (await findUserById(id));
+
+    const password = generatePassword();
+
+    memberData.id = id;
+    memberData.password = password;
+
+    const subject = getSubject();
+    const body = getBody(first_name, email, password);
+
+    console.log(memberData);
+    console.log(id,password,addedByUserId);
+
+    if(await addNewPhysicalMember(memberData, addedByUserId) && 
+    await sendEmail(subject, body, email)) {
+        res.status(201).json({
+            message: "Member added successfully.",
+        });
+    } else {
         res.status(500);
         throw new Error("Something went wrong!");
     }
-
-    res.status(201).json({
-        data: result,
-        message: "Member added successfully.",
-    });
 });
+
 
 export {
     getAllViewMembers,
