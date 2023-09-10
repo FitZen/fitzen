@@ -1,5 +1,6 @@
 import {query} from '../config/db.js';
 import asyncHandler from 'express-async-handler';
+import hashPassword from "../utils/hashPassword.js";
 
 
 //get all view members
@@ -30,8 +31,6 @@ const getViewVirtualMembers = asyncHandler(async () => {
 
 
 // add new physical member
-
-
 const addNewPhysicalMember = asyncHandler(async (memberData, addedByUserId) => {
     const { id, nic, first_name, last_name, email, password, contact_no, dob, gender, emergency_contact_no, address,
         membership, has_heart_disease, has_cardiovascular_condition, experiences_dizziness, has_blood_pressure, has_gout,
@@ -39,13 +38,17 @@ const addNewPhysicalMember = asyncHandler(async (memberData, addedByUserId) => {
         has_hips_pelvis_issues, has_neck_shoulder_issues, surgery_info, medication_info, other_health_notes       
     } = memberData;
 
+    // add height and weight to progress table
+    // membership eka eka membership table ekn enna one
+    const hashedPassword = await hashPassword(password);
+
     const physicalMemberSql = `
         INSERT INTO physicalMember (
         id, nic, first_name, last_name, email, password, contact_no, dob, gender, emergency_contact_no, address,  membership, added_by
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id `;
     
     const physicalMemberResult = await query(physicalMemberSql, [
-        id, nic, first_name, last_name, email, password, contact_no, dob, gender,  emergency_contact_no, address, membership,  addedByUserId
+        id, nic, first_name, last_name, email, hashedPassword, contact_no, dob, gender,  emergency_contact_no, address, membership,  addedByUserId
     ]);
 
     const healthInfoSql = `
