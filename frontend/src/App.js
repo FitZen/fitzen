@@ -158,7 +158,7 @@ function App() {
         <Route path="/receiptionist/instructors" element={<ViewInstructors />} />
         <Route path="/receiptionist/membership" element={<ViewMembership />} />
         <Route path="/receiptionist/reports" element={<ReceptionistReports />} />
-        <Route path="/receiptionist/memberprofile" element={<MemberProfile />} />
+        <Route path="/receiptionist/memberprofile/:memberType/:memberID" element={<MemberProfile />} />
         <Route path="/receiptionist/instructorprofile" element={<ReceptionViaInstructorProfile />} />
 
         <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
