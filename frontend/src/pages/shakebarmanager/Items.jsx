@@ -4,16 +4,17 @@ import { Typography,Grid,Table, TableBody, TableCell, TableContainer, TableHead,
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 import { useNavigate } from 'react-router-dom';
-import item1 from "../../assets/images (3).jpg"
+import item1 from "../../assets/images (3).jpg";
+import axios from 'axios';
 
 
 import {FaRegTimesCircle} from 'react-icons/fa';
 
-const data = [
-  { id: 1, name: 'Item 1', quantity: 10, price: 100, category: 'Category A', details: 'Details about Item 1' },
-  { id: 2, name: 'Item 2', quantity: 15, price: 150, category: 'Category B', details: 'Details about Item 2' },
-  // Add more items as needed
-];
+// const data = [
+//   { id: 1, name: 'Item 1', quantity: 10, price: 100, category: 'Category A', details: 'Details about Item 1' },
+//   { id: 2, name: 'Item 2', quantity: 15, price: 150, category: 'Category B', details: 'Details about Item 2' },
+//   // Add more items as needed
+// ];
 
 const Items = () => {
   const [open, setOpen] = React.useState(false);
@@ -21,12 +22,19 @@ const Items = () => {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
 
-  const [selectedItemId, setSelectedItemId] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
+  const [itemData, setItemData] = useState([]);
+  const [newItem, setNewItem] = useState({
+    id:"",
+    name:"",
+    unit_price:"",
+    category:"",
+    description:"",
+  });
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
   useEffect(() => {
+    viewItems();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -44,6 +52,23 @@ const Items = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  const viewItems = async () => {
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/shakebarItems/getshakebaritems");
+      console.log(res.data.data);
+      setItemData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
 
 
   const color1 = "#102B4C" //dark blue
@@ -96,18 +121,18 @@ const Items = () => {
                 <TableRow>
                   <TableCell style={{fontWeight:'700'}}>Item ID</TableCell>
                   <TableCell style={{fontWeight:'700'}}>Item Name</TableCell>
-                  <TableCell style={{fontWeight:'700'}}>Quantity</TableCell>
+                  {/* <TableCell style={{fontWeight:'700'}}>Quantity</TableCell> */}
                   <TableCell style={{fontWeight:'700'}}>Unit Price (LKR)</TableCell>
                   <TableCell style={{fontWeight:'700'}}>Category</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody style={{ backgroundColor: '#F5F5F5' }}>
-                {data.map((item) => (
+                {itemData.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>{item.id}</TableCell>
                     <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
-                    <TableCell>{item.price}</TableCell>
+                    {/* <TableCell>{item.quantity}</TableCell> */}
+                    <TableCell>{item.unit_price}</TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>
                         <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleOpen(item)}>
