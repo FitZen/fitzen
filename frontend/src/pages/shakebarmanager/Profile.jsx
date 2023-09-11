@@ -68,7 +68,7 @@ const Instructors = () => {
     ProfileImage = avatar;
   } else {
     const img = userData.profile_pic;
-    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+    ProfileImage = `../../assets/uploads/profile/${img}`; // Update this line to correctly display the profile image
   }
 
   return (

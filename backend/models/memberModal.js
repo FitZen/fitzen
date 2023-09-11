@@ -14,7 +14,7 @@ const getViewMembers = asyncHandler(async () => {
 
 //get all view physical members
 const getViewPhysicalMembers = asyncHandler(async () => {
-    const sql = 'SELECT * FROM physicalMember ORDER BY joined_on DESC;';
+    const sql = 'SELECT * FROM physicalMember ORDER BY added_on DESC;';
     const result = await query(sql);
 
     return result.rows;

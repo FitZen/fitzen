@@ -104,7 +104,7 @@ const MemberProfile = () => {
     ProfileImage = avatar;
   } else {
     const img = userData.profile_pic;
-    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+    ProfileImage = `../../assets/uploads/profile/${img}`; // Update this line to correctly display the profile image
   }
 
 
@@ -161,7 +161,7 @@ const MemberProfile = () => {
             <Box style={{width:"40%",}}>
                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", marginLeft: "", }}><FaTelegram style={{marginTop: "1rem"}}/>  Contact Information</Typography>
                 <Box style={{marginLeft:"1%"}}>
-                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: 6th Flr Paul CI Cent 24 Malwatte Road, 11</Typography>
+                    <Typography variant="h6" style={{ display: memberType === "Virtual Member" ? "none" : "", fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: {userData.address}</Typography>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email: {userData.email}</Typography>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) {userData.contact_no}</Typography>
                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Emergency Contact: (+94) {userData.emergency_contact_no}</Typography>
