@@ -63,6 +63,13 @@ const InstructorProfile = () => {
 
   }
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const birthDate = new Date(userData.dob);
+  const birthYear = birthDate.getFullYear();
+
+  const age = currentYear - birthYear;
+
   let ProfileImage;
 
   if (userData.profile_pic === null) {
@@ -103,12 +110,12 @@ const InstructorProfile = () => {
                                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Instructor ID: {userData.id}</Typography>
                                     <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Gender: {userData.gender}</Typography>
                                     <Typography variant="h6" style={{ display: instructorType === "Physiotherapist" ? "none" : "", fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mode: {userData.mode}</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Age: {userData.dob}</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Joined in: {userData.added_on}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Age: {age}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Joined in: {new Date(userData.added_on).toLocaleDateString()}</Typography>
                                 </Box>
                             </Box>
                         </Box>
-                        <Button variant="contained" style={{backgroundColor:"#000000", color:"#ffffff", width:"15%", height:"10%", marginTop:"1%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Send Request</Button>
+                        <Button variant="contained" style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", width:"15%", height:"10%", marginTop:"1%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Send Request</Button>
 
                     </Box>
                     <Box sx={{width:"95%"}}> 

@@ -62,6 +62,13 @@ const InstructorProfile = () => {
 
   }
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const birthDate = new Date(userData.dob);
+  const birthYear = birthDate.getFullYear();
+
+  const age = currentYear - birthYear;
+
   let ProfileImage;
 
   if (userData.profile_pic === null) {
@@ -99,10 +106,11 @@ const InstructorProfile = () => {
                             <Box>
                                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1%", marginLeft: "1rem", marginBottom:"2rem" }}>{userData.first_name} {userData.last_name}</Typography>
                                 <Box sx={{width:"400px", height:"auto", textAlign:"center", justifyContent:"center", borderRadius:"10px", marginLeft:"5%", padding:"7%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', }}>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Country: Sri Lanka</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Languages: Sinahala/English</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Instructor ID: {userData.id}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Gender: {userData.gender}</Typography>
                                     <Typography variant="h6" style={{ display: instructorType === "Physiotherapist" ? "none" : "", fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mode: {userData.mode}</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Packages: Usual Packages</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Age: {age}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Joined in: {new Date(userData.added_on).toLocaleDateString()}</Typography>
                                 </Box>
                             </Box>
                         </Box>
