@@ -113,7 +113,7 @@ const Items = () => {
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Items</Typography>
 
-          <Button variant="contained"  size="small" style={{ marginLeft: '65rem',marginTop:'-5rem',backgroundColor:"#346E93"  }} onClick={handleAddNewItemClick}>Add New</Button>
+          <Button variant="contained"  size="small" style={{ marginLeft: '68rem',marginTop:'-5rem',backgroundColor:"#346E93"  }} onClick={handleAddNewItemClick}>Add New</Button>
 
           <TableContainer component={Paper} style={{marginTop:'1rem',width:'95%',fontSize: '15px'}}>
             <Table>
@@ -121,7 +121,7 @@ const Items = () => {
                 <TableRow>
                   <TableCell style={{fontWeight:'700'}}>Item ID</TableCell>
                   <TableCell style={{fontWeight:'700'}}>Item Name</TableCell>
-                  {/* <TableCell style={{fontWeight:'700'}}>Quantity</TableCell> */}
+                  <TableCell style={{fontWeight:'700'}}>Quantity</TableCell>
                   <TableCell style={{fontWeight:'700'}}>Unit Price (LKR)</TableCell>
                   <TableCell style={{fontWeight:'700'}}>Category</TableCell>
                 </TableRow>
@@ -131,7 +131,7 @@ const Items = () => {
                   <TableRow key={item.id}>
                     <TableCell>{item.id}</TableCell>
                     <TableCell>{item.name}</TableCell>
-                    {/* <TableCell>{item.quantity}</TableCell> */}
+                    <TableCell>{item.availble_count}</TableCell>
                     <TableCell>{item.unit_price}</TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>
@@ -144,56 +144,6 @@ const Items = () => {
               </TableBody>
             </Table>
           </TableContainer>
-
-          {/* <Modal open={openModal} onClose={handleCloseModal}>
-            <Box sx={{ position: 'absolute', top: '50%', left: '55%',transform: 'translate(-50%, -50%)', width: 500, bgcolor: 'background.paper', boxShadow: 24,pb:4,pl:4 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <IconButton style={{marginLeft:'26.8rem',backgroundColor:'#CD0808',borderRadius:'0',color:'#ffffff',marginTop:'0px'}} onClick={handleCloseModal}>
-                  <CloseIcon />
-                </IconButton>
-              </div>
-
-              <img src={item1} style={{height:'150px',marginLeft:'8rem'}}></img>
-
-              <Grid item xs={10} md={6}>
-          
-            <form  style={{fontSize:'16px',marginLeft: '80px',lineHeight:'2.3em',marginTop:'10px'}}>
-                <label style={{marginRight:'60px'}}>Item Name:</label><br />
-                <label style={{marginRight:'70px'}}>Unit Price:</label><br />
-                <label style={{marginRight:'78px'}}>Category:</label><br />
-                <label style={{marginRight:'82px'}}>Quantity:</label><br />
-                <label style={{marginRight:'55px'}}>Description:</label><br />
-                <Button
-            variant="contained"
-            style={{
-              fontSize: '17px',
-              width: '100px',
-              marginLeft: '15px',
-              backgroundColor: "#346E93" ,
-              marginRight: '30px',
-              marginTop:'30px',
-              color: '#ffffff'
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            style={{
-              fontSize: '17px',
-              width: '120px',
-              backgroundColor: '#CD0808',
-              marginTop:'30px',
-              color: '#ffffff'
-            }}
-          >
-            Delete
-            </Button>
-           </form>
-       
-        </Grid>
-            </Box>
-          </Modal> */}
 
         </Box>
       </Box>
