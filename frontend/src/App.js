@@ -108,7 +108,7 @@ function App() {
         <Route path="/member/packages" element={<Packages />} />
         <Route path="/member/mealplan" element={<MealPlan />} />
         <Route path="/member/goals" element={<Goals />} />
-        <Route path="/member/instructorprofile" element={<InstructorProfile />} />
+        <Route path="/member/instructorprofile/:instructorType/:instructorID" element={<InstructorProfile />} />
         <Route path="/member/ownmembership" element={<OwnMembership />} />
         <Route path="/member/allocatedinstructorprofile" element={<AllocatedInstructorProfile />} />
         <Route path="/member/scheduletask/:clickedDay" element={<ScheduleTask />} />
@@ -159,7 +159,7 @@ function App() {
         <Route path="/receiptionist/membership" element={<ViewMembership />} />
         <Route path="/receiptionist/reports" element={<ReceptionistReports />} />
         <Route path="/receiptionist/memberprofile/:memberType/:memberID" element={<MemberProfile />} />
-        <Route path="/receiptionist/instructorprofile" element={<ReceptionViaInstructorProfile />} />
+        <Route path="/receiptionist/instructorprofile/:instructorType/:instructorID" element={<ReceptionViaInstructorProfile />} />
 
         <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
         <Route path="/physiotherapist/profile" element={<PhysiotherapistProfile />} />

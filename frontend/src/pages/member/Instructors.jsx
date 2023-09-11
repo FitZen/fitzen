@@ -1,123 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, useNavi }  from "react";
 import Box from "@mui/material/Box";
+import {Tabs, Tab,Typography, Button } from '@mui/material';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
-import Rating from '@mui/material/Rating';
-import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
+import axios from "axios";
+import avatar from '../../assets/avatar.jpg';
+import Rating from '@mui/material/Rating';
 
-import item1 from "../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg"
-import item2 from "../../assets/Trainers/ben-den-engelsen-YUu9UAcOKZ4-unsplash.jpg"
-import item3 from "../../assets/Trainers/christina-wocintechchat-com-SJvDxw0azqw-unsplash.jpg"
-import item4 from "../../assets/Trainers/jake-nackos-IF9TK5Uy-KI-unsplash.jpg"
-import item5 from "../../assets/Trainers/james-timothy-Kh3aTWwMH1I-unsplash.jpg"
-import item6 from "../../assets/Trainers/jonas-kakaroto-KIPqvvTOC1s-unsplash.jpg"
-import item7 from "../../assets/Trainers/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
-import item8 from "../../assets/Trainers/roland-cousins-3GTHyh2lo9o-unsplash.jpg"
-import item9 from "../../assets/Trainers/stephanie-liverani-Zz5LQe-VSMY-unsplash.jpg"
-import item10 from "../../assets/Trainers/jd-mason-2oUiUu5QAys-unsplash.jpg"
-import item11 from "../../assets/Trainers/tamarcus-brown-29pFbI_D1Sc-unsplash.jpg"
-import item12 from "../../assets/Trainers/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg"
-import { Link } from "react-router-dom";
+const Instructors= () => {
 
-const instructorsData = [
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item1,
-      },
-      {
-        name: "Mr. Warne",
-        workoutsFor: "Both",
-        mode: "Onsite only",
-        rating: 4,
-        image: item2,
-      },
-      {
-        name: "Mrs. Jhonson",
-        workoutsFor: "Female only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item3,
-      },
-      {
-        name: "Ms. Natalie",
-        workoutsFor: "Female only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item4,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item5,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item6,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item7,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item8,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item9,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item10,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item11,
-      },
-      {
-        name: "Mr. Jhonny",
-        workoutsFor: "Male only",
-        mode: "Onsite only",
-        rating: 4,
-        image: item12,
-      },
-    ];
-    
-
-const Instructors = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
 
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+  useEffect(() => {
+
+    viewTrainersList();
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -136,84 +40,118 @@ const Instructors = () => {
     };
   }, []);
 
-  const [item, setItem] = React.useState('');
+    const [selectedTab, setSelectedTab] = useState(0);
 
-  const handleChange = (event) => {
-    setItem(event.target.value);
-  };
+    const [trainers, setTrainers] = useState([]);
+    const [physiotherapists, setPhysiotherapists] = useState([]);
 
-  return (
-    <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
-      <Box>
-        <Sidebar sidebarLinkId = "2"/>
-      </Box>
-
-      <Box component="main" sx={{ flex: 1 }}>
+    const viewTrainersList = async () => {
+    
+      try {
+       
+        const res = await axios.get("http://localhost:8000/api/trainers/viewtrainers");
+        console.log(res.data.data);
+        setTrainers(res.data.data);
+  
+        // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+      } catch (error) {
+        console.error("Retrieving failed:", error);
+        // Handle error scenarios here
+      }
+    };
+  
+    const viewPhysiotherapistsList = async () => {
+      
+      try {
+       
+        const res = await axios.get("http://localhost:8000/api/physiotherapists/viewphysiotherapists");
+        console.log(res.data.data);
+        setPhysiotherapists(res.data.data);
+  
+        // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+      } catch (error) {
+        console.error("Retrieving failed:", error);
+        // Handle error scenarios here
+      }
+    };
+  
+    const handleTabChange = (event, newValue) => {
+      setSelectedTab(newValue);
+    };
+  
+  
+    return (
+      <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
+        <Box>
+          <Sidebar sidebarLinkId = "2" />
+        </Box>
+  
+        <Box component="main" sx={{ flex: 1 }}>
         <div
           className={`navbar ${fixedNavbar ? "fixed" : ""}`}
           style={{ width: "100%" }}
         >
           <Navbar />
         </div>
+          <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
+            <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" ,marginBottom:'1rem'}}>Instructors</Typography>
+  
+            <Tabs value={selectedTab} onChange={handleTabChange} aria-label="Report Tabs" style={{ backgroundColor: '#ffffff', width:"24%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+              <Tab label="Trainers" onClick={viewTrainersList}/>
+              <Tab label="Physiotherapists" onClick={viewPhysiotherapistsList}/>
+            </Tabs>
+  
+            {selectedTab === 0 && (
+              <Box>
+              <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
+                        <Box sx={{display:"flex",height:"80vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
+                            {trainers.map((instructor) => (
+                                <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"72%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"0.65rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
+                                  
+                                  <img src={instructor.profile_pic === null ? avatar : `../../assets/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"56.5%", objectFit:"cover", marginBottom:"3%"}}></img>
+                                  <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
+                                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
+                                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
+                                  <Rating name="read-only" value={3} readOnly /><br />                             
+                                  <Link to={`/member/instructorprofile/Trainer/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
+                                      <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
+                                  </Link>
+                                </Box>
+                            ))}
+                            
+                        </Box>
 
-        <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Instructors</Typography>
+                    </Box>
 
-          <Box sx={{ display: "flex", marginTop: "1rem" }}>
-            <FormControl style={{ width: "15%" }}>
-              <InputLabel id="demo-simple-select-label">All</InputLabel>
-              <Select
-                style={{ height: "85%" }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={item}
-                label="All"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>All</MenuItem>
-                <MenuItem value={20}>Trainers</MenuItem>
-                <MenuItem value={30}>Physiotherapists</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-
-          <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
-            <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
-              {instructorsData.map((instructor, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    width: "22%",
-                    textAlign: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "70%",
-                    cursor: "pointer",
-                    border: "2px solid white",
-                    borderRadius: "10px",
-                    padding: "1rem",
-                    marginRight: "3%",
-                    marginBottom: "1%",
-                    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-                    '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
-                  }}
-                >
-                  <img src={instructor.image} alt="item" style={{ width: "80%", height: "60%", objectFit: "cover" }} />
-                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 700 }}>{instructor.name}</Typography>
-                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
-                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
-                  <Rating name="read-only" value={instructor.rating} readOnly /><br />
-                  <Link to="/member/instructorprofile" style={{ textDecoration: "none" }}>
-                    <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>View Profile</Button>
-                  </Link>
-                </Box>
-              ))}
-            </Box>
+              </Box>
+            )}
+  
+            {selectedTab === 1 && (
+                            <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
+                              <Box sx={{display:"flex",height:"78vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
+                                {physiotherapists.map((instructor) => (
+                                    <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"68%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"0.65rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
+                                      
+                                      <img src={instructor.profile_pic === null ? avatar : `../../assets/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"62%", objectFit:"cover", marginBottom:"3%"}}></img>
+                                      <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
+                                      <Rating name="read-only" value={3} readOnly /><br />                             
+                                      <Link to={`/member/instructorprofile/Physiotherapist/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
+                                          <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
+                                      </Link>
+                                    </Box>
+                                ))}
+                                
+                            </Box>
+    
+                        </Box>  
+            )}
           </Box>
         </Box>
+
+  
+
       </Box>
-    </Box>
-  );
-};
+    );
+  };
 
 export default Instructors;

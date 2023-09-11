@@ -2,27 +2,31 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
-import ProfileImg from '../../assets/Trainers/sab-qadeer-nP2UzV4liWQ-unsplash.jpg';
+import avatar from '../../assets/avatar.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import Sidebar from "../../components/ReceiptionistSidebar";
 import Navbar from "../../components/ReceiptionistNavbar";
-import {FaUserEdit} from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
 
 const InstructorProfile = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const [userData, setUserData] = useState({});
     const navigate = useNavigate();
+
+    const { instructorID, instructorType } = useParams();
 
   useEffect(() => {
 
     if((localStorage.getItem('userType') !== '"Receptionist"')){
       navigate('/login');
     }
+
+    getUserDetails()
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -40,6 +44,39 @@ const InstructorProfile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  const getUserDetails = async () => {
+
+    try {
+      const reqData = {
+        userID: instructorID,
+        userType: instructorType,
+      };
+      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      setUserData(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+
+  }
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const birthDate = new Date(userData.dob);
+  const birthYear = birthDate.getFullYear();
+
+  const age = currentYear - birthYear;
+
+  let ProfileImage;
+
+  if (userData.profile_pic === null) {
+    ProfileImage = avatar;
+  } else {
+    const img = userData.profile_pic;
+    ProfileImage = `../../assets/${img}`; // Update this line to correctly display the profile image
+  }
 
   return (
 
@@ -62,17 +99,18 @@ const InstructorProfile = () => {
                 <Box>
                     <Box sx={{display:"flex", width:"100%"}}>
                         <Box sx={{width:"30%"}}>
-                            <img src={ProfileImg} alt="profile img" style={{width:"80%", borderRadius:"5px", objectFit:"cover"}} />
+                            <img src={ProfileImage} alt="profile img" style={{width:"80%", borderRadius:"5px", objectFit:"cover"}} />
                         </Box>
                         <Box sx={{display:"flex", width:"50%"}}>
                             <Box sx={{display:"flex", flexDirection:"column", backgroundColor:"#000000", width:"0.2rem", borderRadius:"5px", marginRight:"15%"}}></Box>
                             <Box>
-                                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1%", marginLeft: "1rem", marginBottom:"2rem" }}> Dhanush Perera</Typography>
+                                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1%", marginLeft: "1rem", marginBottom:"2rem" }}>{userData.first_name} {userData.last_name}</Typography>
                                 <Box sx={{width:"400px", height:"auto", textAlign:"center", justifyContent:"center", borderRadius:"10px", marginLeft:"5%", padding:"7%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', }}>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Country: Sri Lanka</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Languages: Sinahala/English</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mod: Onsite/Online</Typography>
-                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Packages: Usual Packages</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Instructor ID: {userData.id}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Gender: {userData.gender}</Typography>
+                                    <Typography variant="h6" style={{ display: instructorType === "Physiotherapist" ? "none" : "", fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Training Mode: {userData.mode}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Age: {age}</Typography>
+                                    <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Joined in: {new Date(userData.added_on).toLocaleDateString()}</Typography>
                                 </Box>
                             </Box>
                         </Box>
