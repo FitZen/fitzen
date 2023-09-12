@@ -59,6 +59,7 @@ import Items from './pages/shakebarmanager/Items';
 import SReports from './pages/shakebarmanager/Reports';
 import SProfile from './pages/shakebarmanager/Profile';
 import AddnewItem from './pages/shakebarmanager/AddnewItem';
+import EditShakebarManagerProfile from './pages/shakebarmanager/EditProfile';
 
 import TrainerDashboard from "./pages/trainer/Dashboard";
 import TrainerProfile from './pages/trainer/Profile';
@@ -120,7 +121,7 @@ function App() {
         <Route path="/shakebarmanager/reports" element={<SReports />} />
         <Route path="/shakebarmanager/profile" element={<SProfile />} />
         <Route path="/shakebarmanager/addnewitem" element={<AddnewItem />} />
-
+        <Route path="/shakebarmanager/editprofile" element={<EditShakebarManagerProfile />} />
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
