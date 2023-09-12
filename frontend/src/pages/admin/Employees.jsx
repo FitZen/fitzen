@@ -8,7 +8,7 @@ import { FaAddressCard, FaUserEdit, FaUserTie} from 'react-icons/fa';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -21,8 +21,12 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Employees = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -154,7 +158,7 @@ const Employees = () => {
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Receptionists</Typography>
                     <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
                     <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%" }}>47 are logged in </Typography>
-                    <Link to="/admin/receptionView" style={{textDecoration:"none", color:"black", marginLeft:"57%"}}>
+                    <Link to="/admin/receptionView/Reception" style={{textDecoration:"none", color:"black", marginLeft:"57%"}}>
                         <Button variant="outlined" style={{ color:color2, fontWeight: 700}}>View All</Button>
                     </Link>
                 </Box>
@@ -165,7 +169,9 @@ const Employees = () => {
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Shakebar Managers</Typography>
                       <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
                       <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%" }}>23 are logged in </Typography>
-                      <Button variant="outlined" style={{marginLeft:"52%",  color:color1 ,border:"1px solid #102B4C", fontWeight: 700}}>View All</Button>
+                      <Link to="/admin/receptionView/Shake Bar Manager" style={{textDecoration:"none", color:"black", marginLeft:"52%"}}>
+                        <Button variant="outlined" style={{ color:color2, fontWeight: 700}}>View All</Button>
+                    </Link>
                 </Box>
                 
             </Box>    
