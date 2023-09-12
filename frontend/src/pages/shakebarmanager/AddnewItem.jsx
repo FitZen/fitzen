@@ -83,7 +83,7 @@ const AddnewItem = () => {
             Items
           </Typography>
 
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1, width:"100%"}}>
             <Grid container spacing={2}>
               <Grid item xs={8} md={4}>
                 <Item style={{ marginRight: "50px" }}>
@@ -100,20 +100,20 @@ const AddnewItem = () => {
                 </Item>
               </Grid>
 
-              <Grid item xs={10} md={6}>
-                <Item>
+              <Grid item xs={10} md={6} sx={{padding:"1%"}}>
+                <Item sx={{padding:"1%"}}>
                   <form>
-                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", justifyContent:"space-between"}}>
+                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", marginRight:"2%", justifyContent:"space-between"}}>
                       <InputLabel sx={{marginRight:"4%", marginTop:"1%"}}>Item Name:</InputLabel>
                       <TextField type="text" inputProps={{style: {height: 1, width:350,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                     </Box>
                     
-                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", justifyContent:"space-between"}}>
+                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", marginRight:"2%", justifyContent:"space-between"}}>
                       <InputLabel sx={{marginRight:"4%", marginTop:"1%"}}>Unit Price:</InputLabel>
                       <TextField type="text" inputProps={{style: {height: 1, width:350,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                     </Box>
 
-                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", justifyContent:"space-between"}}>
+                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", marginRight:"2%", justifyContent:"space-between"}}>
                       <InputLabel sx={{marginRight:"4%", marginTop:"1%"}}>Category:</InputLabel>
                       <Select style= {{height:38, width:378,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}>
                         <MenuItem value="supplement">Supplement</MenuItem>
@@ -122,12 +122,12 @@ const AddnewItem = () => {
                       </Select>
                     </Box>
                    
-                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", justifyContent:"space-between"}}>
+                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", marginRight:"2%", justifyContent:"space-between"}}>
                       <InputLabel sx={{marginRight:"4%", marginTop:"1%"}}>Quantity:</InputLabel>
                       <TextField type="text" inputProps={{style: {height: 1, width:350,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                     </Box>
                     
-                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", justifyContent:"space-between"}}>
+                    <Box sx={{display:"flex", marginTop:"5%", marginLeft:"3%", marginRight:"2%", justifyContent:"space-between"}}>
                       <InputLabel sx={{marginRight:"4%", marginTop:"1%"}}>Description:</InputLabel>
                       <TextField type="text" inputProps={{style: {height: 1, width:350,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                     </Box>

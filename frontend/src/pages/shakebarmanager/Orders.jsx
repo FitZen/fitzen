@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import {Typography,Tabs,Tab,Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper,Button} from '@mui/material';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
-import { positions } from '@mui/system';
+
 
 const Orders = () => {
 
@@ -76,11 +76,11 @@ const Orders = () => {
         return (
 
           
- <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
-            <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
-            <TableContainer component={Paper} style={{ fontSize: '15px',width:'95%'}}>
-            <Table>
-              <TableHead style={{positions:'fixed'}}>
+ <Box sx={{ display: "flex", width: "96%", height: "60%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
+            <Box sx={{ display: "flex", height: "60vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
+            <TableContainer component={Paper} style={{ fontSize: '15px',width:'95%',marginLeft:'2rem'}}>
+            <Table >
+              <TableHead style={{}}>
                 <TableRow>
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
@@ -137,7 +137,7 @@ const Orders = () => {
           <ShakebarmanagerNavbar />
         </div>
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem",marginBottom:'3rem', textAlign:"left" }}>Orders</Typography>
+          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem",marginBottom:'2rem', textAlign:"left" }}>Orders</Typography>
               
      
         <div>
