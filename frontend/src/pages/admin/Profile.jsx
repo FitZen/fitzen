@@ -71,7 +71,9 @@ const Profile = () => {
     ProfileImage = avatar;
   } else {
     const img = userData.profile_pic;
-    ProfileImage = `../../assets/uploads/profile/${img}`; // Update this line to correctly display the profile image
+    ProfileImage = `http://localhost:3000/Profile/${img}`; // Update this line to correctly display the profile image
+    console.log(ProfileImage);
+    console.log(avatar)
   }
 
   return (
@@ -94,7 +96,7 @@ const Profile = () => {
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Profile</Typography>
         <Box sx={{ display:"flex", width: "100%", height:"100%"}}> 
           <Box sx={{ width: "25%", marginTop:"3rem", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                  <img src={ProfileImage} alt="Profile" width="100%" height="300px" style={{borderRadius:"10px"}}/>
+                  <img src={ProfileImage} alt="Profile" width="100%" height="300px" style={{borderRadius:"10px", objectFit:"cover"}}/>
               </Box>
               <Box sx={{display:"flex", width: "75%", height:"100%", marginTop:"3rem", marginLeft:"2%", justifyContent:"center"}}>
                   <Box sx={{width:"40%"}}>
