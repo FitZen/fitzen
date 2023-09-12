@@ -103,7 +103,7 @@ let ProfileImage;
     ProfileImage = avatar;
   } else {
     const img = userData.profile_pic;
-    ProfileImage = `../assets/${img}`; // Update this line to correctly display the profile image
+    ProfileImage = `http://localhost:3000/Profile/${img}`; // Update this line to correctly display the profile image
   }
 
 
@@ -181,7 +181,7 @@ let ProfileImage;
             color="inherit"
           >
             {/* <AccountCircle /> */}
-            <img src={ProfileImage} alt="Profile" width="30px" height="30px"  style={{borderRadius:"50px"}}/>
+            <img src={ProfileImage} alt="Profile" width="30px" height="30px"  style={{borderRadius:"50px", objectFit:"cover"}}/>
           </IconButton>
           <p style={{fontSize:"13px", marginLeft:"0.2rem"}}>Profile</p>
         </MenuItem>

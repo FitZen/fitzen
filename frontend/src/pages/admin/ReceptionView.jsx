@@ -10,6 +10,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Swal from "sweetalert2";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ReceptionView = () => {
 
@@ -22,9 +23,21 @@ const ReceptionView = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [receptionData, setReceptionData] = useState([]);
+  const [shakeOpen, setShakeOpen] = React.useState(false);
+  const handleShakeOpen = () => setShakeOpen(true);
+  const handleShakeClose = () => setShakeOpen(false);
+  const [employeeData, setEmployeeData] = useState([]);
+  const navigate = useNavigate();
+  const {employeeType} = useParams();
   
   const [newReception, setNewReception] = useState({
+    first_name: "",
+    last_name: "",
+    nic: "",
+    email: "",
+    contact_no: "",
+  });
+  const [newManager, setNewManager] = useState({
     first_name: "",
     last_name: "",
     nic: "",
@@ -55,7 +68,17 @@ const ReceptionView = () => {
 
   useEffect(() => {
 
-    viewReceptionList();
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+
+    if(employeeType === "Reception"){
+      viewReceptionList();
+    }
+    else{
+      viewShakeBarManagersList();
+    }
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -80,7 +103,22 @@ const ReceptionView = () => {
      
       const res = await axios.get("http://localhost:8000/api/receptionists/getreceptionists");
       console.log(res.data.data);
-      setReceptionData(res.data.data);
+      setEmployeeData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  const viewShakeBarManagersList = async () => {
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/shakebarmanagers/getshakebarmanagers");
+      console.log(res.data.data);
+      setEmployeeData(res.data.data);
 
       // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
     } catch (error) {
@@ -94,6 +132,14 @@ const ReceptionView = () => {
     const { name, value } = event.target;
     setNewReception((prevReception) => ({
       ...prevReception,
+      [name]: value,
+    }));
+  };
+
+  const handleShakeInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewManager((prevManager) => ({
+      ...prevManager,
       [name]: value,
     }));
   };
@@ -143,6 +189,51 @@ const ReceptionView = () => {
     }
   };
 
+  const handleShakeSubmit = async () => {
+
+    if (!newManager.first_name || !newManager.last_name || !newManager.nic || !newManager.email || !newManager.contact_no) {
+      // Display error messages or styles for empty fields
+      setSubmitted(true);
+      return;
+    }  
+
+    try {
+      const payload = {
+        first_name: newManager.first_name,
+        last_name: newManager.last_name,
+        nic: newManager.nic,
+        email: newManager.email,
+        contact_no: newManager.contact_no,
+        userID: JSON.parse(localStorage.getItem("userID")),	
+      };
+
+      console.log(payload);
+
+      const res = await axios.post(
+        "http://localhost:8000/api/shakebarmanagers/addshakebarmanager",
+        payload
+      );
+  
+      if (res.status === 201) {
+        handleShakeClose(); // Close the modal
+        viewShakeBarManagersList(); // Refresh the announcement list
+        setNewManager({ first_name:"", last_name:"", nic:"", email:"",contact_no:"" }); // Clear the form
+        setSubmitted(false);
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Shake Bar Manager Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    } catch (error) {
+      console.error("Adding Shake Bar Manager failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
   return (
 
 
@@ -161,8 +252,8 @@ const ReceptionView = () => {
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
            
           <Box sx={{display:"flex", marginTop:"5rem", justifyContent:"space-between"}}>
-            <Typography variant="h4" style={{ fontWeight: 700, textAlign:"left" }}>Receptionists</Typography>
-            <Button variant="contained" onClick={handleOpen} sx={{backgroundColor: color2, marginRight:"7%", marginBottom:"3%",'&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaPlus />&nbsp; Add New</Button>
+            <Typography variant="h4" style={{ fontWeight: 700, textAlign:"left" }}>{employeeType === "Reception" ? "Receiptionists" : "Shake Bar Managers"}</Typography>
+            <Button variant="contained" onClick={employeeType === "Reception" ? handleOpen : handleShakeOpen} sx={{backgroundColor: color2, marginRight:"7%", marginBottom:"3%",'&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaPlus />&nbsp; Add New</Button>
           </Box>
 
           <Box sx={{width:"93%", height:"80vh", overflowY:"auto", flexWrap:"wrep", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
@@ -170,7 +261,7 @@ const ReceptionView = () => {
                   <Table sx={{ minWidth: 650, }} aria-label="simple table">
                       <TableHead>
                           <TableRow>
-                              <TableCell align="left" sx={{fontWeight:"600"}}>Receptionist ID</TableCell>
+                              <TableCell align="left" sx={{fontWeight:"600"}}>Employee ID</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Name</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Email</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Contact No</TableCell>
@@ -178,7 +269,7 @@ const ReceptionView = () => {
                           </TableRow>
                       </TableHead>
                       <TableBody>
-                          {receptionData.map((row) => (
+                          {employeeData.map((row) => (
                               <TableRow
                                   key={row.name}
                                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -211,7 +302,7 @@ const ReceptionView = () => {
         </Box>
       </Box>
 
-      <Modal
+                <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
@@ -246,6 +337,48 @@ const ReceptionView = () => {
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
                               <Button onClick={handleSubmit} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Receptionist</Button>
+                            </Box>
+                            
+                           
+                        </Box>
+                        
+                    </Box>
+                </Modal>
+                <Modal
+                    open={shakeOpen}
+                    onClose={handleShakeClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={modalStyle}>
+                        <FaRegTimesCircle onClick={handleShakeClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                            onMouseEnter={(e) => {
+                                e.target.style.color = "#D71313";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.color = "#D8D9DA";
+                                e.target.style.transform = "scale(1)";
+                            }}
+                        />
+                        <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                            
+                        </Box>
+                        
+                        <Box sx={{textAlign:"center", padding:"1%"}}>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>First Name:</InputLabel>
+                            <TextField variant="outlined" name="first_name" value={newManager.first_name} onChange={handleShakeInputChange} error={submitted && !newManager.first_name} helperText={submitted && !newManager.first_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Last Name:</InputLabel>
+                            <TextField variant="outlined" name="last_name" value={newManager.last_name} onChange={handleShakeInputChange} error={submitted && !newManager.last_name} helperText={submitted && !newManager.last_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>NIC:</InputLabel>
+                            <TextField variant="outlined" name="nic" value={newManager.nic} onChange={handleShakeInputChange} error={submitted && !newManager.nic} helperText={submitted && !newManager.nic ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Email:</InputLabel>
+                            <TextField variant="outlined" name="email" value={newManager.email} onChange={handleShakeInputChange} error={submitted && !newManager.email} helperText={submitted && !newManager.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
+                            <TextField variant="outlined" name="contact_no" value={newManager.contact_no} onChange={handleShakeInputChange} error={submitted && !newManager.contact_no} helperText={submitted && !newManager.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            
+                            <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
+                              <Button onClick={handleShakeSubmit}  variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Shake Bar Manager</Button>
                             </Box>
                             
                            

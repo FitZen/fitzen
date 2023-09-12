@@ -110,7 +110,7 @@ const Instructors= () => {
                                 {trainers.map((instructor) => (
                                     <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"72%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"0.65rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                       
-                                      <img src={instructor.profile_pic === null ? avatar : `../../assets/uploads/profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"56.5%", objectFit:"cover", marginBottom:"3%"}}></img>
+                                      <img src={instructor.profile_pic === null ? avatar : `http://localhost:3000/Profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"56.5%", objectFit:"cover", marginBottom:"3%"}}></img>
                                       <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
                                       <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
                                       <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
@@ -134,7 +134,7 @@ const Instructors= () => {
                                     {physiotherapists.map((instructor) => (
                                         <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"68%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"0.65rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                           
-                                          <img src={instructor.profile_pic === null ? avatar : `../../assets/uploads/profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"62%", objectFit:"cover", marginBottom:"3%"}}></img>
+                                          <img src={instructor.profile_pic === null ? avatar : `http://localhost:3000/Profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"62%", objectFit:"cover", marginBottom:"3%"}}></img>
                                           <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
                                           <Rating name="read-only" value={3} readOnly /><br />                             
                                           <Link to={`/receiptionist/instructorprofile/Physiotherapist/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
