@@ -133,7 +133,7 @@ function App() {
         <Route path="/admin/report" element={<Adminreport />} />
         <Route path="/admin/membershipplans" element={<MembershipPlans />} />
         <Route path="/admin/trainerpackages" element={<TrainerPackages />} />
-        <Route path="/admin/receptionview" element={<ReceptionView />} />
+        <Route path="/admin/receptionview/:employeeType" element={<ReceptionView />} />
         <Route path="/admin/memberlist/:memberType" element={<MemberList />} />
         <Route path="/admin/instructorlist/:instructorType" element={<InstructorList />} />
 
