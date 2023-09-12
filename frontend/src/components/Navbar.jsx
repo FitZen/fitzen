@@ -106,7 +106,7 @@ export default function PrimarySearchAppBar() {
     ProfileImage = avatar;
   } else {
     const img = userData.profile_pic;
-    ProfileImage = `../assets/${img}`; // Update this line to correctly display the profile image
+    ProfileImage = `http://localhost:3000/Profile/${img}`; // Update this line to correctly display the profile image
   }
 
   const menuId = 'primary-search-account-menu';
