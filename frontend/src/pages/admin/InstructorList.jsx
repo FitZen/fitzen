@@ -272,6 +272,7 @@ const InstructorList = () => {
                               <TableCell align="left" sx={{fontWeight:"600"}}>Contact No</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Added On</TableCell>
                               {instructorType === "Trainer" ? <TableCell align="left" sx={{fontWeight:"600"}}>Training Mode</TableCell> : null}
+                              <TableCell align="left" sx={{fontWeight:"600"}}></TableCell>
                           </TableRow>
                       </TableHead>
                       <TableBody>
@@ -298,6 +299,12 @@ const InstructorList = () => {
                                   {instructorType === "Trainer" ? <TableCell align="left" sx={{fontWeight:"600"}}>
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.mode}</Typography>
                                   </TableCell> : null}
+                                  <TableCell align="left">
+                                    <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
+                                  </TableCell>
+                                  {/* <TableCell align="left">
+                                    <Button variant="outlined" color="#346E93" style={{height:"5%", fontWeight: 700, marginTop: '0.3rem'}} >View</Button>
+                                  </TableCell> */}
                               </TableRow>
                           ))}
                       </TableBody>
