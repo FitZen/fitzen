@@ -188,23 +188,6 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}>
-              <Badge variant="dot" color="error">
-                <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
-              </Badge>
-            </IconButton>
-            <Link to="" style={{textDecoration:"none", color:"black"}}>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-                style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}
-              >
-                <Badge variant="dot" color="error" style={{marginRight:"10px"}}>
-                <NotificationsIcon style={{ fontSize: "1.2rem", color: "black" }} />
-                </Badge>
-              </IconButton>
-            </Link>
             <Typography  variant='subtitle1' component="div" sx={{ flexGrow: 1, mt:2, mr:1, fontSize:"14px", color:"black", fontWeight:700 }}>
                 {userData.first_name} {userData.last_name}
                 <Typography variant="subtitle2"  gutterBottom sx={{ flexGrow: 1, fontSize:"12px", color:"grey", fontWeight:500, textAlign:"right" }}>
