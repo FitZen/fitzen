@@ -7,8 +7,7 @@ import {FaBitbucket} from "react-icons/fa";
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
-import {FaRegTimesCircle} from 'react-icons/fa';
-
+import {FaRegTimesCircle, FaPlus} from 'react-icons/fa';
 
 const instructorsData = [
       {
@@ -117,64 +116,125 @@ const MembershipPlans = () => {
         </div>
 
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
-          <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Membership Plans</Typography>
-
-          <Box sx={{ display: "flex", marginTop: "1rem", justifyContent:"space-between", width:"96%" }}>
-            <FormControl style={{ width: "15%" }}>
-              <InputLabel id="demo-simple-select-label">All</InputLabel>
-              <Select
-                style={{ height: "85%" }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={item}
-                label="All"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>All</MenuItem>
-                <MenuItem value={20}>Membership packages</MenuItem>
-                <MenuItem value={30}>Trainer packages</MenuItem>
-              </Select>
-            </FormControl>
-           
-              <Box sx={{}}>
-                <Button variant="contained" onClick={handleOpen} style={{backgroundColor:color2}}> Add New Membership Plan</Button>
+          <Box sx={{display:"flex", marginTop: "5rem"}}>
+              <Typography variant="h4" style={{ fontWeight: 700, textAlign: "left" , marginRight:"47.5%"}}>Membership Plans</Typography>
+              <Box>
+                <Button variant="contained" onClick={handleOpen} style={{backgroundColor:color2}}><FaPlus/>&nbsp;&nbsp;Add New Membership Plan</Button>
               </Box>
-     
           </Box>
-
-          <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
-            <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
-              {instructorsData.map((instructor, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    width: "22%",
-                    textAlign: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "60%",
-                    cursor: "pointer",
-                    border: "2px solid white",
-                    borderRadius: "10px",
-                    padding: "1rem",
-                    marginRight: "3%",
-                    marginBottom: "1%",
-                    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-                    '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
-                  }}
-                >
-                  <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
-                  <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>({instructor.type})</Typography><br />
-                  <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact1}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
-                  <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
-                  <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Edit</Button>
-                </Box>
-              ))}
+          <Box sx={{display:"block", marginTop:"3rem"}}>
+            <Box>
+              <Typography variant="h6" style={{ fontWeight: 700, textAlign: "left" }}>Bronze Packages</Typography>
             </Box>
+            
+            <Box sx={{ display: "flex", height: "40vh", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "0.1rem", marginTop: "0.5rem" }}>
+                {instructorsData.map((instructor, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: "22%",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      cursor: "pointer",
+                      border: "2px solid white",
+                      borderRadius: "10px",
+                      padding: "1rem",
+                      marginRight: "3%",
+                      marginBottom: "1%",
+                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                      '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
+                    }}
+                  >
+                    <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
+                    <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact1}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
+                    <Button variant="outlined" color="error" style={{fontWeight: "700" }}>Delete</Button>
+                  </Box>
+                ))}
+              </Box>
+              
           </Box>
+          <Box sx={{display:"block", marginTop:"3rem"}}>
+            <Box>
+              <Typography variant="h6" style={{ fontWeight: 700, textAlign: "left" }}>Silver Packages</Typography>
+            </Box>
+            
+            <Box sx={{ display: "flex", height: "40vh", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "0.1rem", marginTop: "0.5rem" }}>
+                {instructorsData.map((instructor, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: "22%",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      cursor: "pointer",
+                      border: "2px solid white",
+                      borderRadius: "10px",
+                      padding: "1rem",
+                      marginRight: "3%",
+                      marginBottom: "1%",
+                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                      '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
+                    }}
+                  >
+                    <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
+                    <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact1}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
+                    <Button variant="outlined" color="error" style={{fontWeight: "700" }}>Delete</Button>
+                  </Box>
+                ))}
+              </Box>
+              
+          </Box>
+          <Box sx={{display:"block", marginTop:"3rem"}}>
+            <Box>
+              <Typography variant="h6" style={{ fontWeight: 700, textAlign: "left" }}>Gold Packages</Typography>
+            </Box>
+            
+            <Box sx={{ display: "flex", height: "40vh", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "0.1rem", marginTop: "0.5rem" }}>
+                {instructorsData.map((instructor, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: "22%",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                      cursor: "pointer",
+                      border: "2px solid white",
+                      borderRadius: "10px",
+                      padding: "1rem",
+                      marginRight: "3%",
+                      marginBottom: "1%",
+                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                      '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
+                    }}
+                  >
+                    <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{instructor.month}</Typography>
+                    <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{instructor.price}</Typography><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact1}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact2}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact3}</span><br />
+                    <span style={{ fontSize: "12px", fontWeight: 500 }}><FaBitbucket /> {instructor.fact4}</span><br /><br />
+                    <Button variant="outlined" color="error" style={{fontWeight: "700" }}>Delete</Button>
+                  </Box>
+                ))}
+              </Box>
+              
+          </Box>
+          
+         
         </Box>
       </Box>
         
