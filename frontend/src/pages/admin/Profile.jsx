@@ -103,16 +103,17 @@ const Profile = () => {
                       <Typography variant="h5" style={{ fontWeight: 700, textAlign:"left" }}><PiMedalFill />  Personal Information</Typography>
                       <Box sx={{marginLeft:"7%"}}>
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Name: {userData.first_name} {userData.last_name}</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Age: {age}</Typography>
+                        {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Age: {age}</Typography> */}
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>NIC: {userData.nic}</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>DOB: {new Date(userData.dob).toLocaleDateString()}</Typography>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Gender: {userData.gender}</Typography>
+                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>User ID: {userData.id}</Typography>
+                        {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>DOB: {new Date(userData.dob).toLocaleDateString()}</Typography> */}
+                        {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Gender: {userData.gender}</Typography> */}
                       </Box>
                   </Box>	
                   <Box sx={{width:"60%"}}>
                     <Typography variant="h5" style={{ fontWeight: 700, textAlign:"left" }}><FaTelegram />  Contact Information</Typography>
                     <Box style={{ marginLeft:"7%"}}>
-                        <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: 6th Flr Paul CI Cent 24 Malwatte Road, 11</Typography>
+                        {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Address: 6th Flr Paul CI Cent 24 Malwatte Road, 11</Typography> */}
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Email: {userData.email}</Typography>
                         {/* <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: (+94) {(userData.contact_no).slice(1,3)} {(userData.contact_no).slice(3,6)} {(userData.contact_no).slice(6)}</Typography> */}
                         <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left"}}>Contact Number: {userData.contact_no}</Typography>
