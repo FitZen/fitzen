@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography,TextField, Button, FormControl, InputLabel, Select, MenuItem, Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper } from "@mui/material";
+import { Typography,TextField, Button, FormControl, InputLabel, Select, MenuItem, Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper, Tab } from "@mui/material";
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {FaPlus} from "react-icons/fa";
@@ -129,6 +129,7 @@ const MemberList = () => {
                               <TableCell align="left" sx={{fontWeight:"600"}}>Email</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Contact No</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Added On</TableCell>
+                              <TableCell align="left" sx={{fontWeight:"600"}}></TableCell>
                           </TableRow>
                       </TableHead>
                       <TableBody>
@@ -150,8 +151,14 @@ const MemberList = () => {
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.contact_no}</Typography>
                                   </TableCell>
                                   <TableCell align="left">
-                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{new Date(row.joined_on).toLocaleDateString()}</Typography>
+                                    <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{(memberType === "Virtual") ? new Date(row.joined_on).toLocaleDateString() : new Date(row.added_on).toLocaleDateString()}</Typography>
                                   </TableCell>  
+                                  <TableCell align="left">
+                                    <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
+                                  </TableCell>
+                                  {/* <TableCell align="left">
+                                    <Button variant="contained" style={{height:"5%", backgroundColor:color2, color:"white", fontWeight: 700, marginTop: '0.3rem'}} onClick={handleOpen}>View</Button>
+                                  </TableCell> */}
                               </TableRow>
                           ))}
                       </TableBody>
