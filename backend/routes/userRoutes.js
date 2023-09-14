@@ -17,7 +17,8 @@ router.post("/logout", protect, logoutUser);
 router.get("/details", protect, getUserAllDetails);
 // router.post("/logout", logoutUser);
 // router.get("/details", getUserAllDetails);
-router.get("/totalusercount", protect, permit('Admin'), getTotalUserCount);
-router.get("/activeusercount", protect, permit('Admin'), getActiveUserCount);
+
+router.get("/total/count", protect, permit('Admin'), getTotalUserCount);
+router.get("/active/count", protect, permit('Admin'), getActiveUserCount);
 
 export default router;
