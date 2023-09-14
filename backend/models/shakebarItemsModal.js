@@ -13,9 +13,9 @@ const getShakeBarItems = asyncHandler(async () => {
 
 
 // add shakebar item
-const addShakeBarItem = asyncHandler(async (name, unitPrice, category, quantity, description) => {
-    const sql = 'INSERT INTO shakeBarItems (name, unit_price, quantity, category, description) VALUES ($1, $2, $3, $4,$5) RETURNING id';
-    const result = await query(sql, [name, unitPrice, quantity, category, description]);
+const addShakeBarItem = asyncHandler(async (name, unitPrice, category, description,availble_count) => {
+    const sql = 'INSERT INTO shakeBarItems (name, unit_price, category, description,availble_count) VALUES ($1, $2, $3, $4,$5) RETURNING id';
+    const result = await query(sql, [name, unitPrice, category, description,availble_count]);
 
 
     return result.rows[0].id;
