@@ -9,7 +9,6 @@ import {
     totalUserCount,
     activeUserCount,
 } from "../models/userModel.js";
-import sendEmail from "../utils/sendEmail.js";
 
 
 // desc    login user
