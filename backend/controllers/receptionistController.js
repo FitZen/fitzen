@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {
     getReceptionists,
     addReceptionist,
+    receptionistCount,
 } from "../models/receptionistModel.js";
 import {
     findUserById,
@@ -73,7 +74,23 @@ const addNewReceptionist = asyncHandler(async (req, res) => {
 });
 
 
+// get receptionist count
+const getReceptionistCount = asyncHandler(async (req, res) => {
+    const count = await receptionistCount();
+
+    if (! count) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getAllReceptionists,
     addNewReceptionist,
+    getReceptionistCount,
 }

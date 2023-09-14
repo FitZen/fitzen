@@ -23,7 +23,17 @@ const addShakebarManager = asyncHandler(async (id, nic, first_name, last_name, e
 });
 
 
+// shakebar manager count
+const shakebarManagerCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Shake Bar Manager\' AND (status = \'Active\' OR status = \'Inactive\');';
+    const result = await query(sql);
+
+    return result.rows[0].count;
+});
+
+
 export{
     getShakebarManagers,
     addShakebarManager,
+    shakebarManagerCount,
 };

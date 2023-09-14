@@ -23,7 +23,17 @@ const addReceptionist = asyncHandler(async (id, nic, firstName, lastName, email,
 });
 
 
+// receptionist count
+const receptionistCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Receptionist\' AND (status = \'Active\' OR status = \'Inactive\');';
+    const result = await query(sql);
+
+    return result.rows[0].count;
+});
+
+
 export {
     getReceptionists,
     addReceptionist,
+    receptionistCount,
 }

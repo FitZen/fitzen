@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {
     getShakebarManagers,
     addShakebarManager,
+    shakebarManagerCount,
 } from "../models/shakebarManagerModel.js";
 import {
     findUserById,
@@ -73,7 +74,23 @@ const addNewShakebarManager = asyncHandler(async (req, res) => {
 });
 
 
+// get shakebar manager count
+const getShakebarManagerCount = asyncHandler(async (req, res) => {
+    const count = await shakebarManagerCount();
+
+    if (! count) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getAllShakebarManagers,
     addNewShakebarManager,
+    getShakebarManagerCount,
 };
