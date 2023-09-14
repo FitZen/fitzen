@@ -6,7 +6,6 @@ import {
     getPhysiotherapistCount,
 } from "../controllers/physiotherapistController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
-import {getTrainerCount} from "../controllers/trainerController.js";
 
 
 router.get("/viewphysiotherapists", getViewAllPhysiotherapists);
