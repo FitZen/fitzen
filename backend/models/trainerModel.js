@@ -23,7 +23,17 @@ const addTrainer = asyncHandler(async (id, nic, first_name, last_name, email, pa
 });
 
 
+// trainer count
+const trainerCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Trainer\' AND (status = \'Active\' OR status = \'Inactive\');';
+    const result = await query(sql);
+
+    return result.rows[0].count;
+});
+
+
 export{
     getViewTrainers,
     addTrainer,
+    trainerCount,
 };

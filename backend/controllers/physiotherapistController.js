@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {
     getViewPhysiotherapists,
     addPhysiotherapist,
+    physiotherapistCount,
 } from "../models/physiotherapistModel.js";
 import {
     findUserById,
@@ -73,7 +74,23 @@ const addNewPhysiotherapist = asyncHandler(async (req, res) => {
 });
 
 
+// get physiotherapist count
+const getPhysiotherapistCount = asyncHandler(async (req, res) => {
+    const count = await physiotherapistCount();
+
+    if (! count) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getViewAllPhysiotherapists,
     addNewPhysiotherapist,
+    getPhysiotherapistCount,
 };
