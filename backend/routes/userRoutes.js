@@ -4,6 +4,8 @@ import {
     loginUser,
     logoutUser,
     getUserAllDetails,
+    getTotalUserCount,
+    getActiveUserCount,
 } from "../controllers/userController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -15,6 +17,7 @@ router.post("/logout", protect, logoutUser);
 router.get("/details", protect, getUserAllDetails);
 // router.post("/logout", logoutUser);
 // router.get("/details", getUserAllDetails);
-
+router.get("/totalusercount", protect, getTotalUserCount);
+router.get("/activeusercount", protect, getActiveUserCount);
 
 export default router;

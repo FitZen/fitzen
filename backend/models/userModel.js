@@ -103,6 +103,24 @@ const getUserDetails = asyncHandler(async (id, type) => {
 });
 
 
+// total user count
+const totalUserCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) AS count FROM users WHERE status = \'Active\' OR status = \'Inactive\';';
+    const result = await query(sql);
+
+    return result.rows[0].count;
+});
+
+
+// active user count
+const activeUserCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE status = \'Active\';';
+    const result = await query(sql);
+
+    return result.rows[0].count;
+});
+
+
 export {
     findUserById,
     findUserByNIC,
@@ -112,4 +130,6 @@ export {
     setLoginDateTime,
     setLoginStatus,
     getUserDetails,
+    totalUserCount,
+    activeUserCount,
 };

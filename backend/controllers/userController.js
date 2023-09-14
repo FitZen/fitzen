@@ -6,6 +6,8 @@ import {
     setLoginDateTime,
     setLoginStatus,
     getUserDetails,
+    totalUserCount,
+    activeUserCount,
 } from "../models/userModel.js";
 import sendEmail from "../utils/sendEmail.js";
 
@@ -85,8 +87,40 @@ const getUserAllDetails = asyncHandler(async (req, res) => {
 });
 
 
+// get total user count
+const getTotalUserCount = asyncHandler(async (req, res) => {
+    const userCount = await totalUserCount();
+
+    if (! userCount) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: userCount,
+    });
+});
+
+
+// get active user count
+const getActiveUserCount = asyncHandler(async (req, res) => {
+    const userCount = await activeUserCount();
+
+    if (! userCount) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: userCount,
+    });
+});
+
+
 export {
     loginUser,
     logoutUser,
     getUserAllDetails,
+    getTotalUserCount,
+    getActiveUserCount,
 }
