@@ -8,16 +8,17 @@ import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import axios from 'axios';
 
 const color1 = "#102B4C" //dark blue
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, DoughnutController, ArcElement);
 
-const data = [
-  { id: 1, name: 'Item 1', quantity: 10, category: 'Category A'},
-  { id: 2, name: 'Item 2', quantity: 15, category: 'Category B' },
-  // Add more items as needed
-];
+// const data = [
+//   { id: 1, name: 'Item 1', quantity: 10, category: 'Category A'},
+//   { id: 2, name: 'Item 2', quantity: 15, category: 'Category B' },
+//   // Add more items as needed
+// ];
 
 
 const Reports = () => {
@@ -30,7 +31,10 @@ const Reports = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
+  const [itemData, setItemData] = useState([]);
+
   useEffect(() => {
+    viewItems();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -48,6 +52,26 @@ const Reports = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  const viewItems = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/shakebarItems/getshakebaritems");
+      // const sortedData = res.data.data.sort((a, b) => b.available_count - a.available_count);
+      // setItemData(sortedData);
+      console.log("Fetched data:", res.data.data);
+
+      // Sort the data in descending order based on available_count
+      const sortedData = res.data.data.sort((a, b) => b.availble_count - a.availble_count);
+      const sortedDataCopy = [...sortedData];
+    
+      setItemData(sortedDataCopy);
+
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
 
 
   const renderCalendar = () => {
@@ -185,30 +209,30 @@ const Reports = () => {
           )}
 
           {selectedTab === 1 && (
-            <Typography variant="body1" style={{ marginTop: "1rem" }}>
-                        <TableContainer component={Paper} style={{marginTop:'1rem',width:'80%',fontSize: '15px'}}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell style={{fontWeight:'700'}}>Item ID</TableCell>
-                  <TableCell style={{fontWeight:'700'}}>Item Name</TableCell>
-                  <TableCell style={{fontWeight:'700'}}>Quantity</TableCell>
-                  <TableCell style={{fontWeight:'700'}}>Category</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody style={{ backgroundColor: '#F5F5F5' }}>
-                {data.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell>{item.id}</TableCell>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
-                    <TableCell>{item.category}</TableCell>
-                  </TableRow>
-                ))}
+       <div>
+        <TableContainer component={Paper} style={{ marginTop: '1rem', width: '80%', fontSize: '15px' }}>
+         <Table>
+           <TableHead>
+             <TableRow>
+               <TableCell style={{ fontWeight: '700' }}>Item ID</TableCell>
+               <TableCell style={{ fontWeight: '700' }}>Item Name</TableCell>
+               <TableCell style={{ fontWeight: '700' }}>Quantity</TableCell>
+               <TableCell style={{ fontWeight: '700' }}>Category</TableCell>
+             </TableRow>
+           </TableHead>
+           <TableBody style={{ backgroundColor: '#F5F5F5' }}>
+             {itemData.map((item) => (
+               <TableRow key={item.id}>
+                 <TableCell>{item.id}</TableCell>
+                 <TableCell>{item.name}</TableCell>
+                 <TableCell>{item.availble_count}</TableCell>
+                 <TableCell>{item.category}</TableCell>
+               </TableRow>
+               ))}
               </TableBody>
-            </Table>
-          </TableContainer>
-            </Typography>
+                </Table>
+       </TableContainer>
+</div>
           )}
         </Box>
       </Box>
