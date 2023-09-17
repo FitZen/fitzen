@@ -9,6 +9,8 @@ import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -21,8 +23,19 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Instructors = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [trainerCount, setTrainerCount] = useState(0); 
+  const [physioCount, setPhysioCount] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+
+    getTrainersCount();
+    getPhysiotherapistCount()
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -40,6 +53,32 @@ const Instructors = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  
+  const getTrainersCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/trainers/count');
+      setTrainerCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  
+  const getPhysiotherapistCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/physiotherapists/count');
+      setPhysioCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+
 
   const data = {
     labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
@@ -131,7 +170,7 @@ const Instructors = () => {
             <Box sx={{ display:"flex", marginTop:"2rem" }}>
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>35</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>{trainerCount}</Typography>
                         <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Trainers</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
@@ -142,7 +181,7 @@ const Instructors = () => {
 
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>10</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>{physioCount}</Typography>
                         <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Physiotherapist</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>

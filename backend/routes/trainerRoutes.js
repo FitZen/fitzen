@@ -12,7 +12,8 @@ router.get("/viewtrainers", getViewAllTrainers);
 // router.get("/viewtrainers", protect, getViewAllTrainers);
 router.post("/addtrainer", protect, permit('Admin'), addNewTrainer);
 
-router.get("/count", protect, permit('Admin'), getTrainerCount);
+// router.get("/count", protect, permit('Admin'), getTrainerCount);
+router.get("/count", getTrainerCount);
 
 
 export default router;

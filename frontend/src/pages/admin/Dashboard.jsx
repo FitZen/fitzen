@@ -9,6 +9,7 @@ import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -21,6 +22,8 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [loggedInUsers, setLoggedInUsers] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +31,9 @@ const Dashboard = () => {
     if((localStorage.getItem('userType') !== '"Admin"')){
       navigate('/login');
     }
+
+    getTotalUsers();
+    getLoggedInUsers();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -45,6 +51,30 @@ const Dashboard = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getTotalUsers = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/users/total/count');
+      setTotalUsers(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  
+  const getLoggedInUsers = async () => {
+    try {
+     
+      const res2 = await axios.get('http://localhost:8000/api/users/active/count');
+      setLoggedInUsers(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
 
   const data = {
     labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
@@ -130,7 +160,7 @@ const Dashboard = () => {
             <Box sx={{ display:"flex", marginTop:"2rem" }}>
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>167</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>{totalUsers}</Typography>
                         <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Total Users</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
@@ -141,7 +171,7 @@ const Dashboard = () => {
 
                 <Grid md={4} sx={{display:"flex", padding:"1%", marginRight:"8%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>102</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>{loggedInUsers}</Typography>
                         <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Logged in Users</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
