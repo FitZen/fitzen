@@ -8,7 +8,7 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 
 
 router.get("/getshakebaritems", getAllShakeBarItems);
-router.post("/addshakebaritem",protect,permit('Shake Bar Manager'), addNewShakeBarItem);
+router.post("/addshakebaritem", addNewShakeBarItem);
 
 
 export default router;

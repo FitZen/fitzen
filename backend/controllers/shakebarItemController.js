@@ -22,9 +22,9 @@ const getAllShakeBarItems = asyncHandler(async (req, res) => {
 
 // add shakebar item
 const addNewShakeBarItem = asyncHandler(async (req, res) => {
-    const { name, unitPrice,quantity, category, description} = req.body;
+    const { name, unitPrice, category, description,availble_count} = req.body;
     const added_by = req.user.id;
-    const result = await addShakeBarItem(name, unitPrice,quantity, category, description, added_by);
+    const result = await addShakeBarItem(name, unitPrice, category, description, availble_count);
 
     if (! result) {
         res.status(500);
