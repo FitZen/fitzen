@@ -151,7 +151,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
       
     >
-      <Link to="/member/notification" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/receiptionist/notification" style={{textDecoration:"none", color:"black"}}>
         <MenuItem  sx={{lineHeight:"3%"}}>
             <IconButton
               size="1rem"
@@ -201,7 +201,7 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Link to="" style={{textDecoration:"none", color:"black"}}>
+            <Link to="/receiptionist/notification" style={{textDecoration:"none", color:"black"}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"

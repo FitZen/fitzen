@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography, Tab, Tabs } from "@mui/material";
-import Sidebar from "../../components/PhysiotherapistSidebar";
-import Navbar from "../../components/PhysiotherapistNavbar";
+import Sidebar from "../../components/ShakebarmanagerSidebar";
+import Navbar from "../../components/ShakebarmanagerNavbar";
 import CheckIcon from '@mui/icons-material/Check';
 import ToggleButton from '@mui/material/ToggleButton';
 import {useEffect, useState} from 'react';
@@ -27,7 +27,7 @@ const Notification = () => {
 
   useEffect(() => {
 
-    if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+    if((localStorage.getItem('userType') !== '"Shake Bar Manager"')){
       navigate('/login');
     }
 

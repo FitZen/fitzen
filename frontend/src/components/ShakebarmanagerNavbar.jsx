@@ -200,7 +200,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
            
-            <Link to="../notification" style={{textDecoration:"none", color:"black"}}>
+            <Link to="/shakebarmanager/notification" style={{textDecoration:"none", color:"black"}}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"

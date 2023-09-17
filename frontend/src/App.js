@@ -52,6 +52,7 @@ import ViewMembership from './pages/receiptionist/Membership';
 import ReceptionistReports from './pages/receiptionist/Reports';
 import MemberProfile from './pages/receiptionist/MemberProfile';
 import ReceptionViaInstructorProfile from './pages/receiptionist/InstructorProfile';
+import ReceptionNotification from './pages/receiptionist/Notification';
 
 import SDashboard from './pages/shakebarmanager/Dashboard';
 import Orders from './pages/shakebarmanager/Orders';
@@ -59,6 +60,7 @@ import Items from './pages/shakebarmanager/Items';
 import SReports from './pages/shakebarmanager/Reports';
 import SProfile from './pages/shakebarmanager/Profile';
 import AddnewItem from './pages/shakebarmanager/AddnewItem';
+import SNotification from './pages/shakebarmanager/Notification';
 import EditShakebarManagerProfile from './pages/shakebarmanager/EditProfile';
 
 import TrainerDashboard from "./pages/trainer/Dashboard";
@@ -121,6 +123,7 @@ function App() {
         <Route path="/shakebarmanager/reports" element={<SReports />} />
         <Route path="/shakebarmanager/profile" element={<SProfile />} />
         <Route path="/shakebarmanager/addnewitem" element={<AddnewItem />} />
+        <Route path="/shakebarmanager/notification" element={<SNotification />} />
         <Route path="/shakebarmanager/editprofile" element={<EditShakebarManagerProfile />} />
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -161,6 +164,7 @@ function App() {
         <Route path="/receiptionist/reports" element={<ReceptionistReports />} />
         <Route path="/receiptionist/memberprofile/:memberType/:memberID" element={<MemberProfile />} />
         <Route path="/receiptionist/instructorprofile/:instructorType/:instructorID" element={<ReceptionViaInstructorProfile />} />
+        <Route path="/receiptionist/notification" element={<ReceptionNotification />} />
 
         <Route path="/physiotherapist/dashboard" element={<PhysiotherapistDashboard />} />
         <Route path="/physiotherapist/profile" element={<PhysiotherapistProfile />} />
