@@ -12,7 +12,8 @@ router.get("/viewphysiotherapists", getViewAllPhysiotherapists);
 // router.get("/viewphysiotherapists", protect, getViewAllPhysiotherapists);
 router.post("/addphysiotherapist", protect, permit('Admin'), addNewPhysiotherapist);
 
-router.get("/count", protect, permit('Admin'), getPhysiotherapistCount);
+// router.get("/count", protect, permit('Admin'), getPhysiotherapistCount);
+router.get("/count", getPhysiotherapistCount);
 
 
 export default router;
