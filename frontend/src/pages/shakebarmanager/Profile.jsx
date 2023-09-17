@@ -8,6 +8,8 @@ import Sidebar from "../../components/ShakebarmanagerSidebar";
 import Navbar from "../../components/ShakebarmanagerNavbar";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {FaUserEdit} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Instructors = () => {
 
@@ -118,8 +120,12 @@ const Instructors = () => {
             
             
         </Box>
-
-        
+        <Link to="/shakebarmanager/editprofile" style={{textDecoration:"none", color:"black"}}>
+                  <Box style={{display:"flex"}}>
+                    <FaUserEdit size={30} style={{marginTop:"3.5%", marginLeft:"5%", marginRight:"1%"}}/>
+                    <Typography variant="h5" style={{ fontSize:"25px",fontWeight: 700, textAlign:"right", marginLeft:"0%", marginTop:"3.2%" }}> Edit Profile</Typography>
+                  </Box>  
+                </Link>       
         </Box>
       </Box>
      
