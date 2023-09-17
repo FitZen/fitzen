@@ -164,7 +164,7 @@ const Dashboard = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Total Users</Typography>
-                    <Button variant="containedned" style={{marginLeft:"73.2%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                    {/* <Button variant="containedned" style={{marginLeft:"73.2%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button> */}
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
@@ -185,7 +185,7 @@ const Dashboard = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Logged in Users</Typography>
-                    <Button variant="containedned" style={{marginLeft:"69%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                    <Button variant="contained" style={{marginLeft:"69%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>
@@ -206,7 +206,7 @@ const Dashboard = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Income</Typography>
-                    <Button variant="containedned" style={{marginLeft:"76.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
+                    <Button variant="contained" style={{marginLeft:"76.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View All</Button>
                 </Box>
                 
                 <Box sx={{display:"flex"}}>

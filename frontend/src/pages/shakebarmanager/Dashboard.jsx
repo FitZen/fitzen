@@ -6,6 +6,7 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 import { FaDotCircle, } from 'react-icons/fa';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
+import { useNavigate } from "react-router-dom";
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -16,8 +17,14 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Shake Bar Manager"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

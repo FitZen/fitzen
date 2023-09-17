@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from "react";
 import Box from "@mui/material/Box";
-import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl } from "@mui/material";
+import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl, IconButton } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Modal from '@mui/material/Modal';
-import {FaRegTimesCircle} from 'react-icons/fa';
+import {FaRegTimesCircle, FaPlus, FaMinus} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 // Import the images
 import item1 from "../../assets/images (3).jpg"
@@ -25,6 +26,22 @@ const Shakebar = () => {
   const handleClose = () => setOpen(false);
   const [valueStart, setValueStart] = React.useState(null);
   const [valueEnd, setValueEnd] = React.useState(null);
+  const [count, setCount] = React.useState(0);
+
+  function increment() {
+    setCount(prevCount => prevCount + 1);
+  }
+
+  function decrement() {
+    setCount(prevCount => {
+
+      if (prevCount > 0) {
+        return prevCount - 1;
+      }
+      return prevCount;
+    });
+  }
+
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
@@ -156,7 +173,7 @@ const Shakebar = () => {
             <FormControl style={{ width: "15%" }}>
               <InputLabel id="demo-simple-select-label">All</InputLabel>
               <Select
-                style={{ height: "85%" }}
+                style={{ height: "75%" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={item}
@@ -168,6 +185,7 @@ const Shakebar = () => {
                 <MenuItem value={30}>Shakes</MenuItem>
               </Select>
             </FormControl>
+            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"72.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
           </Box>
 
           {/* Item boxes */}
@@ -244,13 +262,21 @@ const Shakebar = () => {
                       <Typography variant="body1" textAlign="left">
                         <span style={{fontWeight:"600"}}>Description:</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       </Typography><br />
-                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Ingredients: </span> Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography><br />
-                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> In Stock.</Typography>
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> In Stock.</Typography><br />
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Quantity: &nbsp;
+                        <IconButton size="small" onClick={increment} aria-label="plus" style={{border:"1px solid"}}>
+                          <FaPlus />
+                        </IconButton>
+                        <Typography variant="body1" textAlign="center" style={{display:"inline-block", width:"10%"}}>{count}</Typography>
+                        <IconButton size="small" onClick={decrement} aria-label="minus" style={{border:"1px solid"}}>
+                          <FaMinus />
+                        </IconButton>
+                      </span> </Typography>
                     </Box>
                   </Box>
                   
                  
-                  <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Pay Online</Button>
+                  <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Add to Cart</Button>
                 
               </Box>
               
