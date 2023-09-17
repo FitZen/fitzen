@@ -18,7 +18,9 @@ router.get("/member/physical", getAllViewPhysicalMembers);
 router.get("/member/virtual", getAllViewVirtualMembers);
 router.post("/member/physical/add",protect, permit('Receptionist'), addPhysicalMember);
 
-router.get("/physical/count",protect, permit('Admin'), getPhysicalMemberCount);
-router.get("/virtual/count",protect, permit('Admin'), getVirtualMemberCount);
+// router.get("/physical/count",protect, permit('Admin'), getPhysicalMemberCount);
+router.get("/physical/count", getPhysicalMemberCount);
+// router.get("/virtual/count",protect, permit('Admin'), getVirtualMemberCount);
+router.get("/virtual/count", getVirtualMemberCount);
 
 export default router;
