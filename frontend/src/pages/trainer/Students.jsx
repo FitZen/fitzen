@@ -4,6 +4,7 @@ import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import {useEffect, useState} from 'react';
 import {Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 import item1 from "../../assets/Members/7.jpg"
 import item2 from "../../assets/Members/4.jpg"
@@ -25,8 +26,14 @@ const Students = () => {
 
     const [item, setItem] = React.useState('');
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Trainer"')){
+		navigate('/login');
+	}
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

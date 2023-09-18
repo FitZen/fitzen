@@ -5,6 +5,7 @@ import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Import the images
 import item1 from "../../assets/images (3).jpg"
@@ -26,8 +27,14 @@ const Shakebar = () => {
   const [valueEnd, setValueEnd] = React.useState(null);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Trainer"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

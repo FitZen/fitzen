@@ -17,6 +17,7 @@ import { FaRegTimesCircle} from "react-icons/fa";
 import Modal from "@mui/material/Modal";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#346E93"; //light blue
 
@@ -39,8 +40,14 @@ const Reports = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Trainer"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

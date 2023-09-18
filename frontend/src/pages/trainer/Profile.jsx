@@ -22,9 +22,9 @@ const TrainerProfile = () => {
 
 	if((localStorage.getItem('userType') !== '"Trainer"')){
 		navigate('/login');
-	  }
+	}
 
-	  getUserDetails();
+	getUserDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

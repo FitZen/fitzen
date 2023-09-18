@@ -11,12 +11,19 @@ import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StudentProfile = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        if((localStorage.getItem('userType') !== '"Trainer"')){
+            navigate('/login');
+        }
+        
         // Function to handle scroll event
         const handleScroll = () => {
             if (window.scrollY > 0) {
