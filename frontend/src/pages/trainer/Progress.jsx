@@ -10,6 +10,7 @@ import ProfileImg from '../../assets/Members/photo-1633332755192-727a05c4013d.jp
 import {PiMedalFill,PiVideoCameraFill} from 'react-icons/pi';
 import { AiFillSchedule } from "react-icons/ai";
 import { SiProgress } from "react-icons/si";
+import { useNavigate } from 'react-router-dom';
 
 import BMI from "../../assets/BMI-Calculator.png";
 import {Link} from "react-router-dom";
@@ -33,9 +34,14 @@ const StudentProgress = () => {
 	const handleCloseFirstPopup = () => setOpenFirstPopup(false);
 	const [valueStart, setValueStart] = React.useState(null);
 	const [fixedNavbar, setFixedNavbar] = useState(false);
-
+	const navigate = useNavigate();
 
 	useEffect(() => {
+
+		if((localStorage.getItem('userType') !== '"Trainer"')){
+			navigate('/login');
+		}
+		
 		// Function to handle scroll event
 		const handleScroll = () => {
 			if (window.scrollY > 0) {

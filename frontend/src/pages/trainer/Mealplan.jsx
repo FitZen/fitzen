@@ -11,6 +11,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import { motion } from "framer-motion";
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 import Meal1 from '../../assets/Meals//meal1.png';
 import Meal2 from '../../assets/Meals//meal2.png';
@@ -32,13 +33,10 @@ const MealPlan = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //to display meal plan names
   const [mealPlanName, setMealPlanName] = useState([]);
-  //to display meal plan details
   const [selectedMealPlan, setSelectedMealPlan] = useState(null);
-  //to selected display meal plan details
+  const navigate = useNavigate();
   const [selectedMealPlanDetails, setSelectedMealPlanDetails] = useState(null);
-  //to add new meal plan
   const [newMealPlan, setNewMealPlan] = useState({
     name: "",
     breakfast: "",
@@ -74,6 +72,10 @@ const MealPlan = () => {
   };
 
   useEffect(() => {
+    
+    if((localStorage.getItem('userType') !== '"Trainer"')){
+      navigate('/login');
+    }
 
     viewMealPlans();
 
@@ -82,6 +84,7 @@ const MealPlan = () => {
     }, 3000); // 3 seconds interval
 
     return () => clearInterval(timer);
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -194,32 +197,6 @@ const MealPlan = () => {
     
   };
 
-  const Meals = [
-    {
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake",
-    },
-    {
-      title: "Lunch",
-      description: "Chicken Breast with Brown Rice and Salad",
-    },
-    {
-      title: "Pre Workout",
-      description: "Protein Shake with 1 Banana"
-    },
-    {
-      title: "Dinner",
-      description: "Brown rice, peas paneer curry, sprouts vegetable salad",
-    },
-    {
-      title: "Post Workout",
-      description: "Green tea"
-    },
-    {
-      title: "Note",
-      description: "Low Carb Diet"
-    },
-  ];
 
   return (
 
