@@ -4,9 +4,7 @@ import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@
 import { Bar } from 'react-chartjs-2';
 import Sidebar from "../../components/PhysiotherapistSidebar";
 import Navbar from "../../components/PhysiotherapistNavbar";
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#346E93" //light blue
 
@@ -16,8 +14,14 @@ const Reports = () => {
   const [selectedMonth, setSelectedMonth] = useState('');
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    
+    if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

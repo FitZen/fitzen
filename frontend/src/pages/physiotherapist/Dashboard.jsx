@@ -10,7 +10,7 @@ import Sidebar from "../../components/PhysiotherapistSidebar";
 import Navbar from "../../components/PhysiotherapistNavbar";
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -22,9 +22,15 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 
 const PhysiotherapistDashboard = () => {
 
-    const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+        navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

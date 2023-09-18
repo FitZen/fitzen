@@ -24,7 +24,6 @@ const Notification = () => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
 
     if((localStorage.getItem('userType') !== '"Physiotherapist"')){

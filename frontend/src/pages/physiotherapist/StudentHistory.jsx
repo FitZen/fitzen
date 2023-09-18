@@ -10,7 +10,7 @@ import ProfileImg from '../../assets/Members/photo-1633332755192-727a05c4013d.jp
 import {PiMedalFill,PiVideoCameraFill} from 'react-icons/pi';
 import { AiFillSchedule,AiFillPlusCircle } from "react-icons/ai";
 import {FaHistory, FaRegAddressBook, FaRegTimesCircle} from "react-icons/fa";
-
+import { useNavigate } from 'react-router-dom';
 
 import BMI from "../../assets/BMI-Calculator.png";
 import {Link} from "react-router-dom";
@@ -29,8 +29,14 @@ const StudentHistory = () => {
 	const [valueStart, setValueStart] = React.useState(null);
 	const [valueEnd, setValueEnd] = React.useState(null);
 	const [fixedNavbar, setFixedNavbar] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
+		
+		if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+			navigate('/login');
+		  }
+
 		// Function to handle scroll event
 		const handleScroll = () => {
 			if (window.scrollY > 0) {
@@ -92,9 +98,12 @@ const StudentHistory = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
+				<div
+					className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+					style={{ width: "100%" }}
+					>
 					<Navbar />
-				</Box>
+					</div>
 
 				<Box sx={{ paddingLeft:"5rem", flex:1 }}>
 					<Box sx={{ display:"flex", width: "100%", height:"100%", marginTop: "1rem"}}>

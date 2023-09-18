@@ -9,6 +9,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from "@mui/x-date-pickers";
+import { useNavigate } from 'react-router-dom';
 
 
 const color2 = "#346E93" //light blue
@@ -20,8 +21,14 @@ const Schedule = () => {
   const [value, setValue] = React.useState(null);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    
+    if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

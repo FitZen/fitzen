@@ -14,6 +14,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import { GiConfirmed } from "react-icons/gi";
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -39,9 +40,15 @@ const NewRequests = () => {
     const handleOpenSecondPopup = () => setOpenSecondPopup(true);
     const handleCloseSecondPopup = () => setOpenSecondPopup(false);
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
+        
+        if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+            navigate('/login');
+        }
+
         // Function to handle scroll event
         const handleScroll = () => {
             if (window.scrollY > 0) {
