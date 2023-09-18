@@ -50,6 +50,7 @@ const addNewShakebarManager = asyncHandler(async (req, res) => {
         throw new Error("Contact no already exists.");
     }
 
+    // const added_by = req.user.id;
     const added_by = req.body.userID;
 
     let id;

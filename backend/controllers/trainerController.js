@@ -34,7 +34,7 @@ const getViewAllTrainers = asyncHandler(async (req, res) => {
 //add trainer
 const addNewTrainer = asyncHandler(async (req, res) => {
     const { nic, first_name, last_name, email, contact_no, address, dob, gender, qualification, mode} = req.body;
-    console.log(req.body);
+   
     if (await findUserByNIC(nic)) {
         res.status(409);    // status code for conflict
         throw new Error("NIC already exists.");
@@ -50,6 +50,7 @@ const addNewTrainer = asyncHandler(async (req, res) => {
         throw new Error("Contact no already exists.");
     }
 
+    // const addedBy = req.user.id;
     const addedBy = req.body.userID;
 
     let id;
