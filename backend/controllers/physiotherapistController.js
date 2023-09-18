@@ -34,7 +34,7 @@ const getViewAllPhysiotherapists = asyncHandler(async (req, res) => {
 //add physiotherapist
 const addNewPhysiotherapist = asyncHandler(async (req, res) => {
     const { nic, first_name, last_name, email, contact_no, address, dob, gender, qualification } = req.body;
-
+    console.log(req.body);
     if (await findUserByNIC(nic)) {
         res.status(409);    // status code for conflict
         throw new Error("NIC already exists.");
@@ -50,8 +50,8 @@ const addNewPhysiotherapist = asyncHandler(async (req, res) => {
         throw new Error("Contact no already exists.");
     }
 
-    const added_by = req.user.id;
-
+    const added_by = req.body.userID;
+    
     let id;
     do {
         id = generateUserId('Physiotherapist');
