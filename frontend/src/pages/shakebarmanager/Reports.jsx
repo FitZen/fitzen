@@ -9,6 +9,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const color1 = "#102B4C" //dark blue
 
@@ -23,7 +24,7 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 
 const Reports = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
@@ -34,6 +35,11 @@ const Reports = () => {
   const [itemData, setItemData] = useState([]);
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Shake Bar Manager"')){
+      navigate('/login');
+    }
+
     viewItems();
     // Function to handle scroll event
     const handleScroll = () => {

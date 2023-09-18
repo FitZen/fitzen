@@ -15,7 +15,7 @@ const Instructors = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 	const [userData, setUserData] = useState({});
-  	const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
 
