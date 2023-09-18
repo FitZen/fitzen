@@ -13,6 +13,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 const Announcement = () => {
 
@@ -31,6 +32,7 @@ const Announcement = () => {
     // Also close the view announcement modal if it's open
     setViewAnnouncementModalOpen(false);
   };
+  const navigate = useNavigate();
   const [announcementData, setAnnouncementData] = useState([]);
   
   const [newAnnouncement, setNewAnnouncement] = useState({
@@ -60,6 +62,10 @@ const Announcement = () => {
 
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
 
     viewAnnouncement();
     // Function to handle scroll event

@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 
 const instructorsData = [
@@ -64,10 +65,15 @@ const TrainerPackages = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
 
   const color2 = "#346E93" //light blue
   useEffect(() => {
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

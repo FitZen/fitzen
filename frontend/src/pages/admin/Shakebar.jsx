@@ -9,12 +9,19 @@ import AdminNavbar from "../../components/AdminNavbar";
 import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Shakebar = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

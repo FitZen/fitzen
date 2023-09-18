@@ -8,6 +8,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Complaints = () => {
 
@@ -23,7 +24,7 @@ const Complaints = () => {
 
   const [handledComplaintsData, setHandledComplaintsData] = useState([]); 
   const [unHandleComplaintsData, setUnHandleComplaintsData] = useState([]);
-
+  
   const [item, setItem] = React.useState('');
 
   const handleChangeValue = (event, newValue) => {
@@ -33,6 +34,8 @@ const Complaints = () => {
   const handleChange = (event) => {
     setItem(event.target.value);
   };
+
+  const navigate = useNavigate();
 
   const modalStyle = {
     position: 'absolute',
@@ -48,6 +51,10 @@ const Complaints = () => {
 
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Admin"')){
+      navigate('/login');
+    }
 
     viewUnHandleComplaints();
     viewHandledComplaints();
@@ -106,57 +113,6 @@ const Complaints = () => {
 
   const [value, setValue] = useState(0);
 
-  const [handleComplaints,setHandleComplaint] = useState([
-    {
-      added_on: "2023-08-12 23:12:03.390954",
-      subject: "Breakfast",
-      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      added_on: "2023-08-12 23:12:03.390954",
-      subject: "Breakfast",
-      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      added_on: "2023-08-12 23:12:03.390954",
-      subject: "Breakfast",
-      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      added_on: "2023-08-12 23:12:03.390954",
-      subject: "Breakfast",
-      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    {
-      added_on: "2023-08-12 23:12:03.390954",
-      subject: "Breakfast",
-      content: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-    
-  ]);
-
-  const [toHandleComplaints, setToHandleComplaints] = useState([
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-
-    },
-    {
-      date: "2021-10-01",
-      time: "10:00",
-      title: "Breakfast",
-      description: "Oats Banana Pancakes with Protein Shake with Protein Shake Calcium Vitamin",
-    },
-  ]);
 
   const renderTable = (data) => {
 
