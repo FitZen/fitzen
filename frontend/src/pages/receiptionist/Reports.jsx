@@ -4,14 +4,19 @@ import ReceiptionistSidebar from "../../components/ReceiptionistSidebar";
 import ReceiptionistNavbar from "../../components/ReceiptionistNavbar";
 import {useEffect, useState} from 'react';
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
-
-
+import { useNavigate } from 'react-router-dom';
 
 const Report = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
   
     useEffect(() => {
+
+      if((localStorage.getItem('userType') !== '"Receptionist"')){
+        navigate('/login');
+      }
+
       // Function to handle scroll event
       const handleScroll = () => {
         if (window.scrollY > 0) {

@@ -5,8 +5,7 @@ import ReceiptionistNavbar from "../../components/ReceiptionistNavbar";
 import { Typography, Select, MenuItem, Button, InputLabel, FormControl } from "@mui/material";
 import {FaBitbucket} from "react-icons/fa";
 import {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-
+import {Link, useNavigate} from 'react-router-dom';
 
 const instructorsData = [
       {
@@ -58,10 +57,16 @@ const instructorsData = [
 const Membership = () => {
   const [item, setItem] = React.useState('');
   const [fixedNavbar, setFixedNavbar] = useState(false);
-
+  const navigate = useNavigate();
 
   const color2 = "#346E93" //light blue
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Receptionist"')){
+      navigate('/login');
+    }
+
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
