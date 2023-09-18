@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography,TextField, Button, FormControl, InputLabel, Select, MenuItem, Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper } from "@mui/material";
+import { Typography,TextField, Button, FormControl, InputLabel, Select, MenuItem, Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper,FormControlLabel, Checkbox } from "@mui/material";
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
 import {FaPlus} from "react-icons/fa";
@@ -11,6 +11,9 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
 const InstructorList = () => {
 
@@ -28,6 +31,27 @@ const InstructorList = () => {
   const handlePhysiotherapistOpen = () => setOpenPhysiotherapist(true);
   const handlePhysiotherapistClose = () => setOpenPhysiotherapist(false);
   const [InstructorData, setInstructorData] = useState([]);
+  const [value, setValue] = React.useState(null);
+  const [gender, setGender] = React.useState('');
+  const [isPhysicalChecked, setIsPhysicalChecked] = React.useState(false);
+  const [isVirtualChecked, setIsVirtualChecked] = React.useState(false);
+  const [isBothChecked, setIsBothChecked] = React.useState(false);
+
+  const handleCheckboxClick = (checkboxName) => {
+    if (checkboxName === 'Physical') {
+      setIsPhysicalChecked(true);
+      setIsVirtualChecked(false);
+      setIsBothChecked(false);
+    } else if (checkboxName === 'Virtual') {
+      setIsPhysicalChecked(false);
+      setIsVirtualChecked(true);
+      setIsBothChecked(false);
+    } else if (checkboxName === 'Both') {
+      setIsPhysicalChecked(false);
+      setIsVirtualChecked(false);
+      setIsBothChecked(true);
+    }
+  };
 
   const [newTrainer, setNewTrainer] = useState({
     first_name: "",
@@ -35,6 +59,9 @@ const InstructorList = () => {
     nic: "",
     email: "",
     contact_no: "",
+    address: "",
+    qualification: "",
+
   });
   const [newPhysiotherapist, setNewPhysiotherapist] = useState({
     first_name: "",
@@ -42,6 +69,8 @@ const InstructorList = () => {
     nic: "",
     email: "",
     contact_no: "",
+    address: "",
+    qualification: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -54,6 +83,9 @@ const InstructorList = () => {
 
   const handleChange = (event) => {
     setItem(event.target.value);
+  };
+  const handleChangeGender = (event) => {
+    setGender(event.target.value);
   };
 
   useEffect(() => {
@@ -136,7 +168,7 @@ const InstructorList = () => {
 
   const handleSubmitTrainer = async () => {
 
-    if (!newTrainer.first_name || !newTrainer.last_name || !newTrainer.nic || !newTrainer.email || !newTrainer.contact_no) {
+    if (!newTrainer.first_name || !newTrainer.last_name || !newTrainer.nic || !newTrainer.email || !newTrainer.contact_no || !newTrainer.address || !newTrainer.qualification) {
       // Display error messages or styles for empty fields
       setSubmitted(true);
       return;
@@ -149,6 +181,11 @@ const InstructorList = () => {
         nic: newTrainer.nic,
         email: newTrainer.email,
         contact_no: newTrainer.contact_no,
+        address: newTrainer.address,
+        qualification: newTrainer.qualification,
+        dob: value,
+        gender: gender,
+        mode: isPhysicalChecked ? "Physical" : isVirtualChecked ? "Virtual" : isBothChecked ? "Both" : "",
         userID: JSON.parse(localStorage.getItem("userID")),	
       };
 
@@ -162,26 +199,31 @@ const InstructorList = () => {
       if (res.status === 201) {
         handleTrainerClose(); // Close the modal
         viewTrainerList(); // Refresh the announcement list
-        setNewTrainer({ first_name:"", last_name:"", nic:"", email:"",contact_no:"" }); // Clear the form
+        setNewTrainer({ first_name:"", last_name:"", nic:"", email:"",contact_no:"",address:"", qualification:"" }); // Clear the form
+        setIsPhysicalChecked(false); // Reset checkbox states
+        setIsVirtualChecked(false); 
+        setIsBothChecked(false);
+        setValue(null); // Reset date picker
+        setGender('');
         setSubmitted(false);
       }
 
       Swal.fire({
         icon: 'success',
-        title: 'Receptionist Added Successfully',
+        title: 'Trainer Added Successfully',
         showConfirmButton: false,
         timer: 1500
       })
 
     } catch (error) {
-      console.error("Adding Reception failed:", error);
+      console.error("Adding Trainer failed:", error);
       // Handle error scenarios here
     }
   };
 
   const handleSubmitPhysiotherapist = async () => {
 
-    if (!newPhysiotherapist.first_name || !newPhysiotherapist.last_name || !newPhysiotherapist.nic || !newPhysiotherapist.email || !newPhysiotherapist.contact_no) {
+    if (!newPhysiotherapist.first_name || !newPhysiotherapist.last_name || !newPhysiotherapist.nic || !newPhysiotherapist.email || !newPhysiotherapist.contact_no || !newPhysiotherapist.address || !newPhysiotherapist.qualification) {
       // Display error messages or styles for empty fields
       setSubmitted(true);
       return;
@@ -194,6 +236,10 @@ const InstructorList = () => {
         nic: newPhysiotherapist.nic,
         email: newPhysiotherapist.email,
         contact_no: newPhysiotherapist.contact_no,
+        address: newPhysiotherapist.address,
+        qualification: newPhysiotherapist.qualification,
+        dob: value,
+        gender: gender,
         userID: JSON.parse(localStorage.getItem("userID")),	
       };
 
@@ -207,19 +253,21 @@ const InstructorList = () => {
       if (res.status === 201) {
         handlePhysiotherapistClose(); // Close the modal
         viewPhysiotherapistList(); // Refresh the announcement list
-        setNewPhysiotherapist({ first_name:"", last_name:"", nic:"", email:"",contact_no:"" }); // Clear the form
+        setNewPhysiotherapist({ first_name:"", last_name:"", nic:"", email:"",contact_no:"", address:"", qualification:"" }); // Clear the form
+        setValue(null); // Reset date picker
+        setGender('');
         setSubmitted(false);
       }
 
       Swal.fire({
         icon: 'success',
-        title: 'Virt Added Successfully',
+        title: 'Physiotherapist Added Successfully',
         showConfirmButton: false,
         timer: 1500
       })
 
     } catch (error) {
-      console.error("Adding Reception failed:", error);
+      console.error("Adding Physiotherapist failed:", error);
       // Handle error scenarios here
     }
   };
@@ -232,10 +280,12 @@ const InstructorList = () => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "35%",
+    height: "90%",
     bgcolor: 'background.paper',
     borderRadius: '10px',
     boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-    p: 4,
+    p: 3,
+    overflowY: 'auto',
   };
 
 
@@ -346,6 +396,65 @@ const InstructorList = () => {
                             <TextField variant="outlined" name="email" value={newTrainer.email} onChange={handleInputChange} error={submitted && !newTrainer.email} helperText={submitted && !newTrainer.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
                             <TextField variant="outlined" name="contact_no" value={newTrainer.contact_no} onChange={handleInputChange} error={submitted && !newTrainer.contact_no} helperText={submitted && !newTrainer.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Address:</InputLabel>
+                            <TextField variant="outlined" name="address" value={newTrainer.address} onChange={handleInputChange} error={submitted && !newTrainer.address} helperText={submitted && !newTrainer.address ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            
+                            <Box sx={{display:"flex", marginLeft:"4%"}}>
+                              <Box sx={{width:"45%", marginRight:"5%"}}>
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>DOB:</InputLabel>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker 
+                                        label=""
+                                        value={value}
+                                        onChange={(newValue) => setValue(newValue)} 
+                                        renderInput={(params) => <TextField {...params}  />}
+                                    />
+                                </LocalizationProvider>    
+                              </Box>
+                              <Box sx={{width:"45%"}}>
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Gender:</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={gender}
+                                    size="small"
+                                    style={{marginTop:"0.2rem", width:"100%", height:"65%", marginBottom:"0rem", borderRadius:"5px",border:"1px solid D8D9DA"}}
+                                    
+                                    onChange={handleChangeGender}
+                                >
+                                    <MenuItem value={'Male'}>Male</MenuItem>
+                                    <MenuItem value={'Female'}>Female</MenuItem>
+                                
+                                </Select>
+                              </Box>                      
+                              
+                            </Box>
+
+                            <Box sx={{display:"flex", marginTop:"0.1rem"}}>
+                              
+                                  <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Mode:</InputLabel>
+                              
+                                  <Box sx={{display:"flex", marginLeft:"5%", marginTop:"1%"}}>
+                                    <FormControlLabel
+                                        control={<Checkbox checked={isPhysicalChecked} onChange={() => handleCheckboxClick('Physical')} color="primary" />}
+                                        label="Physical"
+                                    /> 
+                                    <FormControlLabel
+                                        control={<Checkbox checked={isVirtualChecked} onChange={() => handleCheckboxClick('Virtual')} color="primary" />}
+                                        label="Virtual"
+                                    /> 
+                                    <FormControlLabel
+                                        control={<Checkbox checked={isBothChecked} onChange={() => handleCheckboxClick('Both')} color="primary" />}
+                                        label="Both"
+                                    /> 
+                                  </Box>
+                            
+                                
+                          
+
+                            </Box>     
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Qualification:</InputLabel>
+                            <TextField variant="outlined" name="qualification" value={newTrainer.qualification} onChange={handleInputChange} error={submitted && !newTrainer.qualification} helperText={submitted && !newTrainer.qualification ? "qualification is required" : ""}   multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
                               <Button onClick={handleSubmitTrainer} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Trainer</Button>
@@ -388,6 +497,43 @@ const InstructorList = () => {
                             <TextField variant="outlined" name="email" value={newPhysiotherapist.email} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.email} helperText={submitted && !newPhysiotherapist.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
                             <TextField variant="outlined" name="contact_no" value={newPhysiotherapist.contact_no} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.contact_no} helperText={submitted && !newPhysiotherapist.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Address:</InputLabel>
+                            <TextField variant="outlined" name="address" value={newPhysiotherapist.address} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.address} helperText={submitted && !newPhysiotherapist.address ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            
+                            <Box sx={{display:"flex", marginLeft:"4%"}}>
+                              <Box sx={{width:"45%", marginRight:"5%"}}>
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>DOB:</InputLabel>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker 
+                                        label=""
+                                        value={value}
+                                        onChange={(newValue) => setValue(newValue)} 
+                                        renderInput={(params) => <TextField {...params}  />}
+                                    />
+                                </LocalizationProvider>    
+                              </Box>
+                              <Box sx={{width:"45%"}}>
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "1%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Gender:</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={gender}
+                                    size="small"
+                                    style={{marginTop:"0.2rem", width:"100%", height:"65%", marginBottom:"0rem", borderRadius:"5px",border:"1px solid D8D9DA"}}
+                                    
+                                    onChange={handleChangeGender}
+                                >
+                                    <MenuItem value={'Male'}>Male</MenuItem>
+                                    <MenuItem value={'Female'}>Female</MenuItem>
+                                
+                                </Select>
+                              </Box>                      
+                              
+                            </Box>
+
+                            <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "2%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Qualification:</InputLabel>
+                            <TextField variant="outlined" name="qualification" value={newPhysiotherapist.qualification} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.qualification} helperText={submitted && !newPhysiotherapist.qualification ? "qualification is required" : ""}   multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
+                            
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
                               <Button onClick={handleSubmitPhysiotherapist}  variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Physiotherapist</Button>
