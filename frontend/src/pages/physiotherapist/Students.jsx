@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Sidebar from "../../components/TrainerSidebar";
-import Navbar from "../../components/TrainerNavbar";
+import Sidebar from "../../components/PhysiotherapistSidebar";
+import Navbar from "../../components/PhysiotherapistNavbar";
 import {useEffect, useState} from 'react';
 import {Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
 
@@ -19,14 +19,20 @@ import item11 from "../../assets/Members/9.jpg"
 import item12 from "../../assets/Members/10.jpg"
 import item13 from "../../assets/Members/photo-1633332755192-727a05c4013d.jpg"
 import {Link} from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 const Students = () => {
 
     const [item, setItem] = React.useState('');
     const [fixedNavbar, setFixedNavbar] = useState(false);
+    const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+        navigate('/login');
+      }
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

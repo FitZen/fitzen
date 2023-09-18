@@ -13,6 +13,8 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Sidebar from "../../components/PhysiotherapistSidebar";
 import Navbar from "../../components/PhysiotherapistNavbar";
+import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
@@ -21,6 +23,7 @@ const color4 = "#DC1E2A" //red
 
 const PhysiotherapistEditProfile = () => {
 
+	const [fixedNavbar, setFixedNavbar] = useState(false);
 	const [gender, setGender] = React.useState('');
 	const [value, setValue] = React.useState(null);
 
@@ -28,6 +31,31 @@ const PhysiotherapistEditProfile = () => {
 	const handleChange = (event) => {
 		setGender(event.target.value);
 	};
+	const navigate = useNavigate();
+
+	useEffect(() => {
+
+		if((localStorage.getItem('userType') !== '"Physiotherapist"')){
+		  navigate('/login');
+		}
+	
+		// Function to handle scroll event
+		const handleScroll = () => {
+		  if (window.scrollY > 0) {
+			setFixedNavbar(true);
+		  } else {
+			setFixedNavbar(false);
+		  }
+		};
+	
+		// Attach the scroll event listener
+		window.addEventListener("scroll", handleScroll);
+	
+		// Clean up the event listener when component unmounts
+		return () => {
+		  window.removeEventListener("scroll", handleScroll);
+		};
+	  }, []);
 
 	return (
 
@@ -38,9 +66,12 @@ const PhysiotherapistEditProfile = () => {
 			</Box>
 
 			<Box component="main" sx={{flex:1 }}>
-				<Box>
-					<Navbar />
-				</Box>
+			<div
+				className={`navbar ${fixedNavbar ? "fixed" : ""}`}
+				style={{ width: "100%" }}
+				>
+				<Navbar />
+				</div>
 				<Box sx={{ paddingLeft:"5rem", flex:1, width:"100%"}}>
 
 					<Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>Edit Profile</Typography>
