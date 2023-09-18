@@ -3,14 +3,20 @@ import Box from "@mui/material/Box";
 import {Typography,Tabs,Tab,Table,TableContainer,TableHead,TableRow,TableCell,TableBody,Paper,Button} from '@mui/material';
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
-
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
 
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Shake Bar Manager"')){
+      navigate('/login');
+    }
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {

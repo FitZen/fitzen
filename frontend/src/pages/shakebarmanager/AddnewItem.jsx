@@ -30,6 +30,11 @@ const AddnewItem = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
   useEffect(() => {
+
+    if((localStorage.getItem('userType') !== '"Shake Bar Manager"')){
+      navigate('/login');
+    }
+    
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
