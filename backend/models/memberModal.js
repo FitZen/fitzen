@@ -73,7 +73,7 @@ const addNewPhysicalMember = asyncHandler(async (memberData, addedByUserId) => {
 const physicalMemberCount = asyncHandler(async () => {
     const sql = 'SELECT count(id) FROM users WHERE type = \'Physical Member\' AND (status = \'Active\' OR status = \'Inactive\');';
     const result = await query(sql);
-
+    
     return result.rows[0].count;
 });
 
@@ -87,6 +87,15 @@ const virtualMemberCount = asyncHandler(async () => {
 });
 
 
+// active physical member count
+const activePhysicalMemberCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Physical Member\' AND status = \'Active\';';
+    const result = await query(sql);
+    
+    return parseInt(result.rows[0].count);
+});
+
+
 export{
     getViewMembers,
     getViewPhysicalMembers,
@@ -94,4 +103,5 @@ export{
     addNewPhysicalMember,
     physicalMemberCount,
     virtualMemberCount,
+    activePhysicalMemberCount,
 };
