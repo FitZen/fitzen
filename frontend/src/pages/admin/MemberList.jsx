@@ -24,7 +24,6 @@ const MemberList = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [MemberData, setMemberData] = useState([]);
- 
   const navigate = useNavigate();
   const [item, setItem] = React.useState('');
 
