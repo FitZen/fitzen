@@ -25,6 +25,9 @@ const Members = () => {
   const [physicalMembers, setPhysicalMembers] = useState(0);
   const [virtualMembers, setVirtualMembers] = useState(0);
   const navigate = useNavigate();
+  //to get active physical members
+  const [activePhysicalMembers,setActivePhysicalMembers] = useState();
+ 
 
   useEffect(() => {
 
@@ -34,6 +37,9 @@ const Members = () => {
 
     getPhysicalMemberCount();
     getVirtualMemberCount();
+
+    //calling the backend and get details
+    getActivePhysicalMemberCount();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -67,6 +73,17 @@ const Members = () => {
     try {
       const res2 = await axios.get('http://localhost:8000/api/members/virtual/count');
       setVirtualMembers(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  const getActivePhysicalMemberCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/members/physical/count/active');
+      setActivePhysicalMembers(res2.data.data);
       
     } catch (error) {
       console.log('error message: ',error.data);
@@ -190,7 +207,7 @@ const Members = () => {
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Physical Members</Typography>
                     <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
-                    <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%", marginRight:"52.5%" }}>47 are logged in </Typography>
+                    <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%", marginRight:"52.5%" }}>{activePhysicalMembers} are logged in </Typography>
                     <Link to='/admin/memberList/Physical' sx={{textDecoration:"none",}}>
                       <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
                         View All
