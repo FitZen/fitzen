@@ -27,6 +27,7 @@ const Members = () => {
   const navigate = useNavigate();
   //to get active physical members
   const [activePhysicalMembers,setActivePhysicalMembers] = useState();
+  const [activeVirtualMembers,setActiveVirtualMembers] = useState();
  
 
   useEffect(() => {
@@ -48,6 +49,10 @@ const Members = () => {
         setFixedNavbar(false);
       }
     };
+
+
+    //calling the backend and get details
+    getActiveVirtualMemberCount();
 
     // Attach the scroll event listener
     window.addEventListener("scroll", handleScroll);
@@ -84,6 +89,18 @@ const Members = () => {
     try {
       const res2 = await axios.get('http://localhost:8000/api/members/physical/count/active');
       setActivePhysicalMembers(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+
+  const getActiveVirtualMemberCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/members/virtual/count/active');
+      setActiveVirtualMembers(res2.data.data);
       
     } catch (error) {
       console.log('error message: ',error.data);
@@ -241,7 +258,7 @@ const Members = () => {
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Virtual Members</Typography>
                       <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
-                      <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"54.5%"}}>23 are logged in </Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"54.5%"}}>{activeVirtualMembers} are logged in </Typography>
                       <Link to="/admin/memberList/Virtual" sx={{textDecoration:"none",}}>
                         <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
                           View All
