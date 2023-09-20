@@ -7,6 +7,7 @@ import {
     physicalMemberCount,
     virtualMemberCount,
     activePhysicalMemberCount,
+    activeVirtualMemberCount,
 } from "../models/memberModal.js";
 import {
     findUserById,
@@ -159,6 +160,21 @@ const getActivePhysicalMemberCount = asyncHandler(async (req, res) => {
 });
 
 
+// get active virtual member count
+const getActiveVirtualMemberCount = asyncHandler(async (req, res) => {
+    const count = await activeVirtualMemberCount();
+
+    if (count === 'undefined') {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getAllViewMembers,
     getAllViewPhysicalMembers,
@@ -167,4 +183,5 @@ export {
     getPhysicalMemberCount,
     getVirtualMemberCount,
     getActivePhysicalMemberCount,
+    getActiveVirtualMemberCount,
 };
