@@ -96,6 +96,15 @@ const activePhysicalMemberCount = asyncHandler(async () => {
 });
 
 
+// active virtual member count
+const activeVirtualMemberCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Virtual Member\' AND status = \'Active\';';
+    const result = await query(sql);
+    
+    return parseInt(result.rows[0].count);
+});
+
+
 export{
     getViewMembers,
     getViewPhysicalMembers,
@@ -104,4 +113,5 @@ export{
     physicalMemberCount,
     virtualMemberCount,
     activePhysicalMemberCount,
+    activeVirtualMemberCount,
 };
