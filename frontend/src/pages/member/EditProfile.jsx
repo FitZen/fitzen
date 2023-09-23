@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { InputLabel, Typography, Select, MenuItem, Button } from "@mui/material";
-import {FaTelegram, FaFeatherAlt, FaCamera} from 'react-icons/fa';
+import {FaTelegram, FaFeatherAlt,FaUnlockAlt, FaCamera, FaRegAddressBook, FaRegTimesCircle} from 'react-icons/fa';
 import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill} from 'react-icons/pi';
 import Sidebar from "../../components/Sidebar";
@@ -16,11 +16,25 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Modal from "@mui/material/Modal";
+import {AiFillPlusCircle} from "react-icons/ai";
 
 const color1 = "#102B4C" //dark blue
 const color2 = "#346E93" //light blue
 const color3 = "#96CDEF" //lighter blue
-const color4 = "#DC1E2A" //red 
+const color4 = "#DC1E2A" //red
+
+const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 4,
+};
 
 const Profile = () => {
 
@@ -28,6 +42,12 @@ const Profile = () => {
   const [value, setValue] = React.useState(null);
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const [userData, setUserData] = useState({});
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [valueStart, setValueStart] = React.useState(null);
+    const [valueEnd, setValueEnd] = React.useState(null);
 
   const navigate = useNavigate();
 
@@ -153,7 +173,54 @@ const Profile = () => {
             </Grid>
             <Grid item xs={12} md={12} sx={{display:"flex", marginBottom:"5%", marginTop:"2%"}}>
                 <Box sx={{display:"block",textAlign:"left", marginRight:"25%"}}>
-                    <Link to="/profile" style={{}}>Change Password</Link><br />
+                    {/*<Link to="/profile" style={{}}>Change Password</Link><br />*/}
+                    <Button variant="contained" onClick={handleOpen} style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"600",}}><FaUnlockAlt style={{marginRight: "0.5rem"}}/>  Change Password</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={modalStyle}>
+                            <FaRegTimesCircle onClick={handleClose}  style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+                                              onMouseEnter={(e) => {
+                                                  e.target.style.color = "#D71313";
+                                                  e.target.style.transform = "scale(1)";
+                                              }}
+                                              onMouseLeave={(e) => {
+                                                  e.target.style.color = "#D8D9DA";
+                                                  e.target.style.transform = "scale(1)";
+                                              }}
+                            />
+                            <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                                <FaUnlockAlt  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                                <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                                    &nbsp; Change Password
+                                </Typography>
+                            </Box>
+                            <br />
+                            <Typography id="modal-modal-title" variant="h8" component="h5" fontWeight="600" textAlign="center">
+                                &nbsp; Your password should be different from previous one.
+                            </Typography>
+                            <Box sx={{textAlign:"center", padding:"1%"}}>
+
+                                <Box sx={{width:"40%", marginLeft:"4%"}}>
+                                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Current Password:</InputLabel>
+                                    <TextField variant="outlined" inputProps={{style: {height: 10, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                                </Box>
+
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>New Passowrd:</InputLabel>
+                                <TextField variant="outlined" inputProps={{style: {height: 10, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+
+                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Confirm Passowrd:</InputLabel>
+                                <TextField variant="outlined" inputProps={{style: {height: 10, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+
+                                <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Change</Button>
+
+                            </Box>
+
+                        </Box>
+                    </Modal>
                     <Link to="" style={{marginLeft:""}}>Delete Account</Link>
                 </Box>
                 <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Save changes </Button>
@@ -164,7 +231,7 @@ const Profile = () => {
         
         </Box>
       </Box>
-     
+
     </Box>
 
   );
