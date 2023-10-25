@@ -79,11 +79,6 @@ const addNewTrainer = asyncHandler(async (req, res) => {
 const getTrainerCount = asyncHandler(async (req, res) => {
     const count = await trainerCount();
 
-    if (! count) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
     res.status(200).json({
         data: count,
     });
