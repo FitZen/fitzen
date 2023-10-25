@@ -11,7 +11,7 @@ import { protect, permit } from "../middleware/authMiddleware.js";
 // router.get("/getshakebarmanagers", protect, permit('Admin'), getAllShakebarManagers);
 router.get("/getshakebarmanagers", getAllShakebarManagers);
 // router.post("/addshakebarmanager", protect, permit('Admin'), addNewShakebarManager);
-router.post("/addshakebarmanager", protect, permit('Admin'), addNewShakebarManager);
+router.post("/addshakebarmanager", addNewShakebarManager);
 
 
 router.get("/count", protect, permit('Admin'), getShakebarManagerCount);
