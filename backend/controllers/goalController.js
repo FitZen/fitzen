@@ -3,7 +3,6 @@ import {
     getGoals,
     addGoal,
 } from "../models/goalModel.js";
-import {getAnnouncements} from "../models/announcementModel.js";
 
 
 // get all announcements

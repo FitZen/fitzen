@@ -3,7 +3,6 @@ import {
     getMealPlans,
     addMealPlan,
 } from "../models/mealPlanModel.js";
-import {addComplaint} from "../models/complaintModel.js";
 
 
 // get meal plans from specific trainer
