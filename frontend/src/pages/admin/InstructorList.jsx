@@ -36,6 +36,9 @@ const InstructorList = () => {
   const [isPhysicalChecked, setIsPhysicalChecked] = React.useState(false);
   const [isVirtualChecked, setIsVirtualChecked] = React.useState(false);
   const [isBothChecked, setIsBothChecked] = React.useState(false);
+  const [NICError, setNICError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [telError, setTelError] = useState(null);
 
   const handleCheckboxClick = (checkboxName) => {
     if (checkboxName === 'Physical') {
@@ -217,6 +220,16 @@ const InstructorList = () => {
 
     } catch (error) {
       console.error("Adding Trainer failed:", error);
+      if (error.response.data.message === 'NIC already exists.') {
+          setNICError("NIC already exists.");  
+      }
+      if (error.response.data.message === 'Email already exists.') {
+          setEmailError("Email already exists..");          
+      }
+    
+      if (error.response.data.message === 'Contact no already exists.') {
+          setTelError("Contact no already exists.");    
+      }
       // Handle error scenarios here
     }
   };
@@ -268,6 +281,16 @@ const InstructorList = () => {
 
     } catch (error) {
       console.error("Adding Physiotherapist failed:", error);
+      if (error.response.data.message === 'NIC already exists.') {
+          setNICError("NIC already exists.");  
+      }
+      if (error.response.data.message === 'Email already exists.') {
+          setEmailError("Email already exists..");          
+      }
+    
+      if (error.response.data.message === 'Contact no already exists.') {
+          setTelError("Contact no already exists.");    
+      }
       // Handle error scenarios here
     }
   };
@@ -387,17 +410,17 @@ const InstructorList = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>First Name:</InputLabel>
-                            <TextField variant="outlined" name="first_name" value={newTrainer.first_name} onChange={handleInputChange} error={submitted && !newTrainer.first_name} helperText={submitted && !newTrainer.first_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="first_name" value={newTrainer.first_name} onChange={handleInputChange} error={submitted && !newTrainer.first_name} helperText={submitted && !newTrainer.first_name ? "First name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Last Name:</InputLabel>
-                            <TextField variant="outlined" name="last_name" value={newTrainer.last_name} onChange={handleInputChange} error={submitted && !newTrainer.last_name} helperText={submitted && !newTrainer.last_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="last_name" value={newTrainer.last_name} onChange={handleInputChange} error={submitted && !newTrainer.last_name} helperText={submitted && !newTrainer.last_name ? "Last name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>NIC:</InputLabel>
-                            <TextField variant="outlined" name="nic" value={newTrainer.nic} onChange={handleInputChange} error={submitted && !newTrainer.nic} helperText={submitted && !newTrainer.nic ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="nic" value={newTrainer.nic} onChange={handleInputChange} error={(submitted && !newTrainer.nic) || (submitted && NICError)} helperText={submitted && !newTrainer.nic ? "NIC is required" : (submitted && NICError !== "") ? NICError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Email:</InputLabel>
-                            <TextField variant="outlined" name="email" value={newTrainer.email} onChange={handleInputChange} error={submitted && !newTrainer.email} helperText={submitted && !newTrainer.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="email" value={newTrainer.email} onChange={handleInputChange} error={(submitted && !newTrainer.email) || (submitted && emailError)} helperText={submitted && !newTrainer.email ? "Email is required" : (submitted && emailError !== "") ? emailError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
-                            <TextField variant="outlined" name="contact_no" value={newTrainer.contact_no} onChange={handleInputChange} error={submitted && !newTrainer.contact_no} helperText={submitted && !newTrainer.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="contact_no" value={newTrainer.contact_no} onChange={handleInputChange} error={(submitted && !newTrainer.contact_no)  || (submitted && telError)} helperText={submitted && !newTrainer.contact_no ? "Contact number is required" : (submitted && telError !== "") ? telError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Address:</InputLabel>
-                            <TextField variant="outlined" name="address" value={newTrainer.address} onChange={handleInputChange} error={submitted && !newTrainer.address} helperText={submitted && !newTrainer.address ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="address" value={newTrainer.address} onChange={handleInputChange} error={submitted && !newTrainer.address} helperText={submitted && !newTrainer.address ? "Address is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             
                             <Box sx={{display:"flex", marginLeft:"4%"}}>
                               <Box sx={{width:"45%", marginRight:"5%"}}>
@@ -488,17 +511,17 @@ const InstructorList = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>First Name:</InputLabel>
-                            <TextField variant="outlined" name="first_name" value={newPhysiotherapist.first_name} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.first_name} helperText={submitted && !newPhysiotherapist.first_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="first_name" value={newPhysiotherapist.first_name} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.first_name} helperText={submitted && !newPhysiotherapist.first_name ? "First name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Last Name:</InputLabel>
-                            <TextField variant="outlined" name="last_name" value={newPhysiotherapist.last_name} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.last_name} helperText={submitted && !newPhysiotherapist.last_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="last_name" value={newPhysiotherapist.last_name} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.last_name} helperText={submitted && !newPhysiotherapist.last_name ? "Last name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>NIC:</InputLabel>
-                            <TextField variant="outlined" name="nic" value={newPhysiotherapist.nic} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.nic} helperText={submitted && !newPhysiotherapist.nic ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="nic" value={newPhysiotherapist.nic} onChange={handleShakeInputChange} error={(submitted && !newPhysiotherapist.nic) || (submitted && NICError)} helperText={submitted && !newPhysiotherapist.nic ? "NIC is required" : (submitted && NICError !== "") ? NICError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Email:</InputLabel>
-                            <TextField variant="outlined" name="email" value={newPhysiotherapist.email} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.email} helperText={submitted && !newPhysiotherapist.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="email" value={newPhysiotherapist.email} onChange={handleShakeInputChange} error={(submitted && !newPhysiotherapist.email) || (submitted && emailError)} helperText={submitted && !newPhysiotherapist.email ? "Email is required" : (submitted && emailError !== "") ? emailError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
-                            <TextField variant="outlined" name="contact_no" value={newPhysiotherapist.contact_no} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.contact_no} helperText={submitted && !newPhysiotherapist.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="contact_no" value={newPhysiotherapist.contact_no} onChange={handleShakeInputChange} error={(submitted && !newPhysiotherapist.contact_no) || (submitted && telError)} helperText={submitted && !newPhysiotherapist.contact_no ? "Contact number is required" : (submitted && telError !== "") ? telError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Address:</InputLabel>
-                            <TextField variant="outlined" name="address" value={newPhysiotherapist.address} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.address} helperText={submitted && !newPhysiotherapist.address ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="address" value={newPhysiotherapist.address} onChange={handleShakeInputChange} error={submitted && !newPhysiotherapist.address} helperText={submitted && !newPhysiotherapist.address ? "Address is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             
                             <Box sx={{display:"flex", marginLeft:"4%"}}>
                               <Box sx={{width:"45%", marginRight:"5%"}}>

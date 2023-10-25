@@ -29,6 +29,9 @@ const ReceptionView = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const navigate = useNavigate();
   const {employeeType} = useParams();
+  const [NICError, setNICError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [telError, setTelError] = useState(null);
   
   const [newReception, setNewReception] = useState({
     first_name: "",
@@ -185,11 +188,23 @@ const ReceptionView = () => {
 
     } catch (error) {
       console.error("Adding Reception failed:", error);
+      if (error.response.data.message === 'NIC already exists.') {
+        setNICError("NIC already exists.");  
+    }
+    if (error.response.data.message === 'Email already exists.') {
+        setEmailError("Email already exists..");          
+    }
+  
+    if (error.response.data.message === 'Contact no already exists.') {
+        setTelError("Contact no already exists.");    
+    }
       // Handle error scenarios here
     }
   };
 
-  const handleShakeSubmit = async () => {
+  const handleShakeSubmit = async (e) => {
+
+    e.preventDefault();
 
     if (!newManager.first_name || !newManager.last_name || !newManager.nic || !newManager.email || !newManager.contact_no) {
       // Display error messages or styles for empty fields
@@ -230,6 +245,21 @@ const ReceptionView = () => {
 
     } catch (error) {
       console.error("Adding Shake Bar Manager failed:", error);
+      if (error.response.data.message === 'NIC already exists.') {
+          setNICError("NIC already exists.");  
+      }
+      if (error.response.data.message === 'Email already exists.') {
+          setEmailError("Email already exists..");          
+      }
+    
+      if (error.response.data.message === 'Contact no already exists.') {
+          setTelError("Contact no already exists.");    
+      }
+  
+      
+      // } else if (error.response.data.message === "User doesn't exist") {
+        
+      // }
       // Handle error scenarios here
     }
   };
@@ -325,15 +355,15 @@ const ReceptionView = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>First Name:</InputLabel>
-                            <TextField variant="outlined" name="first_name" value={newReception.first_name} onChange={handleInputChange} error={submitted && !newReception.first_name} helperText={submitted && !newReception.first_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="first_name" value={newReception.first_name} onChange={handleInputChange} error={submitted && !newReception.first_name} helperText={submitted && !newReception.first_name ? "First name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Last Name:</InputLabel>
-                            <TextField variant="outlined" name="last_name" value={newReception.last_name} onChange={handleInputChange} error={submitted && !newReception.last_name} helperText={submitted && !newReception.last_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="last_name" value={newReception.last_name} onChange={handleInputChange} error={submitted && !newReception.last_name} helperText={submitted && !newReception.last_name ? "Last name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>NIC:</InputLabel>
-                            <TextField variant="outlined" name="nic" value={newReception.nic} onChange={handleInputChange} error={submitted && !newReception.nic} helperText={submitted && !newReception.nic ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="nic" value={newReception.nic} onChange={handleInputChange} error={(submitted && !newReception.nic) || (submitted && NICError)} helperText={submitted && !newReception.nic ? "NIC is required" : (submitted && NICError !== "") ? NICError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Email:</InputLabel>
-                            <TextField variant="outlined" name="email" value={newReception.email} onChange={handleInputChange} error={submitted && !newReception.email} helperText={submitted && !newReception.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="email" value={newReception.email} onChange={handleInputChange} error={(submitted && !newReception.email) || (submitted && emailError)} helperText={submitted && !newReception.email ? "Email is required" : (submitted && emailError !== "") ? emailError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
-                            <TextField variant="outlined" name="contact_no" value={newReception.contact_no} onChange={handleInputChange} error={submitted && !newReception.contact_no} helperText={submitted && !newReception.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="contact_no" value={newReception.contact_no} onChange={handleInputChange} error={(submitted && !newReception.contact_no) || (submitted && telError)} helperText={submitted && !newReception.contact_no ? "Contact number is required" : (submitted && telError !== "") ? telError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
                               <Button onClick={handleSubmit} variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Receptionist</Button>
@@ -367,15 +397,15 @@ const ReceptionView = () => {
                         
                         <Box sx={{textAlign:"center", padding:"1%"}}>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>First Name:</InputLabel>
-                            <TextField variant="outlined" name="first_name" value={newManager.first_name} onChange={handleShakeInputChange} error={submitted && !newManager.first_name} helperText={submitted && !newManager.first_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="first_name" value={newManager.first_name} onChange={handleShakeInputChange} error={submitted && !newManager.first_name} helperText={submitted && !newManager.first_name ? "First name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Last Name:</InputLabel>
-                            <TextField variant="outlined" name="last_name" value={newManager.last_name} onChange={handleShakeInputChange} error={submitted && !newManager.last_name} helperText={submitted && !newManager.last_name ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="last_name" value={newManager.last_name} onChange={handleShakeInputChange} error={submitted && !newManager.last_name} helperText={submitted && !newManager.last_name ? "Last name is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>NIC:</InputLabel>
-                            <TextField variant="outlined" name="nic" value={newManager.nic} onChange={handleShakeInputChange} error={submitted && !newManager.nic} helperText={submitted && !newManager.nic ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="nic" value={newManager.nic} onChange={handleShakeInputChange} error={(submitted && !newManager.nic) || (submitted && NICError)} helperText={submitted && !newManager.nic ? "NIC is required" : (submitted && NICError !== "") ? NICError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Email:</InputLabel>
-                            <TextField variant="outlined" name="email" value={newManager.email} onChange={handleShakeInputChange} error={submitted && !newManager.email} helperText={submitted && !newManager.email ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="email" value={newManager.email} onChange={handleShakeInputChange} error={(submitted && !newManager.email) || (submitted && emailError)} helperText={submitted && !newManager.email ? "Email is required" : (submitted && emailError !== "") ? emailError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%", textAlign:"left", marginLeft:"4%", color:"#000000" }}>Contact No:</InputLabel>
-                            <TextField variant="outlined" name="contact_no" value={newManager.contact_no} onChange={handleShakeInputChange} error={submitted && !newManager.contact_no} helperText={submitted && !newManager.contact_no ? "Title is required" : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                            <TextField variant="outlined" name="contact_no" value={newManager.contact_no} onChange={handleShakeInputChange} error={(submitted && !newManager.contact_no) || (submitted && telError)} helperText={submitted && !newManager.contact_no ? "Contact number is required" : (submitted && telError !== "") ? telError : ""} inputProps={{style: {height: 1, width:400,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
                               <Button onClick={handleShakeSubmit}  variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Shake Bar Manager</Button>
