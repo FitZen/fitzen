@@ -79,11 +79,6 @@ const addNewPhysiotherapist = asyncHandler(async (req, res) => {
 const getPhysiotherapistCount = asyncHandler(async (req, res) => {
     const count = await physiotherapistCount();
 
-    if (! count) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
     res.status(200).json({
         data: count,
     });
