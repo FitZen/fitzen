@@ -3,6 +3,7 @@ import {
     getViewTrainers,
     addTrainer,
     trainerCount,
+    activeTrainerCount,
 } from "../models/trainerModel.js";
 import {
     findUserById,
@@ -85,8 +86,18 @@ const getTrainerCount = asyncHandler(async (req, res) => {
 });
 
 
+// get active trainer count
+const getActiveTrainerCount = asyncHandler(async (req, res) => {
+    const count = await activeTrainerCount();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
 export {
     getViewAllTrainers,
     addNewTrainer,
     getTrainerCount,
+    getActiveTrainerCount,
 };
