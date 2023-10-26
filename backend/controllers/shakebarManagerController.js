@@ -3,6 +3,7 @@ import {
     getShakebarManagers,
     addShakebarManager,
     shakebarManagerCount,
+    activeShakebarManagerCount,
 } from "../models/shakebarManagerModel.js";
 import {
     findUserById,
@@ -85,8 +86,19 @@ const getShakebarManagerCount = asyncHandler(async (req, res) => {
 });
 
 
+// get active shakebar manager count
+const getActiveShakebarManagerCount = asyncHandler(async (req, res) => {
+    const count = await activeShakebarManagerCount();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getAllShakebarManagers,
     addNewShakebarManager,
     getShakebarManagerCount,
+    getActiveShakebarManagerCount,
 };

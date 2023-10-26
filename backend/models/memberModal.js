@@ -82,6 +82,19 @@ const physicalMemberCount = asyncHandler(async () => {
 });
 
 
+// active physical member count
+const activePhysicalMemberCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Physical Member\' AND status = \'Active\';';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 // virtual member count
 const virtualMemberCount = asyncHandler(async () => {
     const sql = 'SELECT count(id) FROM users WHERE type = \'Virtual Member\' AND (status = \'Active\' OR status = \'Inactive\');';
@@ -95,11 +108,27 @@ const virtualMemberCount = asyncHandler(async () => {
 });
 
 
+// active virtual member count
+const activeVirtualMemberCount = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM users WHERE type = \'Virtual Member\' AND status = \'Active\';';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
+
 export{
     getViewMembers,
     getViewPhysicalMembers,
     getViewVirtualMembers,
     addNewPhysicalMember,
     physicalMemberCount,
+    activePhysicalMemberCount,
     virtualMemberCount,
+    activeVirtualMemberCount,
 };

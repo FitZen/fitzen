@@ -4,6 +4,7 @@ import {
     getAllShakebarManagers,
     addNewShakebarManager,
     getShakebarManagerCount,
+    getActiveShakebarManagerCount,
 } from "../controllers/shakebarManagerController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -15,6 +16,8 @@ router.post("/addshakebarmanager", addNewShakebarManager);
 
 
 router.get("/count", protect, permit('Admin'), getShakebarManagerCount);
+
+router.get("/count/active", getActiveShakebarManagerCount);
 
 
 export default router;
