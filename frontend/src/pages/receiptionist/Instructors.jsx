@@ -114,7 +114,7 @@ const Instructors= () => {
                                       <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
                                       <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
                                       <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
-                                      <Rating name="read-only" value={3} readOnly /><br />                             
+                                      <Rating name="read-only" value={instructor.rating / instructor.count}  precision={0.5}  readOnly /><br />                             
                                       <Link to={`/receiptionist/instructorprofile/Trainer/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
                                           <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                       </Link>
@@ -136,7 +136,7 @@ const Instructors= () => {
                                           
                                           <img src={instructor.profile_pic === null ? avatar : `http://localhost:3000/Profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"62%", objectFit:"cover", marginBottom:"3%"}}></img>
                                           <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
-                                          <Rating name="read-only" value={3} readOnly /><br />                             
+                                          <Rating name="read-only" value={instructor.rating / instructor.count}  precision={0.5}  readOnly /><br />                             
                                           <Link to={`/receiptionist/instructorprofile/Physiotherapist/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
                                               <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                           </Link>

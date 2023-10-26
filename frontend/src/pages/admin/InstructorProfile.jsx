@@ -3,11 +3,9 @@ import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import avatar from '../../assets/avatar.jpg';
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
-import {FaUserEdit} from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
+import {PiMedalFill} from 'react-icons/pi';
+import Sidebar from "../../components/AdminSidebar";
+import Navbar from "../../components/AdminNavbar";
 import Rating from '@mui/material/Rating';
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,17 +17,17 @@ const InstructorProfile = () => {
     const [userData, setUserData] = useState({});
     const [rate, setRate] = useState(0.0);
     const navigate = useNavigate();
-  
+
     const { instructorID, instructorType } = useParams();
-    //console.log(instructorID, instructorType);
 
   useEffect(() => {
 
-    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
+    if((localStorage.getItem('userType') !== '"Admin"')){
       navigate('/login');
     }
 
     getUserDetails()
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -47,6 +45,7 @@ const InstructorProfile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
 
   const getUserDetails = async () => {
 
@@ -87,7 +86,7 @@ const InstructorProfile = () => {
 
     <Box sx={{ flex: "1", display:"flex", mb:2}}>
         <Box>
-            <Sidebar sidebarLinkId = "2"/>
+            <Sidebar sidebarLinkId = "3"/>
         </Box>
       
         <Box component="main" sx={{flex:1 }}>
@@ -118,7 +117,6 @@ const InstructorProfile = () => {
                                 </Box>
                             </Box>
                         </Box>
-                        <Button variant="contained" style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", width:"15%", height:"10%", marginTop:"1%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Send Request</Button>
 
                     </Box>
                     <Box sx={{width:"95%"}}> 

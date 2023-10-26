@@ -15,6 +15,7 @@ const InstructorProfile = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
     const [userData, setUserData] = useState({});
+    const [rate, setRate] = useState(0.0);
     const navigate = useNavigate();
 
     const { instructorID, instructorType } = useParams();
@@ -54,6 +55,8 @@ const InstructorProfile = () => {
         userType: instructorType,
       };
       const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
+      const res3 = await axios.get('http://localhost:8000/api/ratings/instructor/${instructorId}',{params:reqData});
+      setRate(res3.data.data);
       setUserData(res2.data.data);
       
     } catch (error) {
@@ -131,9 +134,10 @@ const InstructorProfile = () => {
                         </Box>
                         <Box  style={{width:"60%", marginLeft:"6%"}}>
                             <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem",  }}>Review</Typography>
-                            <Box style={{marginLeft:"1%"}}>
-                                <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>4.4</Typography>
-                                <Rating name="read-only" value={4.4} readOnly /><br />
+                            <Box style={{marginLeft:"0%"}}>
+                                <Typography variant="h3" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left"}}>{`${(rate.rating / rate.count).toFixed(2)}`}</Typography>
+                                <Rating name="read-only" value={rate.rating / rate.count}  precision={0.5}  readOnly />
+                                <Typography variant="h6" style={{ fontSize:"12px",fontWeight: 500, color:"grey", textAlign:"left"}}>(Based on {rate.count} reviews)</Typography>
                             </Box>
                         </Box>
                     

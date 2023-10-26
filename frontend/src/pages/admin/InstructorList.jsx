@@ -8,7 +8,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle} from 'react-icons/fa';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -373,7 +373,8 @@ const InstructorList = () => {
                                     <Typography variant="h6" style={{fontSize:"15px", fontWeight: 500,  color: "black", textAlign:"left", marginTop: '0.3rem'}}>{row.mode}</Typography>
                                   </TableCell> : null}
                                   <TableCell align="left">
-                                    <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button>
+                                    {instructorType === "Trainer" ? <Link to={`/admin/instructorprofile/Trainer/${row.id}`}><Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button></Link> : <Link to={`/admin/instructorprofile/Physiotherapist/${row.id}`}><Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button></Link>}
+                                    {/* <Button variant="outlined"  sx={{marginRight:"10%", color:color2, border:"1px solid #346E93"}}>View</Button> */}
                                   </TableCell>
                                   {/* <TableCell align="left">
                                     <Button variant="outlined" color="#346E93" style={{height:"5%", fontWeight: 700, marginTop: '0.3rem'}} >View</Button>
