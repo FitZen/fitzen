@@ -4,6 +4,7 @@ import {
     getAllReceptionists,
     addNewReceptionist,
     getReceptionistCount,
+    getActiveReceptionistCount,
 } from "../controllers/receptionistController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -15,6 +16,8 @@ router.post("/addreceptionist", addNewReceptionist);
 
 
 router.get("/count", protect, permit('Admin'), getReceptionistCount);
+
+router.get("/count/active", getActiveReceptionistCount);
 
 
 export default router;
