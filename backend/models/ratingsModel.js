@@ -7,7 +7,7 @@ const instructorRatings = asyncHandler(async (instructor_id) => {
     const sql = 'SELECT * FROM ratings WHERE id = $1;';
     const result = await query(sql, [instructor_id]);
 
-    return result.rows;
+    return result.rows[0];
 });
 
 

@@ -6,7 +6,8 @@ import {
 import { protect, permit } from "../middleware/authMiddleware.js";
 
 
-router.get("/instructor/:instructorId", protect, getInstructorRatings);
+// router.get("/instructor/:instructorId", protect, getInstructorRatings);
+router.get("/instructor/:instructorId", getInstructorRatings);
 
 
 export default router;
