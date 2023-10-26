@@ -6,6 +6,7 @@ import {
     getAllViewVirtualMembers,
     addPhysicalMember,
     getPhysicalMemberCount,
+    getActivePhysicalMemberCount,
     getVirtualMemberCount,
 } from "../controllers/memberController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
@@ -22,5 +23,6 @@ router.post("/member/physical/add",protect, permit('Receptionist'), addPhysicalM
 router.get("/physical/count", getPhysicalMemberCount);
 // router.get("/virtual/count",protect, permit('Admin'), getVirtualMemberCount);
 router.get("/virtual/count", getVirtualMemberCount);
+router.get("/physical/count/active", getActivePhysicalMemberCount);
 
 export default router;

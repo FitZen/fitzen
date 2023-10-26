@@ -5,6 +5,7 @@ import {
     getViewVirtualMembers,
     addNewPhysicalMember,
     physicalMemberCount,
+    activePhysicalMemberCount,
     virtualMemberCount,
 } from "../models/memberModal.js";
 import {
@@ -123,6 +124,16 @@ const getPhysicalMemberCount = asyncHandler(async (req, res) => {
 });
 
 
+// get active physical member count
+const getActivePhysicalMemberCount = asyncHandler(async (req, res) => {
+    const count = await activePhysicalMemberCount();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 // get virtual member count
 const getVirtualMemberCount = asyncHandler(async (req, res) => {
     const count = await virtualMemberCount();
@@ -139,5 +150,6 @@ export {
     getAllViewVirtualMembers,
     addPhysicalMember,
     getPhysicalMemberCount,
+    getActivePhysicalMemberCount,
     getVirtualMemberCount,
 };
