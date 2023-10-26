@@ -90,11 +90,6 @@ const getUserAllDetails = asyncHandler(async (req, res) => {
 const getTotalUserCount = asyncHandler(async (req, res) => {
     const userCount = await totalUserCount();
 
-    if (! userCount) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
     res.status(200).json({
         data: userCount,
     });
@@ -104,11 +99,6 @@ const getTotalUserCount = asyncHandler(async (req, res) => {
 // get active user count
 const getActiveUserCount = asyncHandler(async (req, res) => {
     const userCount = await activeUserCount();
-
-    if (! userCount) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
 
     res.status(200).json({
         data: userCount,

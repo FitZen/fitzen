@@ -12,14 +12,13 @@ const getHandledComplaints = asyncHandler(async (handledBy) => {
 
 
 // get all unhandled complaints
-const getUnhandledComplaints = asyncHandler(async (handledByUserId) => {
+const getUnhandledComplaints = asyncHandler(async () => {
     const sql = 'SELECT * FROM complaint WHERE is_handled=false ORDER BY added_on DESC;'
     const result = await query(sql);
 
     return result.rows;
 });
 
-// meke aulak thiye handledByUserId eka use wela na
 
 // add complaint
 const addComplaint = asyncHandler(async (subject, content, addedBy) => {
@@ -28,6 +27,7 @@ const addComplaint = asyncHandler(async (subject, content, addedBy) => {
 
     return result.rows[0].id;
 });
+
 
 export{
     getHandledComplaints,

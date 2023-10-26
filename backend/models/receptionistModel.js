@@ -28,7 +28,11 @@ const receptionistCount = asyncHandler(async () => {
     const sql = 'SELECT count(id) FROM users WHERE type = \'Receptionist\' AND (status = \'Active\' OR status = \'Inactive\');';
     const result = await query(sql);
 
-    return result.rows[0].count;
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
 });
 
 

@@ -117,11 +117,6 @@ const addPhysicalMember = asyncHandler(async (req, res) => {
 const getPhysicalMemberCount = asyncHandler(async (req, res) => {
     const count = await physicalMemberCount();
 
-    if (! count) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
     res.status(200).json({
         data: count,
     });
@@ -131,11 +126,6 @@ const getPhysicalMemberCount = asyncHandler(async (req, res) => {
 // get virtual member count
 const getVirtualMemberCount = asyncHandler(async (req, res) => {
     const count = await virtualMemberCount();
-
-    if (! count) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
 
     res.status(200).json({
         data: count,

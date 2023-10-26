@@ -79,11 +79,6 @@ const addNewShakebarManager = asyncHandler(async (req, res) => {
 const getShakebarManagerCount = asyncHandler(async (req, res) => {
     const count = await shakebarManagerCount();
 
-    if (! count) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
     res.status(200).json({
         data: count,
     });
