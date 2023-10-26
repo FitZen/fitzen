@@ -43,6 +43,7 @@ import TrainerPackages from './pages/admin/TrainerPackages';
 import ReceptionView from './pages/admin/ReceptionView';
 import MemberList from './pages/admin/MemberList';
 import InstructorList from './pages/admin/InstructorList';
+import AdminViaInstructorProfile from './pages/admin/InstructorProfile';
 
 import ReceiptionistDashboard from './pages/receiptionist/Dashboard';
 import ReceiptionistProfile from './pages/receiptionist/Profile';
@@ -140,6 +141,7 @@ function App() {
         <Route path="/admin/receptionview/:employeeType" element={<ReceptionView />} />
         <Route path="/admin/memberlist/:memberType" element={<MemberList />} />
         <Route path="/admin/instructorlist/:instructorType" element={<InstructorList />} />
+        <Route path="/admin/instructorprofile/:instructorType/:instructorID" element={<AdminViaInstructorProfile />} />
 
 
         <Route path="/trainer/dashboard" element={<TrainerDashboard />} />
