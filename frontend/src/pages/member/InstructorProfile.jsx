@@ -17,7 +17,7 @@ const InstructorProfile = () => {
 
     const [fixedNavbar, setFixedNavbar] = useState(false);
     const [userData, setUserData] = useState({});
-    const [rate, setRate] = useState(0);
+    const [rate, setRate] = useState(0.0);
     const navigate = useNavigate();
   
     const { instructorID, instructorType } = useParams();
