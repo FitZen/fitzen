@@ -5,7 +5,11 @@ import hashPassword from "../utils/hashPassword.js";
 
 //view all trainers
 const getViewTrainers = asyncHandler(async () => {
-    const sql = 'SELECT * FROM trainer ORDER BY added_on DESC;';
+    const sql = 'SELECT t.*, r.rating, r.count\n' +
+                        'FROM trainer t\n' +
+                        'LEFT JOIN ratings r ON t.id = r.id\n' +
+                        'WHERE t.id IN (SELECT id FROM users WHERE status IN (\'Active\', \'Inactive\'))\n' +
+                        'ORDER BY (r.rating * 1.0 / r.count) DESC;';
     const result = await query(sql);
 
     return result.rows;
