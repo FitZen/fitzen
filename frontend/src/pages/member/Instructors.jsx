@@ -106,13 +106,13 @@ const Instructors= () => {
               <Box sx={{display:"flex", width:"96%", height:"70%", backgroundColor:"#E5E8E8", padding:"0.3rem", borderRadius:"10px", marginBottom:"2rem", marginTop:"1.5rem"}}>
                         <Box sx={{display:"flex",height:"80vh", flexWrap: "wrap",overflowY:"auto", width:"100%", backgroundColor:"white", borderRadius:"10px", padding: "1rem", margin:"0.1rem"}}>
                             {trainers.map((instructor) => (
+            
                                 <Box sx={{width:"22%",textAlign:"center",justifyContent: "center", alignItems:"center",height:"72%", cursor:"pointer", border:"2px solid white", borderRadius:"10px" , padding:"0.65rem", marginRight:"3%", marginBottom:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
                                   
                                   <img src={instructor.profile_pic === null ? avatar : `http://localhost:3000/Profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"56.5%", objectFit:"cover", marginBottom:"3%"}}></img>
                                   <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
-                                  <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Workouts for: {instructor.workoutsFor}</Typography>
                                   <Typography variant="h6" style={{ fontSize: "16px", fontWeight: 500 }}>Mode: {instructor.mode}</Typography>
-                                  <Rating name="read-only" value={3} readOnly /><br />                             
+                                  <Rating name="read-only" value={instructor.rating / instructor.count}  precision={0.5}  readOnly /><br />                             
                                   <Link to={`/member/instructorprofile/Trainer/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
                                       <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                   </Link>
@@ -120,7 +120,7 @@ const Instructors= () => {
                             ))}
                             
                         </Box>
-
+                        
                     </Box>
 
               </Box>
@@ -134,7 +134,7 @@ const Instructors= () => {
                                       
                                       <img src={instructor.profile_pic === null ? avatar : `http://localhost:3000/Profile/${instructor.profile_pic}`} alt="item" style={{width:"100%", height:"62%", objectFit:"cover", marginBottom:"3%"}}></img>
                                       <Typography variant="h6" style={{fontSize:"16px",fontWeight: 700}}>{instructor.first_name} {instructor.last_name}</Typography>
-                                      <Rating name="read-only" value={3} readOnly /><br />                             
+                                      <Rating name="read-only" value={instructor.rating / instructor.count}  precision={0.5}  readOnly /><br />                             
                                       <Link to={`/member/instructorprofile/Physiotherapist/${instructor.id}`} style={{textDecoration:"none", color:"black"}}>
                                           <Button variant="contained" style={{backgroundColor:"#96CDEF", color:"black", fontWeight:"700"}}>View Profile</Button>
                                       </Link>
