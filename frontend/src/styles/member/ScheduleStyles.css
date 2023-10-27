@@ -96,7 +96,7 @@ header .current-date{
 }
 
 .days li.task-date::before {
-  background: #7fff7f; /* Change this to your desired highlight color */
+  background: #f4a9a9; /* Change this to your desired highlight color */
 }
 
 .days li.task-added {
