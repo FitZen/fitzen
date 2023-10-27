@@ -94,3 +94,12 @@ header .current-date{
 .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
+
+.days li.task-date::before {
+  background: #7fff7f; /* Change this to your desired highlight color */
+}
+
+.days li.task-added {
+  background: #FFD700; /* Background color for days with added tasks */
+  color: #000; /* Text color for days with added tasks */
+}
