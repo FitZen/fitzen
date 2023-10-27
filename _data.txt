@@ -1,0 +1,523 @@
+DROP TABLE IF EXISTS memberSchedule;
+DROP TABLE IF EXISTS mealPlan;
+DROP TABLE IF EXISTS goal;
+DROP TABLE IF EXISTS complaint;
+DROP TABLE IF EXISTS announcement;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS medicalCondition;
+DROP TABLE IF EXISTS ratings;
+DROP TABLE IF EXISTS physicalMember;
+DROP TABLE IF EXISTS virtualMember;
+DROP TABLE IF EXISTS membership;
+DROP TABLE IF EXISTS membership_plan;
+DROP TABLE IF EXISTS physiotherapist;
+DROP TABLE IF EXISTS trainer;
+DROP TABLE IF EXISTS shakeBarManager;
+DROP TABLE IF EXISTS receptionist;
+DROP TABLE IF EXISTS admin;
+
+
+-- start tables --
+
+CREATE TABLE admin (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    CONSTRAINT pk_admin PRIMARY KEY (id),
+    CONSTRAINT uc_admin_nic UNIQUE (nic),
+    CONSTRAINT uc_admin_email UNIQUE (email),
+    CONSTRAINT uc_admin_contact_no UNIQUE (contact_no)
+);
+
+
+CREATE TABLE receptionist (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    added_by VARCHAR(6) NOT NULL,
+    added_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_receptionist PRIMARY KEY (id),
+    CONSTRAINT uc_receptionist_nic UNIQUE (nic),
+    CONSTRAINT uc_receptionist_email UNIQUE (email),
+    CONSTRAINT uc_receptionist_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_receptionist_admin FOREIGN KEY (added_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE shakeBarManager (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    added_by VARCHAR(6) NOT NULL,
+    added_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_shakeBarManager PRIMARY KEY (id),
+    CONSTRAINT uc_shakeBarManager_nic UNIQUE (nic),
+    CONSTRAINT uc_shakeBarManager_email UNIQUE (email),
+    CONSTRAINT uc_shakeBarManager_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_shakeBarManager_admin FOREIGN KEY (added_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE trainer (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,    -- Male or Female
+    bio VARCHAR(500),
+    qualification VARCHAR(200) NOT NULL,
+    mode VARCHAR(10) NOT NULL,      -- Physical or Virtual
+    added_by VARCHAR(6) NOT NULL,
+    added_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_trainer PRIMARY KEY (id),
+    CONSTRAINT uc_trainer_nic UNIQUE (nic),
+    CONSTRAINT uc_trainer_email UNIQUE (email),
+    CONSTRAINT uc_trainer_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_trainer_admin FOREIGN KEY (added_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE physiotherapist (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,    -- Male or Female
+    bio VARCHAR(500),
+    qualification VARCHAR(200) NOT NULL,
+    added_by VARCHAR(6) NOT NULL,
+    added_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_physiotherapist PRIMARY KEY (id),
+    CONSTRAINT uc_physiotherapist_nic UNIQUE (nic),
+    CONSTRAINT uc_physiotherapist_email UNIQUE (email),
+    CONSTRAINT uc_physiotherapist_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_physiotherapist_admin FOREIGN KEY (added_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE membership_plan (
+    id SERIAL,
+    name VARCHAR(20) NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    price DECIMAL(8,2) NOT NULL,
+    duration INT NOT NULL,          -- in months
+    type VARCHAR(10) NOT NULL,      -- Physical or Virtual
+    created_by VARCHAR(6) NOT NULL,
+    created_on TIMESTAMP DEFAULT NOW(),
+    is_visible BOOLEAN DEFAULT TRUE,
+    CONSTRAINT pk_membership_plan PRIMARY KEY (id),
+    CONSTRAINT fk_membership_plan_admin FOREIGN KEY (created_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE membership (
+    id SERIAL,
+    started_on TIMESTAMP DEFAULT NOW(),
+    ended_on TIMESTAMP NOT NULL,
+    total_payment DECIMAL(8,2) NOT NULL,
+    last_payment DECIMAL(8,2) NOT NULL,
+    last_payment_on TIMESTAMP NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    membership_plan INT NOT NULL,
+    CONSTRAINT pk_membership PRIMARY KEY (id),
+    CONSTRAINT fk_membership_membership_plan FOREIGN KEY (membership_plan) REFERENCES membership_plan (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE virtualMember (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    emergency_contact_no VARCHAR(10) NOT NULL,
+    joined_on TIMESTAMP DEFAULT NOW(),
+    membership INT NOT NULL,
+    CONSTRAINT pk_virtualMember PRIMARY KEY (id),
+    CONSTRAINT uc_virtualMember_nic UNIQUE (nic),
+    CONSTRAINT uc_virtualMember_email UNIQUE (email),
+    CONSTRAINT uc_virtualMember_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_virtualMember_membership FOREIGN KEY (membership) REFERENCES membership (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE physicalMember (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    contact_no VARCHAR(10) NOT NULL,
+    dob DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    emergency_contact_no VARCHAR(10) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    membership INT NOT NULL,
+    added_by VARCHAR(6) NOT NULL,
+    added_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_physicalMember PRIMARY KEY (id),
+    CONSTRAINT uc_physicalMember_nic UNIQUE (nic),
+    CONSTRAINT uc_physicalMember_email UNIQUE (email),
+    CONSTRAINT uc_physicalMember_contact_no UNIQUE (contact_no),
+    CONSTRAINT fk_physicalMember_membership FOREIGN KEY (membership) REFERENCES membership (id) ON UPDATE CASCADE,
+    CONSTRAINT fk_physicalMember_receptionist FOREIGN KEY (added_by) REFERENCES receptionist (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE ratings (
+    id VARCHAR(6) NOT NULL,     -- trainer id or physiotherapist id
+    rating INT DEFAULT 3,
+    count INT DEFAULT 1,
+    CONSTRAINT pk_ratings PRIMARY KEY (id)
+    -- can't add foreign key constraint linking trainer table and physiotherapist table at once
+);
+
+
+CREATE TABLE medicalCondition (
+    id VARCHAR(6) NOT NULL,         -- could be virtual member id or physical member id
+    has_heart_disease BOOLEAN DEFAULT false,
+    has_cardiovascular_condition BOOLEAN DEFAULT false,
+    experiences_dizziness BOOLEAN DEFAULT false,
+    has_blood_pressure BOOLEAN DEFAULT false,
+    has_gout BOOLEAN DEFAULT false,
+    has_family_history_heart BOOLEAN DEFAULT false,
+    has_diabetes BOOLEAN DEFAULT false,
+    has_infectious_disease BOOLEAN DEFAULT false,
+    has_arthritis BOOLEAN DEFAULT false,
+    experiences_fainting BOOLEAN DEFAULT false,
+    has_knee_issues BOOLEAN DEFAULT false,
+    has_lower_back_issues BOOLEAN DEFAULT false,
+    has_hips_pelvis_issues BOOLEAN DEFAULT false,
+    has_neck_shoulder_issues BOOLEAN DEFAULT false,
+    surgery_info TEXT,
+    medication_info TEXT,
+    other_health_notes TEXT,
+	CONSTRAINT pk_medicalCondition PRIMARY KEY (id)
+    -- can't add foreign key constraint linking physicalMember table and virtualMember table at once
+);
+
+
+CREATE TABLE users (
+    id VARCHAR(6) NOT NULL,
+    nic VARCHAR(12) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact_no VARCHAR(10) NOT NULL,
+    last_login TIMESTAMP,
+    type VARCHAR(20) NOT NULL,
+    status VARCHAR(10) DEFAULT 'Inactive',      --Active, Inactive, Deleted, Suspended or Expired,
+    otp VARCHAR(6),
+    CONSTRAINT pk_users PRIMARY KEY (id),
+    CONSTRAINT uc_users_nic UNIQUE (nic),
+    CONSTRAINT uc_users_email UNIQUE (email),
+    CONSTRAINT uc_users_contact_no UNIQUE (contact_no)
+    -- can't add foreign key constraint linking all other main actor tables at once
+);
+
+
+CREATE TABLE announcement (
+    id SERIAL,
+    title VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    posted_by VARCHAR(6) NOT NULL,
+    posted_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_announcement PRIMARY KEY (id),
+    CONSTRAINT fk_announcement_admin FOREIGN KEY (posted_by) REFERENCES admin (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE complaint (
+    id SERIAL,
+    subject VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    added_by VARCHAR(6) NOT NULL,       -- virtual member, physical member, trainer or physiotherapist
+    added_on TIMESTAMP DEFAULT NOW(),
+    is_handled BOOLEAN DEFAULT FALSE,
+    handled_by VARCHAR(6),
+    handled_on TIMESTAMP,
+    CONSTRAINT pk_complaint PRIMARY KEY (id),
+    CONSTRAINT fk_complaint_admin FOREIGN KEY (handled_by) REFERENCES admin (id) ON UPDATE CASCADE
+    --can't add foreign key constraint linking members and instructors at once
+);
+
+
+CREATE TABLE goal (
+    id SERIAL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(300) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    created_on TIMESTAMP DEFAULT NOW(),
+    created_by VARCHAR(6) NOT NULL,         -- Virtual member, Physical member
+    completed_on TIMESTAMP,
+    status VARCHAR(20),                     -- Not started, In progress, Overdue, Completed
+    CONSTRAINT pk_goal PRIMARY KEY (id)
+    --can't add foreign key constraint linking virtual and physical members at once
+);
+
+
+CREATE TABLE mealPlan (
+    id SERIAL,
+    name VARCHAR(20) NOT NULL,
+    breakfast VARCHAR(200) NOT NULL,
+    lunch VARCHAR(200) NOT NULL,
+    dinner VARCHAR(200) NOT NULL,
+    pre_workout VARCHAR(200) NOT NULL,
+    post_workout VARCHAR(200) NOT NULL,
+    note VARCHAR(500) NOT NULL,
+    created_by VARCHAR(6) NOT NULL,
+    created_on TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT pk_mealPlan PRIMARY KEY (id),
+    CONSTRAINT fk_mealPlan_trainer FOREIGN KEY (created_by) REFERENCES trainer (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE memberSchedule (
+    id SERIAL,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    created_by VARCHAR(6) NOT NULL,     -- Virtual member, Physical member
+    CONSTRAINT pk_memberSchedule PRIMARY KEY (id)
+    --can't add foreign key constraint linking virtual and physical members at once
+);
+
+-- end tables --
+
+
+-- start triggers --
+
+CREATE OR REPLACE FUNCTION insert_into_users()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        INSERT INTO users (id, nic, email, password, contact_no, type)
+        VALUES (NEW.id, NEW.nic, NEW.email, NEW.password, NEW.contact_no, TG_ARGV[0]);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER admin_trigger
+AFTER INSERT ON admin
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Admin');
+
+
+CREATE TRIGGER receptionist_trigger
+AFTER INSERT ON receptionist
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Receptionist');
+
+
+CREATE TRIGGER shakeBarManager_trigger
+AFTER INSERT ON shakeBarManager
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Shake Bar Manager');
+
+
+CREATE TRIGGER trainer_trigger
+AFTER INSERT ON trainer
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Trainer');
+
+
+CREATE TRIGGER physiotherapist_trigger
+AFTER INSERT ON physiotherapist
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Physiotherapist');
+
+
+CREATE TRIGGER virtual_member_trigger
+AFTER INSERT ON virtualMember
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Virtual Member');
+
+
+CREATE TRIGGER physical_member_trigger
+AFTER INSERT ON physicalMember
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_users('Physical Member');
+
+
+-- ########## --
+
+CREATE OR REPLACE FUNCTION insert_into_ratings()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        INSERT INTO ratings(id) VALUES (NEW.id);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trainer_insert_trigger
+AFTER INSERT ON trainer
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_ratings();
+
+
+CREATE TRIGGER physiotherapist_insert_trigger
+AFTER INSERT ON physiotherapist
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_ratings();
+
+-- end triggers --
+
+
+-- start insert data --
+
+INSERT INTO admin (id, nic, first_name, last_name, email, password, profile_pic, contact_no)
+VALUES ('AD0001', '992166398V', 'Adheesha', 'Chamod', 'adheesha@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'ad0001.jpg', '0779293569'),
+       ('AD0002', '992166391V', 'Saman', 'Jayasekara', 'saman@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'ad0002.jpg', '0779293545');
+
+
+INSERT INTO receptionist (id, nic, first_name, last_name, email, password, profile_pic, contact_no, added_by)
+VALUES ('RT0001', '987276376V', 'Anjana', 'Silva', 'anjana@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'rt0001.jpg', '0782917652', 'AD0001'),
+       ('RT0002', '987276375V', 'Kasun', 'Gayashan', 'kasun@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'rt0002.jpg', '0782917611', 'AD0001');
+
+
+INSERT INTO shakeBarManager (id, nic, first_name, last_name, email, password, profile_pic, contact_no, added_by)
+VALUES ('SM0001', '669100872V', 'Dulashi', 'Arunodha', 'dulashi@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'sm0001.jpg', '0777917652', 'AD0001'),
+       ('SM0002', '679100827V', 'Umasha', 'Kawmadi', 'umasha@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'sm0002.jpg', '0788917652', 'AD0001');
+
+
+INSERT INTO trainer (id, nic, first_name, last_name, email, password, profile_pic, contact_no, address, dob, gender, qualification, mode, added_by)
+VALUES ('TR0001', '789128765V', 'Chamudi', 'Sadunika', 'chamudi@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'tr0001.jpg', '0711123569', 'Matara, Sri Lanka', '1999-09-10', 'Female', 'NASM Certified Personal Trainer', 'Physical', 'AD0001'),
+       ('TR0002', '789171765V', 'Asanga', 'Nimsara', 'asanga@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'tr0002.jpg', '0711123444', 'Galle, Sri Lanka', '1997-10-10', 'Male', 'ACE Certified Personal Trainer', 'Virtual', 'AD0001');
+
+
+INSERT INTO physiotherapist (id, nic, first_name, last_name, email, password, profile_pic, contact_no, address, dob, gender, qualification, added_by)
+VALUES ('PT0001', '651298623V', 'Nimesha', 'Pawani', 'nimesha@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'pt0001.jpg', '0789999169', 'Anuradhapura, Sri Lanka', '1988-11-01', 'Female', 'State License in Physiotherapy', 'AD0001'),
+       ('PT0002', '651298612V', 'Gayal', 'Sanjana', 'gayal@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'pt0002.jpg', '0789999196', 'Matara, Sri Lanka', '1989-11-01', 'Male', 'National Certification in Physiotherapy', 'AD0001');
+
+
+INSERT INTO membership_plan (name, description, price, duration, type, created_by)
+VALUES  ('Virtual', 'This is the virtual membership plan', 1000.00, 1, 'Virtual', 'AD0001'),
+        ('Bronze', 'This is the bronze membership plan', 2000.00, 1, 'Physical', 'AD0001'),
+        ('Silver', 'This is the silver membership plan', 4000.00, 3, 'Physical', 'AD0001'),
+        ('Gold', 'This is the gold membership plan', 8000.00, 6, 'Physical', 'AD0001');
+
+
+INSERT INTO membership (ended_on, total_payment, last_payment, last_payment_on, membership_plan)
+VALUES ('2023-09-15 18:20:57.285000', '1000.00', '1000.00', '2021-08-15 18:20:57.285000', 1),
+       ('2023-09-15 18:20:57.285000', '1000.00', '1000.00', '2021-08-15 18:20:57.285000', 1),
+       ('2023-09-15 18:20:57.285000', '2000.00', '2000.00', '2021-08-15 18:20:57.285000', 2),
+       ('2023-09-15 18:20:57.285000', '4000.00', '4000.00', '2021-08-15 18:20:57.285000', 3);
+
+
+INSERT INTO virtualMember (id, nic, first_name, last_name, email, password, profile_pic, contact_no, dob, gender, emergency_contact_no, membership)
+VALUES ('VM0001', '889123976V', 'Tharindu', 'Gunawardhana', 'tharindu@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'vm0001.jpg', '0778283569', '1999-08-05', 'Male', '0998176273', 1),
+       ('VM0002', '889123988V', 'Hasantha', 'Kariayawasam', 'hasantha@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'vm0002.jpg', '0778287769', '1971-12-05', 'Male', '0998176111', 2);
+
+
+INSERT INTO physicalMember (id, nic, first_name, last_name, email, password, profile_pic, contact_no, dob, gender, emergency_contact_no, address, membership, added_by)
+VALUES ('PM0001', '981237651V', 'Rusiru', 'Rathmina', 'rusiru@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'pm0001.jpg', '0711795769', '1999-08-05', 'Male', '0919293569', 'Galle, Sri Lanka', 3, 'RT0001'),
+       ('PM0002', '981231157V', 'Mahindha', 'Kumara', 'mahindha@gmail.com', '$2a$10$Q3bgufSlXOJmFvogm/Odi.js081nTLL7c7xaxCQWCwjKJpK.CR7Oa', 'pm0002.jpg', '0711795745', '1999-08-05', 'Male', '0919293533', 'Nuwara, Sri Lanka', 4, 'RT0001');
+
+
+UPDATE ratings SET rating = 11, count = 4 WHERE id = 'TR0001';
+UPDATE ratings SET rating = 17, count = 6 WHERE id = 'TR0002';
+UPDATE ratings SET rating = 24, count = 7 WHERE id = 'PT0001';
+
+
+INSERT INTO announcement (title, content, posted_by)
+VALUES ('New Gym Hours', 'Our gym hours have been updated for the winter. Please check the schedule.', 'AD0001'),
+       ('Holiday Closure', 'We will be closed for the holidays from Dec 24th to Dec 26th.', 'AD0001'),
+       ('New Equipment', 'We have received new training equipment. Come check it out!', 'AD0001');
+
+
+INSERT INTO complaint (subject, content, added_by)
+VALUES ('Broken Equipment', 'The treadmill in the corner is broken.', 'TR0001'),
+       ('Loud Music', 'The music in the weight room is too loud.', 'PT0001'),
+       ('Crowded Gym', 'The gym is too crowded in the evenings.', 'PM0001');
+
+INSERT INTO complaint (subject, content, added_by, is_handled, handled_by, handled_on)
+VALUES ('AC Malfunction', 'The air conditioning doesn''t seem to be working in the Zumba room.', 'TR0002', true, 'AD0001', '2021-08-15 21:20:57.285000'),
+       ('Unsanitary Locker Rooms', 'The men''s locker room wasn''t cleaned today. It''s very unsanitary.', 'PT0002', true, 'AD0001', '2021-08-15 21:20:57.285000'),
+       ('Distracting Lighting', 'The lighting in the meditation room is too bright and distracting.', 'PM0002', true, 'AD0001', '2021-08-15 21:20:57.285000');
+
+
+INSERT INTO goal (title, description, start_date, end_date, created_by, status)
+VALUES ('Muscle Building Program', '12-week intensive program focused on hypertrophy', '2023-08-17', '2023-11-17', 'VM0001', 'Not started'),
+       ('Cardio Challenge', 'Run 100 miles in 2 months', '2023-08-20', '2023-10-22', 'VM0001', 'Not started'),
+       ('Yoga Flexibility Routine', '30 days of Yoga to improve flexibility and mental wellness', '2023-08-15', '2023-09-17', 'VM0001', 'In progress'),
+       ('Nutrition Overhaul', 'Consult with a nutritionist and maintain a balanced diet for 3 months', '2023-08-15', '2023-11-15', 'PM0001', 'In progress'),
+       ('Swimming Mastery', 'Attend advanced swimming classes and achieve 500m in under 10 minutes', '2023-08-17', '2023-08-17', 'PM0001', 'Not started');
+
+
+INSERT INTO mealPlan (name, breakfast, lunch, dinner, pre_workout, post_workout, note, created_by)
+VALUES ('Muscle Gain 1', '3 eggs, 1 toast', 'Chicken breast, salad', 'Salmon, broccoli', 'Protein shake', 'Amino acid drink', 'High protein diet', 'TR0001'),
+       ('Fat Loss 1', '2 eggs, 1 toast', 'Turkey breast, salad', 'Tuna, greens', 'Fat burner shake', 'Green tea', 'Low carb diet', 'TR0001'),
+       ('Vegan Fitness', 'Vegan protein shake', 'Quinoa salad', 'Tofu, veggies', 'Almond snack', 'Herbal drink', 'Diet for vegan athletes', 'TR0001'),
+       ('Keto Kickstart', 'Bacon, eggs', 'Chicken thigh, greens', 'Steak, asparagus', 'MCT Oil', 'Keto drink', 'Strict ketogenic diet', 'TR0001'),
+       ('Endurance Max', 'Oatmeal, berries', 'Pasta, veggies', 'Chicken, sweet potato', 'Energy gel', 'Electrolyte drink', 'For marathon trainers', 'TR0002');
+
+
+INSERT INTO memberSchedule (title, description, date, time, created_by)
+VALUES ('Meeting', 'Discuss project updates', '2023-11-01', '10:00:00', 'VM0001'),
+       ('Lunch Break', 'Time to eat', '2023-11-01', '12:30:00', 'PM0001'),
+       ('Gym Session', 'Workout', '2023-11-02', '16:00:00', 'PM0001'),
+       ('Team Meeting', 'Discuss project planning', '2023-11-02', '14:00:00', 'VM0001');
+
+-- end insert data --
+
+
+--start verify data--
+
+-- SELECT * FROM admin;
+-- SELECT * FROM receptionist;
+-- SELECT * FROM shakeBarManager;
+-- SELECT * FROM trainer;
+-- SELECT * FROM physiotherapist;
+-- SELECT * FROM membership_plan;
+-- SELECT * FROM membership;
+-- SELECT * FROM virtualMember;
+-- SELECT * FROM physicalMember;
+SELECT * FROM ratings;
+-- SELECT * FROM users;
+-- SELECT * FROM announcement;
+-- SELECT * FROM complaint;
+-- SELECT * FROM goal;
+-- SELECT * FROM mealPlan;
+-- SELECT * FROM memberSchedule;
+
+--end verify data--
