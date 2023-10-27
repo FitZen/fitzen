@@ -1,18 +1,16 @@
 import asyncHandler from 'express-async-handler';
 import {
-    getShakeBarItems,
-    addShakeBarItem
+    findShakebarItemById,
+    findShakebarItemByName,
+    allShakebarItems,
+    addShakebarItem,
 } from "../models/shakebarItemsModal.js";
+import generateShakebarItemId from "../utils/generateShakebarItemId.js";
 
 
 // get all shakebar items 
-const getAllShakeBarItems = asyncHandler(async (req, res) => {
-    const shakebarItems = await getShakeBarItems();
-
-    if (shakebarItems === undefined) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
+const getAllShakebarItems = asyncHandler(async (req, res) => {
+    const shakebarItems = await allShakebarItems();
 
     res.status(200).json({
         data: shakebarItems,
@@ -21,23 +19,30 @@ const getAllShakeBarItems = asyncHandler(async (req, res) => {
 
 
 // add shakebar item
-const addNewShakeBarItem = asyncHandler(async (req, res) => {
-    const { name, unitPrice, category, description,availble_count} = req.body;
-    const added_by = req.user.id;
-    const result = await addShakeBarItem(name, unitPrice, category, description, availble_count);
+const addNewShakebarItem = asyncHandler(async (req, res) => {
+    const { name, category, description, price, image, available_count } = req.body;
 
-    if (! result) {
+    if (await findShakebarItemByName(name)) {
+        res.status(409);                            // status code for conflict
+        throw new Error("Item already exists.");
+    }
+
+    let id;
+    do {
+        id = generateShakebarItemId();
+    } while (await findShakebarItemById(id));
+
+    if (await addShakebarItem(id, name, category, description, price, image, available_count)) {
+        res.status(201).json({
+            message: "Item added successfully.",
+        });
+    } else {
         res.status(500);
         throw new Error("Something went wrong!");
     }
-
-    res.status(201).json({
-        data: result,
-        message: "Shakebar item added successfully.",
-    });
 });
 
 export {
-    getAllShakeBarItems,
-    addNewShakeBarItem,
+    getAllShakebarItems,
+    addNewShakebarItem,
 };
