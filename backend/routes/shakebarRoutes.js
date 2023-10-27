@@ -1,14 +1,14 @@
 import express from "express";
 const router = express.Router();
 import {
-    getAllShakeBarItems,
-    addNewShakeBarItem,
+    getAllShakebarItems,
+    addNewShakebarItem,
 } from "../controllers/shakebarItemController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
 
-router.get("/getshakebaritems", getAllShakeBarItems);
-router.post("/addshakebaritem", addNewShakeBarItem);
+router.get("/items", getAllShakebarItems);
+router.post("/item", addNewShakebarItem);
 
 
 export default router;

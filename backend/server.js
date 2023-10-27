@@ -52,7 +52,7 @@ app.use('/api/mealplans', mealPlanRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/trainers', trainerRoutes);
 app.use('/api/physiotherapists', physiotherapistRoutes);
-app.use('/api/shakebarItems', shakebarRoutes);
+app.use('/api/shakebar', shakebarRoutes);
 app.use('/api/membershipplans', membershipPlansRoutes);
 app.use('/api/shakebarmanagers', shakebarManagerRoutes);
 app.use('/api/ratings', ratingsRoutes);

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS shakebarItem;
 DROP TABLE IF EXISTS memberSchedule;
 DROP TABLE IF EXISTS mealPlan;
 DROP TABLE IF EXISTS goal;
@@ -317,6 +318,19 @@ CREATE TABLE memberSchedule (
     --can't add foreign key constraint linking virtual and physical members at once
 );
 
+
+CREATE TABLE shakebarItem (
+    id VARCHAR(6) NOT NULL,         -- format => IT0001
+    name VARCHAR(40) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    price DECIMAL(8,2) NOT NULL,
+    image VARCHAR(255),
+    available_count INT NOT NULL,
+    CONSTRAINT pk_shakebarItem PRIMARY KEY (id),
+    CONSTRAINT uc_shakebarItem_name UNIQUE (name)
+);
+
 -- end tables --
 
 
@@ -498,6 +512,19 @@ VALUES ('Meeting', 'Discuss project updates', '2023-11-01', '10:00:00', 'VM0001'
        ('Gym Session', 'Workout', '2023-11-02', '16:00:00', 'PM0001'),
        ('Team Meeting', 'Discuss project planning', '2023-11-02', '14:00:00', 'VM0001');
 
+
+INSERT INTO shakebarItem (id, name, category, description, price, image, available_count)
+VALUES ('IT0001', 'Protein Shake', 'Shakes', 'High-protein shake for muscle recovery', 450.00, 'IT0001.jpg', 50),
+       ('IT0002', 'Energy Bar', 'Snacks', 'Nutrient-packed energy bar', 225.00, 'IT0002.jpg', 100),
+       ('IT0003', 'Hydration Drink', 'Drinks', 'Refreshing electrolyte drink', 180.00, 'IT0003.jpg', 75),
+       ('IT0004', 'Gym Towel', 'Accessories', 'Quick-dry gym towel', 900.00, 'IT0004.jpg', 30),
+       ('IT0005', 'Protein Pancakes', 'Breakfast', 'Protein-packed pancake mix', 495.00, 'IT0005.jpg', 40),
+       ('IT0006', 'Fitness Water Bottle', 'Accessories', 'Reusable fitness water bottle', 720.00, 'IT0006.jpg', 60),
+       ('IT0007', 'BCAA Supplement', 'Supplements', 'Branched-Chain Amino Acids', 550.00, 'IT0007.jpg', 25),
+       ('IT0008', 'Creatine Powder', 'Supplements', 'Pure creatine monohydrate powder', 650.00, 'IT0008.jpg', 20),
+       ('IT0009', 'Pre-Workout Booster', 'Supplements', 'Energy-boosting pre-workout formula', 675.00, 'IT0009.jpg', 30),
+       ('IT0010', 'Vitamin D Capsules', 'Supplements', 'Vitamin D3 dietary supplements', 290.00, 'IT0010.jpg', 45);
+
 -- end insert data --
 
 
@@ -512,12 +539,13 @@ VALUES ('Meeting', 'Discuss project updates', '2023-11-01', '10:00:00', 'VM0001'
 -- SELECT * FROM membership;
 -- SELECT * FROM virtualMember;
 -- SELECT * FROM physicalMember;
-SELECT * FROM ratings;
--- SELECT * FROM users;
+-- SELECT * FROM ratings;
+SELECT * FROM users;
 -- SELECT * FROM announcement;
 -- SELECT * FROM complaint;
 -- SELECT * FROM goal;
 -- SELECT * FROM mealPlan;
 -- SELECT * FROM memberSchedule;
+-- SELECT * FROM shakebarItem;
 
 --end verify data--
