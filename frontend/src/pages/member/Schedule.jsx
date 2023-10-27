@@ -10,7 +10,8 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from "@mui/x-date-pickers";
-
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const color2 = "#346E93" //light blue
 
@@ -18,7 +19,21 @@ const Schedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currentDate.getMonth());
-  const [value, setValue] = React.useState(null);
+  const [timeValue, setTimeValue] = React.useState(null);
+  const [dateValue, setDateValue] = React.useState(null);
+
+  const [taskDates, setTaskDates] = useState([]);
+
+  const [newTask, setNewTask] = useState({
+    title: "",
+    content: "",
+  });
+
+  //for dates picking
+  const [startDateError, setStartDateError] = useState("");
+  const [timeError, setTimeError] = useState("");
+  
+  const [submitted, setSubmitted] = useState(false);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
@@ -28,6 +43,8 @@ const Schedule = () => {
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getTaskDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -45,6 +62,26 @@ const Schedule = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getTaskDetails = async () => {
+
+      const reqData = {
+        userID : JSON.parse(localStorage.getItem('userID'))
+    };
+        
+    
+    try {
+    
+      const res = await axios.get("http://localhost:8000/api/schedule/gettasksdates",{params:reqData});
+      //console.log("Dates : ",res.data.data);
+      setTaskDates(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  }
 
   const months = [
     "January",
@@ -72,6 +109,8 @@ const Schedule = () => {
     navigate(`/member/scheduletask/${formattedDate}`);
   }
 
+
+
   const renderCalendar = () => {
     const firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
     const lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate();
@@ -86,17 +125,29 @@ const Schedule = () => {
         </li>
       );
     }
+    
 
     for (let i = 1; i <= lastDateofMonth; i++) {
       const isToday =
         i === currentDate.getDate() &&
         currMonth === currentDate.getMonth() &&
         currYear === currentDate.getFullYear();
-      days.push(
-        <li key={`current-${i}`} className={isToday ? "active" : ""} onClick={() => handleDateClick(i)}>
-          {i}
-        </li>
-      );
+        console.log("taskDates : ",taskDates[i-1]);
+        
+        const formattedDate = `${currYear}-${currMonth + 1}-${i}`; // Format as "YYYY-MM-DD"
+        const isColored = taskDates.includes(formattedDate);
+
+        days.push(
+          <li
+            key={`current-${i}`}
+            className={`${
+              isToday ? "active" : ""
+            } ${isColored ? "task-date" : ""}`}
+            onClick={() => handleDateClick(i)}
+          >
+            {i}
+          </li>
+        );
     }
 
     for (let i = lastDayofMonth; i < 6; i++) {
@@ -130,6 +181,70 @@ const Schedule = () => {
     setCurrMonth(newMonth);
     setCurrYear(newYear);
   };
+
+    //get form inputs
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setNewTask((prevGoal) => ({
+        ...prevGoal,
+        [name]: value,
+      }));
+  
+    };
+
+  const handleSubmit = async () => {
+
+    console.log("handleSubmit called");
+
+    if (!newTask.title || !newTask.content || !dateValue || !timeValue ) {
+      // Display error messages or styles for empty fields
+      setSubmitted(true);
+      return;
+    }
+
+    if (!dateValue) {
+        setStartDateError("Start date is required");
+        return;
+    }
+
+    try {
+      const payload = {
+        title: newTask.title,
+        description: newTask.content,
+        start_date: dateValue.format("YYYY-MM-DD"),
+        start_time: timeValue.format("HH:mm:ss"),
+        userID: JSON.parse(localStorage.getItem('userID')),
+      };
+      
+      //console.log("payload : ", payload);
+
+      const res2 = await axios.post(
+        "http://localhost:8000/api/schedule/addmemberschedule",
+        payload
+      );
+  
+      if (res2.status === 201) {
+        setNewTask({ title: "", content: "" }); // Clear the form
+        setSubmitted(false);
+        setStartDateError(""); // Clear any previous errors
+        setDateValue(null);
+        setTimeValue(null);
+        setTimeError("");
+    
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Task Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } catch (error) {
+      console.error("Task Adding failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
 
   return (
     <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
@@ -192,37 +307,59 @@ const Schedule = () => {
               </div>
             </Box>
 
-            <Box sx={{ width: "50%", height:"77vh", justifyContent: "center", alignItems:"center" }}>
+            <Box sx={{ width: "50%", height:"79vh", justifyContent: "center", alignItems:"center" }}>
               <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"3%", paddingLeft:"8%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
                 <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Task</Typography>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
-                <TextField variant="outlined" inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
-                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Date:</InputLabel>
+                <TextField variant="outlined" name="title" value={newTask.title} onChange={handleInputChange} error={submitted && !newTask.title} helperText={submitted && !newTask.title ? "Title is required":""} inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Date:</InputLabel>
                 <Box sx={{maxWidth:"450px"}}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} >
                       <DatePicker 
                           label=""
-                          value={value}
+                          value={dateValue}
                           style={{width:"100px"}}
-                          onChange={(newValue) => setValue(newValue)} 
-                          renderInput={(params) => <TextField {...params}  />}
+                          onChange={(newValue) => {
+                            setDateValue(newValue);
+                            setStartDateError("");
+                          }} 
+                          disablePast
+                          renderInput={(params) => (
+                            <TextField 
+                                name="start_date"
+                                error={submitted && !dateValue} 
+                                helperText={(submitted && !dateValue) ? "Date is required" : ""}  
+                                {...params}  
+                            />
+                            )}
                       />
                   </LocalizationProvider>
                 </Box>
                 
-                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Time:</InputLabel>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Time:</InputLabel>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimePicker
                     label="Select Time"
-                    value={value} // Your value state for the selected time
-                    onChange={(newValue) => setValue(newValue)} // Your onChange handler
-                    renderInput={(params) => <TextField {...params} />}
+                    value={timeValue} // Your value state for the selected time
+                    onChange={(newValue) => {
+                      setTimeValue(newValue);
+                      setTimeError("");
+                    }} // Your onChange handler
+                    renderInput={(params) => (
+                      <TextField
+                        name="start_time"
+                        error={submitted && !timeValue}
+                        helperText={(submitted && !timeValue) ? "Time is required" : ""}
+                        {...params}
+                      />
+                    
+                    )}
                   />
                 </LocalizationProvider>
-                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Description:</InputLabel>
-                <TextField variant="outlined" multiline rows="4" inputProps={{style: {height: 100, width:230, borderRadius:"5px", outline:"none"}}}/>
+                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Description:</InputLabel>
+                <TextField variant="outlined" name="content" value={newTask.content} onChange={handleInputChange} error={submitted && !newTask.content} helperText={submitted && !newTask.content ? "Description is required" : ""} multiline rows="1" inputProps={{style: {height: 100, width:230, borderRadius:"5px", outline:"none"}}}/>
 
-                <Button variant="contained" style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
+                <Button variant="contained" onClick={handleSubmit}  style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
               </Box>
             </Box>
 
