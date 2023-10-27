@@ -13,6 +13,7 @@ const ScheduleTask = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
+  const [taskDetails, setTaskDetails] = useState([]); //[{date: "2021-10-01", task: "Personal Workout", time: "10:00 a.m - 12:00 p.m", type: "Physical"}
 
   const currentDate = new Date();
 
@@ -34,6 +35,13 @@ const ScheduleTask = () => {
     return daysOfWeek[dayIndex];
   }
 
+  function convertTo12HourTime(time24Hour) {
+    const [hours, minutes] = time24Hour.split(':');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = (hours % 12) || 12;
+    return `${formattedHours}:${minutes} ${ampm}`;
+  }
+
   console.log("Date :", clickedDay);
     console.log("Day :", dayName);
     console.log('next day:', formattedNextDay);
@@ -44,7 +52,8 @@ const ScheduleTask = () => {
       navigate('/login');
     }
 
-    getUserDetails();
+    //getUserDetails();
+    getTaskDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -63,24 +72,36 @@ const ScheduleTask = () => {
     };
   }, []);
 
-  const getUserDetails = async () => {
-    try {
-      const reqData = {
-        userID: JSON.parse(localStorage.getItem('userID')),
-        userType: JSON.parse(localStorage.getItem('userType')),
-      };
-      const res2 = await axios.get('http://localhost:8000/api/users/details',{params:reqData});
-      setUserData(res2.data.data);
-      
-    } catch (error) {
-      console.log('error message: ',error.data);
-    }
-  
+  const getTaskDetails = async () => {
+
+    const reqData = {
+      userID : JSON.parse(localStorage.getItem('userID')),
+      clickedDate : formattedNextDay
   };
+
+  function convertTo12HourTime(time24Hour) {
+    const [hours, minutes] = time24Hour.split(':');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = (hours % 12) || 12;
+    return `${formattedHours}:${minutes} ${ampm}`;
+  }
+      
+  
+  try {
+  
+    const res = await axios.get("http://localhost:8000/api/schedule/gettasksdaybased",{params:reqData});
+    console.log("Dates : ",res.data.data);
+    setTaskDetails(res.data.data);
+
+    // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+  } catch (error) {
+    console.error("Retrieving failed:", error);
+    // Handle error scenarios here
+  }
+}
 
   const color2 = "#346E93" //light blue
 
-  ////////////////////////////////
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('Completed'); // Default value
 
@@ -118,30 +139,33 @@ const ScheduleTask = () => {
            <Box sx={{width:"90%"}}>
                 <Typography variant="body2" style={{ fontWeight: 600, marginTop: "2rem", textAlign:"right" }}>{dayName} {dayOfMonth}</Typography>
                 <hr />
-                <Box sx={{display:"flex", width:"100%",marginTop:"2%", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
-                    <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>10:00 a.m - 12:00 p.m</Typography>
-                    <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Personal Workout</Typography>
-                    {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
-                    {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
-                        <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
-                    </Box> */}
-                    <Box
-                        sx={{
-                        width: '10%',
-                        borderRadius: '5px',
-                        padding: '0.3%',
-                        marginLeft: '30%',
-                        backgroundColor: color2,
-                        cursor: 'pointer',
-                        }}
-                        onClick={toggleDropdown}
-                    >
-                        <Typography variant="body2" style={{ fontWeight: 500, textAlign: 'center', color: 'white' }}>
-                         {selectedValue}
-                        </Typography>
-                    </Box>
-
-                </Box>
+                {taskDetails.map((task) => (	
+                    <Box sx={{display:"flex", width:"100%",marginTop:"2%", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{convertTo12HourTime(task.start_time)}</Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>{task.title}</Typography>
+                      {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
+                      {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
+                          <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
+                      </Box> */}
+                      <Box
+                          sx={{
+                          width: '10%',
+                          borderRadius: '5px',
+                          padding: '0.3%',
+                          marginLeft: '30%',
+                          backgroundColor: color2,
+                          cursor: 'pointer',
+                          }}
+                          onClick={toggleDropdown}
+                      >
+                          <Typography variant="body2" style={{ fontWeight: 500, textAlign: 'center', color: 'white' }}>
+                            {selectedValue}
+                          </Typography>
+                      </Box>
+  
+                  </Box>
+                ))}
+               
                 {isDropdownOpen && (
                         <div
                         style={{
