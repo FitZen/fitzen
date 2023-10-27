@@ -82,7 +82,7 @@ const Schedule = () => {
     try {
     
       const res = await axios.get("http://localhost:8000/api/schedule/gettasksdates",{params:reqData});
-      //console.log("Dates : ",res.data.data);
+      console.log("Dates : ",res.data.data);
       setTaskDates(res.data.data);
 
       // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
@@ -148,9 +148,8 @@ const Schedule = () => {
         days.push(
           <li
             key={`current-${i}`}
-            className={`${
-              isToday ? "active" : ""
-            } ${isColored ? "task-date" : ""}`}
+            className={
+              isToday ? "active" : isColored ? "task-date" : ""}
             onClick={() => handleDateClick(i)}
           >
             {i}
