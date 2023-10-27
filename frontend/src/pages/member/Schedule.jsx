@@ -15,6 +15,15 @@ import Swal from 'sweetalert2'
 
 const color2 = "#346E93" //light blue
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
 const Schedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currYear, setCurrYear] = useState(currentDate.getFullYear());
@@ -104,8 +113,6 @@ const Schedule = () => {
     // Format the clicked date as a string (e.g., "YYYY-MM-DD")
     const formattedDate = clickedDate.toISOString().split('T')[0];
 
-    // console.log('Clicked date:', formattedDate);
-
     navigate(`/member/scheduletask/${formattedDate}`);
   }
 
@@ -132,7 +139,8 @@ const Schedule = () => {
         i === currentDate.getDate() &&
         currMonth === currentDate.getMonth() &&
         currYear === currentDate.getFullYear();
-        console.log("taskDates : ",taskDates[i-1]);
+        
+        // console.log("taskDates : ", formatDate(taskDates));
         
         const formattedDate = `${currYear}-${currMonth + 1}-${i}`; // Format as "YYYY-MM-DD"
         const isColored = taskDates.includes(formattedDate);
@@ -230,7 +238,7 @@ const Schedule = () => {
         setDateValue(null);
         setTimeValue(null);
         setTimeError("");
-    
+        getTaskDetails();
       }
 
       Swal.fire({

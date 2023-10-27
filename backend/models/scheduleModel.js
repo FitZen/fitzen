@@ -9,6 +9,14 @@ const getTasksDates = asyncHandler(async (createdBy) => {
     return result.rows;
 });
 
+const getTasksDayBased = asyncHandler(async (createdBy,clickedDate) => {
+    
+    const sql = 'SELECT * FROM memberSchedule WHERE created_by=$1 AND start_date=$2 ORDER BY start_time;';
+    const result = await query(sql, [createdBy,clickedDate]);
+
+    return result.rows;
+});
+
 //Add a new task to member's schedule
 const addTask = asyncHandler(async (title, description, startDate, startTime, createdBy) => {
     const sql = 'INSERT INTO memberSchedule (title, description, start_date, start_time, created_by) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
@@ -19,5 +27,6 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
 
 export {
     getTasksDates,
+    getTasksDayBased,
     addTask
 };
