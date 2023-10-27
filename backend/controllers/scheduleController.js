@@ -1,13 +1,49 @@
 import asyncHandler from 'express-async-handler';
 import {
     getTasksDates,
+    getTasksDayBased,
     addTask
 } from "../models/scheduleModel.js";
 
+//to format the dates as YYYY-MM-DD
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+}
+
+
 //get all tasks dates
+
 const getAllTaskDates = asyncHandler(async (req, res) => {
     const createdBy = req.query.userID;
     const tasks = await getTasksDates(createdBy);
+    //console.log("tasks from backend : ", tasks)
+
+    const formattedDates = tasks.map(task => formatDate(task.start_date));
+    //console.log("formattedDates from backend : ", formattedDates)
+
+    if (tasks === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: formattedDates,
+    });
+});
+
+//get all tasks based on date
+const getAllTasksDayBased = asyncHandler(async (req, res) => {
+    const createdBy = req.query.userID;
+    const clickedDate = req.query.clickedDate;
+
+    const tasks = await getTasksDayBased(createdBy, clickedDate);
+
+    //console.log("tasks from backend : ", tasks)
 
     if (tasks === undefined) {
         res.status(500);
@@ -46,5 +82,6 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
 
 export {
     getAllTaskDates,
+    getAllTasksDayBased,
     addMemberSchedule
 };
