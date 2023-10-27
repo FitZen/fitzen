@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle, FaPlus, FaMinus} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import axios from 'axios';
 
 // Import the images
 import item1 from "../../assets/images (3).jpg"
@@ -27,10 +28,24 @@ const Shakebar = () => {
   const [valueStart, setValueStart] = React.useState(null);
   const [valueEnd, setValueEnd] = React.useState(null);
   const [count, setCount] = React.useState(0);
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleBuyClick = (itemData) => {
+    setSelectedItem(itemData);
+    handleOpen(); // Open the modal to display item details
+  };
+
+  // function increment() {
+  //   setCount(prevCount => prevCount + 1);
+  // }
 
   function increment() {
-    setCount(prevCount => prevCount + 1);
+    if (selectedItem && count < selectedItem?.available_count) {
+      setCount(prevCount => prevCount + 1);
+    }
   }
+  
 
   function decrement() {
     setCount(prevCount => {
@@ -52,6 +67,9 @@ const Shakebar = () => {
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getAllShakebarItemsms();
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -69,6 +87,17 @@ const Shakebar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getAllShakebarItemsms = async () => {
+    
+    try {
+      const response = await axios.get("http://localhost:8000/api/shakebar/items");
+      console.log("response : ", response.data.data);
+      setItems(response.data.data);
+    } catch (error) {
+      console.error("error : ", error.message);
+    }
+  };
 
   const color1 = "#102B4C" //dark blue
   const color2 = "#346E93" //light blue
@@ -192,7 +221,7 @@ const Shakebar = () => {
           <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
             <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
               {/* Map over the data array to generate Box components */}
-              {data.map((itemData) => (
+              {items.map((itemData) => (
                 <Box
                   key={itemData.id}
                   sx={{
@@ -211,14 +240,14 @@ const Shakebar = () => {
                     "&:hover": { borderColor: "#96CDEF", transition: "ease 0.5s" },
                   }}
                 >
-                  <img src={itemData.imageSrc} alt="item" style={{ width: "85%", height: "65%" }} />
+                  <img src={`http://localhost:3000/Shakebar/${itemData.image}`} alt="item" style={{ width: "85%", height: "65%" }} />
                   <Typography variant="h6" style={{ fontWeight: 700 }}>
-                    {itemData.title}
+                    {itemData.name}
                   </Typography>
                   <Typography variant="h6" style={{ fontWeight: 500 }}>
                     {itemData.price}
                   </Typography>
-                  <Button variant="contained" onClick={handleOpen} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
+                  <Button variant="contained" key={itemData.id} onClick={() => handleBuyClick(itemData)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
                     Buy
                   </Button>
                   
@@ -248,29 +277,30 @@ const Shakebar = () => {
               <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
                   
                   <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                      Dymatize Iso 100
+                      {selectedItem?.name}
                   </Typography>
               </Box>
               
               <Box sx={{textAlign:"center", padding:"1%", justifyContent:"center"}}>
                   <Box sx={{display:"flex", height:"40vh"}}>
                     <Box>
-                      <img src={item1} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
+                      <img src={`http://localhost:3000/Shakebar/${selectedItem?.image}`} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                     </Box>
                     <Box sx={{marginTop:"10%"}}>
-                      <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> Rs 2300</Typography><br />
+                      <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> {selectedItem?.price}</Typography><br />
                       <Typography variant="body1" textAlign="left">
-                        <span style={{fontWeight:"600"}}>Description:</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <span style={{fontWeight:"600"}}>Description:</span>  {selectedItem?.description}
                       </Typography><br />
-                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> In Stock.</Typography><br />
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> {selectedItem?.available_count > 0 ? "In Stock" : "Out of Stock"}</Typography><br />
                       <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Quantity: &nbsp;
-                        <IconButton size="small" onClick={increment} aria-label="plus" style={{border:"1px solid"}}>
-                          <FaPlus />
-                        </IconButton>
-                        <Typography variant="body1" textAlign="center" style={{display:"inline-block", width:"10%"}}>{count}</Typography>
                         <IconButton size="small" onClick={decrement} aria-label="minus" style={{border:"1px solid"}}>
                           <FaMinus />
                         </IconButton>
+                        <Typography variant="body1" textAlign="center" style={{display:"inline-block", width:"10%"}}>{count}</Typography>
+                        <IconButton size="small" onClick={increment} aria-label="plus" style={{border:"1px solid"}}>
+                          <FaPlus />
+                        </IconButton>
+                        
                       </span> </Typography>
                     </Box>
                   </Box>
