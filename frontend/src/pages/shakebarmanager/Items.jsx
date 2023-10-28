@@ -4,7 +4,6 @@ import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 import { useNavigate } from 'react-router-dom';
-import item1 from "../../assets/images (3).jpg";
 import axios from 'axios';
 import { FaRegTimesCircle } from 'react-icons/fa';
 
@@ -19,6 +18,7 @@ const Items = () => {
 
   const [itemData, setItemData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  //const [item, setItem] = useState([]);
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
 
@@ -45,11 +45,11 @@ const Items = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [navigate]);
 
   const viewItems = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/shakebarItems/getshakebaritems");
+      const res = await axios.get("http://localhost:8000/api/shakebar/items");
       setItemData(res.data.data);
     } catch (error) {
       console.error("Retrieving failed:", error);
@@ -90,7 +90,7 @@ const Items = () => {
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Items</Typography>
 
-          <Button variant="contained" size="small" style={{ marginLeft: '68rem', marginTop: '-5rem', backgroundColor: "#346E93" }} onClick={handleAddNewItemClick}>Add New</Button>
+          <Button variant="contained" size="small" style={{ marginLeft: '65rem', marginTop: '-5rem', backgroundColor: "#346E93" }} onClick={handleAddNewItemClick}>Add New</Button>
 
           <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
             <Table>
@@ -108,11 +108,11 @@ const Items = () => {
                   <TableRow key={item.id}>
                     <TableCell>{item.id}</TableCell>
                     <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.availble_count}</TableCell>
-                    <TableCell>{item.unit_price}</TableCell>
+                    <TableCell>{item.available_count}</TableCell>
+                    <TableCell>{item.price}</TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>
-                      <Button variant="contained" color="primary" style={{ backgroundColor: "#346E93" }} size="small" onClick={() => handleOpen(item)}>
+                      <Button key={item.id} onClick={() => handleOpen(item)} variant="contained" color="primary" style={{ backgroundColor: "#346E93" }} size="small">
                         View
                       </Button>
                     </TableCell>
@@ -145,13 +145,13 @@ const Items = () => {
           <Box sx={{ textAlign: "center", padding: "1%", justifyContent: "center" }}>
             <Box sx={{ display: "flex", height: "40vh" }}>
               <Box>
-                <img src={item1} alt="item" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src={(selectedItem?.image) ? `http://localhost:3000/Shakebar/${selectedItem?.image}` : `http://localhost:3000/Shakebar/item.jpg`} alt="item" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </Box>
               <Box sx={{ marginTop: "8%" }}>
                 <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Item Name:</span> {selectedItem?.name}</Typography><br />
-                <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Unit Price:</span> {selectedItem?.unit_price}</Typography><br />
+                <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Unit Price:</span> {selectedItem?.price}</Typography><br />
                 <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Category:</span> {selectedItem?.category}</Typography><br />
-                <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Quantity:</span> {selectedItem?.availble_count}</Typography><br />
+                <Typography variant="body1" textAlign="left"><span style={{ fontWeight: "600" }}>Quantity:</span> {selectedItem?.available_count}</Typography><br />
                 <Typography variant="body1" textAlign="left">
                   <span style={{ fontWeight: "600" }}>Description:</span> {selectedItem?.description}
                 </Typography><br />
