@@ -9,10 +9,28 @@ const getTasksDates = asyncHandler(async (createdBy) => {
     return result.rows;
 });
 
+//get day based tasks
 const getTasksDayBased = asyncHandler(async (createdBy,clickedDate) => {
     
     const sql = 'SELECT * FROM memberSchedule WHERE created_by=$1 AND start_date=$2 ORDER BY start_time;';
     const result = await query(sql, [createdBy,clickedDate]);
+
+    return result.rows;
+});
+
+//get next task
+const getNextDayTask = asyncHandler(async (createdBy) => {
+    const sql = 'SELECT * FROM memberSchedule WHERE created_by=$1 AND start_date=CURRENT_DATE AND start_time>CURRENT_TIME ORDER BY start_time LIMIT 1;';
+    const result = await query(sql, [createdBy]);
+
+    return result.rows[0];
+});
+
+
+//get current day tasks
+const getCurrentDayTasks = asyncHandler(async (createdBy) => {
+    const sql = 'SELECT * FROM memberSchedule WHERE created_by=$1 AND start_date=CURRENT_DATE ORDER BY start_time;';
+    const result = await query(sql, [createdBy]);
 
     return result.rows;
 });
@@ -28,5 +46,7 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
 export {
     getTasksDates,
     getTasksDayBased,
+    getNextDayTask,
+    getCurrentDayTasks,
     addTask
 };

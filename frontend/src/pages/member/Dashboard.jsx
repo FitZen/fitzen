@@ -10,6 +10,7 @@ import {GoGoal} from 'react-icons/go';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import {useEffect, useState} from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const color1 = "#102B4C" //dark blue
@@ -23,14 +24,26 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Doughn
 const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
+  const [taskDetails, setTaskDetails] = useState([]);
+  const [nextTask, setNextTask] = useState({});
 
   const navigate = useNavigate();
+
+  function convertTo12HourTime(time24Hour) {
+    const [hours, minutes] = time24Hour.split(':');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = (hours % 12) || 12;
+    return `${formattedHours}:${minutes} ${ampm}`;
+  }
+      
 
   useEffect(() => {
 
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getCurrentDayTaskDetails();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -48,6 +61,29 @@ const Dashboard = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getCurrentDayTaskDetails = async () => {
+      
+      const reqData = {
+        userID : JSON.parse(localStorage.getItem('userID')),
+    };
+
+
+    try {
+    
+      const res = await axios.get("http://localhost:8000/api/schedule/getcurrentdaytasks",{params:reqData});
+      const res2 = await axios.get("http://localhost:8000/api/schedule/getnexttask",{params:reqData});
+      setNextTask(res2.data.data);
+      console.log("Dates : ",res.data.data);
+      setTaskDetails(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    }
+    catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  }
 
   const data = {
     labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
@@ -125,8 +161,8 @@ const Dashboard = () => {
                 <Box sx={{boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px", marginTop:"1rem", width: "100%", height:"35%", padding:"0.5rem", justifyContent:"center",textAlign:"center"}}>
                   <Typography variant="h6" style={{ fontWeight: 700,  color: "#000000"}}>Next Task</Typography>
                   <FaCalendarCheck size={50} />
-                  <Typography variant="h6" style={{ fontWeight: 500,fontSize: "1rem",  color: "#000000" }}>Task : Personal Workout</Typography>
-                  <Typography variant="h6" style={{ fontWeight: 500, fontSize: "1rem", color: "#000000" }}>Time : 10:30 am</Typography>
+                  <Typography variant="h6" style={{ fontWeight: 500,fontSize: "1rem",  color: "#000000" }}>Task : {nextTask.title}</Typography>
+                  <Typography variant="h6" style={{ fontWeight: 500, fontSize: "1rem", color: "#000000" }}>Time : {convertTo12HourTime(nextTask.start_time)}</Typography>
                 </Box>
               </Box>
 
@@ -164,36 +200,25 @@ const Dashboard = () => {
 
           <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"left", marginTop:"2rem"}}>Daily Tasks</Typography>
           <Box sx={{ width: "94%", backgroundColor: "#E5E8E8", padding: "20px", mt:3 , mb: 2, borderRadius:"10px",  boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
-            <Box sx={{width:"100%", height:"20%", backgroundColor:"#ffffff", borderRadius:"10px", display: "flex", marginTop: "0.5rem",cursor:"pointer" ,"&:hover": {transform: "scale(1.02)", transition: "transform 0.2s ease"}}}>
-              <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
-              <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
-              <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:`${color3}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
-                <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Completed </Typography>
-                <FaCheckCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
+            {taskDetails.map((task) => (
+              <Box sx={{width:"100%", height:"25%", justifyContent:"space-between", backgroundColor:"#ffffff", borderRadius:"10px", display: "flex", marginTop: "0.5rem",cursor:"pointer" ,"&:hover": {transform: "scale(1.02)", transition: "transform 0.2s ease"}}}>
+                <FaDotCircle style={{marginTop: "0.8rem", marginLeft:"1rem", color:"#000000"}}/>
+                <Typography variant="h6" style={{ fontSize: "16px",fontWeight: 500,  color: "#000000", textAlign:"left", marginTop:"0.5rem"}}>{task.title}</Typography>
+                <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"0.5rem"}}>{convertTo12HourTime(task.start_time)}</Typography>
+                {task.start_time > Date.now() ?
+                <Box style={{display:"flex", backgroundColor:`${color3}`, borderRadius:"50px", width: "15%", height:"68%",  marginLeft:"30%", marginTop:"0.3rem", marginBottom:"0.3rem", textAlign:"center", cursor: "pointer"}}>
+                  <Typography variant="h6" style={{fontSize:"16px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.1rem'}}>Time passed </Typography>
+                  <FaCheckCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.3rem', textAlign: "right"}}/>
+                </Box> :
+                <Box style={{display:"flex", backgroundColor:`${color2}`, borderRadius:"50px", width: "15%", height:"68%",  marginLeft:"30%", marginTop:"0.3rem", marginBottom:"0.3rem", textAlign:"center", cursor: "pointer"}}>
+                  <Typography variant="h6" style={{fontSize:"16px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.1rem'}}>Pending </Typography>
+                  <FaClock style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.3rem', textAlign: "right"}}/>
+                </Box>
+              }
+                
+              
               </Box>
-            
-            </Box>
-            <Box sx={{width:"100%", height:"20%", backgroundColor:"#ffffff", borderRadius:"10px", display: "flex", marginTop: "1rem",cursor:"pointer" ,"&:hover": {transform: "scale(1.02)", transition: "transform 0.2s ease"}}}>
-              <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
-              <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
-              <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:`${color2}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
-                <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Pending </Typography>
-                <FaClock style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
-              </Box>
-            
-            </Box>
-            <Box sx={{width:"100%", height:"20%", backgroundColor:"#ffffff", borderRadius:"10px", display: "flex", marginTop: "1rem",cursor:"pointer" ,"&:hover": {transform: "scale(1.02)", transition: "transform 0.2s ease"}}}>
-              <FaDotCircle style={{marginTop: "1.3rem", marginLeft:"1rem", marginRight:"1rem", color:"#000000"}}/>
-              <Typography variant="h6" style={{ fontSize: "18px",fontWeight: 500,  color: "#000000", textAlign:"left", marginLeft:"1rem", marginTop:"1rem"}}>Personal Workout</Typography>
-              <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"1rem"}}>10:30 am</Typography>
-              <Box style={{display:"flex", backgroundColor:`${color4}`, borderRadius:"50px", width: "15%", height:"70%",  marginLeft:"30%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer"}}>
-                <Typography variant="h6" style={{fontSize:"18px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.3rem'}}>Cancelled </Typography>
-                <FaTimesCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.6rem', textAlign: "right"}}/>
-              </Box>
-            
-            </Box>
+            ))}
           
           </Box>
         </Box>

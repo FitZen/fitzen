@@ -103,7 +103,7 @@ const ScheduleTask = () => {
   const color2 = "#346E93" //light blue
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('Completed'); // Default value
+  const [selectedValue, setSelectedValue] = useState('Not completed'); // Default value
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -114,7 +114,7 @@ const ScheduleTask = () => {
     setDropdownOpen(false); // Close the dropdown after selection
   };
 
-  const dropdownOptions = ['Complete', 'Cancel']; 
+  const dropdownOptions = ['Not completed','Complete', 'Cancel']; 
 
 
   return (
@@ -140,9 +140,9 @@ const ScheduleTask = () => {
                 <Typography variant="body2" style={{ fontWeight: 600, marginTop: "2rem", textAlign:"right" }}>{dayName} {dayOfMonth}</Typography>
                 <hr />
                 {taskDetails.map((task) => (	
-                    <Box sx={{display:"flex", width:"100%",marginTop:"2%", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+                    <Box sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{convertTo12HourTime(task.start_time)}</Typography>
-                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>{task.title}</Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.title}</Typography>
                       {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
                       {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
                           <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
@@ -152,7 +152,6 @@ const ScheduleTask = () => {
                           width: '10%',
                           borderRadius: '5px',
                           padding: '0.3%',
-                          marginLeft: '30%',
                           backgroundColor: color2,
                           cursor: 'pointer',
                           }}
@@ -170,8 +169,8 @@ const ScheduleTask = () => {
                         <div
                         style={{
                             position: 'relative',
-                            marginLeft: '83.5%',
-                            width: '10%',
+                            marginLeft: "89%",
+                            width: '11.5%',
                             marginTop: '-1%',
                             backgroundColor: 'white',
                             color: 'black',

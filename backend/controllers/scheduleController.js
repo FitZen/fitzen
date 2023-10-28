@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler';
 import {
     getTasksDates,
     getTasksDayBased,
+    getCurrentDayTasks,
+    getNextDayTask,
     addTask
 } from "../models/scheduleModel.js";
 
@@ -33,6 +35,42 @@ const getAllTaskDates = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         data: formattedDates,
+    });
+});
+
+
+//get next task
+const getNextTask = asyncHandler(async (req, res) => {
+    const createdBy = req.query.userID;
+    const tasks = await getNextDayTask(createdBy);
+    //console.log("tasks from backend : ", tasks)
+
+    if (tasks === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: tasks,
+    });
+});
+
+
+//get currentday tasks
+const getAllCurrentDayTasks = asyncHandler(async (req, res) => {
+    const createdBy = req.query.userID;
+
+    const tasks = await getCurrentDayTasks(createdBy);
+
+    //console.log("tasks from backend : ", tasks)
+
+    if (tasks === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: tasks,
     });
 });
 
@@ -83,5 +121,7 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
 export {
     getAllTaskDates,
     getAllTasksDayBased,
+    getAllCurrentDayTasks,
+    getNextTask,
     addMemberSchedule
 };
