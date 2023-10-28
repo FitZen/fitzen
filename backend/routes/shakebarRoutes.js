@@ -7,6 +7,7 @@ import {
 import {
     getAllClosedShakebarOrders,
     getShakebarOrder,
+    setShakebarOrderStatus,
     getAllPendingShakebarOrders,
     getAllShakebarOrders
 } from "../controllers/shakebarOrderController.js";
@@ -18,6 +19,7 @@ router.post("/item", addNewShakebarItem);
 
 router.get('/orders', getAllShakebarOrders);
 router.get('/order/:orderId', getShakebarOrder);
+router.patch('/order', setShakebarOrderStatus);
 router.get('/orders/pending', getAllPendingShakebarOrders);
 router.get('/orders/closed', getAllClosedShakebarOrders);
 

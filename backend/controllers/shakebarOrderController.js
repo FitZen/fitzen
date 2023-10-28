@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {
     allShakebarOrders,
     shakebarOrder,
+    updateShakebarOrderStatus,
     allPendingShakebarOrders,
     allClosedShakebarOrders,
 } from '../models/shakebarOrderModel.js';
@@ -29,6 +30,17 @@ const getShakebarOrder = asyncHandler(async (req, res) => {
 });
 
 
+// set order status
+const setShakebarOrderStatus = asyncHandler(async (req, res) => {
+    const {orderId, status} = req.body;
+    const updatedOrderId = await updateShakebarOrderStatus(orderId, status);
+
+    res.status(200).json({
+        data: updatedOrderId
+    });
+});
+
+
 // get all pending orders
 const getAllPendingShakebarOrders = asyncHandler(async (req, res) => {
     const pendingOrders = await allPendingShakebarOrders();
@@ -52,6 +64,7 @@ const getAllClosedShakebarOrders = asyncHandler(async (req, res) => {
 export {
     getAllShakebarOrders,
     getShakebarOrder,
+    setShakebarOrderStatus,
     getAllPendingShakebarOrders,
     getAllClosedShakebarOrders,
 }
