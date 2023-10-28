@@ -9,15 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import axios from 'axios';
 
-// Import the images
-import item1 from "../../assets/images (3).jpg"
-import item2 from "../../assets/images (2).jpg"
-import item3 from "../../assets/images (4).jpg"
-import item4 from "../../assets/kisspng-dietary-supplement-optimum-nutrition-serious-mass-nutrition-and-supplements-puregym-shop-5b63010863aca4.2335550215332149844083.jpg"
-import item5 from "../../assets/images (5).jpg"
-import item6 from "../../assets/images-9.jpg"
-import item7 from "../../assets/5lb_Promasil_Choc__62208.webp"
-import item8 from "../../assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c131a00-2144-43e6-b87b-1b5eeb2c29ab_grande.webp"
+
 
 const Shakebar = () => {
   // State to store the selected item from the Select component
@@ -68,7 +60,7 @@ const Shakebar = () => {
       navigate('/login');
     }
 
-    getAllShakebarItemsms();
+    getAllShakebarItems();
 
     // Function to handle scroll event
     const handleScroll = () => {
@@ -88,7 +80,7 @@ const Shakebar = () => {
     };
   }, []);
 
-  const getAllShakebarItemsms = async () => {
+  const getAllShakebarItems = async () => {
     
     try {
       const response = await axios.get("http://localhost:8000/api/shakebar/items");
@@ -120,60 +112,6 @@ const Shakebar = () => {
     setItem(event.target.value);
   };
 
-  // Data array containing objects with information for each item
-  const data = [
-    {
-      id: 1,
-      imageSrc: item1,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 2,
-      imageSrc: item2,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 3,
-      imageSrc: item3,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 4,
-      imageSrc: item4,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 5,
-      imageSrc: item5,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 6,
-      imageSrc: item6,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 7,
-      imageSrc: item7,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 8,
-      imageSrc: item8,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-  
-  ];
-  
-
   return (
     <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
       {/* Sidebar */}
@@ -199,7 +137,7 @@ const Shakebar = () => {
 
           {/* Select component */}
           <Box sx={{ display: "flex", marginTop: "1rem" }}>
-            <FormControl style={{ width: "15%" }}>
+            {/* <FormControl style={{ width: "15%" }}>
               <InputLabel id="demo-simple-select-label">All</InputLabel>
               <Select
                 style={{ height: "75%" }}
@@ -213,8 +151,8 @@ const Shakebar = () => {
                 <MenuItem value={20}>Proteins</MenuItem>
                 <MenuItem value={30}>Shakes</MenuItem>
               </Select>
-            </FormControl>
-            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"72.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
+            </FormControl> */}
+            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"88%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
           </Box>
 
           {/* Item boxes */}
@@ -240,7 +178,7 @@ const Shakebar = () => {
                     "&:hover": { borderColor: "#96CDEF", transition: "ease 0.5s" },
                   }}
                 >
-                  <img src={`http://localhost:3000/Shakebar/${itemData.image}`} alt="item" style={{ width: "85%", height: "65%" }} />
+                  <img src={(itemData?.image) ? `http://localhost:3000/Shakebar/${itemData?.image}` : 'http://localhost:3000/Shakebar/item.jpg'} alt="item" style={{ width: "85%", height: "65%" }} />
                   <Typography variant="h6" style={{ fontWeight: 700 }}>
                     {itemData.name}
                   </Typography>
@@ -284,7 +222,7 @@ const Shakebar = () => {
               <Box sx={{textAlign:"center", padding:"1%", justifyContent:"center"}}>
                   <Box sx={{display:"flex", height:"40vh"}}>
                     <Box>
-                      <img src={`http://localhost:3000/Shakebar/${selectedItem?.image}`} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
+                      <img src={(selectedItem?.image) ? `http://localhost:3000/Shakebar/${selectedItem?.image}` : `http://localhost:3000/Shakebar/item.jpg`} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                     </Box>
                     <Box sx={{marginTop:"10%"}}>
                       <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> {selectedItem?.price}</Typography><br />
