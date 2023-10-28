@@ -39,7 +39,10 @@ const NewRequests = () => {
     const handleOpenFirstPopup = () => setOpenFirstPopup(true);
     const handleCloseFirstPopup = () => setOpenFirstPopup(false);
     const handleOpenSecondPopup = () => setOpenSecondPopup(true);
-    const handleCloseSecondPopup = () => setOpenSecondPopup(false);
+    const handleCloseSecondPopup = () => {
+        setOpenSecondPopup(false);
+        setOpenFirstPopup(false);
+    }
     const [fixedNavbar, setFixedNavbar] = useState(false);
     const navigate = useNavigate();
 
@@ -103,157 +106,67 @@ const NewRequests = () => {
                 </div>
                 <Box sx={{ paddingLeft:"5rem", flex:1 }}>
 
-                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Student Requests</Typography>
+                    <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>New Requests</Typography>
                     <Box sx={{ width:"95%", height:"80vh", padding:"1%", marginTop:"2%", borderRadius:"10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
-                        <Box sx={{display:"flex", marginTop:"1rem",marginLeft:"1rem"}}>
-                            <FormControl style={{width:"15%"}}>
-                                <InputLabel id="demo-simple-select-label">All</InputLabel>
-                                <Select
-                                    style={{height:"85%"}}
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={item}
-                                    label="All"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={10}>Accepted</MenuItem>
-                                    <MenuItem value={20}>Pending</MenuItem>
-                                    <MenuItem value={30}>Cancelled</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
+                       
                         <Box sx={{ padding: "1%", overflowY: "auto", width: "100%", flexWrap: "wrap", height: "65vh" }}>
                             <TableContainer component={Paper} sx={{ marginTop: "2%", width: "100%" }}>
                                 <Table sx={{ minWidth: 650, boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }} aria-label="simple table">
                                     <TableHead>
                                         <TableRow >
-                                            <TableCell align="center">Student Name</TableCell>
-                                            <TableCell align="center"></TableCell>
-                                            <TableCell align="center">Requested Date</TableCell>
-                                            <TableCell align="center">Current Status</TableCell>
+                                            <TableCell align="left"><Typography sx={{fontWeight:"700"}}>Trainee Name</Typography></TableCell>
+                                            <TableCell align="left"><Typography sx={{fontWeight:"700"}}></Typography></TableCell>
+                                            <TableCell align="left"><Typography sx={{fontWeight:"700"}}>Requested Date</Typography></TableCell>
+                                            <TableCell align="left"><Typography sx={{fontWeight:"700"}}>Current Status</Typography></TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                            <TableRow
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row" align="center">
+                                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                <TableCell component="th" scope="row" align="leftr">
                                                     Tharindu Gunawardhane
                                                 </TableCell>
-                                                <TableCell align="center">
+                                                <TableCell align="left">
                                                     <Link to="/trainer/studentprofile" style={{ color:"#346E93"}}>
-                                                    <Box style={{backgroundColor:"#ffffff", borderRadius:"10px", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
-                                                        <Typography variant="h7" style={{fontSize:"15px", fontWeight: 500,  color: "#000000",marginTop: '0.3rem'}}>View Profile </Typography>
-                                                    </Box>
+                                                        <Box style={{backgroundColor:"#ffffff", borderRadius:"10px", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
+                                                            <Typography variant="h7" style={{fontSize:"15px", fontWeight: 500,  color: "#000000",marginTop: '0.3rem'}}>View Profile </Typography>
+                                                        </Box>
                                                     </Link>
                                                 </TableCell>
-                                                <TableCell align="center">2023.08.13</TableCell>
-                                                <TableCell align="center">
-                                                        <Button variant="contained" onClick={handleOpenFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"1%", marginRight:"1%", marginBottom:"1%",width:"100%"}}>Pending</Button>
-                                                        <Modal
-                                                            open={openFirstPopup}
-                                                            onClose={handleCloseFirstPopup}
-                                                            aria-labelledby="modal-modal-title"
-                                                            aria-describedby="modal-modal-description"
-                                                        >
-                                                            <Box sx={modalStyle}>
-                                                                <FaRegTimesCircle onClick={handleCloseFirstPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
-                                                                                  onMouseEnter={(e) => {
-                                                                                      e.target.style.color = "#D71313";
-                                                                                      e.target.style.transform = "scale(1)";
-                                                                                  }}
-                                                                                  onMouseLeave={(e) => {
-                                                                                      e.target.style.color = "#D8D9DA";
-                                                                                      e.target.style.transform = "scale(1)";
-                                                                                  }}
-                                                                />
-                                                                <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
-                                                                    <GiConfirmed  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
-                                                                    <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                                                                        &nbsp; Accept The Request
-                                                                    </Typography>
-                                                                </Box>
-
-                                                                <Box sx={{textAlign:"center", padding:"2%"}}>
-                                                                    <Typography variant="h6" style={{fontSize:"17px", fontWeight: 500,  color: "#000000",marginTop: '2rem'}}>Are you sure you want to accept the request? </Typography>
-                                                                </Box>
-                                                                <Box sx={{display:"flex", justifyContent:"center"}}>
-                                                                <Button variant="contained" onClick={handleCloseFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Accept </Button>
-                                                                <Button variant="contained" onClick={handleOpenSecondPopup} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%",marginLeft:"1rem"}}>Reject</Button>
-                                                                    <Modal
-                                                                        open={openSecondPopup}
-                                                                        onClose={handleCloseSecondPopup}
-                                                                        aria-labelledby="modal-modal-title"
-                                                                        aria-describedby="modal-modal-description"
-                                                                    >
-                                                                        <Box sx={modalStyle}>
-                                                                            <FaRegTimesCircle onClick={handleCloseSecondPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
-                                                                                              onMouseEnter={(e) => {
-                                                                                                  e.target.style.color = "#D71313";
-                                                                                                  e.target.style.transform = "scale(1)";
-                                                                                              }}
-                                                                                              onMouseLeave={(e) => {
-                                                                                                  e.target.style.color = "#D8D9DA";
-                                                                                                  e.target.style.transform = "scale(1)";
-                                                                                              }}
-                                                                            />
-                                                                            <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
-                                                                                <GoGoal  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
-                                                                                <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                                                                                    &nbsp; Submit The Reason For Rejection
-                                                                                </Typography>
-                                                                            </Box>
-
-                                                                            <Box sx={{textAlign:"center", padding:"1%"}}>
-                                                                                <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Reason:</InputLabel>
-                                                                                <TextField variant="outlined" inputProps={{style: {height: 125, width:425,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
-                                                                            </Box>
-                                                                                <Button variant="contained" onClick={handleCloseFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginLeft:"4%"}}>Submit</Button>
-                                                                        </Box>
-                                                                    </Modal>
-                                                                </Box>
-                                                            </Box>
-                                                        </Modal>
+                                                <TableCell align="left">2023.08.13</TableCell>
+                                                <TableCell align="left">
+                                                    <Button variant="contained" onClick={handleOpenFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"1%", marginRight:"1%", marginBottom:"1%",width:"70%"}}>Pending</Button>
                                                 </TableCell>
                                             </TableRow>
-                                            <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row" align="center">
-                                            Tharindu Gunawardhane
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Link to="/trainer/studentprofile" style={{ color:"#346E93"}}>
-                                                <Box style={{backgroundColor:"#ffffff", borderRadius:"10px", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
-                                                    <Typography variant="h7" style={{fontSize:"15px", fontWeight: 500,  color: "#000000",marginTop: '0.3rem'}}>View Profile </Typography>
-                                                </Box>
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell align="center">2023.08.12</TableCell>
-                                        <TableCell align="center">
-                                            <Box style={{backgroundColor:`${color1}`, borderRadius:"5px", height:"70%", marginTop:"0.4rem", textAlign:"center", padding:"1%"}}>
-                                                <Typography variant="h6" style={{fontSize:"14px", fontWeight: 500,  color: "#ffffff",marginTop: '0.3rem',textTransform: "uppercase"}}>Accepted </Typography>
-                                            </Box>
-                                        </TableCell>
-                                    </TableRow>
-                                        <TableRow
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row" align="center">
+                                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                <TableCell component="th" scope="row" align="left">
+                                                    Tharindu Gunawardhane
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Link to="/trainer/studentprofile" style={{ color:"#346E93"}}>
+                                                        <Box style={{backgroundColor:"#ffffff", borderRadius:"10px", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
+                                                            <Typography variant="h7" style={{fontSize:"15px", fontWeight: 500,  color: "#000000",marginTop: '0.3rem'}}>View Profile </Typography>
+                                                        </Box>
+                                                    </Link>
+                                                </TableCell>
+                                                <TableCell align="left">2023.08.12</TableCell>
+                                                <TableCell align="left">
+                                                <Button variant="contained" style={{backgroundColor:color1, color:"white", marginTop:"1%", marginRight:"1%", marginBottom:"1%",width:"70%"}}>Accepted</Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                            <TableCell component="th" scope="row" align="left">
                                                 Tharindu Gunawardhane
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell align="left">
                                                 <Link to="/trainer/studentprofile" style={{ color:"#346E93"}}>
                                                     <Box style={{backgroundColor:"#ffffff", borderRadius:"0px", height:"70%", marginTop:"0.4rem", textAlign:"center", cursor: "pointer", padding:"1%"}}>
                                                         <Typography variant="h7" style={{fontSize:"15px", fontWeight: 500,  color: "#000000",marginTop: '0.3rem'}}>View Profile </Typography>
                                                     </Box>
                                                 </Link>
                                             </TableCell>
-                                            <TableCell align="center">2023.08.12</TableCell>
-                                            <TableCell align="center">
-                                                <Box style={{backgroundColor:`${color4}`, borderRadius:"5px", height:"70%", marginTop:"0.4rem", textAlign:"center", padding:"1%"}}>
-                                                    <Typography variant="h6" style={{fontSize:"14px", fontWeight: 500,  color: "#ffffff",marginTop: '0.3rem',textTransform: "uppercase"}}>Cancelled </Typography>
-                                                </Box>
+                                            <TableCell align="leftr">2023.08.12</TableCell>
+                                            <TableCell align="leftr">
+                                            <Button variant="contained" style={{backgroundColor:color4, color:"white", marginTop:"1%", marginRight:"1%", marginBottom:"1%",width:"70%"}}>Cancelled</Button>
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>
@@ -266,7 +179,71 @@ const NewRequests = () => {
                 </Box>
 
             </Box>
-        </Box>
+
+        <Modal
+            open={openFirstPopup}
+            onClose={handleCloseFirstPopup}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={modalStyle}>
+                <FaRegTimesCircle onClick={handleCloseFirstPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+                                  onMouseEnter={(e) => {
+                                      e.target.style.color = "#D71313";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                      e.target.style.color = "#D8D9DA";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                />
+                <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                    <GiConfirmed  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                        &nbsp; Accept The Request
+                    </Typography>
+                </Box>
+                <Box sx={{textAlign:"center", padding:"2%"}}>
+                    <Typography variant="h6" style={{fontSize:"17px", fontWeight: 500,  color: "#000000",marginTop: '2rem'}}>Are you sure you want to accept the request? </Typography>
+                </Box>
+                <Box sx={{display:"flex", justifyContent:"center"}}>
+                    <Button variant="contained" onClick={handleCloseFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Accept </Button>
+                    <Button variant="contained" onClick={handleOpenSecondPopup} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%",marginLeft:"1rem"}}>Reject</Button>
+                </Box>
+            </Box>
+        </Modal>
+
+        <Modal
+            open={openSecondPopup}
+            onClose={handleCloseSecondPopup}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={modalStyle}>
+                <FaRegTimesCircle onClick={handleCloseSecondPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+                                  onMouseEnter={(e) => {
+                                      e.target.style.color = "#D71313";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                      e.target.style.color = "#D8D9DA";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                />
+                <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                    <GoGoal  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                        &nbsp; Submit The Reason For Rejection
+                    </Typography>
+                </Box>
+                <Box sx={{textAlign:"center", padding:"1%"}}>
+                    <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%", textAlign:"left", marginLeft:"4%",color:"#000000" }}>Reason:</InputLabel>
+                    <TextField variant="outlined" inputProps={{style: {height: 125, width:425,border:"1px solid D8D9DA", borderRadius:"5px", outline:"none"}}}/>
+                </Box>
+                    <Button variant="contained" onClick={handleCloseFirstPopup} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginLeft:"4%"}}>Submit</Button>
+            </Box>
+        </Modal>
+    </Box>
 
     );
 };

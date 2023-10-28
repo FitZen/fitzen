@@ -1,17 +1,80 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Button, Typography } from "@mui/material";
-import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
+import { Button, Typography,Select, MenuItem, InputLabel, FormControl, TextField } from "@mui/material";
+import {FaTelegram, FaFeatherAlt, FaBandcamp, FaUserEdit, FaRegTimesCircle, FaBitbucket} from 'react-icons/fa';
+import { BiSolidMessageEdit,BiSolidMessageSquareAdd } from "react-icons/bi";
 import avatar from '../../assets/avatar.jpg';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
-import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 import Rating from '@mui/material/Rating';
+import Modal from "@mui/material/Modal";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import { width } from "@mui/system";
+
+const PhysicalTrainerPack = [
+  {
+    title: "Gold Package",
+    sessions: "20 Sessions",
+    price: "Rs.30000",
+    fact1: "Full physical gym experience",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Access to all gym facilities",
+  },
+  {
+    title: "Silver Package",
+    sessions: "15 Sessions",
+    price: "Rs.25000",
+    fact1: "Full physical gym experience",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Access to all gym facilities",
+  },
+  {
+    title: "Bronze Package",
+    sessions: "10 Sessions",
+    price: "Rs.20000",
+    fact1: "Full physical gym experience",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Access to all gym facilities",
+  },
+  
+];
+
+const VirtualTrainerPack = [
+  {
+    title: "Gold Package",
+    sessions: "20 Sessions",
+    price: "Rs.20000",
+    fact1: "Full Guidance on workout plans",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Give tricky workouts",
+  },
+  {
+    title: "Silver Package",
+    sessions: "15 Sessions",
+    price: "Rs.15000",
+    fact1: "Full Guidance on workout plans",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Give tricky workouts",
+  },
+  {
+    title: "Bronze Package",
+    sessions: "10 Sessions",
+    price: "Rs.10000",
+    fact1: "Full physical gym experience",
+    fact2: "Personalized training",
+    fact3: "Diet plan & workout plans",
+    fact4: "Give tricky workouts",
+  },
+];
 
 const InstructorProfile = () => {
 
@@ -19,6 +82,9 @@ const InstructorProfile = () => {
     const [userData, setUserData] = useState({});
     const [rate, setRate] = useState(0.0);
     const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
   
     const { instructorID, instructorType } = useParams();
     //console.log(instructorID, instructorType);
@@ -47,6 +113,19 @@ const InstructorProfile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const modalStyle = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+    height: "75%",
+		width: "75%",
+		bgcolor: 'background.paper',
+		borderRadius: '10px',
+		boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+		p: 4,
+	};
 
   const getUserDetails = async () => {
 
@@ -118,7 +197,11 @@ const InstructorProfile = () => {
                                 </Box>
                             </Box>
                         </Box>
-                        <Button variant="contained" style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", width:"15%", height:"10%", marginTop:"1%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Send Request</Button>
+                        <Box style={{width:"16%", textAlign:"right"}}>
+                          <Button variant="contained" onClick={handleOpen} style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", height:"10%", marginTop:"1%"}}><FaBandcamp style={{fontSize: "20px"}}/> &nbsp; packages</Button><br />
+                          <Button variant="contained" style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", height:"10%", marginTop:"5%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Chat</Button>
+                        </Box>
+                        
 
                     </Box>
                     <Box sx={{width:"95%"}}> 
@@ -150,6 +233,97 @@ const InstructorProfile = () => {
             
             </Box>
         </Box>
+
+        
+      <Modal
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="modal-modal-title"
+							aria-describedby="modal-modal-description"
+						>
+							<Box sx={modalStyle}>
+								<FaRegTimesCircle onClick={handleClose} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+												  onMouseEnter={(e) => {
+													  e.target.style.color = "#D71313";
+													  e.target.style.transform = "scale(1)";
+												  }}
+												  onMouseLeave={(e) => {
+													  e.target.style.color = "#D8D9DA";
+													  e.target.style.transform = "scale(1)";
+												  }}
+								/>
+								<Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+									<FaBandcamp  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+									<Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+										&nbsp; Trainer Packages
+									</Typography>
+								</Box>
+                <Box sx={{display:"flex", marginTop:"5%"}}>
+                {(localStorage.getItem('userType') === '"Virtual Member"') ? VirtualTrainerPack.map((item) => (
+                  <Box
+                    sx={{
+                      width: "30%",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "60%",
+                      cursor: "pointer",
+                      border: "2px solid white",
+                      borderRadius: "10px",
+                      padding: "1rem",
+                      marginRight: "3%",
+                      marginBottom: "1%",
+                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                      '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
+                    }}
+                  >  
+                      <>
+                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title}</Typography>
+                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions}</Typography><br />
+                        <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{item.price}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact1}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact2}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact3}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact4}</Typography><br /><br />
+                        <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
+                      </>  
+                    </Box>
+                    )) : PhysicalTrainerPack.map((item) => (
+                      <Box
+                        sx={{
+                          width: "30%",
+                          textAlign: "center",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "60%",
+                          cursor: "pointer",
+                          border: "2px solid white",
+                          borderRadius: "10px",
+                          padding: "1rem",
+                          marginRight: "3%",
+                          marginBottom: "1%",
+                          boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                          '&:hover': { borderColor: '#96CDEF', transition: "ease 0.5s" }
+                        }}
+                      >
+                      <>
+                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title}</Typography>
+                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions}</Typography><br />
+                        <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{item.price}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact1}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact2}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact3}</Typography><br />
+                        <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact4}</Typography><br /><br />
+                        <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
+                      </>
+                 
+          
+                  </Box>
+                     ))}
+                </Box>          
+
+							</Box>
+						</Modal>
      
     </Box>
 
