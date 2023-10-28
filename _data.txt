@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS shakebarOrderItem;
+DROP TABLE IF EXISTS shakebarOrder;
 DROP TABLE IF EXISTS shakebarItem;
 DROP TABLE IF EXISTS memberSchedule;
 DROP TABLE IF EXISTS mealPlan;
@@ -311,8 +313,8 @@ CREATE TABLE memberSchedule (
     id SERIAL,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(200) NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
+    start_date DATE NOT NULL,
+    start_time TIME NOT NULL,
     created_by VARCHAR(6) NOT NULL,     -- Virtual member, Physical member
     CONSTRAINT pk_memberSchedule PRIMARY KEY (id)
     --can't add foreign key constraint linking virtual and physical members at once
@@ -324,11 +326,35 @@ CREATE TABLE shakebarItem (
     name VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL,
     description VARCHAR(100) NOT NULL,
-    price DECIMAL(8,2) NOT NULL,
+    price DECIMAL(8,2) NOT NULL,    -- unit_price
     image VARCHAR(255),
     available_count INT NOT NULL,
     CONSTRAINT pk_shakebarItem PRIMARY KEY (id),
     CONSTRAINT uc_shakebarItem_name UNIQUE (name)
+);
+
+
+CREATE TABLE shakebarOrder (
+    id VARCHAR(10) NOT NULL,                -- format => OD12345678
+    total_amount DECIMAL(8,2) NOT NULL,
+    placed_on TIMESTAMP DEFAULT NOW(),
+    placed_by VARCHAR(6) NOT NULL,          -- members and instructors
+    status VARCHAR(20) DEFAULT 'Pending',   -- Pending, Closed, Cancelled
+    CONSTRAINT pk_shakebarOrder PRIMARY KEY (id)
+    -- can't add foreign key constraint linking members and instructors at once
+);
+
+
+CREATE TABLE shakebarOrderItem (
+    id SERIAL,
+    item_id VARCHAR(6) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(8,2) NOT NULL,        -- unit_price
+    amount DECIMAL(8,2) NOT NULL,       -- quantity * unit_price
+    order_id VARCHAR(10) NOT NULL,
+    CONSTRAINT pk_shakebarOrderItem PRIMARY KEY (id),
+    CONSTRAINT fk_shakebarOrderItem_shakebarItem FOREIGN KEY (item_id) REFERENCES shakebarItem (id) ON UPDATE CASCADE,
+    CONSTRAINT fk_shakebarOrderItem_shakebarOrder FOREIGN KEY (order_id) REFERENCES shakebarOrder (id) ON UPDATE CASCADE
 );
 
 -- end tables --
@@ -506,7 +532,7 @@ VALUES ('Muscle Gain 1', '3 eggs, 1 toast', 'Chicken breast, salad', 'Salmon, br
        ('Endurance Max', 'Oatmeal, berries', 'Pasta, veggies', 'Chicken, sweet potato', 'Energy gel', 'Electrolyte drink', 'For marathon trainers', 'TR0002');
 
 
-INSERT INTO memberSchedule (title, description, date, time, created_by)
+INSERT INTO memberSchedule (title, description, start_date, start_time, created_by)
 VALUES ('Meeting', 'Discuss project updates', '2023-11-01', '10:00:00', 'VM0001'),
        ('Lunch Break', 'Time to eat', '2023-11-01', '12:30:00', 'PM0001'),
        ('Gym Session', 'Workout', '2023-11-02', '16:00:00', 'PM0001'),
