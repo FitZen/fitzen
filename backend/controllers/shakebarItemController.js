@@ -24,7 +24,7 @@ const addNewShakebarItem = asyncHandler(async (req, res) => {
 
     if (await findShakebarItemByName(name)) {
         res.status(409);                            // status code for conflict
-        throw new Error("Item already exists.");
+        throw new Error("Item already exists");
     }
 
     let id;

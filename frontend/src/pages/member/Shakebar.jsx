@@ -7,16 +7,9 @@ import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle, FaPlus, FaMinus} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import axios from 'axios';
 
-// Import the images
-import item1 from "../../assets/images (3).jpg"
-import item2 from "../../assets/images (2).jpg"
-import item3 from "../../assets/images (4).jpg"
-import item4 from "../../assets/kisspng-dietary-supplement-optimum-nutrition-serious-mass-nutrition-and-supplements-puregym-shop-5b63010863aca4.2335550215332149844083.jpg"
-import item5 from "../../assets/images (5).jpg"
-import item6 from "../../assets/images-9.jpg"
-import item7 from "../../assets/5lb_Promasil_Choc__62208.webp"
-import item8 from "../../assets/PS_NWUE_2.47lb_NEW-LOOK_Choc_Render_smaller_1c131a00-2144-43e6-b87b-1b5eeb2c29ab_grande.webp"
+
 
 const Shakebar = () => {
   // State to store the selected item from the Select component
@@ -27,10 +20,24 @@ const Shakebar = () => {
   const [valueStart, setValueStart] = React.useState(null);
   const [valueEnd, setValueEnd] = React.useState(null);
   const [count, setCount] = React.useState(0);
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleBuyClick = (itemData) => {
+    setSelectedItem(itemData);
+    handleOpen(); // Open the modal to display item details
+  };
+
+  // function increment() {
+  //   setCount(prevCount => prevCount + 1);
+  // }
 
   function increment() {
-    setCount(prevCount => prevCount + 1);
+    if (selectedItem && count < selectedItem?.available_count) {
+      setCount(prevCount => prevCount + 1);
+    }
   }
+  
 
   function decrement() {
     setCount(prevCount => {
@@ -52,6 +59,9 @@ const Shakebar = () => {
     if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
       navigate('/login');
     }
+
+    getAllShakebarItems();
+
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -69,6 +79,17 @@ const Shakebar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getAllShakebarItems = async () => {
+    
+    try {
+      const response = await axios.get("http://localhost:8000/api/shakebar/items");
+      console.log("response : ", response.data.data);
+      setItems(response.data.data);
+    } catch (error) {
+      console.error("error : ", error.message);
+    }
+  };
 
   const color1 = "#102B4C" //dark blue
   const color2 = "#346E93" //light blue
@@ -90,60 +111,6 @@ const Shakebar = () => {
   const handleChange = (event) => {
     setItem(event.target.value);
   };
-
-  // Data array containing objects with information for each item
-  const data = [
-    {
-      id: 1,
-      imageSrc: item1,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 2,
-      imageSrc: item2,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 3,
-      imageSrc: item3,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 4,
-      imageSrc: item4,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 5,
-      imageSrc: item5,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 6,
-      imageSrc: item6,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 7,
-      imageSrc: item7,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-    {
-      id: 8,
-      imageSrc: item8,
-      title: "Vitamin C",
-      price: "Rs: 2300",
-    },
-  
-  ];
-  
 
   return (
     <Box sx={{ flex: "1", display: "flex", mb: 2 }}>
@@ -170,7 +137,7 @@ const Shakebar = () => {
 
           {/* Select component */}
           <Box sx={{ display: "flex", marginTop: "1rem" }}>
-            <FormControl style={{ width: "15%" }}>
+            {/* <FormControl style={{ width: "15%" }}>
               <InputLabel id="demo-simple-select-label">All</InputLabel>
               <Select
                 style={{ height: "75%" }}
@@ -184,15 +151,15 @@ const Shakebar = () => {
                 <MenuItem value={20}>Proteins</MenuItem>
                 <MenuItem value={30}>Shakes</MenuItem>
               </Select>
-            </FormControl>
-            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"72.5%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
+            </FormControl> */}
+            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"88%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
           </Box>
 
           {/* Item boxes */}
           <Box sx={{ display: "flex", width: "96%", height: "70%", backgroundColor: "#E5E8E8", padding: "0.3rem", borderRadius: "10px", marginBottom: "2rem", marginTop: "1.5rem" }}>
             <Box sx={{ display: "flex", height: "82vh", flexWrap: "wrap", overflowY: "auto", width: "100%", backgroundColor: "white", borderRadius: "10px", padding: "1rem", margin: "0.1rem" }}>
               {/* Map over the data array to generate Box components */}
-              {data.map((itemData) => (
+              {items.map((itemData) => (
                 <Box
                   key={itemData.id}
                   sx={{
@@ -211,14 +178,14 @@ const Shakebar = () => {
                     "&:hover": { borderColor: "#96CDEF", transition: "ease 0.5s" },
                   }}
                 >
-                  <img src={itemData.imageSrc} alt="item" style={{ width: "85%", height: "65%" }} />
+                  <img src={(itemData?.image) ? `http://localhost:3000/Shakebar/${itemData?.image}` : 'http://localhost:3000/Shakebar/item.jpg'} alt="item" style={{ width: "85%", height: "65%" }} />
                   <Typography variant="h6" style={{ fontWeight: 700 }}>
-                    {itemData.title}
+                    {itemData.name}
                   </Typography>
                   <Typography variant="h6" style={{ fontWeight: 500 }}>
                     {itemData.price}
                   </Typography>
-                  <Button variant="contained" onClick={handleOpen} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
+                  <Button variant="contained" key={itemData.id} onClick={() => handleBuyClick(itemData)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
                     Buy
                   </Button>
                   
@@ -248,29 +215,30 @@ const Shakebar = () => {
               <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
                   
                   <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                      Dymatize Iso 100
+                      {selectedItem?.name}
                   </Typography>
               </Box>
               
               <Box sx={{textAlign:"center", padding:"1%", justifyContent:"center"}}>
                   <Box sx={{display:"flex", height:"40vh"}}>
                     <Box>
-                      <img src={item1} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
+                      <img src={(selectedItem?.image) ? `http://localhost:3000/Shakebar/${selectedItem?.image}` : `http://localhost:3000/Shakebar/item.jpg`} alt="item" style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                     </Box>
                     <Box sx={{marginTop:"10%"}}>
-                      <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> Rs 2300</Typography><br />
+                      <Typography variant="body1"  textAlign="left"><span style={{fontWeight:"600"}}>Price:</span> {selectedItem?.price}</Typography><br />
                       <Typography variant="body1" textAlign="left">
-                        <span style={{fontWeight:"600"}}>Description:</span>  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <span style={{fontWeight:"600"}}>Description:</span>  {selectedItem?.description}
                       </Typography><br />
-                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> In Stock.</Typography><br />
+                      <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Stock: </span> {selectedItem?.available_count > 0 ? "In Stock" : "Out of Stock"}</Typography><br />
                       <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Quantity: &nbsp;
-                        <IconButton size="small" onClick={increment} aria-label="plus" style={{border:"1px solid"}}>
-                          <FaPlus />
-                        </IconButton>
-                        <Typography variant="body1" textAlign="center" style={{display:"inline-block", width:"10%"}}>{count}</Typography>
                         <IconButton size="small" onClick={decrement} aria-label="minus" style={{border:"1px solid"}}>
                           <FaMinus />
                         </IconButton>
+                        <Typography variant="body1" textAlign="center" style={{display:"inline-block", width:"10%"}}>{count}</Typography>
+                        <IconButton size="small" onClick={increment} aria-label="plus" style={{border:"1px solid"}}>
+                          <FaPlus />
+                        </IconButton>
+                        
                       </span> </Typography>
                     </Box>
                   </Box>
