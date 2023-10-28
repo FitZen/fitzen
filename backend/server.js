@@ -21,6 +21,7 @@ import membershipPlansRoutes from "./routes/membershipPlansRoutes.js";
 import shakebarManagerRoutes from "./routes/shakebarManagerRoutes.js";
 import ratingsRoutes from "./routes/ratingsRoutes.js";
 import scheduleRoutes from "./routes/scheduleRoutes.js";
+import requestRoutes from "./routes/requestRoutes.js";
 
 
 // start DB connection
@@ -57,6 +58,7 @@ app.use('/api/membershipplans', membershipPlansRoutes);
 app.use('/api/shakebarmanagers', shakebarManagerRoutes);
 app.use('/api/ratings', ratingsRoutes);
 app.use('/api/schedule', scheduleRoutes);
+app.use('/api/requests', requestRoutes);
 
 //upload routes
 app.use('/api/upload', uploadRoutes)
