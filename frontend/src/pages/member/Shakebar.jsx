@@ -33,7 +33,7 @@ const Shakebar = () => {
   // }
 
   function increment() {
-    if (selectedItem && count < selectedItem?.available_count) {
+    if (selectedItem && count < selectedItem?.available_count && count < 3) {
       setCount(prevCount => prevCount + 1);
     }
   }
@@ -179,13 +179,16 @@ const Shakebar = () => {
                   }}
                 >
                   <img src={(itemData?.image) ? `http://localhost:3000/Shakebar/${itemData?.image}` : 'http://localhost:3000/Shakebar/item.jpg'} alt="item" style={{ width: "85%", height: "65%" }} />
-                  <Typography variant="h6" style={{ fontWeight: 700 }}>
+                  <Typography variant="body1" style={{ fontWeight: 700 }}>
                     {itemData.name}
                   </Typography>
-                  <Typography variant="h6" style={{ fontWeight: 500 }}>
+                  <Typography variant="body1" style={{ fontWeight: 600 }}>
                     {itemData.price}
                   </Typography>
-                  <Button variant="contained" key={itemData.id} onClick={() => handleBuyClick(itemData)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
+                  <Typography variant="body2" style={{ fontWeight: 700, color: itemData.available_count > 0 ? 'green' : 'red' }}>
+                    {itemData.available_count > 0 ? "In Stock" : "Out of Stock"}
+                  </Typography>
+                  <Button variant="contained"  disabled={itemData.available_count <= 0} key={itemData.id} onClick={() => handleBuyClick(itemData)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700", width: "50%" }}>
                     Buy
                   </Button>
                   
