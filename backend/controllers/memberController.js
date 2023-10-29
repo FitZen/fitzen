@@ -9,6 +9,7 @@ import {
     virtualMemberCount,
     activeVirtualMemberCount,
     physicalMemberCountToday,
+    virtualMemberCountToday,
 } from "../models/memberModal.js";
 import {
     findUserById,
@@ -137,7 +138,7 @@ const getActivePhysicalMemberCount = asyncHandler(async (req, res) => {
 
 
 // get newly added physical member count
-const getphysicalMemberCountToday = asyncHandler(async (req, res) => {
+const getPhysicalMemberCountToday = asyncHandler(async (req, res) => {
     const count = await physicalMemberCountToday();
 
     res.status(200).json({
@@ -166,6 +167,16 @@ const getActiveVirtualMemberCount = asyncHandler(async (req, res) => {
 });
 
 
+// get newly added virtual member count
+const getVirtualMemberCountToday = asyncHandler(async (req, res) => {
+    const count = await virtualMemberCountToday();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getAllViewMembers,
     getAllViewPhysicalMembers,
@@ -175,5 +186,6 @@ export {
     getActivePhysicalMemberCount,
     getVirtualMemberCount,
     getActiveVirtualMemberCount,
-    getphysicalMemberCountToday,
+    getPhysicalMemberCountToday,
+    getVirtualMemberCountToday,
 };

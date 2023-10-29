@@ -134,6 +134,19 @@ const activeVirtualMemberCount = asyncHandler(async () => {
 });
 
 
+//newly added virtual member count
+const virtualMemberCountToday = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM virtualmember WHERE joined_on::date = current_date;';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 
 export{
     getViewMembers,
@@ -145,4 +158,5 @@ export{
     virtualMemberCount,
     activeVirtualMemberCount,
     physicalMemberCountToday,
+    virtualMemberCountToday,
 };

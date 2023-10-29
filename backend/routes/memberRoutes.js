@@ -9,7 +9,8 @@ import {
     getActivePhysicalMemberCount,
     getVirtualMemberCount,
     getActiveVirtualMemberCount,
-    getphysicalMemberCountToday,
+    getPhysicalMemberCountToday,
+    getVirtualMemberCountToday,
 } from "../controllers/memberController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -27,7 +28,8 @@ router.get("/physical/count", getPhysicalMemberCount);
 router.get("/virtual/count", getVirtualMemberCount);
 router.get("/physical/count/active", getActivePhysicalMemberCount);
 router.get("/virtual/count/active", getActiveVirtualMemberCount);
-router.get("/physical/count/today", getphysicalMemberCountToday);
+router.get("/physical/count/today", getPhysicalMemberCountToday);
+router.get("/virtual/count/today", getVirtualMemberCountToday);
 
 
 export default router;
