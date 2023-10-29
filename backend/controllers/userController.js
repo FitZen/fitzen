@@ -49,8 +49,8 @@ const loginUser = asyncHandler(async (req, res) => {
 // route   POST /api/users/logout
 // access  private (users who only has login/token can access => protected route)
 const logoutUser = asyncHandler(async (req, res) => {
-    // if (await setLoginStatus(req.user.id, 'Inactive')) {
-     if (await setLoginStatus(req.body.userID, 'Inactive')) {
+    if (await setLoginStatus(req.user.id, 'Inactive')) {
+    //  if (await setLoginStatus(req.body.userID, 'Inactive')) {
         res.cookie('jwt', '', {
             httpOnly: true,
             expires: new Date(Date.now()),
@@ -72,8 +72,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 // access  private
 const getUserAllDetails = asyncHandler(async (req, res) => {
 
-    // const user = await getUserDetails(req.user.id, req.user.type);
-    const user = await getUserDetails(req.query.userID, req.query.userType);
+    const user = await getUserDetails(req.user.id, req.user.type);
+    // const user = await getUserDetails(req.query.userID, req.query.userType);
 
     if (! user) {
         res.status(500);
