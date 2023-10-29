@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl, IconButton } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
+import { Delete as DeleteIcon } from '@mui/icons-material';
 import Navbar from "../../components/Navbar";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle, FaPlus, FaMinus} from 'react-icons/fa';
@@ -10,6 +11,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import axios from 'axios';
 
 
+const color4 = "#DC1E2A" //red 
 
 const Shakebar = () => {
   // State to store the selected item from the Select component
@@ -17,11 +19,44 @@ const Shakebar = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [openCart, setOpenCart] = React.useState(false);
+  const handleOpenCart = () => setOpenCart(true);
+  const handleCloseCart = () => setOpenCart(false);
   const [valueStart, setValueStart] = React.useState(null);
   const [valueEnd, setValueEnd] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleAddToCart = () => {
+    if (selectedItem) {
+      // Find the item in the cart
+      const existingCartItem = cartItems.find((cartItem) => cartItem.id === selectedItem.id);
+
+      if (existingCartItem) {
+        // Update the quantity if the item already exists in the cart
+        existingCartItem.quantity += count;
+        setCartItems([...cartItems]);
+      }
+      else if(count === 0){
+        setCartItems([...cartItems]);
+      }
+      else {
+        // Add a new item to the cart
+        setCartItems([...cartItems, { id: selectedItem.id, name: selectedItem.name, quantity: count, price: selectedItem.price, image: selectedItem.image }]);
+      }
+
+      // Reset the count
+      setCount(0);
+
+      // Close the cart modal
+      console.log("Cart Items: ", cartItems);
+      //handleCloseCart();
+      handleClose();
+    }
+  };
+  
 
   const handleBuyClick = (itemData) => {
     setSelectedItem(itemData);
@@ -78,6 +113,8 @@ const Shakebar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
+    
   }, []);
 
   const getAllShakebarItems = async () => {
@@ -101,6 +138,19 @@ const Shakebar = () => {
       left: '50%',
       transform: 'translate(-50%, -50%)',
       width: "35%",
+      bgcolor: 'background.paper',
+      borderRadius: '10px',
+      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+      p: 4,
+    };
+
+    const modalCartStyle = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      height: "70%",
+      width: "45%",
       bgcolor: 'background.paper',
       borderRadius: '10px',
       boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
@@ -152,7 +202,7 @@ const Shakebar = () => {
                 <MenuItem value={30}>Shakes</MenuItem>
               </Select>
             </FormControl> */}
-            <Button variant="contained" size="small" style={{height:"15%", marginLeft:"88%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
+            <Button variant="contained" onClick={handleOpenCart} size="small" style={{height:"15%", marginLeft:"88%", backgroundColor:color2, color:"#ffffff", fontWeight: 700}}>View Cart</Button>
           </Box>
 
           {/* Item boxes */}
@@ -247,7 +297,62 @@ const Shakebar = () => {
                   </Box>
                   
                  
-                  <Button variant="contained" onClick={handleClose} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Add to Cart</Button>
+                  <Button variant="contained" onClick={handleAddToCart} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Add to Cart</Button>
+                
+              </Box>
+              
+          </Box>
+      </Modal>
+      <Modal
+          open={openCart}
+          onClose={handleCloseCart}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+      >
+          <Box sx={modalCartStyle}>
+              <FaRegTimesCircle onClick={handleCloseCart} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}  
+                  onMouseEnter={(e) => {
+                      e.target.style.color = "#D71313";
+                      e.target.style.transform = "scale(1)";
+                  }}
+                  onMouseLeave={(e) => {
+                      e.target.style.color = "#D8D9DA";
+                      e.target.style.transform = "scale(1)";
+                  }}
+              />
+              <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                  
+                  <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                      Your Cart
+                  </Typography>
+              </Box>
+              
+              <Box sx={{textAlign:"center", padding:"1%", justifyContent:"center"}}>
+                  <Box sx={{overflowY:"auto", height:"20rem", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}> 
+                    {cartItems.map((cartItem) =>  ( 
+                        <Box key={cartItem.id} sx={{margin:"0.5%", marginBottom:"2%", display:"flex", height:"40%", borderRadius:"5px", borderColor: '#96CDEF', boxShadow: "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px"}}>
+                          <img src={`http://localhost:3000/Shakebar/${cartItem.image}`} alt="item" style={{width:"15%", height:"90%", objectFit:"cover", margin:"1%"}}/>
+                          <Box sx={{margin:"2%", marginLeft:"20%", width:"32%"}}>
+                            <Typography variant="body1" style={{marginTop:"4%"}}  textAlign="left"><span style={{fontWeight:"600"}}>Name:</span> {cartItem.name}</Typography>
+                            <Typography variant="body1" style={{marginTop:"4%"}}  textAlign="left"><span style={{fontWeight:"600" }}>Price:</span> {cartItem.price}</Typography>
+                            <Typography variant="body1" style={{marginTop:"4%"}} textAlign="left"><span style={{fontWeight:"600" }}>Quantity:</span> {cartItem.quantity}</Typography>
+                          </Box>
+                          <Box sx={{marginLeft:"2%", marginTop:"3%"}}>
+                            <DeleteIcon sx={{ color: "black", textAlign:"right", borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px", '&:hover': {backgroundColor:color4, color:"white",transition: "ease 0.5s" }  }} />
+                            <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Sub Total:</span> {(cartItem.price)*(cartItem.quantity)}.00</Typography><br />
+                          </Box>
+                      </Box>
+                    ))}
+                    
+                   
+                  </Box>
+                  
+                  <Box sx={{marginTop:"2%", marginBottom:"1%", display:"flex", height:"40%", borderRadius:"5px", backgroundColor:"#D8D9DA", justifyContent:"space-between"}}>
+                      <Typography variant="body1"  textAlign="left" style={{marginLeft:"1%"}}><span style={{fontWeight:"600"}}>Total Items:</span> {cartItems.reduce((a, b) => a + (b.quantity), 0)}</Typography><br /> 
+                      <Typography variant="body1"  textAlign="left" style={{marginLeft:"30%"}}><span style={{fontWeight:"600"}}>Total:</span> {cartItems.reduce((a, b) => a + (b.price*b.quantity), 0)}.00</Typography><br />
+                  </Box>
+                 
+                  <Button variant="contained" onClick={handleCloseCart} style={{backgroundColor:color2, color:"white", marginTop:"5%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Pay now</Button>
                 
               </Box>
               
