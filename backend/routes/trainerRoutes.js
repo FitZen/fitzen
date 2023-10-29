@@ -5,6 +5,7 @@ import {
     addNewTrainer,
     getTrainerCount,
     getActiveTrainerCount,
+    getTrainerCountToday,
 } from "../controllers/trainerController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -18,6 +19,8 @@ router.post("/addtrainer", addNewTrainer);
 router.get("/count", getTrainerCount);
 
 router.get("/count/active", getActiveTrainerCount);
+
+router.get("/count/today", getTrainerCountToday);
 
 
 export default router;
