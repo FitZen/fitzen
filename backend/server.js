@@ -22,6 +22,7 @@ import shakebarManagerRoutes from "./routes/shakebarManagerRoutes.js";
 import ratingsRoutes from "./routes/ratingsRoutes.js";
 import scheduleRoutes from "./routes/scheduleRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 
 // start DB connection
@@ -59,6 +60,8 @@ app.use('/api/shakebarmanagers', shakebarManagerRoutes);
 app.use('/api/ratings', ratingsRoutes);
 app.use('/api/schedule', scheduleRoutes);
 app.use('/api/requests', requestRoutes);
+app.use('/api/payments', paymentRoutes);
+
 
 //upload routes
 app.use('/api/upload', uploadRoutes)
