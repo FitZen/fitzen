@@ -49,9 +49,23 @@ const activeReceptionistCount = asyncHandler(async () => {
 });
 
 
+//newly added receptionist count
+const receptionistCountToday = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM receptionist WHERE added_on::date = current_date;';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 export {
     getReceptionists,
     addReceptionist,
     receptionistCount,
     activeReceptionistCount,
+    receptionistCountToday,
 }
