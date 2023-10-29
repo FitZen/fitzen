@@ -332,13 +332,13 @@ const Shakebar = () => {
                     {cartItems.map((cartItem) =>  ( 
                         <Box key={cartItem.id} sx={{margin:"0.5%", marginBottom:"2%", display:"flex", height:"40%", borderRadius:"5px", borderColor: '#96CDEF', boxShadow: "rgba(3, 102, 214, 0.3) 0px 0px 0px 3px"}}>
                           <img src={`http://localhost:3000/Shakebar/${cartItem.image}`} alt="item" style={{width:"15%", height:"90%", objectFit:"cover", margin:"1%"}}/>
-                          <Box sx={{margin:"2%", marginLeft:"20%", width:"32%"}}>
+                          <Box sx={{margin:"1%", marginLeft:"5%", width:"50%"}}>
                             <Typography variant="body1" style={{marginTop:"4%"}}  textAlign="left"><span style={{fontWeight:"600"}}>Name:</span> {cartItem.name}</Typography>
                             <Typography variant="body1" style={{marginTop:"4%"}}  textAlign="left"><span style={{fontWeight:"600" }}>Price:</span> {cartItem.price}</Typography>
                             <Typography variant="body1" style={{marginTop:"4%"}} textAlign="left"><span style={{fontWeight:"600" }}>Quantity:</span> {cartItem.quantity}</Typography>
                           </Box>
-                          <Box sx={{marginLeft:"2%", marginTop:"3%"}}>
-                            <DeleteIcon sx={{ color: "black", textAlign:"right", borderRadius: '50%', padding: '4px', cursor: "pointer", fontSize: "25px", '&:hover': {backgroundColor:color4, color:"white",transition: "ease 0.5s" }  }} />
+                          <Box sx={{marginLeft:"1%", marginTop:"3%"}}>
+                      
                             <Typography variant="body1" textAlign="left"><span style={{fontWeight:"600"}}>Sub Total:</span> {(cartItem.price)*(cartItem.quantity)}.00</Typography><br />
                           </Box>
                       </Box>
@@ -349,7 +349,7 @@ const Shakebar = () => {
                   
                   <Box sx={{marginTop:"2%", marginBottom:"1%", display:"flex", height:"40%", borderRadius:"5px", backgroundColor:"#D8D9DA", justifyContent:"space-between"}}>
                       <Typography variant="body1"  textAlign="left" style={{marginLeft:"1%"}}><span style={{fontWeight:"600"}}>Total Items:</span> {cartItems.reduce((a, b) => a + (b.quantity), 0)}</Typography><br /> 
-                      <Typography variant="body1"  textAlign="left" style={{marginLeft:"30%"}}><span style={{fontWeight:"600"}}>Total:</span> {cartItems.reduce((a, b) => a + (b.price*b.quantity), 0)}.00</Typography><br />
+                      <Typography variant="body1"  textAlign="left" style={{marginLeft:"33%"}}><span style={{fontWeight:"600"}}>Total:</span> {cartItems.reduce((a, b) => a + (b.price*b.quantity), 0)}.00</Typography><br />
                   </Box>
                  
                   <Button variant="contained" onClick={handleCloseCart} style={{backgroundColor:color2, color:"white", marginTop:"5%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Pay now</Button>
