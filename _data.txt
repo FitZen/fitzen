@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS request;
 DROP TABLE IF EXISTS shakebarOrderItem;
 DROP TABLE IF EXISTS shakebarOrder;
 DROP TABLE IF EXISTS shakebarItem;
@@ -357,6 +358,17 @@ CREATE TABLE shakebarOrderItem (
     CONSTRAINT fk_shakebarOrderItem_shakebarOrder FOREIGN KEY (order_id) REFERENCES shakebarOrder (id) ON UPDATE CASCADE
 );
 
+
+CREATE TABLE request (
+    id SERIAL,
+    member_id VARCHAR(6) NOT NULL,          -- virtual member or physical member
+    trainer_id VARCHAR(6) NOT NULL,
+    package VARCHAR(20) NOT NULL,           -- Gold, Silver or Bronze
+    created_on TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'Pending',   -- Pending, Accepted, Rejected
+    CONSTRAINT pk_request PRIMARY KEY (id)
+);
+
 -- end tables --
 
 
@@ -568,6 +580,13 @@ VALUES ('IT0001', 2, 450.00, 900.00, 'OD12345678'),
        ('IT0008', 1, 650.00, 650.00, 'OD34567890'),
        ('IT0010', 5, 290.00, 1450.00, 'OD45678901');
 
+
+INSERT INTO request (member_id, trainer_id, package)
+VALUES ('VM0001', 'TR0001', 'Gold'),
+       ('VM0002', 'TR0001', 'Silver'),
+       ('PM0001', 'TR0001', 'Bronze'),
+       ('PM0002', 'TR0001', 'Silver');
+
 -- end insert data --
 
 
@@ -592,5 +611,6 @@ SELECT * FROM users;
 -- SELECT * FROM shakebarItem;
 -- SELECT * FROM shakebarOrder;
 -- SELECT * FROM shakebarOrderItem;
+-- SELECT * FROM request;
 
 --end verify data--
