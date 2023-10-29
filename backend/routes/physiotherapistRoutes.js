@@ -5,6 +5,7 @@ import {
     addNewPhysiotherapist,
     getPhysiotherapistCount,
     getActivePhysiotherapistCount,
+    getPhysiotherapistCountToday,
 } from "../controllers/physiotherapistController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -18,6 +19,8 @@ router.post("/addphysiotherapist", addNewPhysiotherapist);
 router.get("/count", getPhysiotherapistCount);
 
 router.get("/count/active", getActivePhysiotherapistCount);
+
+router.get("/count/today", getPhysiotherapistCountToday);
 
 
 export default router;

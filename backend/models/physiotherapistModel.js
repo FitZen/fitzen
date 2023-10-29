@@ -53,10 +53,24 @@ const activePhysiotherapistCount = asyncHandler(async () => {
 });
 
 
+//newly added physiotherapist count
+const physiotherapistCountToday = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM physiotherapist WHERE added_on::date = current_date;';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 
 export{
     getViewPhysiotherapists,
     addPhysiotherapist,
     physiotherapistCount,
     activePhysiotherapistCount,
+    physiotherapistCountToday,
 };

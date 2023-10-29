@@ -4,6 +4,7 @@ import {
     addReceptionist,
     receptionistCount,
     activeReceptionistCount,
+    receptionistCountToday,
 } from "../models/receptionistModel.js";
 import {
     findUserById,
@@ -94,9 +95,20 @@ const getActiveReceptionistCount = asyncHandler(async (req, res) => {
     });
 });
 
+
+// get newly added receptionist count
+const getReceptionistCountToday = asyncHandler(async (req, res) => {
+    const count = await receptionistCountToday();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
 export {
     getAllReceptionists,
     addNewReceptionist,
     getReceptionistCount,
     getActiveReceptionistCount,
+    getReceptionistCountToday,
 }

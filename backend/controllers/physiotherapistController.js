@@ -4,6 +4,7 @@ import {
     addPhysiotherapist,
     physiotherapistCount,
     activePhysiotherapistCount,
+    physiotherapistCountToday,
 } from "../models/physiotherapistModel.js";
 import {
     findUserById,
@@ -96,9 +97,20 @@ const getActivePhysiotherapistCount = asyncHandler(async (req, res) => {
 });
 
 
+// get newly added physiotherapist count
+const getPhysiotherapistCountToday = asyncHandler(async (req, res) => {
+    const count = await physiotherapistCountToday();
+
+    res.status(200).json({
+        data: count,
+    });
+});
+
+
 export {
     getViewAllPhysiotherapists,
     addNewPhysiotherapist,
     getPhysiotherapistCount,
     getActivePhysiotherapistCount,
+    getPhysiotherapistCountToday,
 };

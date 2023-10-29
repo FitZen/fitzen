@@ -49,9 +49,23 @@ const activeShakebarManagerCount = asyncHandler(async () => {
 });
 
 
+//newly added shake bar manager count
+const shakebarManagerCountToday = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM shakebarmanager WHERE added_on::date = current_date;';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 export{
     getShakebarManagers,
     addShakebarManager,
     shakebarManagerCount,
     activeShakebarManagerCount,
+    shakebarManagerCountToday,
 };

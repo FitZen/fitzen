@@ -53,9 +53,23 @@ const activeTrainerCount = asyncHandler(async () => {
 });
 
 
+//newly added trainer count
+const trainerCountToday = asyncHandler(async () => {
+    const sql = 'SELECT count(id) FROM trainer WHERE added_on::date = current_date;';
+    const result = await query(sql);
+
+    if (result.rows.length > 0) {
+        return parseInt(result.rows[0].count, 10);
+    } else {
+        return 0;
+    }
+});
+
+
 export{
     getViewTrainers,
     addTrainer,
     trainerCount,
     activeTrainerCount,
+    trainerCountToday,
 };
