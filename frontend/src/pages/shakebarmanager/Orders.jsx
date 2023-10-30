@@ -4,12 +4,21 @@ import {Typography,Tabs,Tab,Table,TableContainer,TableHead,TableRow,TableCell,Ta
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Orders = () => {
 
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
+  const [orderData, setOrderData] = useState([]);
+  
+  const [newOrder, setNewOrder] = useState({
+    order_id: "",
+    item_id: "",
+    quantity: "",
+    amount: "",
+  });
 
   useEffect(() => {
 
@@ -17,6 +26,7 @@ const Orders = () => {
       navigate('/login');
     }
     
+    viewOrder();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -35,6 +45,23 @@ const Orders = () => {
     };
   }, []);
 
+  const viewOrder = async () => {
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/shakebar/orders");
+      console.log("data under axios",res.data.data);
+      setOrderData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  
+
     const [value, setValue] = useState(0);
     const [pendingItems, setPendingItems] = useState([
 
@@ -47,17 +74,17 @@ const Orders = () => {
       setValue(newValue);
     };
   
-    const handleDone = (item) => {
+    const handleDone = (row) => {
       // Remove the item from the pendingItems array
       setPendingItems((prevPendingItems) =>
-        prevPendingItems.filter((pendingItem) => pendingItem.orderId !== item.orderId)
+        prevPendingItems.filter((pendingItem) => pendingItem.orderId !== row.orderId)
       );
   
       // Add the item to the completedItems array
-      setCompletedItems((prevCompletedItems) => [...prevCompletedItems, item]);
+      setCompletedItems((prevCompletedItems) => [...prevCompletedItems, row]);
     };
     
-    const renderTable = (data) => {
+    const renderTable = (orderData) => {
         return (
 
           
@@ -77,17 +104,17 @@ const Orders = () => {
                 </TableRow>
               </TableHead>
               <TableBody style={{ backgroundColor: '#F5F5F5' }}>
-                {data.map((item) => (
-                  <TableRow key={item.orderId}>
-                    <TableCell style={{ fontSize: '14px' }}>{item.orderId}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.itemName}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.quantity}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.totalPrice}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.orderedDate}</TableCell>
-                    {value === 1 && <TableCell style={{ fontSize: '14px' }}>{item.issuedDate}</TableCell>}
+                {orderData.map((row) => (
+                  <TableRow key={row.orderId}>
+                    <TableCell style={{ fontSize: '14px' }}>{row.order_id}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.item_id}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.quantity}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.totalPrice}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.orderedDate}</TableCell>
+                    {value === 1 && <TableCell style={{ fontSize: '14px' }}>{row.issuedDate}</TableCell>}
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
-                        <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(item)}>
+                        <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(row)}>
                           Done
                         </Button>
                       </TableCell>
