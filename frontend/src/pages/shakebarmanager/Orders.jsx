@@ -107,7 +107,6 @@ const Orders = () => {
                     <TableCell style={{ fontSize: '14px' }}>{item.totalPrice}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>{item.orderedDate}</TableCell>
                     {value === 1 && <TableCell style={{ fontSize: '14px' }}>{item.issuedDate}</TableCell>}
-                    {value === 2 && <TableCell style={{ fontSize: '14px' }}>{item.canceledDate}</TableCell>}
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
                         <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(item)}>
