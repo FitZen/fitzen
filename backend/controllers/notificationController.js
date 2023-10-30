@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import {
-    getNotifications
+    getNotifications,
+    addNotification,
 } from "../models/notificationModel.js";
 
 
@@ -15,6 +16,19 @@ const getAllNotifications = asyncHandler(async (req, res) => {
 });
 
 
+// add new notification
+const addNewNotification = asyncHandler(async (req, res) => {
+    const { title, content, receiver_id } = req.body;
+
+    const notificationId = await addNotification(title, content, receiver_id);
+
+    res.status(200).json({
+        data: notificationId,
+    });
+});
+
+
 export {
     getAllNotifications,
+    addNewNotification,
 }
