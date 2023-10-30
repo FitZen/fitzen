@@ -41,36 +41,8 @@ const updateShakebarOrderStatus = asyncHandler(async (orderId, status) => {
 });
 
 
-// get all pending orders
-const allPendingShakebarOrders = asyncHandler(async () => {
-    const sql = 'SELECT * FROM shakebarOrder WHERE status = \'Pending\' ORDER BY placed_on;';
-    const result = await query(sql);
-
-    if (result.rowCount > 0) {
-        return result.rows;
-    } else {
-        return null;
-    }
-});
-
-
-// get all closed orders
-const allClosedShakebarOrders = asyncHandler(async () => {
-    const sql = 'SELECT * FROM shakebarOrder WHERE status = \'Closed\' ORDER BY placed_on;';
-    const result = await query(sql);
-
-    if (result.rowCount > 0) {
-        return result.rows;
-    } else {
-        return null;
-    }
-});
-
-
 export {
     allShakebarOrders,
     shakebarOrder,
     updateShakebarOrderStatus,
-    allPendingShakebarOrders,
-    allClosedShakebarOrders,
 }
