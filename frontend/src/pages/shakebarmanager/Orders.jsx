@@ -37,31 +37,10 @@ const Orders = () => {
 
     const [value, setValue] = useState(0);
     const [pendingItems, setPendingItems] = useState([
-      { orderId: 1, itemName: 'Item 1', quantity: 2, totalPrice: 10000, orderedDate: '2023-08-10' },
-      { orderId: 2, itemName: 'Item 2', quantity: 3, totalPrice: 6150, orderedDate: '2023-08-12' },
-      { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12' }, 
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
+
     ]);
     const [completedItems, setCompletedItems] = useState([
-        { orderId: 1, itemName: 'Item 1', quantity: 2, totalPrice: 10000, orderedDate: '2023-08-10',issuedDate:'2023-08-15' },
-        { orderId: 2, itemName: 'Item 2', quantity: 3, totalPrice: 6150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' },
-        { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' }, 
-        { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10',issuedDate:'2023-08-15' },
-        { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' ,issuedDate:'2023-08-15'},
-        { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' },
-    ]);
-    const [canceledItems, setCanceledItems] = useState([
-        { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12',canceledDate:'2023-08-15' }, 
-        { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10',canceledDate:'2023-08-15' },
-        { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' ,canceledDate:'2023-08-15'},
+
     ]);
   
     const handleChange = (event, newValue) => {
