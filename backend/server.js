@@ -23,6 +23,7 @@ import ratingsRoutes from "./routes/ratingsRoutes.js";
 import scheduleRoutes from "./routes/scheduleRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import checkoutRoutes from "./routes/checkoutRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 
 // start DB connection
@@ -61,6 +62,7 @@ app.use('/api/ratings', ratingsRoutes);
 app.use('/api/schedule', scheduleRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/checkout', checkoutRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 
 //upload routes
