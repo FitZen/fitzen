@@ -28,7 +28,17 @@ const addNotification = asyncHandler(async (title, content, receiverId) => {
 });
 
 
+// set notification as read
+const setNotificationAsRead = asyncHandler(async (notificationId) => {
+    const sql = 'UPDATE notification SET is_read = true WHERE id = $1;';
+    const result = await query(sql, [notificationId]);
+
+    return result.rowCount > 0;
+});
+
+
 export {
     getNotifications,
     addNotification,
+    setNotificationAsRead,
 }
