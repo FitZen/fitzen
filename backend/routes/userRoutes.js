@@ -6,6 +6,7 @@ import {
     getUserAllDetails,
     getTotalUserCount,
     getActiveUserCount,
+    getUserDetailsById,
 } from "../controllers/userController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
@@ -17,6 +18,7 @@ router.post("/login", loginUser);
 // router.get("/details", protect, getUserAllDetails);
 router.post("/logout", logoutUser);
 router.get("/details", getUserAllDetails);
+router.get("/details/:userId", getUserDetailsById);
 
 // router.get("/total/count", protect, permit('Admin'), getTotalUserCount);
 router.get("/total/count", getTotalUserCount);
