@@ -94,7 +94,6 @@ const Orders = () => {
                   <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell>
                   {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>}
-                  {value === 2 && <TableCell style={{ fontSize: '15px' }}><b>Canceled Date</b></TableCell>}
                   {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>}
                 </TableRow>
               </TableHead>
