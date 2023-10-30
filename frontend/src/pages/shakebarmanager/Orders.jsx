@@ -150,7 +150,6 @@ const Orders = () => {
           <Tabs style={{ backgroundColor: '#D7D7D7'  ,marginRight:'4rem',position:'sticky'}} value={value} onChange={handleChange}>
             <Tab style={{ fontSize: '15px', margin: '0 250px 0 100px',fontWeight: '700' }} label="Pending" />
             <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Completed" />
-            <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Canceled" />
           </Tabs>
           {value === 0 && renderTable(pendingItems)}
           {value === 1 && renderTable(completedItems)}
