@@ -153,7 +153,6 @@ const Orders = () => {
           </Tabs>
           {value === 0 && renderTable(pendingItems)}
           {value === 1 && renderTable(completedItems)}
-          {value === 2 && renderTable(canceledItems)}
         </div>
           
           </Box>
