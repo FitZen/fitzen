@@ -10,6 +10,7 @@ import Modal from "@mui/material/Modal";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import { create } from "lodash";
 
 
 const PhysicalTrainerPack = [
@@ -89,6 +90,8 @@ const InstructorProfile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    let select_trainer = {};
+
     let selected_package = {};
   
     const { instructorID, instructorType } = useParams();
@@ -100,6 +103,32 @@ const InstructorProfile = () => {
       
     };
 
+    const createNewChat = async (userData) => {
+      select_trainer = userData;
+      createChat();
+    };
+
+    const createChat = async () => {
+     
+       const reqData = {
+        senderId: JSON.parse(localStorage.getItem('userID')),
+        receiverId: select_trainer.id,
+        trainerType: select_trainer.type,
+      };
+
+      //console.log('Clicked package:', reqData);
+      try{
+        const res = await axios.post('http://localhost:8000/api/chat/', reqData);
+        console.log('res.data: ', res.data);
+        
+        //navigate(`/chat/${res.data.chatId}`);
+      }
+      catch (error) {
+      console.error("error : ", error);
+    }
+
+
+    } 
     const buyTrainerPackage = async () => {
       const packageDetails = {
         title: selected_package?.title,
@@ -231,7 +260,7 @@ const InstructorProfile = () => {
                         </Box>
                         <Box style={{width:"16%", textAlign:"right"}}>
                           <Button variant="contained" onClick={handleOpen} style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", height:"10%", marginTop:"1%"}}><FaBandcamp style={{fontSize: "20px"}}/> &nbsp; packages</Button><br />
-                          <Button variant="contained" style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", height:"10%", marginTop:"5%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Chat</Button>
+                          <Button variant="contained" onClick={() => createNewChat(userData)}  style={{display: instructorType === "Physiotherapist" ? "none" : "", backgroundColor:"#000000", color:"#ffffff", height:"10%", marginTop:"5%"}}><FaTelegram style={{fontSize: "20px"}}/> &nbsp; Chat</Button>
                         </Box>
                         
 
