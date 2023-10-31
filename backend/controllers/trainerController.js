@@ -1,6 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import {
     getViewTrainers,
+    getViewInstructorTrainers,
+    getViewInstructorPhysiotherapist,
     addTrainer,
     trainerCount,
     activeTrainerCount,
@@ -32,6 +34,31 @@ const getViewAllTrainers = asyncHandler(async (req, res) => {
     });
 });
 
+const getViewAllInstructorPhysiotherapist = asyncHandler(async (req, res) => {
+    const trainers = await getViewInstructorPhysiotherapist();
+
+    if (trainers === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: trainers,
+    });
+});
+
+const getViewAllInstructorTrainers = asyncHandler(async (req, res) => {
+    const trainers = await getViewInstructorTrainers();
+
+    if (trainers === undefined) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: trainers,
+    });
+});
 
 //add trainer
 const addNewTrainer = asyncHandler(async (req, res) => {
