@@ -87,13 +87,13 @@ const getUserAllDetails = asyncHandler(async (req, res) => {
 });
 
 const getUserDetailsById = asyncHandler(async (req, res) => {
-    console.log(req.params.userId);
+    // console.log(req.params.userId);
 
     // const user = await getUserDetails(req.user.id);
     const user = await findUserById(req.params.userId);
     const userDetail = await getUserDetails(req.params.userId, user.type);
 
-    console.log(userDetail);
+    // console.log(userDetail);
     if (! userDetail) {
         res.status(500);
         throw new Error("Something went wrong!");
