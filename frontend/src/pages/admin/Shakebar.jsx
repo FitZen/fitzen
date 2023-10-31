@@ -100,7 +100,7 @@ const Shakebar = () => {
         </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
            
-        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Shakebar</Typography>
+        <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Shakebar Items</Typography>
           <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
             <Table>
               <TableHead>
