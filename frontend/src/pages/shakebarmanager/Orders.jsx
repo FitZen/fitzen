@@ -16,13 +16,7 @@ const Orders = () => {
 
   const [pendingItems, setPendingItems] = useState([]);
   const [completedItems, setCompletedItems] = useState([]);
-  
-  const [newOrder, setNewOrder] = useState({
-    order_id: "",
-    item_id: "",
-    quantity: "",
-    amount: "",
-  });
+
 
   useEffect(() => {
 
@@ -68,8 +62,8 @@ const Orders = () => {
 
     const [value, setValue] = useState(0);
     useEffect(() => {
-      setPendingItems(orderData.filter(order => order.status === 'pending'));
-      setCompletedItems(orderData.filter(order => order.status === 'closed'));
+      setPendingItems(orderData.filter(order => order.status === 'Pending'));
+      setCompletedItems(orderData.filter(order => order.status === 'Closed'));
     }, [orderData]);
   
     const handleChange = (event, newValue) => {
@@ -97,12 +91,13 @@ const Orders = () => {
               <TableHead style={{}}>
                 <TableRow>
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Quantity</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Total Amount</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Placed On</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Placed By</b></TableCell>
                   {/* <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell>
-                  {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>}
-                  {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>} */}
+                  <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell> */}
+                  {/* {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>} */}
+                  {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody style={{ backgroundColor: '#F5F5F5' }}>
@@ -110,6 +105,7 @@ const Orders = () => {
                   <TableRow key={row.id}>
                     <TableCell style={{ fontSize: '14px' }}>{row.id}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>{row.total_amount}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.placed_on}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>{row.placed_by}</TableCell>
                     {/* <TableCell style={{ fontSize: '14px' }}>{row.totalPrice}</TableCell>
                     <TableCell style={{ fontSize: '14px' }}>{row.orderedDate}</TableCell> */}
@@ -117,7 +113,7 @@ const Orders = () => {
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
                         <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(row)}>
-                          Done
+                          Completed
                         </Button>
                       </TableCell>
                     )}
