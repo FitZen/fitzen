@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS shakebarOrderItem;
 DROP TABLE IF EXISTS shakebarOrder;
 DROP TABLE IF EXISTS shakebarItem;
 DROP TABLE IF EXISTS schedule;
+DROP TABLE IF EXISTS contract;
 DROP TABLE IF EXISTS memberSchedule;
 DROP TABLE IF EXISTS mealPlan;
 DROP TABLE IF EXISTS goal;
@@ -312,6 +313,21 @@ CREATE TABLE mealPlan (
 );
 
 
+CREATE TABLE contract (
+    id SERIAL,
+    member_id VARCHAR(6) NOT NULL,          -- virtual or physical member
+    instructor_id VARCHAR(6) NOT NULL,      -- trainer or physiotherapist
+    package VARCHAR(10) NOT NULL,           -- package type => Gold, Silver or Bronze
+    remain_sessions INT,
+    payment DECIMAL(8, 2) NOT NULL,         -- total amount
+    payment_id VARCHAR(255) NOT NULL,       -- by stripe
+    created_on TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'On going',  -- On going, Expired
+    CONSTRAINT pk_contract PRIMARY KEY (id)
+    --can't add foreign key constraint linking members and instructors at once
+);
+
+
 CREATE TABLE schedule (
     id SERIAL,
     title VARCHAR(100) NOT NULL,
@@ -321,8 +337,10 @@ CREATE TABLE schedule (
     created_by VARCHAR(6) NOT NULL,         -- Member or Instructor
     created_for VARCHAR(6),                 -- Member
     zoom_link VARCHAR(255),
+    contract_id INT NOT NULL,
     status VARCHAR(20) DEFAULT 'Pending',   -- Pending, Completed, Overdue
-    CONSTRAINT pk_schedule PRIMARY KEY (id)
+    CONSTRAINT pk_schedule PRIMARY KEY (id),
+    CONSTRAINT fk_schedule_contract FOREIGN KEY (contract_id) REFERENCES contract (id) ON UPDATE CASCADE
     --can't add foreign key constraint linking members and instructors at once
 );
 
@@ -561,11 +579,11 @@ VALUES ('Muscle Gain 1', '3 eggs, 1 toast', 'Chicken breast, salad', 'Salmon, br
        ('Endurance Max', 'Oatmeal, berries', 'Pasta, veggies', 'Chicken, sweet potato', 'Energy gel', 'Electrolyte drink', 'For marathon trainers', 'TR0002');
 
 
-INSERT INTO schedule (title, description, start_date, start_time, created_by, created_for, zoom_link)
-VALUES ('Gym Session 1', 'Workout starts at 10:00 am on 2023-11-01', '2023-11-01', '10:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting1'),
-       ('Gym Session 2', 'Workout starts at 04:00 pm on 2023-11-04', '2023-11-04', '16:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting2'),
-       ('Gym Session 3', 'Workout starts at 02:00 pm on 2023-11-06', '2023-11-06', '14:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting3'),
-       ('Gym Session', 'Workout without trainer', '2023-11-02', '15:00:00', 'VM0001', NULL, NULL);
+-- INSERT INTO schedule (title, description, start_date, start_time, created_by, created_for, zoom_link)
+-- VALUES ('Gym Session 1', 'Workout starts at 10:00 am on 2023-11-01', '2023-11-01', '10:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting1'),
+--        ('Gym Session 2', 'Workout starts at 04:00 pm on 2023-11-04', '2023-11-04', '16:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting2'),
+--        ('Gym Session 3', 'Workout starts at 02:00 pm on 2023-11-06', '2023-11-06', '14:00:00', 'TR0001', 'VM0001', 'zoom.us/meeting3'),
+--        ('Gym Session', 'Workout without trainer', '2023-11-02', '15:00:00', 'VM0001', NULL, NULL);
 
 
 INSERT INTO shakebarItem (id, name, category, description, price, image, available_count)
@@ -638,6 +656,6 @@ SELECT * FROM users;
 -- SELECT * FROM shakebarItem;
 -- SELECT * FROM shakebarOrder;
 -- SELECT * FROM shakebarOrderItem;
-SELECT * FROM notification;
+-- SELECT * FROM notification;
 
 --end verify data--
