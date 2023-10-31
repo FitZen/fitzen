@@ -254,7 +254,7 @@ const Complaints = () => {
                             <TextField variant="outlined"  multiline rows="4" style={{height: 125, width:425, borderRadius:"5px", outline:"none", border:"1px solid D8D9DA"}}/>
                             
                             <Box sx={{display:"flex", marginTop:"3%", justifyContent:"center"}}>
-                              <Button variant="contained" style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Add Announcement</Button>
+                              <Button variant="contained" style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%", marginRight:"1%"}}>Cancel</Button>
                             </Box>
                             
                            
