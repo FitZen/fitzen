@@ -339,7 +339,7 @@ const InstructorList = () => {
                   <Table sx={{ minWidth: 650, }} aria-label="simple table">
                       <TableHead>
                           <TableRow>
-                              <TableCell align="left" sx={{fontWeight:"600"}}>Member ID</TableCell>
+                              <TableCell align="left" sx={{fontWeight:"600"}}>Trainer ID</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Name</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Email</TableCell>
                               <TableCell align="left" sx={{fontWeight:"600"}}>Contact No</TableCell>
