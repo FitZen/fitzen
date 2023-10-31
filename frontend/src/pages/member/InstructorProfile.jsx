@@ -2,42 +2,42 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Button, Typography,Select, MenuItem, InputLabel, FormControl, TextField } from "@mui/material";
 import {FaTelegram, FaFeatherAlt, FaBandcamp, FaUserEdit, FaRegTimesCircle, FaBitbucket} from 'react-icons/fa';
-import { BiSolidMessageEdit,BiSolidMessageSquareAdd } from "react-icons/bi";
 import avatar from '../../assets/avatar.jpg';
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
 import Rating from '@mui/material/Rating';
 import Modal from "@mui/material/Modal";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
-import { width } from "@mui/system";
+
 
 const PhysicalTrainerPack = [
   {
-    title: "Gold Package",
-    sessions: "20 Sessions",
-    price: "Rs.30000",
+    id: 1,
+    title: "Gold",
+    sessions: 20,
+    price: 30000,
     fact1: "Full physical gym experience",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
     fact4: "Access to all gym facilities",
   },
   {
-    title: "Silver Package",
-    sessions: "15 Sessions",
-    price: "Rs.25000",
+    id: 2,
+    title: "Silver",
+    sessions: 15,
+    price: 25000,
     fact1: "Full physical gym experience",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
     fact4: "Access to all gym facilities",
   },
   {
-    title: "Bronze Package",
-    sessions: "10 Sessions",
-    price: "Rs.20000",
+    id: 3,
+    title: "Bronze",
+    sessions: 10,
+    price: 20000,
     fact1: "Full physical gym experience",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
@@ -48,27 +48,30 @@ const PhysicalTrainerPack = [
 
 const VirtualTrainerPack = [
   {
-    title: "Gold Package",
-    sessions: "20 Sessions",
-    price: "Rs.20000",
+    id: 1,
+    title: "Gold",
+    sessions: 20,
+    price: 20000,
     fact1: "Full Guidance on workout plans",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
     fact4: "Give tricky workouts",
   },
   {
-    title: "Silver Package",
-    sessions: "15 Sessions",
-    price: "Rs.15000",
+    id: 2,
+    title: "Silver",
+    sessions: 15,
+    price: 15000,
     fact1: "Full Guidance on workout plans",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
     fact4: "Give tricky workouts",
   },
   {
-    title: "Bronze Package",
-    sessions: "10 Sessions",
-    price: "Rs.10000",
+    id: 3,
+    title: "Bronze",
+    sessions: 10,
+    price: 10000,
     fact1: "Full physical gym experience",
     fact2: "Personalized training",
     fact3: "Diet plan & workout plans",
@@ -85,9 +88,38 @@ const InstructorProfile = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    let selected_package = {};
   
     const { instructorID, instructorType } = useParams();
-    //console.log(instructorID, instructorType);
+
+    const handlePackageClick = (item) => {
+     
+      selected_package = item;
+      buyTrainerPackage();
+      
+    };
+
+    const buyTrainerPackage = async () => {
+      const packageDetails = {
+        title: selected_package?.title,
+        sessions: selected_package?.sessions,
+        price: selected_package?.price,
+        trainerID: instructorID,
+        memberID: JSON.parse(localStorage.getItem('userID')),
+      };
+      
+      console.log('Clicked package:', packageDetails);
+      
+      try{
+        const res = await axios.post('http://localhost:8000/api/trainerpackage/trainerPackageBuy', packageDetails);
+        window.location.href = res.data.url; 
+      
+      } catch (error) {
+        console.error("error : ", error);
+  
+      }
+    }
 
   useEffect(() => {
 
@@ -278,14 +310,14 @@ const InstructorProfile = () => {
                     }}
                   >  
                       <>
-                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title}</Typography>
-                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions}</Typography><br />
+                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title} Package</Typography>
+                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions} sessions</Typography><br />
                         <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{item.price}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact1}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact2}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact3}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact4}</Typography><br /><br />
-                        <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
+                        <Button variant="contained" key={item.id}  onClick={() => handlePackageClick(item)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
                       </>  
                     </Box>
                     )) : PhysicalTrainerPack.map((item) => (
@@ -307,14 +339,14 @@ const InstructorProfile = () => {
                         }}
                       >
                       <>
-                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title}</Typography>
-                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions}</Typography><br />
+                        <Typography variant="h5" style={{ fontSize: "20px", fontWeight: 700 }}>{item.title} Package</Typography>
+                        <Typography variant="h6" style={{ fontSize: "12px", fontWeight: 600 }}>{item.sessions} sessions</Typography><br />
                         <Typography variant="h5" style={{ fontSize: "16px", fontWeight: 700 }}>Rs.{item.price}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact1}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact2}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact3}</Typography><br />
                         <Typography variant="body1"><span style={{ fontSize: "10px", fontWeight: 500 }}><FaBitbucket /> </span>{item.fact4}</Typography><br /><br />
-                        <Button variant="contained" style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
+                        <Button variant="contained"  onClick={() => handlePackageClick(item)} style={{ backgroundColor: "#96CDEF", color: "black", fontWeight: "700" }}>Get Started</Button>
                       </>
                  
           
