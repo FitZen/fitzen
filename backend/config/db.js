@@ -1,5 +1,6 @@
 import pg from 'pg';
 const { Pool } = pg;
+import mongoose from 'mongoose';
 
 
 // create connection string
@@ -31,7 +32,23 @@ const query = async (text, params) => {
 }
 
 
+//MongoDB connection
+const connectMongoDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1); // Exit with a non-zero status code to indicate an error
+    }
+};
+
 export {
     connectDB,
-    query
+    query,
+    connectMongoDB
 };

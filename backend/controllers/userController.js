@@ -8,6 +8,7 @@ import {
     getUserDetails,
     totalUserCount,
     activeUserCount,
+    findUserById,
 } from "../models/userModel.js";
 
 
@@ -85,6 +86,24 @@ const getUserAllDetails = asyncHandler(async (req, res) => {
     });
 });
 
+const getUserDetailsById = asyncHandler(async (req, res) => {
+    // console.log(req.params.userId);
+
+    // const user = await getUserDetails(req.user.id);
+    const user = await findUserById(req.params.userId);
+    const userDetail = await getUserDetails(req.params.userId, user.type);
+
+    // console.log(userDetail);
+    if (! userDetail) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(200).json({
+        data: userDetail,
+    });
+});
+
 
 // get total user count
 const getTotalUserCount = asyncHandler(async (req, res) => {
@@ -112,4 +131,5 @@ export {
     getUserAllDetails,
     getTotalUserCount,
     getActiveUserCount,
+    getUserDetailsById,
 }
