@@ -59,7 +59,6 @@ const Shakebar = () => {
            
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Shakebar</Typography>
         
-        
     
         
         </Box>
