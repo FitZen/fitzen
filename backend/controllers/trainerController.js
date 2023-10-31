@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {
     getViewTrainers,
     getViewInstructorTrainers,
-    getViewInstructorPhysiotherapist,
+    getViewInstructorPhysiotherapists,
     addTrainer,
     trainerCount,
     activeTrainerCount,
@@ -34,8 +34,8 @@ const getViewAllTrainers = asyncHandler(async (req, res) => {
     });
 });
 
-const getViewAllInstructorPhysiotherapist = asyncHandler(async (req, res) => {
-    const trainers = await getViewInstructorPhysiotherapist();
+const getViewAllInstructorTrainers = asyncHandler(async (req, res) => {
+    const trainers = await getViewInstructorTrainers();
 
     if (trainers === undefined) {
         res.status(500);
@@ -47,8 +47,8 @@ const getViewAllInstructorPhysiotherapist = asyncHandler(async (req, res) => {
     });
 });
 
-const getViewAllInstructorTrainers = asyncHandler(async (req, res) => {
-    const trainers = await getViewInstructorTrainers();
+const getViewAllInstructorPhysiotherapists = asyncHandler(async (req, res) => {
+    const trainers = await getViewInstructorPhysiotherapists();
 
     if (trainers === undefined) {
         res.status(500);

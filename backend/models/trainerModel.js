@@ -22,7 +22,7 @@ const getViewInstructorTrainers = asyncHandler(async () => {
     return result.rows;
 });
 
-const getViewInstructorPhysiotherapist = asyncHandler(async () => {
+const getViewInstructorPhysiotherapists = asyncHandler(async () => {
     const sql = 'SELECT * FROM physiotherapist ORDER BY added_on DESC;';
     const result = await query(sql);
 
@@ -82,7 +82,7 @@ const trainerCountToday = asyncHandler(async () => {
 export{
     getViewTrainers,
     getViewInstructorTrainers,
-    getViewInstructorPhysiotherapist,
+    getViewInstructorPhysiotherapists,
     addTrainer,
     trainerCount,
     activeTrainerCount,
