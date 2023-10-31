@@ -10,6 +10,7 @@ import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Shakebar = () => {
 
@@ -21,6 +22,7 @@ const Shakebar = () => {
     if((localStorage.getItem('userType') !== '"Admin"')){
       navigate('/login');
     }
+    viewItems();
 
     // Function to handle scroll event
     const handleScroll = () => {
@@ -38,7 +40,29 @@ const Shakebar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [navigate]);
+
+  const viewItems = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/shakebar/items");
+      setItemData(res.data.data);
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 4,
+  };
 
   return (
 
