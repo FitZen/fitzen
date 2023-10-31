@@ -1,8 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import {
     getViewTrainers,
-    getViewInstructorTrainers,
-    getViewInstructorPhysiotherapists,
     addTrainer,
     trainerCount,
     activeTrainerCount,
@@ -23,32 +21,6 @@ import { getSubject, getBody } from "../utils/EmpRegMailTemplate.js";
 //view all trainers
 const getViewAllTrainers = asyncHandler(async (req, res) => {
     const trainers = await getViewTrainers();
-
-    if (trainers === undefined) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
-    res.status(200).json({
-        data: trainers,
-    });
-});
-
-const getViewAllInstructorTrainers = asyncHandler(async (req, res) => {
-    const trainers = await getViewInstructorTrainers();
-
-    if (trainers === undefined) {
-        res.status(500);
-        throw new Error("Something went wrong!");
-    }
-
-    res.status(200).json({
-        data: trainers,
-    });
-});
-
-const getViewAllInstructorPhysiotherapists = asyncHandler(async (req, res) => {
-    const trainers = await getViewInstructorPhysiotherapists();
 
     if (trainers === undefined) {
         res.status(500);
