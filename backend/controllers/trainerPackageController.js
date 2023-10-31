@@ -1,5 +1,12 @@
 import asyncHandler from 'express-async-handler';
 import {Stripe} from 'stripe';
+import {
+    createContract
+} from "../models/contractModel.js";
+import {
+    addNotification
+} from "../models/notificationModel.js";
+
 const stripe = new Stripe(process.env.STRIPE_SK);
 
 
@@ -30,11 +37,18 @@ const checkoutTrainerPackage = asyncHandler(async (req, res) => {
         cancel_url: `${process.env.CLIENT_URL}/payment/failed`,         // direct when payment is cancelled / failed
     });
 
-    const sessionID = session.id;
-
-    if (sessionID) {
-
+    if (session.url === undefined) {
+        throw new Error("Something went wrong!");
     }
+
+    const memNotifyTitle = "Payment successful"
+    const memNotifyContent = `Your payment for the trainer package ${title} offered by trainer ${trainerID} was successful`;
+    const trainerNotifyTitle = "New Trainee";
+    const trainerNotifyContent = `You have a new trainee ${memberID} for the package ${title} that you offered`;
+
+    await createContract(memberID, trainerID, title, sessions, price)
+    await addNotification(memNotifyTitle, memNotifyContent, memberID)
+    await addNotification(trainerNotifyTitle, trainerNotifyContent, trainerID)
 
     res.status(200).json({
         url: session.url,
