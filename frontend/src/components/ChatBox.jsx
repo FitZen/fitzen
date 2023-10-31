@@ -45,7 +45,7 @@ const ChatBox = ({chat, currentUser}) => {
                 }
                 const res2 = await axios.get(`http://localhost:8000/api/message/${chat._id}`, {params: reqData});
                 setMessages(res2.data);
-                console.log(res2.data);
+                // console.log(res2.data);
             } catch (error) {
                 console.log(error);
             }
@@ -53,9 +53,30 @@ const ChatBox = ({chat, currentUser}) => {
         if(chat!==null) fetchMessages();
     }, [chat])
 
-      const handleChange = (newMessage) => {
-        setNewMessage(newMessage);
-      }
+    const handleChange = (newMessage) => {
+      setNewMessage(newMessage);
+    }
+
+
+    const handleSend = async(e)=> {
+        e.preventDefault()
+        const message = {
+        senderId : currentChatUser,
+        text: newMessage,
+        chatId: chat._id,
+
+        }  
+        try {
+          // const { data } = await addMessage(message);
+          const { data } = await axios.post("http://localhost:8000/api/message", message);
+          setMessages([...messages, data]);
+          setNewMessage("");
+        }
+        catch
+        {
+          console.log("error")
+        }
+    }
 
   return (
     <>
@@ -97,7 +118,8 @@ const ChatBox = ({chat, currentUser}) => {
                 value = {newMessage}
                 onChange={handleChange}
               />
-              <div className="send-button button ">Send</div>
+              <div className="send-button button " onClick={handleSend}>Send</div>
+              {/* <div className="send-button button ">Send</div> */}
             </div>
           </>):(
             <span className='chatbox-empty-message'>Tap on a Chat to start Conversation...</span>
