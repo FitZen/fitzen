@@ -12,6 +12,10 @@ const Orders = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
   const [orderData, setOrderData] = useState([]);
+
+
+  const [pendingItems, setPendingItems] = useState([]);
+  const [completedItems, setCompletedItems] = useState([]);
   
   const [newOrder, setNewOrder] = useState({
     order_id: "",
@@ -63,12 +67,10 @@ const Orders = () => {
   
 
     const [value, setValue] = useState(0);
-    const [pendingItems, setPendingItems] = useState([
-
-    ]);
-    const [completedItems, setCompletedItems] = useState([
-
-    ]);
+    useEffect(() => {
+      setPendingItems(orderData.filter(order => order.status === 'pending'));
+      setCompletedItems(orderData.filter(order => order.status === 'closed'));
+    }, [orderData]);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -84,7 +86,7 @@ const Orders = () => {
       setCompletedItems((prevCompletedItems) => [...prevCompletedItems, row]);
     };
     
-    const renderTable = (orderData) => {
+    const renderTable = () => {
         return (
 
           
@@ -97,21 +99,21 @@ const Orders = () => {
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Quantity</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
+                  {/* <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
                   <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell>
                   {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>}
-                  {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>}
+                  {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>} */}
                 </TableRow>
               </TableHead>
               <TableBody style={{ backgroundColor: '#F5F5F5' }}>
                 {orderData.map((row) => (
-                  <TableRow key={row.orderId}>
-                    <TableCell style={{ fontSize: '14px' }}>{row.order_id}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{row.item_id}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{row.quantity}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{row.totalPrice}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{row.orderedDate}</TableCell>
-                    {value === 1 && <TableCell style={{ fontSize: '14px' }}>{row.issuedDate}</TableCell>}
+                  <TableRow key={row.id}>
+                    <TableCell style={{ fontSize: '14px' }}>{row.id}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.total_amount}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.placed_by}</TableCell>
+                    {/* <TableCell style={{ fontSize: '14px' }}>{row.totalPrice}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.orderedDate}</TableCell> */}
+                    {/* {value === 1 && <TableCell style={{ fontSize: '14px' }}>{row.issuedDate}</TableCell>} */}
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
                         <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(row)}>
@@ -168,4 +170,4 @@ const Orders = () => {
 
 };
 
-export default Orders;
+export default Orders;     
