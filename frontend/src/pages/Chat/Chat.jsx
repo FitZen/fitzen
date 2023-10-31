@@ -1,16 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Chat.css'
 import { userChats } from '../../api/ChatRequests';
 import axios from 'axios';
 import Conversation from '../../components/Conversation';
 import ChatBox from '../../components/ChatBox';
+import { io } from 'socket.io-client';
 
 const Chat = () => {
 
     const userId = localStorage.getItem('userID');
+
+    const curUser = userId.slice(1, -1)
     // console.log("check 1",userId);
     const [chats, setChats] = useState([])
+    const [onlineUsers, setOnlineUsers] = useState([]);
     const [currentChat, setCurrentChat] = useState(null)
+    const socket = useRef();
+
+
+    useEffect(() => {
+        console.log("check 1",curUser);
+        console.log("check 2",userId)
+        socket.current = io("ws://localhost:8800");
+        socket.current.emit("new-user-add", userId);
+        socket.current.on("get-users", (users) => {
+        setOnlineUsers(users);
+        console.log(onlineUsers)
+    });
+  }, [userId]);
+
+    //userId: JSON.parse(localStorage.getItem('userID')),
 
     useEffect(() => {
     const getChats = async () => {
