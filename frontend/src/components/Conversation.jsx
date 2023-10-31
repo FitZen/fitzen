@@ -36,12 +36,14 @@ const Conversation = ({data, currentUserId}) => {
             <div className="follower conversation">
                 <div>
                     {<div className="online-dot"></div>}
+                   {userData && (
                     <img
-                        // src={"../assets/avatar.jpg"}
-                        // alt="Profile"
+                        src={`http://localhost:3000/Profile/${userData.data.profile_pic}`}
+                        alt="Profile"
                         className="followerImage"
                         style={{ width: "50px", height: "50px" }}
                     />
+                    )}
                     <div className="name" style={{fontSize: '0.8rem'}}>
                         <span>{userData ? `${userData.data.first_name} ${userData.data.last_name}` : "Loading..."}</span>
                         <span >online</span>
