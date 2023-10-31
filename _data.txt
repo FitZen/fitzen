@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS request;
+DROP TABLE IF EXISTS shakebarOrderItem;
+DROP TABLE IF EXISTS shakebarOrder;
 DROP TABLE IF EXISTS shakebarItem;
 DROP TABLE IF EXISTS memberSchedule;
 DROP TABLE IF EXISTS mealPlan;
@@ -311,8 +314,8 @@ CREATE TABLE memberSchedule (
     id SERIAL,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(200) NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
+    start_date DATE NOT NULL,
+    start_time TIME NOT NULL,
     created_by VARCHAR(6) NOT NULL,     -- Virtual member, Physical member
     CONSTRAINT pk_memberSchedule PRIMARY KEY (id)
     --can't add foreign key constraint linking virtual and physical members at once
@@ -324,11 +327,46 @@ CREATE TABLE shakebarItem (
     name VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL,
     description VARCHAR(100) NOT NULL,
-    price DECIMAL(8,2) NOT NULL,
+    price DECIMAL(8,2) NOT NULL,    -- unit_price
     image VARCHAR(255),
     available_count INT NOT NULL,
     CONSTRAINT pk_shakebarItem PRIMARY KEY (id),
     CONSTRAINT uc_shakebarItem_name UNIQUE (name)
+);
+
+
+CREATE TABLE shakebarOrder (
+    id VARCHAR(10) NOT NULL,                -- format => OD12345678
+    total_amount DECIMAL(8,2) NOT NULL,
+    placed_on TIMESTAMP DEFAULT NOW(),
+    placed_by VARCHAR(6) NOT NULL,          -- members and instructors
+    status VARCHAR(20) DEFAULT 'Pending',   -- Pending, Closed, Cancelled
+    CONSTRAINT pk_shakebarOrder PRIMARY KEY (id)
+    -- can't add foreign key constraint linking members and instructors at once
+);
+
+
+CREATE TABLE shakebarOrderItem (
+    id SERIAL,
+    item_id VARCHAR(6) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(8,2) NOT NULL,        -- unit_price
+    amount DECIMAL(8,2) NOT NULL,       -- quantity * unit_price
+    order_id VARCHAR(10) NOT NULL,
+    CONSTRAINT pk_shakebarOrderItem PRIMARY KEY (id),
+    CONSTRAINT fk_shakebarOrderItem_shakebarItem FOREIGN KEY (item_id) REFERENCES shakebarItem (id) ON UPDATE CASCADE,
+    CONSTRAINT fk_shakebarOrderItem_shakebarOrder FOREIGN KEY (order_id) REFERENCES shakebarOrder (id) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE request (
+    id SERIAL,
+    member_id VARCHAR(6) NOT NULL,          -- virtual member or physical member
+    trainer_id VARCHAR(6) NOT NULL,
+    package VARCHAR(20) NOT NULL,           -- Gold, Silver or Bronze
+    created_on TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'Pending',   -- Pending, Accepted, Rejected
+    CONSTRAINT pk_request PRIMARY KEY (id)
 );
 
 -- end tables --
@@ -506,7 +544,7 @@ VALUES ('Muscle Gain 1', '3 eggs, 1 toast', 'Chicken breast, salad', 'Salmon, br
        ('Endurance Max', 'Oatmeal, berries', 'Pasta, veggies', 'Chicken, sweet potato', 'Energy gel', 'Electrolyte drink', 'For marathon trainers', 'TR0002');
 
 
-INSERT INTO memberSchedule (title, description, date, time, created_by)
+INSERT INTO memberSchedule (title, description, start_date, start_time, created_by)
 VALUES ('Meeting', 'Discuss project updates', '2023-11-01', '10:00:00', 'VM0001'),
        ('Lunch Break', 'Time to eat', '2023-11-01', '12:30:00', 'PM0001'),
        ('Gym Session', 'Workout', '2023-11-02', '16:00:00', 'PM0001'),
@@ -524,6 +562,30 @@ VALUES ('IT0001', 'Protein Shake', 'Shakes', 'High-protein shake for muscle reco
        ('IT0008', 'Creatine Powder', 'Supplements', 'Pure creatine monohydrate powder', 650.00, 'IT0008.jpg', 20),
        ('IT0009', 'Pre-Workout Booster', 'Supplements', 'Energy-boosting pre-workout formula', 675.00, 'IT0009.jpg', 30),
        ('IT0010', 'Vitamin D Capsules', 'Supplements', 'Vitamin D3 dietary supplements', 290.00, 'IT0010.jpg', 45);
+
+
+INSERT INTO shakebarOrder (id, total_amount, placed_by)
+VALUES ('OD12345678', 1575.00, 'VM0001'),
+       ('OD23456789', 2340.00, 'PM0001'),
+       ('OD34567890', 2850.00, 'TR0001'),
+       ('OD45678901', 1450.00, 'PT0001');
+
+
+INSERT INTO shakebarOrderItem (item_id, quantity, price, amount, order_id)
+VALUES ('IT0001', 2, 450.00, 900.00, 'OD12345678'),
+       ('IT0002', 3, 225.00, 675.00, 'OD12345678'),
+       ('IT0004', 1, 900.00, 900.00, 'OD23456789'),
+       ('IT0006', 2, 720.00, 1440.00, 'OD23456789'),
+       ('IT0007', 4, 550.00, 2200.00, 'OD34567890'),
+       ('IT0008', 1, 650.00, 650.00, 'OD34567890'),
+       ('IT0010', 5, 290.00, 1450.00, 'OD45678901');
+
+
+INSERT INTO request (member_id, trainer_id, package)
+VALUES ('VM0001', 'TR0001', 'Gold'),
+       ('VM0002', 'TR0001', 'Silver'),
+       ('PM0001', 'TR0001', 'Bronze'),
+       ('PM0002', 'TR0001', 'Silver');
 
 -- end insert data --
 
@@ -547,5 +609,8 @@ SELECT * FROM users;
 -- SELECT * FROM mealPlan;
 -- SELECT * FROM memberSchedule;
 -- SELECT * FROM shakebarItem;
+-- SELECT * FROM shakebarOrder;
+-- SELECT * FROM shakebarOrderItem;
+-- SELECT * FROM request;
 
 --end verify data--

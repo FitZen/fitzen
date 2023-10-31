@@ -24,7 +24,10 @@ import ratingsRoutes from "./routes/ratingsRoutes.js";
 import scheduleRoutes from "./routes/scheduleRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
-// import chats from './data.js';
+import requestRoutes from "./routes/requestRoutes.js";
+import checkoutRoutes from "./routes/checkoutRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
+import { checkoutTrainerPackage } from './controllers/trainerPackageController.js';
 
 // start DB connection
 connectDB();
@@ -64,6 +67,10 @@ app.use('/api/ratings', ratingsRoutes);
 app.use('/api/schedule', scheduleRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
+app.use('/api/requests', requestRoutes);
+app.use('/api/checkout', checkoutRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/trainerpackage', checkoutTrainerPackage);	
 
 
 //upload routes
