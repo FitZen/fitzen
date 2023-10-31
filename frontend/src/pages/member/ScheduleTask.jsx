@@ -1,12 +1,21 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import {FaRegTimesCircle} from 'react-icons/fa';
+import { GiConfirmed } from "react-icons/gi";
+import Modal from '@mui/material/Modal';
+
+
+const color1 = "#102B4C" //dark blue
+const color2 = "#346E93" //light blue
+const color3 = "#96CDEF" //lighter blue
+const color4 = "#DC1E2A" //red
 
 const ScheduleTask = () => {
 
@@ -14,6 +23,10 @@ const ScheduleTask = () => {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   const [taskDetails, setTaskDetails] = useState([]); //[{date: "2021-10-01", task: "Personal Workout", time: "10:00 a.m - 12:00 p.m", type: "Physical"}
+  const [openFirstPopup, setOpenFirstPopup] = React.useState(false);
+  const handleOpenFirstPopup = () => setOpenFirstPopup(true);
+  const handleCloseFirstPopup = () => setOpenFirstPopup(false);
+
 
   const currentDate = new Date();
 
@@ -114,8 +127,28 @@ const ScheduleTask = () => {
     setDropdownOpen(false); // Close the dropdown after selection
   };
 
-  const dropdownOptions = ['Not completed','Complete', 'Cancel']; 
+  const handleCompleted = async () => {
+    handleCloseFirstPopup();
+  }
 
+  const handleCancel = async () => {
+    handleCloseFirstPopup();
+  }
+
+  const dropdownOptions = ['Not completed','Complete', 'Cancel']; 
+  const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 4,
+};
 
   return (
 
@@ -155,10 +188,10 @@ const ScheduleTask = () => {
                           backgroundColor: color2,
                           cursor: 'pointer',
                           }}
-                          onClick={toggleDropdown}
+                          onClick={handleOpenFirstPopup}
                       >
                           <Typography variant="body2" style={{ fontWeight: 500, textAlign: 'center', color: 'white' }}>
-                            {selectedValue}
+                            {task.status}
                           </Typography>
                       </Box>
   
@@ -205,6 +238,38 @@ const ScheduleTask = () => {
         </Box>
         
       </Box>
+
+      
+      <Modal
+            open={openFirstPopup}
+            onClose={handleCloseFirstPopup}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={modalStyle}>
+                <FaRegTimesCircle onClick={handleCloseFirstPopup} style={{float:"right", cursor:"pointer", fontSize:"1.5rem", color:"#D8D9DA" ,}}
+                                  onMouseEnter={(e) => {
+                                      e.target.style.color = "#D71313";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                      e.target.style.color = "#D8D9DA";
+                                      e.target.style.transform = "scale(1)";
+                                  }}
+                />
+                <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
+                    <GiConfirmed  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
+                        &nbsp; Mark your task as...
+                    </Typography>
+                </Box>
+             
+                <Box sx={{display:"flex", justifyContent:"center"}}>
+                    <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Complete</Button>
+                    <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%",marginLeft:"1rem"}}>Cancel</Button>
+                </Box>
+            </Box>
+        </Modal>
      
     </Box>
 
