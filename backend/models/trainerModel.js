@@ -15,6 +15,12 @@ const getViewTrainers = asyncHandler(async () => {
     return result.rows;
 });
 
+const getViewInstructorTrainers = asyncHandler(async () => {
+    const sql = 'SELECT * FROM trainer ORDER BY added_on DESC;';
+    const result = await query(sql);
+
+    return result.rows;
+});
 
 // add trainer
 const addTrainer = asyncHandler(async (id, nic, first_name, last_name, email, password, contact_no, address, dob, gender, qualification, mode, addedBy) => {
@@ -68,6 +74,7 @@ const trainerCountToday = asyncHandler(async () => {
 
 export{
     getViewTrainers,
+    getViewInstructorTrainers,
     addTrainer,
     trainerCount,
     activeTrainerCount,
