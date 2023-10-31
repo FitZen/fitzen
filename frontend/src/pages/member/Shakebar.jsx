@@ -2,7 +2,6 @@ import React, { useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import { Typography, Select, MenuItem, Button, InputLabel, TextField, FormControl, IconButton } from "@mui/material";
 import Sidebar from "../../components/Sidebar";
-import { Delete as DeleteIcon } from '@mui/icons-material';
 import Navbar from "../../components/Navbar";
 import Modal from '@mui/material/Modal';
 import {FaRegTimesCircle, FaPlus, FaMinus} from 'react-icons/fa';
@@ -10,8 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import axios from 'axios';
 
-
-const color4 = "#DC1E2A" //red 
 
 const Shakebar = () => {
   // State to store the selected item from the Select component
@@ -22,8 +19,6 @@ const Shakebar = () => {
   const [openCart, setOpenCart] = React.useState(false);
   const handleOpenCart = () => setOpenCart(true);
   const handleCloseCart = () => setOpenCart(false);
-  const [valueStart, setValueStart] = React.useState(null);
-  const [valueEnd, setValueEnd] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -51,7 +46,7 @@ const Shakebar = () => {
       setCount(0);
 
       // Close the cart modal
-      console.log("Cart Items: ", cartItems);
+      //console.log("Cart Items: ", cartItems);
       //handleCloseCart();
       handleClose();
     }
@@ -160,6 +155,30 @@ const Shakebar = () => {
   // Event handler for handling the Select component's value change
   const handleChange = (event) => {
     setItem(event.target.value);
+  };
+
+  const submitPayment = async () => {
+
+    const reqData = {
+      userID : JSON.parse(localStorage.getItem('userID')),
+      cartItems : cartItems,
+    };
+
+    console.log("reqData : ", reqData);
+
+    try{
+      const response = await axios.post("http://localhost:8000/api/checkout/shakebar-order", reqData);
+      //console.log("response : ", response.data.url);
+      // setCartItems([]);
+      // handleCloseCart();
+      // console.log("response : ", response.data.url);
+      window.location.href = response.data.url; 
+      
+    } catch (error) {
+      console.error("error : ", error);
+
+    }
+
   };
 
   return (
@@ -352,7 +371,7 @@ const Shakebar = () => {
                       <Typography variant="body1"  textAlign="left" style={{marginLeft:"33%"}}><span style={{fontWeight:"600"}}>Total:</span> {cartItems.reduce((a, b) => a + (b.price*b.quantity), 0)}.00</Typography><br />
                   </Box>
                  
-                  <Button variant="contained" onClick={handleCloseCart} style={{backgroundColor:color2, color:"white", marginTop:"5%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Pay now</Button>
+                  <Button variant="contained" onClick={submitPayment} style={{backgroundColor:color2, color:"white", marginTop:"5%", marginBottom:"1%"}}><AddShoppingCartIcon/>&nbsp;&nbsp;Pay now</Button>
                 
               </Box>
               
