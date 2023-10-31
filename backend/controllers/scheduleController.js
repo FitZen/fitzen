@@ -4,7 +4,8 @@ import {
     getTasksDayBased,
     getCurrentDayTasks,
     getNextDayTask,
-    addTask
+    addTask,
+    checkTime	
 } from "../models/scheduleModel.js";
 
 //to format the dates as YYYY-MM-DD
@@ -103,19 +104,37 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
         userID
     } = req.body;
     //console.log("data from backend : ", req.body)
-    const result = await addTask(title, description, start_date, start_time, userID);
-
-    //console.log("result from backend : ", result)
-
-    if (!result) {
+    const timeCheck = await checkTime(start_date, start_time, userID);
+    if(timeCheck == 1){
         res.status(500);
-        throw new Error("Something went wrong!");
+        throw new Error("Time is already allocated!");
     }
+    else{
+        const result = await addTask(title, description, start_date, start_time, userID);
+        if (!result) {
+            res.status(500);
+            throw new Error("Something went wrong!");
+        }
+        res.status(201).json({
+            data: result,
+            message: "Task added successfully.",
+        });
+    }
+    // const result = await addTask(title, description, start_date, start_time, userID);
 
-    res.status(201).json({
-        data: result,
-        message: "Task added successfully.",
-    });
+    // //console.log("result from backend : ", result)
+
+
+
+    // if (!result) {
+    //     res.status(500);
+    //     throw new Error("Something went wrong!");
+    // }
+
+    // res.status(201).json({
+    //     data: result,
+    //     message: "Task added successfully.",
+    // });
 });
 
 export {
