@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../pages/Chat/ChatBox.css'
 import {format} from 'timeago.js'
 import InputEmoji from "react-input-emoji";
@@ -9,6 +9,8 @@ const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage }) => {
     const [userData, setUserData] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const scroll = useRef();
+    // const imageRef = useRef();
     const currentChatUser = currentUser.slice(1, -1);
 
 
@@ -101,7 +103,16 @@ const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage }) => {
         {
           console.log("error")
         }
-    }   
+    }  
+    
+    
+    // Always scroll to bottom
+    useEffect(()=> {
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
+    },[messages])
+
+
+  
 
   return (
     <>
@@ -129,7 +140,7 @@ const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage }) => {
             <div className="chat-body">
                 {messages.map((message) => (
                   <>
-                    <div 
+                    <div ref = {scroll}
                       className={message.senderId === currentChatUser ? "message own" : "message"}
                     >   
                         <span>{message.text}</span>
