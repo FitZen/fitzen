@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import {Stripe} from 'stripe';
 import {
+    existContracts,
     createContract
 } from "../models/contractModel.js";
 import {
@@ -10,12 +11,20 @@ import {
 const stripe = new Stripe(process.env.STRIPE_SK);
 
 
+// get existing contracts
+const getExistContracts = asyncHandler(async (req, res) => {
+    const memberId = req.params.memberId;
+    const contracts = await existContracts(memberId);
+
+    res.status(200).json({
+        contracts: contracts,
+    });
+});
+
+
+// checkout trainer package
 const checkoutTrainerPackage = asyncHandler(async (req, res) => {
     const {title, sessions, price, trainerID, memberID} = req.body;
-
-    // console.log(title, sessions, price, trainerID, memberID);
-    //             Silver    15     15000  TR0001     VM0001
-
     const items = [
         {
             price_data: {
@@ -57,5 +66,6 @@ const checkoutTrainerPackage = asyncHandler(async (req, res) => {
 
 
 export {
+    getExistContracts,
     checkoutTrainerPackage,
 };
