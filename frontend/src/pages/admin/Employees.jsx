@@ -64,7 +64,7 @@ const Employees = () => {
 
   const getTodayShakebarCount = async () => {
     try {
-      const res2 = await axios.get('http://localhost:8000/api/shakebar/count/today');
+      const res2 = await axios.get('http://localhost:8000/api/shakebarmanagers/count/today');
       setTodayShakebarCount(res2.data.data);
       
     } catch (error) {
