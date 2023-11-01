@@ -126,7 +126,7 @@ const Dashboard = () => {
   const data = {
     labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
     datasets: [{
-      label: 'Sales',
+      label: 'workout-count',
       data: [5, 2, 3, 1, 4, 2, 3],
       backgroundColor: [`${color2}`],
       borderColor: [`${color2}`],
@@ -155,9 +155,9 @@ const Dashboard = () => {
   };
 
   const DoughnutData = {
-    labels: ['Completed', 'Upcoming', 'Cancelled', 'Total'],
+    labels: ['Completed sessions', 'Upcoming sessions', 'Cancelled sessions', 'Total sessions'],
     datasets: [{
-      data: [65, 59, 80, 81],
+      data: [1, 19, 0, 20],
       backgroundColor: [`${color3}`,`${color2}`, `${color4}`, `${color1}`],
       borderColor: '#000',
       borderWidth: 0
