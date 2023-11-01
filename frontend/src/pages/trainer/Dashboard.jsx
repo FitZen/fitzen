@@ -141,14 +141,14 @@ const TrainerDashboard = () => {
 
 
 
-					<Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem"}}>
-						<Link to="/trainer/NewRequests" style={{textDecoration:"none", color:"#000000"}}>
+					<Box sx={{display: "flex", width: "100%", height: "250px", backgroundColor: "#ffffff",  mt:5 , mb: 2, borderRadius:"10px", paddingTop:"1rem", justifyContent:"center"}}>
+						{/* <Link to="/trainer/NewRequests" style={{textDecoration:"none", color:"#000000"}}>
 							<Box sx={{width:"140%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", mr:9, cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px',transition: "ease 0.5s"}}}>
 							<img src={Icon1} alt="Icon1" style={{textAlign:"left", marginLeft:"5%", marginTop:"5%"}} />
 							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"15%"}}> New Requests</Typography>
 						</Box>
-						</Link>
-						<Box sx={{width:"30%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", ml:18,  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+						</Link> */}
+						<Box sx={{width:"30%", height:"90%", bgcolor: "#ffffff", borderRadius:"10px", ml:-6,  mr:4 , cursor: "pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border: '2px solid white', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 							<img src={Icon3} alt="Icon3" style={{textAlign:"left", marginLeft:"5", marginTop:"5%"}}/>
 							<Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginLeft:"0%"}}>30 Physical Trainees</Typography>
 						</Box>
