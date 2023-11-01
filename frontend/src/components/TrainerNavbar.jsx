@@ -206,11 +206,23 @@ let ProfileImage;
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{borderRadius: "50%",  width: "60px", height: "60px", marginTop:"5px"}}>
-                            <Badge variant="dot" color="error">
-                                <MailIcon style={{ fontSize: "1.2rem", color: "black"  }}/>
-                            </Badge>
-                        </IconButton>
+                        <Link to="/chat" style={{ textDecoration: 'none', color: 'black' }}>
+                          <IconButton
+                              size="large"
+                              aria-label="show 4 new mails"
+                              color="inherit"
+                              style={{
+                                borderRadius: '50%',
+                                width: '60px',
+                                height: '60px',
+                                marginTop: '5px',
+                              }}
+                            >
+                              <Badge variant="dot" color="error">
+                                <MailIcon style={{ fontSize: '1.2rem', color: 'black' }} />
+                              </Badge>
+                            </IconButton>
+                        </Link>
                         <Link to="/trainer/notification" style={{textDecoration:"none", color:"black"}}>
                             <IconButton
                                 size="large"
