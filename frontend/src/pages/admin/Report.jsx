@@ -33,6 +33,16 @@ const color4 = "#DC1E2A" //red
 
 const Report = () => {
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (item) => {
+    setSelectedItem(item); // Set the selected item before opening the modal
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+
+  const [itemData, setItemData] = useState([]);
+  const [setSelectedItem] = useState(null);
+
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
 
@@ -43,7 +53,8 @@ const Report = () => {
     if((localStorage.getItem('userType') !== '"Admin"')){
       navigate('/login');
     }
-    
+
+    viewItems();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -70,18 +81,6 @@ const Report = () => {
       console.error("Retrieving failed:", error);
       // Handle error scenarios here
     }
-  };
-
-  const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: "35%",
-    bgcolor: 'background.paper',
-    borderRadius: '10px',
-    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-    p: 4,
   };
 
   const handleYearChange = (event) => {
@@ -225,6 +224,7 @@ const Report = () => {
                 </Box>
 
               </Box>
+            </Box>
               <Box sx={{width:"94%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
                 <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
                   <Table>
@@ -245,6 +245,11 @@ const Report = () => {
                             <TableCell>{item.available_count}</TableCell>
                             <TableCell>{item.price}</TableCell>
                             <TableCell>{item.category}</TableCell>
+                            <TableCell style={{ fontSize: '14px' }}>
+                              <Button key={item.id} onClick={() => handleOpen(item)} variant="contained" color="primary" style={{ backgroundColor: "#346E93" }} size="small">
+                                View
+                              </Button>
+                            </TableCell>
                           </TableRow>
                       ))}
                     </TableBody>
@@ -253,7 +258,6 @@ const Report = () => {
               </Box>
             </Box>
           </Box>
-        </Box>
 
       </Box>
 
