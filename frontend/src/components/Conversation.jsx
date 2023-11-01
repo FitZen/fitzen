@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-const Conversation = ({data, currentUserId}) => {
+const Conversation = ({data, currentUserId, online}) => {
 
     const [userData, setUserData] = useState(null);
 
@@ -35,8 +35,8 @@ const Conversation = ({data, currentUserId}) => {
         <>
             <div className="follower conversation">
                 <div>
-                    {<div className="online-dot"></div>}
-                   {userData && (
+                    {online && <div className="online-dot"></div>}
+                    {userData && (
                     <img
                         src={`http://localhost:3000/Profile/${userData.data.profile_pic}`}
                         alt="Profile"
@@ -46,7 +46,8 @@ const Conversation = ({data, currentUserId}) => {
                     )}
                     <div className="name" style={{fontSize: '0.8rem'}}>
                         <span>{userData ? `${userData.data.first_name} ${userData.data.last_name}` : "Loading..."}</span>
-                        <span >online</span>
+                        {/* <span >online</span> */}
+                        <span style={{color: online?"#51e200":""}}>{online? "Online" : "Offline"}</span>
                     </div>
                 </div>
             </div>
