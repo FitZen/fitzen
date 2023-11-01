@@ -24,6 +24,7 @@ const Employees = () => {
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
   const[todayReceptionistCount, setTodayReceptionistCount]=useState(0);
+  const[todayShakebarCount, setTodayShakebarCount]=useState(0);
 
   useEffect(() => {
     if((localStorage.getItem('userType') !== '"Admin"')){
@@ -31,6 +32,7 @@ const Employees = () => {
     }
 
     getTodayReceptionistCount();
+    getTodayShakebarCount();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -53,6 +55,17 @@ const Employees = () => {
     try {
       const res2 = await axios.get('http://localhost:8000/api/receptionists/count/today');
       setTodayReceptionistCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  const getTodayShakebarCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/shakebar/count/today');
+      setTodayShakebarCount(res2.data.data);
       
     } catch (error) {
       console.log('error message: ',error.data);
@@ -182,7 +195,7 @@ const Employees = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Shakebar Managers</Typography>
-                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
+                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+{todayShakebarCount}</Box>
                       <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%" }}>23 are logged in </Typography>
                       <Link to="/admin/receptionView/Shake Bar Manager" style={{textDecoration:"none", color:"black", marginLeft:"52%"}}>
                         <Button variant="outlined" style={{ color:color2, fontWeight: 700}}>View All</Button>
