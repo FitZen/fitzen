@@ -8,6 +8,7 @@ import {
     addSessionTrainer,
     checkTime,
     addVirtualSessionTrainer
+    updateCurrentScheduleStatus
 } from "../models/scheduleModel.js";
 
 import {findUserById} from "../models/userModel.js";
@@ -215,6 +216,28 @@ const addTrainerSchedule = asyncHandler(async (req, res) => {
     // });
 });
 
+
+const updateScheduleStatus = asyncHandler(async (req, res) => {
+    const {
+        id,
+        status
+    } = req.body;
+    //console.log("data from backend : ", req.body)
+    const result = await updateCurrentScheduleStatus(id, status);
+
+    //console.log("result from backend : ", result)
+
+    if (!result) {
+        res.status(500);
+        throw new Error("Something went wrong!");
+    }
+
+    res.status(201).json({
+        data: result,
+        message: "Schedule status updated successfully.",
+    });
+});
+
 export {
     getAllTaskDates,
     getAllTasksDayBased,
@@ -222,4 +245,5 @@ export {
     getNextTask,
     addMemberSchedule,
     addTrainerSchedule
+    updateScheduleStatus
 };

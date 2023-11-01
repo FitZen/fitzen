@@ -1,13 +1,13 @@
 import express from "express";
 const router = express.Router();
 import {
+    getExistContracts,
     checkoutTrainerPackage,
 } from "../controllers/trainerPackageController.js";
-// import { protect, permit } from "../middleware/authMiddleware.js";
 
 
+router.get('/exist-contracts/:memberId', getExistContracts);
 router.post("/trainerPackageBuy", checkoutTrainerPackage);
-
 
 
 export default router;

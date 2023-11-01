@@ -27,7 +27,8 @@ import messageRoutes from "./routes/messageRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import checkoutRoutes from "./routes/checkoutRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
-import { checkoutTrainerPackage } from './controllers/trainerPackageController.js';
+import trainerPackageRoutes from "./routes/trainerPackageRoutes.js";
+
 
 // start DB connection
 connectDB();
@@ -70,7 +71,7 @@ app.use('/api/message', messageRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/checkout', checkoutRoutes);
 app.use('/api/notifications', notificationRoutes);
-app.use('/api/trainerpackage', checkoutTrainerPackage);	
+app.use('/api/trainerpackage', trainerPackageRoutes);
 
 
 //upload routes

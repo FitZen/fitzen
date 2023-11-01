@@ -43,7 +43,6 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
     return result.rows[0].id;
 });
 
-
 //Add a new session for physical members
 const addSessionTrainer = asyncHandler(async (title, description, startDate, startTime, createdBy, memberID) => {
     const sql = 'INSERT INTO schedule (title, description, start_date, start_time, created_by, created_for) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
@@ -90,6 +89,18 @@ const checkTime = asyncHandler(async (startDate, startTime, createdBy) => {
     return recordCount > 0 ? 1 : 0;
   });
   
+//Update Schedule Status
+const updateCurrentScheduleStatus = asyncHandler(async (scheduleID, status) => {
+    const sql = 'UPDATE schedule SET status=$1 WHERE id=$2 RETURNING id;';
+    const result= await query(sql, [status, scheduleID]);
+
+    if(result.rowCount>0){
+        return true;
+    }else{
+        return false;
+    }
+});
+
 
 export {
     getTasksDates,
@@ -99,5 +110,7 @@ export {
     addTask,
     addSessionTrainer,
     checkTime,
-    addVirtualSessionTrainer
+    addVirtualSessionTrainer,
+    updateCurrentScheduleStatus
+
 };
