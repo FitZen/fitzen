@@ -4,12 +4,19 @@ import {Typography,Tabs,Tab,Table,TableContainer,TableHead,TableRow,TableCell,Ta
 import ShakebarmanagerSidebar from "../../components/ShakebarmanagerSidebar";
 import ShakebarmanagerNavbar from "../../components/ShakebarmanagerNavbar";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Orders = () => {
 
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const navigate = useNavigate();
+  const [orderData, setOrderData] = useState([]);
+
+
+  const [pendingItems, setPendingItems] = useState([]);
+  const [completedItems, setCompletedItems] = useState([]);
+
 
   useEffect(() => {
 
@@ -17,6 +24,7 @@ const Orders = () => {
       navigate('/login');
     }
     
+    viewOrder();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -35,50 +43,44 @@ const Orders = () => {
     };
   }, []);
 
+  const viewOrder = async () => {
+    
+    try {
+     
+      const res = await axios.get("http://localhost:8000/api/shakebar/orders");
+      console.log("data under axios",res.data.data);
+      setOrderData(res.data.data);
+
+      // Perform any additional actions after successful logout, such as clearing local storage, redirecting, etc.
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  
+
     const [value, setValue] = useState(0);
-    const [pendingItems, setPendingItems] = useState([
-      { orderId: 1, itemName: 'Item 1', quantity: 2, totalPrice: 10000, orderedDate: '2023-08-10' },
-      { orderId: 2, itemName: 'Item 2', quantity: 3, totalPrice: 6150, orderedDate: '2023-08-12' },
-      { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12' }, 
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
-      { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10' },
-      { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' },
-      { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12' },
-    ]);
-    const [completedItems, setCompletedItems] = useState([
-        { orderId: 1, itemName: 'Item 1', quantity: 2, totalPrice: 10000, orderedDate: '2023-08-10',issuedDate:'2023-08-15' },
-        { orderId: 2, itemName: 'Item 2', quantity: 3, totalPrice: 6150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' },
-        { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' }, 
-        { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10',issuedDate:'2023-08-15' },
-        { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' ,issuedDate:'2023-08-15'},
-        { orderId: 6, itemName: 'Item 2', quantity: 5, totalPrice: 7150, orderedDate: '2023-08-12',issuedDate:'2023-08-15' },
-    ]);
-    const [canceledItems, setCanceledItems] = useState([
-        { orderId: 3, itemName: 'Item 6', quantity: 5, totalPrice: 3150, orderedDate: '2023-08-12',canceledDate:'2023-08-15' }, 
-        { orderId: 4, itemName: 'Item 6', quantity: 2, totalPrice: 33100, orderedDate: '2023-08-10',canceledDate:'2023-08-15' },
-        { orderId: 5, itemName: 'Item 5', quantity: 3, totalPrice: 2150, orderedDate: '2023-08-12' ,canceledDate:'2023-08-15'},
-    ]);
+    useEffect(() => {
+      setPendingItems(orderData.filter(order => order.status === 'Pending'));
+      setCompletedItems(orderData.filter(order => order.status === 'Closed'));
+    }, [orderData]);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
   
-    const handleDone = (item) => {
+    const handleDone = (row) => {
       // Remove the item from the pendingItems array
       setPendingItems((prevPendingItems) =>
-        prevPendingItems.filter((pendingItem) => pendingItem.orderId !== item.orderId)
+        prevPendingItems.filter((pendingItem) => pendingItem.orderId !== row.orderId)
       );
   
       // Add the item to the completedItems array
-      setCompletedItems((prevCompletedItems) => [...prevCompletedItems, item]);
+      setCompletedItems((prevCompletedItems) => [...prevCompletedItems, row]);
     };
     
-    const renderTable = (data) => {
+    const renderTable = () => {
         return (
 
           
@@ -89,29 +91,29 @@ const Orders = () => {
               <TableHead style={{}}>
                 <TableRow>
                   <TableCell style={{ fontSize: '15px',fontWeight: '700' }}><b>Order Id</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Item Name</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Quantity</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
-                  <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell>
-                  {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>}
-                  {value === 2 && <TableCell style={{ fontSize: '15px' }}><b>Canceled Date</b></TableCell>}
+                  <TableCell style={{ fontSize: '15px' }}><b>Total Amount</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Placed On</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Placed By</b></TableCell>
+                  {/* <TableCell style={{ fontSize: '15px' }}><b>Total Price(LKR)</b></TableCell>
+                  <TableCell style={{ fontSize: '15px' }}><b>Ordered Date</b></TableCell> */}
+                  {/* {value === 1 && <TableCell style={{ fontSize: '15px' }}><b>Issued Date</b></TableCell>} */}
                   {value === 0 && <TableCell style={{ fontSize: '15px' }}></TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody style={{ backgroundColor: '#F5F5F5' }}>
-                {data.map((item) => (
-                  <TableRow key={item.orderId}>
-                    <TableCell style={{ fontSize: '14px' }}>{item.orderId}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.itemName}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.quantity}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.totalPrice}</TableCell>
-                    <TableCell style={{ fontSize: '14px' }}>{item.orderedDate}</TableCell>
-                    {value === 1 && <TableCell style={{ fontSize: '14px' }}>{item.issuedDate}</TableCell>}
-                    {value === 2 && <TableCell style={{ fontSize: '14px' }}>{item.canceledDate}</TableCell>}
+                {orderData.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell style={{ fontSize: '14px' }}>{row.id}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.total_amount}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.placed_on}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.placed_by}</TableCell>
+                    {/* <TableCell style={{ fontSize: '14px' }}>{row.totalPrice}</TableCell>
+                    <TableCell style={{ fontSize: '14px' }}>{row.orderedDate}</TableCell> */}
+                    {/* {value === 1 && <TableCell style={{ fontSize: '14px' }}>{row.issuedDate}</TableCell>} */}
                     {value === 0 && (
                       <TableCell style={{ fontSize: '14px' }}>
-                        <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(item)}>
-                          Done
+                        <Button variant="contained" color="primary" style={{backgroundColor:"#346E93" }} size="small" onClick={() => handleDone(row)}>
+                          Completed
                         </Button>
                       </TableCell>
                     )}
@@ -150,11 +152,9 @@ const Orders = () => {
           <Tabs style={{ backgroundColor: '#D7D7D7'  ,marginRight:'4rem',position:'sticky'}} value={value} onChange={handleChange}>
             <Tab style={{ fontSize: '15px', margin: '0 250px 0 100px',fontWeight: '700' }} label="Pending" />
             <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Completed" />
-            <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Canceled" />
           </Tabs>
           {value === 0 && renderTable(pendingItems)}
           {value === 1 && renderTable(completedItems)}
-          {value === 2 && renderTable(canceledItems)}
         </div>
           
           </Box>
@@ -166,4 +166,4 @@ const Orders = () => {
 
 };
 
-export default Orders;
+export default Orders;     

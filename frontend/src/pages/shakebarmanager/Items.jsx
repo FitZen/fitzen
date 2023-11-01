@@ -90,7 +90,7 @@ const Items = () => {
         <Box sx={{ paddingLeft: "5rem", flex: 1 }}>
           <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign: "left" }}>Items</Typography>
 
-          <Button variant="contained" size="small" style={{ marginLeft: '65rem', marginTop: '-5rem', backgroundColor: "#346E93" }} onClick={handleAddNewItemClick}>Add New</Button>
+          <Button variant="contained" size="small" style={{ marginLeft: '70rem', marginTop: '-3rem', backgroundColor: "#346E93" }} onClick={handleAddNewItemClick}>Add New</Button>
 
           <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
             <Table>
