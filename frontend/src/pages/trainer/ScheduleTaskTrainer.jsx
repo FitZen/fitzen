@@ -11,6 +11,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import { GiConfirmed } from "react-icons/gi";
 import Modal from '@mui/material/Modal';
 
+const color1 = "#102B4C" //dark blue
 const color4 = "#DC1E2A" //red
 
 const ScheduleTask = () => {
@@ -23,6 +24,7 @@ const ScheduleTask = () => {
   const handleOpenFirstPopup = () => setOpenFirstPopup(true);
   const handleCloseFirstPopup = () => setOpenFirstPopup(false);
 
+ 
 
   const currentDate = new Date();
 
@@ -139,7 +141,7 @@ const ScheduleTask = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: "35%",
+    width: "25%",
     bgcolor: 'background.paper',
     borderRadius: '10px',
     boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
@@ -169,9 +171,10 @@ const ScheduleTask = () => {
                 <Typography variant="body2" style={{ fontWeight: 600, marginTop: "2rem", textAlign:"right" }}>{dayName} {dayOfMonth}</Typography>
                 <hr />
                 {taskDetails.map((task) => (	
-                    <Box sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+                    <Box key={task.id} sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{convertTo12HourTime(task.start_time)}</Typography>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.title}</Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.created_for}</Typography>
                       {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
                       {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
                           <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
@@ -254,15 +257,16 @@ const ScheduleTask = () => {
                                   }}
                 />
                 <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
-                    <GiConfirmed  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                    <GiConfirmed  style={{marginTop:"0%", color:"green", fontSize:"2rem"}}/>
                     <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                        &nbsp; Mark your task as...
+                        &nbsp; Mark your session as...
                     </Typography>
                 </Box>
              
-                <Box sx={{display:"flex", justifyContent:"center"}}>
+                <Box sx={{display:"flex", justifyContent:"space-between"}}>
+                    <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color1, color:"white", marginTop:"7%", marginBottom:"1%"}}>Start</Button>
                     <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Complete</Button>
-                    <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%",marginLeft:"1rem"}}>Cancel</Button>
+                    <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%"}}>Cancel</Button>
                 </Box>
             </Box>
         </Modal>
