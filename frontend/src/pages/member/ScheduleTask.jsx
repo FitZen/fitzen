@@ -26,7 +26,12 @@ const ScheduleTask = () => {
   const [openFirstPopup, setOpenFirstPopup] = React.useState(false);
   const handleOpenFirstPopup = () => setOpenFirstPopup(true);
   const handleCloseFirstPopup = () => setOpenFirstPopup(false);
+  const [clickedTask, setClickedTask] = useState(null); //[{date: "2021-10-01", task: "Personal Workout", time: "10:00 a.m - 12:00 p.m", type: "Physical"}
 
+  const  changeStatus = (task) => {
+      setClickedTask(task);
+      handleOpenFirstPopup();
+  }
 
   const currentDate = new Date();
 
@@ -55,9 +60,9 @@ const ScheduleTask = () => {
     return `${formattedHours}:${minutes} ${ampm}`;
   }
 
-  console.log("Date :", clickedDay);
-    console.log("Day :", dayName);
-    console.log('next day:', formattedNextDay);
+  // console.log("Date :", clickedDay);
+  // console.log("Day :", dayName);
+  // console.log('next day:', formattedNextDay);
 
   useEffect(() => {
 
@@ -143,7 +148,7 @@ const ScheduleTask = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: "35%",
+    width: "25%",
     bgcolor: 'background.paper',
     borderRadius: '10px',
     boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
@@ -176,63 +181,18 @@ const ScheduleTask = () => {
                     <Box sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{convertTo12HourTime(task.start_time)}</Typography>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.title}</Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{(task.created_for === null) ? "": task.created_by }</Typography>
                       {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
                       {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
                           <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
                       </Box> */}
-                      <Box
-                          sx={{
-                          width: '10%',
-                          borderRadius: '5px',
-                          padding: '0.3%',
-                          backgroundColor: color2,
-                          cursor: 'pointer',
-                          }}
-                          onClick={handleOpenFirstPopup}
-                      >
-                          <Typography variant="body2" style={{ fontWeight: 500, textAlign: 'center', color: 'white' }}>
+                       <Button variant="contained" style={{backgroundColor:color2}} onClick={() => changeStatus(task)}>
                             {task.status}
-                          </Typography>
-                      </Box>
+                       </Button>
   
                   </Box>
                 ))}
                
-                {isDropdownOpen && (
-                        <div
-                        style={{
-                            position: 'relative',
-                            marginLeft: "89%",
-                            width: '11.5%',
-                            marginTop: '-1%',
-                            backgroundColor: 'white',
-                            color: 'black',
-                            boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-                            borderRadius: '5px',
-                            zIndex: 1,
-                            
-                        }}
-                        >
-                        {dropdownOptions.map((option) => (
-                            <div
-                            key={option}
-                            onClick={() => handleItemClick(option)}
-                            style={{
-                                padding: '8px',
-                                cursor: 'pointer',
-                            }}
-                            onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = '#f0f0f0'; // Change background color on hover
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = 'white'; // Restore the original background color
-                              }}
-                            >
-                            {option}
-                            </div>
-                        ))}
-                        </div>
-                    )}
            </Box>
         
         </Box>
@@ -258,15 +218,16 @@ const ScheduleTask = () => {
                                   }}
                 />
                 <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
-                    <GiConfirmed  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
+                    <GiConfirmed  style={{marginTop:"0%", color:"green", fontSize:"2rem"}}/>
                     <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
                         &nbsp; Mark your task as...
                     </Typography>
                 </Box>
              
-                <Box sx={{display:"flex", justifyContent:"center"}}>
+                <Box sx={{display:"flex", justifyContent:"space-between"}}>
+                    {/* <Button variant="contained" onClick={handleCancel} style={{display: clickedTask.created_for === null ? "none" : "block", backgroundColor:color1, color:"white", marginTop:"7%", marginBottom:"1%"}}>Join</Button> */}
                     <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Complete</Button>
-                    <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%",marginLeft:"1rem"}}>Cancel</Button>
+                    <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%"}}>Cancel</Button>
                 </Box>
             </Box>
         </Modal>
