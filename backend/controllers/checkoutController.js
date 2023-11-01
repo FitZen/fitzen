@@ -62,7 +62,8 @@ const testPaymentController = asyncHandler(async (req, res) => {
 
 // checkout shakebar order
 const checkoutShakebarOrder = asyncHandler(async (req, res) => {
-    console.log("req.body: ", req.body.cartItems)
+    console.log(req.body);
+
     const items = req.body.cartItems.map(item => {
         return {
             price_data: {
@@ -76,12 +77,6 @@ const checkoutShakebarOrder = asyncHandler(async (req, res) => {
             quantity: item.quantity,
         };
     });
-
-    // console.log("items: ", items)
-
-    // const firstName = items[0].price_data.product_data.name;
-    // console.log("firstname: ",firstName); // This will print the name of the first product.
-
 
     const session = await stripe.checkout.sessions.create({
         line_items: items,
