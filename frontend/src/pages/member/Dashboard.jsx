@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const [fixedNavbar, setFixedNavbar] = useState(false);
   const [taskDetails, setTaskDetails] = useState([]);
-  const [nextTask, setNextTask] = useState({});
+  const [nextTask, setNextTask] = useState(null);
 
   const navigate = useNavigate();
 
@@ -199,11 +199,11 @@ const Dashboard = () => {
                 <Box sx={{boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px", marginTop:"1rem", width: "100%", height:"35%", padding:"0.5rem", justifyContent:"center",textAlign:"center"}}>
                   <Typography variant="h6" style={{ fontWeight: 700,  color: "#000000"}}>Next Task</Typography>
                   <FaCalendarCheck size={50} />
-                  {nextTask === "undefined" ? 
+                  {nextTask === null ? 
                     <Typography variant="h6" style={{ fontWeight: 500, fontSize: "1rem", color: "#000000" }}>No task</Typography> 
                     :<>
                     <Typography variant="h6" style={{ fontWeight: 500,fontSize: "1rem",  color: "#000000" }}>Task : {nextTask.title}</Typography>
-                    <Typography variant="h6" style={{ fontWeight: 500, fontSize: "1rem", color: "#000000" }}>Time : {nextTask.start_time}</Typography>
+                    <Typography variant="h6" style={{ fontWeight: 500, fontSize: "1rem", color: "#000000" }}>Time : {convertTo12HourTime(nextTask.start_time)}</Typography>
                     </>
                      }
 
