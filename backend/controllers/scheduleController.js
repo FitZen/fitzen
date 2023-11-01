@@ -5,8 +5,13 @@ import {
     getCurrentDayTasks,
     getNextDayTask,
     addTask,
+    addSessionTrainer,
+    checkTime,
+    addVirtualSessionTrainer
     updateCurrentScheduleStatus
 } from "../models/scheduleModel.js";
+
+import {findUserById} from "../models/userModel.js";
 
 //to format the dates as YYYY-MM-DD
 function formatDate(dateString) {
@@ -104,19 +109,111 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
         userID
     } = req.body;
     //console.log("data from backend : ", req.body)
-    const result = await addTask(title, description, start_date, start_time, userID);
-
-    //console.log("result from backend : ", result)
-
-    if (!result) {
+    const timeCheck = await checkTime(start_date, start_time, userID);
+    if(timeCheck == 1){
         res.status(500);
-        throw new Error("Something went wrong!");
+        throw new Error("Time is already allocated!");
     }
+    else{
+        const result = await addTask(title, description, start_date, start_time, userID);
+        if (!result) {
+            res.status(500);
+            throw new Error("Something went wrong!");
+        }
+        res.status(201).json({
+            data: result,
+            message: "Task added successfully.",
+        });
+    }
+    // const result = await addTask(title, description, start_date, start_time, userID);
 
-    res.status(201).json({
-        data: result,
-        message: "Task added successfully.",
-    });
+    // //console.log("result from backend : ", result)
+
+
+
+    // if (!result) {
+    //     res.status(500);
+    //     throw new Error("Something went wrong!");
+    // }
+
+    // res.status(201).json({
+    //     data: result,
+    //     message: "Task added successfully.",
+    // });
+});
+
+
+//add Trainer's schedule
+const addTrainerSchedule = asyncHandler(async (req, res) => {
+    const {
+        title,
+        description,
+        start_date,
+        start_time,
+        userID,
+        memberID
+    } = req.body;
+    //console.log("data from backend : ", req.body)
+    const timeCheckForTrainer = await checkTime(start_date, start_time, userID);
+    const timeCheckForMember = await checkTime(start_date, start_time, memberID);
+
+    if((timeCheckForTrainer == 1) || (timeCheckForMember == 1)){
+        res.status(500);
+        throw new Error("Time is already allocated!");
+    }
+    else{
+
+        const member = await findUserById(memberID);
+        //console.log("member from backend : ", member.type);
+
+        if(member.type == "Physical Member"){
+            const result = await addSessionTrainer(title, description, start_date, start_time, userID, memberID);
+            //const resultMember = await addSessionTrainer(title, description, start_date, start_time, userID, userID);
+            if (!result) {
+                res.status(500);
+                throw new Error("Something went wrong!");
+            }
+            res.status(201).json({
+                data: result,
+                message: "Task added successfully.",
+            });
+        }else{
+            const result = await addVirtualSessionTrainer(title, description, start_date, start_time, userID, memberID);
+            if (!result) {
+                res.status(500);
+                throw new Error("Something went wrong!");
+            }
+            res.status(201).json({
+                data: result,
+                message: "Task added successfully.",
+            });
+        }
+
+        // const result = await addSessionTrainer(title, description, start_date, start_time, userID, memberID);
+        // if (!result) {
+        //     res.status(500);
+        //     throw new Error("Something went wrong!");
+        // }
+        // res.status(201).json({
+        //     data: result,
+        //     message: "Task added successfully.",
+        // });
+    }
+    // const result = await addTask(title, description, start_date, start_time, userID);
+
+    // //console.log("result from backend : ", result)
+
+
+
+    // if (!result) {
+    //     res.status(500);
+    //     throw new Error("Something went wrong!");
+    // }
+
+    // res.status(201).json({
+    //     data: result,
+    //     message: "Task added successfully.",
+    // });
 });
 
 
@@ -147,5 +244,6 @@ export {
     getAllCurrentDayTasks,
     getNextTask,
     addMemberSchedule,
+    addTrainerSchedule
     updateScheduleStatus
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/TrainerSidebar";
+import Navbar from "../../components/TrainerNavbar";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,10 +11,7 @@ import {FaRegTimesCircle} from 'react-icons/fa';
 import { GiConfirmed } from "react-icons/gi";
 import Modal from '@mui/material/Modal';
 
-
 const color1 = "#102B4C" //dark blue
-const color2 = "#346E93" //light blue
-const color3 = "#96CDEF" //lighter blue
 const color4 = "#DC1E2A" //red
 
 const ScheduleTask = () => {
@@ -26,12 +23,8 @@ const ScheduleTask = () => {
   const [openFirstPopup, setOpenFirstPopup] = React.useState(false);
   const handleOpenFirstPopup = () => setOpenFirstPopup(true);
   const handleCloseFirstPopup = () => setOpenFirstPopup(false);
-  const [clickedTask, setClickedTask] = useState(null); //[{date: "2021-10-01", task: "Personal Workout", time: "10:00 a.m - 12:00 p.m", type: "Physical"}
 
-  const  changeStatus = (task) => {
-      setClickedTask(task);
-      handleOpenFirstPopup();
-  }
+ 
 
   const currentDate = new Date();
 
@@ -60,14 +53,14 @@ const ScheduleTask = () => {
     return `${formattedHours}:${minutes} ${ampm}`;
   }
 
-  // console.log("Date :", clickedDay);
-  // console.log("Day :", dayName);
-  // console.log('next day:', formattedNextDay);
+  console.log("Date :", clickedDay);
+    console.log("Day :", dayName);
+    console.log('next day:', formattedNextDay);
 
   useEffect(() => {
 
-    if((localStorage.getItem('userType') !== '"Virtual Member"' && localStorage.getItem('userType') !== '"Physical Member"')){
-      navigate('/login');
+    if((localStorage.getItem('userType') !== '"Trainer"')){
+        navigate('/login');
     }
 
     //getUserDetails();
@@ -178,21 +171,67 @@ const ScheduleTask = () => {
                 <Typography variant="body2" style={{ fontWeight: 600, marginTop: "2rem", textAlign:"right" }}>{dayName} {dayOfMonth}</Typography>
                 <hr />
                 {taskDetails.map((task) => (	
-                    <Box sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+                    <Box key={task.id} sx={{display:"flex", width:"100%",marginTop:"2%", justifyContent:"space-between", borderRadius:"10px", padding:"1%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{convertTo12HourTime(task.start_time)}</Typography>
                       <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.title}</Typography>
-                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{(task.created_for === null) ? "": task.created_by }</Typography>
+                      <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left" }}>{task.created_for}</Typography>
                       {/* <Typography variant="body2" style={{ fontWeight: 500, textAlign:"left", marginLeft:"30%" }}>Completed</Typography> */}
                       {/* <Box sx={{width:"10%", borderRadius:"5px", padding:"0.2%", marginLeft:"30%", backgroundColor:color2}}>
                           <Typography variant="body2" style={{ fontWeight: 500, textAlign:"center", color:"white" }}>Completed</Typography>
                       </Box> */}
-                       <Button variant="contained" style={{backgroundColor:color2}} onClick={() => changeStatus(task)}>
+                      <Box
+                          sx={{
+                          width: '10%',
+                          borderRadius: '5px',
+                          padding: '0.3%',
+                          backgroundColor: color2,
+                          cursor: 'pointer',
+                          }}
+                          onClick={handleOpenFirstPopup}
+                      >
+                          <Typography variant="body2" style={{ fontWeight: 500, textAlign: 'center', color: 'white' }}>
                             {task.status}
-                       </Button>
+                          </Typography>
+                      </Box>
   
                   </Box>
                 ))}
                
+                {isDropdownOpen && (
+                        <div
+                        style={{
+                            position: 'relative',
+                            marginLeft: "89%",
+                            width: '11.5%',
+                            marginTop: '-1%',
+                            backgroundColor: 'white',
+                            color: 'black',
+                            boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                            borderRadius: '5px',
+                            zIndex: 1,
+                            
+                        }}
+                        >
+                        {dropdownOptions.map((option) => (
+                            <div
+                            key={option}
+                            onClick={() => handleItemClick(option)}
+                            style={{
+                                padding: '8px',
+                                cursor: 'pointer',
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = '#f0f0f0'; // Change background color on hover
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = 'white'; // Restore the original background color
+                              }}
+                            >
+                            {option}
+                            </div>
+                        ))}
+                        </div>
+                    )}
            </Box>
         
         </Box>
@@ -220,12 +259,12 @@ const ScheduleTask = () => {
                 <Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
                     <GiConfirmed  style={{marginTop:"0%", color:"green", fontSize:"2rem"}}/>
                     <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-                        &nbsp; Mark your task as...
+                        &nbsp; Mark your session as...
                     </Typography>
                 </Box>
              
                 <Box sx={{display:"flex", justifyContent:"space-between"}}>
-                    {/* <Button variant="contained" onClick={handleCancel} style={{display: clickedTask.created_for === null ? "none" : "block", backgroundColor:color1, color:"white", marginTop:"7%", marginBottom:"1%"}}>Join</Button> */}
+                    <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color1, color:"white", marginTop:"7%", marginBottom:"1%"}}>Start</Button>
                     <Button variant="contained" onClick={handleCompleted} style={{backgroundColor:color2, color:"white", marginTop:"7%", marginBottom:"1%"}}>Complete</Button>
                     <Button variant="contained" onClick={handleCancel} style={{backgroundColor:color4, color:"white", marginTop:"7%", marginBottom:"1%"}}>Cancel</Button>
                 </Box>

@@ -139,23 +139,23 @@ const Schedule = () => {
         i === currentDate.getDate() &&
         currMonth === currentDate.getMonth() &&
         currYear === currentDate.getFullYear();
-        
-        // console.log("taskDates : ", formatDate(taskDates));
-        
-        const formattedDate = `${currYear}-${currMonth + 1}-${i}`; // Format as "YYYY-MM-DD"
-        const isColored = taskDates.includes(formattedDate);
-
-        days.push(
-          <li
-            key={`current-${i}`}
-            className={
-              isToday ? "active" : isColored ? "task-date" : ""}
-            onClick={() => handleDateClick(i)}
-          >
-            {i}
-          </li>
-        );
+    
+      const formattedDate = `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+      const isColored = taskDates.includes(formattedDate);
+    
+      days.push(
+        <li
+          key={`current-${i}`}
+          className={`${
+            isToday ? "active" : isColored ? "task-date" : ""
+          }`}
+          onClick={() => handleDateClick(i)}
+        >
+          {i}
+        </li>
+      );
     }
+    
 
     for (let i = lastDayofMonth; i < 6; i++) {
       days.push(
@@ -223,7 +223,7 @@ const Schedule = () => {
         userID: JSON.parse(localStorage.getItem('userID')),
       };
       
-      //console.log("payload : ", payload);
+      console.log("payload : ", payload);
 
       const res2 = await axios.post(
         "http://localhost:8000/api/schedule/addmemberschedule",
@@ -247,7 +247,18 @@ const Schedule = () => {
         timer: 1500
       })
     } catch (error) {
-      console.error("Task Adding failed:", error);
+      console.error("Task Adding failed:", error.response.data.message);
+
+      if(error.response.data.message === "Time is already allocated!"){
+        setTimeError("Time is already allocated!");
+        Swal.fire({
+          icon: 'error',
+          title: 'Time is already allocated!',
+          showConfirmButton: true,
+        })
+      }
+      
+      
       // Handle error scenarios here
     }
   };

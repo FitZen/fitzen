@@ -73,6 +73,7 @@ import StudentProgress from './pages/trainer/Progress';
 import NewRequests from './pages/trainer/NewRequests';
 import StudentProfile from './pages/trainer/StudentProfile';
 import TrainerNotification from './pages/trainer/Notification';
+import TrainerScheduleTask from './pages/trainer/ScheduleTaskTrainer';
 
 
 import TrainerReports from "./pages/trainer/Report";
@@ -155,6 +156,7 @@ function App() {
         <Route path="/trainer/NewRequests" element={<NewRequests />} />
         <Route path="/trainer/StudentProfile" element={<StudentProfile />} />
         <Route path="/trainer/Notification" element={<TrainerNotification />} />
+        <Route path="/trainer/ScheduleTaskTrainer/:clickedDay" element={<TrainerScheduleTask />} />
 
         <Route path="/trainer/reports" element={<TrainerReports />} />
         <Route path="/trainer/schedule" element={<TrainerSchedule />} />
