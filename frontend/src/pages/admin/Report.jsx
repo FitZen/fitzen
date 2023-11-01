@@ -45,7 +45,7 @@ const Report = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [navigate]);
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
