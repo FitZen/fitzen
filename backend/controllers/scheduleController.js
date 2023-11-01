@@ -5,6 +5,7 @@ import {
     getCurrentDayTasks,
     getNextDayTask,
     addTask,
+    addSessionTrainer,
     checkTime	
 } from "../models/scheduleModel.js";
 
@@ -137,10 +138,56 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
     // });
 });
 
+
+//add Trainer's schedule
+const addTrainerSchedule = asyncHandler(async (req, res) => {
+    const {
+        title,
+        description,
+        start_date,
+        start_time,
+        userID,
+        memberID
+    } = req.body;
+    //console.log("data from backend : ", req.body)
+    const timeCheck = await checkTime(start_date, start_time, userID);
+    if(timeCheck == 1){
+        res.status(500);
+        throw new Error("Time is already allocated!");
+    }
+    else{
+        const result = await addSessionTrainer(title, description, start_date, start_time, userID, memberID);
+        if (!result) {
+            res.status(500);
+            throw new Error("Something went wrong!");
+        }
+        res.status(201).json({
+            data: result,
+            message: "Task added successfully.",
+        });
+    }
+    // const result = await addTask(title, description, start_date, start_time, userID);
+
+    // //console.log("result from backend : ", result)
+
+
+
+    // if (!result) {
+    //     res.status(500);
+    //     throw new Error("Something went wrong!");
+    // }
+
+    // res.status(201).json({
+    //     data: result,
+    //     message: "Task added successfully.",
+    // });
+});
+
 export {
     getAllTaskDates,
     getAllTasksDayBased,
     getAllCurrentDayTasks,
     getNextTask,
-    addMemberSchedule
+    addMemberSchedule,
+    addTrainerSchedule
 };
