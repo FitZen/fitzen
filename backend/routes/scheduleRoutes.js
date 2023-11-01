@@ -6,8 +6,8 @@ import {
     getAllCurrentDayTasks,
     getNextTask,
     addMemberSchedule,
-    addTrainerSchedule
-    updateScheduleStatus,
+    addTrainerSchedule,
+    updateScheduleStatus
 } from "../controllers/scheduleController.js";
 import { protect, permit } from "../middleware/authMiddleware.js";
 
