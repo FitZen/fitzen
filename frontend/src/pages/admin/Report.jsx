@@ -1,6 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
+import { Bar } from 'react-chartjs-2';
 import {FaTelegram, FaFeatherAlt} from 'react-icons/fa';
 import ProfileImg from '../../assets/photo-1633332755192-727a05c4013d.jpg';
 import {PiMedalFill} from 'react-icons/pi';
