@@ -193,8 +193,8 @@ const Reports = () => {
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
         <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left"}}>Reports</Typography>
 
-        <Box>
-              <Button variant="contained" onClick={handleOpenComplaintPopup} style={{height:"30%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "2rem",marginBottom:"1%"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints and feedbacks</Button>
+        <Box sx={{justifyContent:"right"}}>
+              <Button variant="contained" onClick={handleOpenComplaintPopup} style={{marginLeft:"81.5%",height:"30%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "2rem",marginBottom:"1%"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints</Button>
         </Box>
         
         <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
@@ -309,7 +309,7 @@ const Reports = () => {
 								<Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
 									<BiSolidMessageSquareAdd  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
 									<Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-										&nbsp; Add Complaints And Feedbacks
+										&nbsp; Add Complaints
 									</Typography>
 								</Box>
 
