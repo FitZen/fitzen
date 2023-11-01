@@ -28,7 +28,7 @@ const getViewAllPhysiotherapists = asyncHandler(async (req, res) => {
     }
 
     res.status(200).json({
-        data: physiotherapists,
+        data: trainers,
     });
 });
 
