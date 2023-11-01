@@ -26,6 +26,8 @@ const Instructors = () => {
   const [trainerCount, setTrainerCount] = useState(0); 
   const [physioCount, setPhysioCount] = useState(0);
   const navigate = useNavigate();
+  const[todayTrainerCount, setTodayTrainerCount]=useState(0);
+  const[todayPhysioCount, setTodayPhysioCount]=useState(0);
 
   useEffect(() => {
 
@@ -36,6 +38,8 @@ const Instructors = () => {
 
     getTrainersCount();
     getPhysiotherapistCount()
+    getTodayTrainerCount();
+    getTodayPhysioCount();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -77,6 +81,32 @@ const Instructors = () => {
     }
   
   };
+
+
+  const getTodayTrainerCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/trainers/count/today');
+      setTodayTrainerCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+
+  const getTodayPhysioCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/physiotherapists/count/today');
+      setTodayPhysioCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+  
 
 
 
@@ -194,7 +224,7 @@ const Instructors = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Trainers</Typography>
-                    <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+23</Box>
+                    <Box sx={{ marginLeft:"2%", backgroundColor:color2,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+{todayTrainerCount}</Box>
                     <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color2, marginLeft:"1%", marginRight:"63%" }}>47 are logged in </Typography>
                     <Link to='/admin/instructorList/Trainer' sx={{textDecoration:"none",}}>
                       <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
@@ -228,7 +258,7 @@ const Instructors = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Physiotherapists</Typography>
-                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
+                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+{todayPhysioCount}</Box>
                       <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"56%" }}>23 are logged in </Typography>
                       <Link to='/admin/instructorList/Physiotherapist' sx={{textDecoration:"none"}}>
                         <Button variant="outlined" style={{color:color1, border:"1px solid", fontWeight: 700, width:"7rem"}} >
