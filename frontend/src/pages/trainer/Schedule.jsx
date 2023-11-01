@@ -258,6 +258,13 @@ const Schedule = () => {
           title: 'Time is already allocated!',
           showConfirmButton: true,
         })
+      } else if(error.response.data.message === "You cannot allocate a past time!"){
+        setStartDateError("You cannot allocate a past time!");
+        Swal.fire({
+          icon: 'error',
+          title: 'You cannot allocate a past time!',
+          showConfirmButton: true,
+        })
       }
       
       
