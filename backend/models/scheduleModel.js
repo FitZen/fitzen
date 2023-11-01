@@ -43,10 +43,24 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
     return result.rows[0].id;
 });
 
+
+//Update Schedule Status
+const updateCurrentScheduleStatus = asyncHandler(async (scheduleID, status) => {
+    const sql = 'UPDATE schedule SET status=$1 WHERE id=$2 RETURNING id;';
+    const result= await query(sql, [status, scheduleID]);
+
+    if(result.rowCount>0){
+        return true;
+    }else{
+        return false;
+    }
+});
+
 export {
     getTasksDates,
     getTasksDayBased,
     getNextDayTask,
     getCurrentDayTasks,
-    addTask
+    addTask,
+    updateCurrentScheduleStatus
 };
