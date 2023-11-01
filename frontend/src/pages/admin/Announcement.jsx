@@ -203,7 +203,7 @@ const Announcement = () => {
             <Button variant="contained" onClick={handleOpen} sx={{backgroundColor: color2, marginRight:"7%",'&:hover': {backgroundColor:color3, transition: "ease 0.5s"}}}><FaPlus />&nbsp; Add New</Button>
           </Box>
           <Box sx={{marginTop:"2%"}}>
-            <FormControl style={{ width: "15%" }}>
+            {/* <FormControl style={{ width: "15%" }}>
                 <InputLabel id="demo-simple-select-label">All</InputLabel>
                 <Select
                   
@@ -220,7 +220,7 @@ const Announcement = () => {
                   <MenuItem value={20}>My Announcements</MenuItem>
                 
                 </Select>
-              </FormControl>
+              </FormControl> */}
           </Box>
 
           <Box sx={{width:"93%", height:"80vh", overflowY:"auto", flexWrap:"wrep", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
