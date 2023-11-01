@@ -41,8 +41,34 @@ const updateShakebarOrderStatus = asyncHandler(async (orderId, status) => {
 });
 
 
+const addShakebarOrder = asyncHandler(async (orderId, totalAmount, orderBy) => {
+    const sql = 'INSERT INTO shakebarOrder (id, total_amount, placed_by) VALUES ($1, $2, $3) RETURNING id;';
+    const result = await query(sql, [orderId, totalAmount, orderBy]);
+
+    if (result.rowCount > 0) {
+        return result.rows[0].id;
+    } else {
+        return null;
+    }
+});
+
+
+const addShakebarOrderItems = asyncHandler(async (item, orderId) => {
+    const sql = 'INSERT INTO shakebarOrderItem (item_id, quantity, price, amount, order_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
+    const result = await query(sql, [item.id, item.qty, item.price, item.amount, orderId]);
+
+    if (result.rowCount > 0) {
+        return result.rows[0].id;
+    } else {
+        return null;
+    }
+});
+
+
 export {
     allShakebarOrders,
     shakebarOrder,
     updateShakebarOrderStatus,
+    addShakebarOrder,
+    addShakebarOrderItems,
 }

@@ -1,10 +1,12 @@
 import asyncHandler from 'express-async-handler';
 import {
-    testPaymentModel
-} from "../models/checkoutMode.js";
-
+    shakebarOrder,
+    addShakebarOrder,
+    addShakebarOrderItems,
+} from "../models/shakebarOrderModel.js";
 import { Stripe } from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SK);
+import generateShakebarOrderId from "../utils/generateShakebarOrderId.js";
 
 
 // test payment controller (create checkout session)
@@ -62,8 +64,7 @@ const testPaymentController = asyncHandler(async (req, res) => {
 
 // checkout shakebar order
 const checkoutShakebarOrder = asyncHandler(async (req, res) => {
-    console.log(req.body);
-
+    const { userID, totalAmount } = req.body;
     const items = req.body.cartItems.map(item => {
         return {
             price_data: {
@@ -78,12 +79,32 @@ const checkoutShakebarOrder = asyncHandler(async (req, res) => {
         };
     });
 
+    let orderId;
+    do {
+        orderId = generateShakebarOrderId();
+    } while (await shakebarOrder(orderId));
+
+    const mappedItems = req.body.cartItems.map(item => {
+        return {
+            id: item.id,
+            price: item.price,
+            qty: item.quantity,
+            amount: item.price * item.quantity,
+        };
+    });
+
     const session = await stripe.checkout.sessions.create({
         line_items: items,
         mode: 'payment',
         success_url: `${process.env.CLIENT_URL}/member/shakebar`,   // direct when payment is successful
         cancel_url: `${process.env.CLIENT_URL}/payment/failed`,     // direct when payment is cancelled / failed
     });
+
+    await addShakebarOrder(orderId, totalAmount, userID);
+
+    for (let i = 0; i < mappedItems.length; i++) {
+        await addShakebarOrderItems(mappedItems[i], orderId);
+    }
 
     res.status(200).json({
         url: session.url,
