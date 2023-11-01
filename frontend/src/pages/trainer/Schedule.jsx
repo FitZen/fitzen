@@ -336,7 +336,7 @@ const Schedule = () => {
 
             <Box sx={{ width: "50%", height:"87vh", justifyContent: "center", alignItems:"center" }}>
               <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"3%", paddingLeft:"8%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
-                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Task</Typography>
+                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Session</Typography>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
                 <TextField variant="outlined" name="title" value={newTask.title} onChange={handleInputChange} error={submitted && !newTask.title} helperText={submitted && !newTask.title ? "Title is required":""} inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Member ID:</InputLabel>
