@@ -161,6 +161,7 @@ const Shakebar = () => {
 
     const reqData = {
       userID : JSON.parse(localStorage.getItem('userID')),
+      totalAmount : cartItems.reduce((a, b) => a + (b.price*b.quantity), 0),
       cartItems : cartItems,
     };
 
@@ -172,8 +173,8 @@ const Shakebar = () => {
       // setCartItems([]);
       // handleCloseCart();
       // console.log("response : ", response.data.url);
-      window.location.href = response.data.url; 
-      
+      window.location.href = response.data.url;
+
     } catch (error) {
       console.error("error : ", error);
 
