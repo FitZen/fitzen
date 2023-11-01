@@ -119,8 +119,8 @@ const Report = () => {
           <Box sx={{ paddingLeft:"5rem", flex:1 }}>
             <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left"}}>Reports</Typography>
 
-            <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
-              <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
+            <Box sx={{display:"flex", width:"94%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
+              <Box sx={{width:"94%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
                 <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"center" }}>Monthly Revenue</Typography>
                 <Box sx={{}}>
                   <Box sx={{display:"flex", justifyContent:"center"}}>
@@ -186,10 +186,13 @@ const Report = () => {
 
                 </Box>
                 <Box sx={{ width: "62%", height: "100%", padding: "30px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "2rem" }}>
-                  <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000" }}>Total Income</Typography>
+                  <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem",marginBottom: "1rem", color: "#000000" }}>Total Income</Typography>
                   <Bar data={data} options={options} />
                 </Box>
 
+              </Box>
+              <Box sx={{width:"94%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
+                
               </Box>
             </Box>
           </Box>
