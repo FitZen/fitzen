@@ -1,6 +1,17 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Typography,  Select, MenuItem, Button, InputLabel, FormControl} from "@mui/material";
+import {
+  Typography,
+  Select,
+  MenuItem,
+  Button,
+  InputLabel,
+  FormControl,
+  Paper,
+  Table,
+  TableHead,
+  TableRow, TableCell, TableBody, TableContainer
+} from "@mui/material";
 import { Bar } from 'react-chartjs-2';
 import AdminSidebar from "../../components/AdminSidebar";
 import AdminNavbar from "../../components/AdminNavbar";
@@ -11,6 +22,7 @@ import {FaUserEdit} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 ;
 
 const color1 = "#102B4C" //dark blue
@@ -49,6 +61,28 @@ const Report = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [navigate]);
+
+  const viewItems = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/shakebar/items");
+      setItemData(res.data.data);
+    } catch (error) {
+      console.error("Retrieving failed:", error);
+      // Handle error scenarios here
+    }
+  };
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "35%",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+    p: 4,
+  };
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
@@ -192,7 +226,30 @@ const Report = () => {
 
               </Box>
               <Box sx={{width:"94%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
-                
+                <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={{ fontWeight: '700' }}>Item ID</TableCell>
+                        <TableCell style={{ fontWeight: '700' }}>Item Name</TableCell>
+                        <TableCell style={{ fontWeight: '700' }}>Quantity</TableCell>
+                        <TableCell style={{ fontWeight: '700' }}>Unit Price (LKR)</TableCell>
+                        <TableCell style={{ fontWeight: '700' }}>Category</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody style={{ backgroundColor: '#F5F5F5' }}>
+                      {itemData.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell>{item.id}</TableCell>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell>{item.available_count}</TableCell>
+                            <TableCell>{item.price}</TableCell>
+                            <TableCell>{item.category}</TableCell>
+                          </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Box>
             </Box>
           </Box>
