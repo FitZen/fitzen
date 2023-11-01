@@ -43,6 +43,15 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
     return result.rows[0].id;
 });
 
+
+//Add a new task to member's schedule
+const addSessionTrainer = asyncHandler(async (title, description, startDate, startTime, createdBy) => {
+    const sql = 'INSERT INTO schedule (title, description, start_date, start_time, created_by) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
+    const result = await query(sql, [title, description, startDate, startTime, createdBy]);
+
+    return result.rows[0].id;
+});
+
 //To check the time is already allocated or not
 const checkTime = asyncHandler(async (startDate, startTime, createdBy) => {
     // Parse the startTime into hours, minutes, and seconds
@@ -84,5 +93,6 @@ export {
     getNextDayTask,
     getCurrentDayTasks,
     addTask,
+    addSessionTrainer,
     checkTime
 };
