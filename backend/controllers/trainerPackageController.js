@@ -1,14 +1,30 @@
 import asyncHandler from 'express-async-handler';
-
 import {Stripe} from 'stripe';
+import {
+    existContracts,
+    createContract
+} from "../models/contractModel.js";
+import {
+    addNotification
+} from "../models/notificationModel.js";
+
 const stripe = new Stripe(process.env.STRIPE_SK);
 
+
+// get existing contracts
+const getExistContracts = asyncHandler(async (req, res) => {
+    const memberId = req.params.memberId;
+    const contracts = await existContracts(memberId);
+
+    res.status(200).json({
+        contracts: contracts,
+    });
+});
+
+
+// checkout trainer package
 const checkoutTrainerPackage = asyncHandler(async (req, res) => {
-    console.log("req.body: ", req.body)
-    
-    const {title,sessions, price, trainerID, memberID} = req.body;
-    console.log("title: ", title,sessions, price, trainerID, memberID)
-    
+    const {title, sessions, price, trainerID, memberID} = req.body;
     const items = [
         {
             price_data: {
@@ -26,15 +42,30 @@ const checkoutTrainerPackage = asyncHandler(async (req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: items,
         mode: 'payment',
-        success_url: `${process.env.CLIENT_URL}/member/instructors`,   // direct when payment is successful
-        cancel_url: `${process.env.CLIENT_URL}/payment/failed`,     // direct when payment is cancelled / failed
+        success_url: `${process.env.CLIENT_URL}/member/instructors`,    // direct when payment is successful
+        cancel_url: `${process.env.CLIENT_URL}/payment/failed`,         // direct when payment is cancelled / failed
     });
+
+    if (session.url === undefined) {
+        throw new Error("Something went wrong!");
+    }
+
+    const memNotifyTitle = "Payment successful"
+    const memNotifyContent = `Your payment for the trainer package ${title} offered by trainer ${trainerID} was successful`;
+    const trainerNotifyTitle = "New Trainee";
+    const trainerNotifyContent = `You have a new trainee ${memberID} for the package ${title} that you offered`;
+
+    await createContract(memberID, trainerID, title, sessions, price)
+    await addNotification(memNotifyTitle, memNotifyContent, memberID)
+    await addNotification(trainerNotifyTitle, trainerNotifyContent, trainerID)
 
     res.status(200).json({
         url: session.url,
     });
 });
 
+
 export {
+    getExistContracts,
     checkoutTrainerPackage,
 };
