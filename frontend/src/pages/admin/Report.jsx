@@ -226,14 +226,14 @@ const Report = () => {
               </Box>
             </Box>
               <Box sx={{width:"94%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
-                <TableContainer component={Paper} style={{ marginTop: '1rem', width: '95%', fontSize: '15px' }}>
+                <Typography variant="h6" style={{ fontWeight: 700, marginTop: "2rem", textAlign:"left"}}>Best-Selling Products</Typography>
+                <TableContainer component={Paper} style={{ marginTop: '2rem', width: '95%', fontSize: '15px' }}>
                   <Table>
                     <TableHead>
                       <TableRow>
                         <TableCell style={{ fontWeight: '700' }}>Item ID</TableCell>
                         <TableCell style={{ fontWeight: '700' }}>Item Name</TableCell>
-                        <TableCell style={{ fontWeight: '700' }}>Quantity</TableCell>
-                        <TableCell style={{ fontWeight: '700' }}>Unit Price (LKR)</TableCell>
+                        <TableCell style={{ fontWeight: '700' }}>Total Sales</TableCell>
                         <TableCell style={{ fontWeight: '700' }}>Category</TableCell>
                       </TableRow>
                     </TableHead>
@@ -243,7 +243,6 @@ const Report = () => {
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.name}</TableCell>
                             <TableCell>{item.available_count}</TableCell>
-                            <TableCell>{item.price}</TableCell>
                             <TableCell>{item.category}</TableCell>
                             <TableCell style={{ fontSize: '14px' }}>
                               <Button key={item.id} onClick={() => handleOpen(item)} variant="contained" color="primary" style={{ backgroundColor: "#346E93" }} size="small">
