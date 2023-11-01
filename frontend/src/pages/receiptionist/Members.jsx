@@ -412,7 +412,7 @@ const Members= () => {
                     variant="contained"
                     sx={{ mt: 3, mb: 2, backgroundColor: "#000000", justifyContent:"center", alignItems:"center" }}
                   >
-                    Register Me
+                    Add
                   </Button>
                 
                 </Box>
