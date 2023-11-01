@@ -26,6 +26,7 @@ const Members = () => {
   const [virtualMembers, setVirtualMembers] = useState(0);
   const navigate = useNavigate();
   const[todayPhysicalCount, setTodayPhysicalCount]=useState(0);
+  const[todayVirtualCount, setTodayVirtualCount]=useState(0);
 
   useEffect(() => {
 
@@ -36,6 +37,7 @@ const Members = () => {
     getPhysicalMemberCount();
     getVirtualMemberCount();
     getTodayPhysicalMemberCount();
+    getTodayVirtualMemberCount();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -82,6 +84,19 @@ const Members = () => {
       const res2 = await axios.get('http://localhost:8000/api/members/physical/count/today');
       console.log("axio calll ; ", res2.data.data)
       setTodayPhysicalCount(res2.data.data);
+      
+    } catch (error) {
+      console.log('error message: ',error.data);
+    }
+  
+  };
+
+
+  const getTodayVirtualMemberCount = async () => {
+    try {
+      const res2 = await axios.get('http://localhost:8000/api/members/virtual/count/today');
+      console.log("axio calll ; ", res2.data.data)
+      setTodayVirtualCount(res2.data.data);
       
     } catch (error) {
       console.log('error message: ',error.data);
@@ -238,7 +253,7 @@ const Members = () => {
             <Box sx={{ width: "100%", height:"80%", marginTop:"5%"}}> 
                 <Box sx={{display:"flex", marginBottom:"3%"}}>
                       <Typography variant="h6" style={{ fontWeight: 700, marginTop: "0%", color: "#000000" }}>Virtual Members</Typography>
-                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+13</Box>
+                      <Box sx={{ marginLeft:"2%", backgroundColor:color1,marginTop:"-0.4%", color:"#ffffff", borderRadius:"50px", padding:"1%", cursor:"pointer"}}>+{todayVirtualCount}</Box>
                       <Typography variant="body2" style={{ fontWeight: 500, marginTop:"0.7%", color: color1, marginLeft:"1%", marginRight:"54.5%"}}>23 are logged in </Typography>
                       <Link to="/admin/memberList/Virtual" sx={{textDecoration:"none",}}>
                         <Button variant="outlined" style={{color:color2, fontWeight: 700, width:"7rem"}} >
