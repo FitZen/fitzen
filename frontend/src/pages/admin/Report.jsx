@@ -60,10 +60,10 @@ const Report = () => {
 
 
   const data = {
-    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    labels: ['Membership', 'Shakebar', 'Trainers'],
     datasets: [{
       label: 'Sales',
-      data: [5, 2, 3, 1, 4, 2, 3],
+      data: [5, 4, 2],
       backgroundColor: [`${color2}`],
       borderColor: [`${color2}`],
       borderWidth: 1
@@ -185,7 +185,7 @@ const Report = () => {
                   </Box>
 
                 </Box>
-                <Box sx={{ width: "62%", height: "50%", padding: "20px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "2rem" }}>
+                <Box sx={{ width: "62%", height: "100%", padding: "30px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', borderRadius:"10px", mt:1, ml: "2rem" }}>
                   <Typography variant="h6" style={{ fontWeight: 700, marginTop: "-1rem", color: "#000000" }}>Total Income</Typography>
                   <Bar data={data} options={options} />
                 </Box>
