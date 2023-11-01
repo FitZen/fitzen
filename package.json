@@ -9,7 +9,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm run start --prefix frontend",
     "socket": "nodemon socket/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run socket\""
   },
   "author": "FitZen Team",
   "license": "ISC",
