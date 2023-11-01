@@ -32,7 +32,6 @@ const getViewAllTrainers = asyncHandler(async (req, res) => {
     });
 });
 
-
 //add trainer
 const addNewTrainer = asyncHandler(async (req, res) => {
     const { nic, first_name, last_name, email, contact_no, address, dob, gender, qualification, mode} = req.body;
