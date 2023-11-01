@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 
 //get all tasks dates
 const getTasksDates = asyncHandler(async (createdBy) => {
-    const sql = 'SELECT start_date FROM schedule WHERE created_by=$1;';
+    const sql = 'SELECT start_date FROM schedule WHERE created_by=$1 OR created_for=$1;';
     const result = await query(sql, [createdBy]);
 
     return result.rows;
@@ -12,7 +12,7 @@ const getTasksDates = asyncHandler(async (createdBy) => {
 //get day based tasks
 const getTasksDayBased = asyncHandler(async (createdBy,clickedDate) => {
     
-    const sql = 'SELECT * FROM schedule WHERE created_by=$1 AND start_date=$2 ORDER BY start_time;';
+    const sql = 'SELECT * FROM schedule WHERE (created_by=$1 OR created_for=$1) AND start_date=$2 ORDER BY start_time;';
     const result = await query(sql, [createdBy,clickedDate]);
 
     return result.rows;
@@ -44,10 +44,18 @@ const addTask = asyncHandler(async (title, description, startDate, startTime, cr
 });
 
 
-//Add a new task to member's schedule
-const addSessionTrainer = asyncHandler(async (title, description, startDate, startTime, createdBy) => {
-    const sql = 'INSERT INTO schedule (title, description, start_date, start_time, created_by) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
-    const result = await query(sql, [title, description, startDate, startTime, createdBy]);
+//Add a new session for physical members
+const addSessionTrainer = asyncHandler(async (title, description, startDate, startTime, createdBy, memberID) => {
+    const sql = 'INSERT INTO schedule (title, description, start_date, start_time, created_by, created_for) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+    const result = await query(sql, [title, description, startDate, startTime, createdBy, memberID]);
+
+    return result.rows[0].id;
+});
+
+//Add a new session for virtual members
+const addVirtualSessionTrainer = asyncHandler(async (title, description, startDate, startTime, createdBy, memberID) => {
+    const sql = 'INSERT INTO schedule (title, description, start_date, start_time, created_by, created_for, zoom_link) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;';
+    const result = await query(sql, [title, description, startDate, startTime, createdBy, memberID, 'zoom/link']);
 
     return result.rows[0].id;
 });
@@ -82,10 +90,6 @@ const checkTime = asyncHandler(async (startDate, startTime, createdBy) => {
     return recordCount > 0 ? 1 : 0;
   });
   
-  
-  
-  
-  
 
 export {
     getTasksDates,
@@ -94,5 +98,6 @@ export {
     getCurrentDayTasks,
     addTask,
     addSessionTrainer,
-    checkTime
+    checkTime,
+    addVirtualSessionTrainer
 };
