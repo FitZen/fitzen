@@ -118,34 +118,20 @@ const Report = () => {
 
             <Box sx={{display:"flex", width:"95%", height:"60%", backgroundColor:"#E5E8E8", padding:"0.8rem", borderRadius:"10px", marginBottom:"1rem", marginTop:"0.5rem"}}>
               <Box sx={{width:"75%", height:"100%", backgroundColor:"white", borderRadius:"10px"}}>
-                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"center" }}>Monthly Session Overview</Typography>
+                <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"center" }}>Monthly Revenue</Typography>
                 <Box sx={{}}>
                   <Box sx={{display:"flex", justifyContent:"center"}}>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
+                    <Box sx={{backgroundColor: "#346E93", padding:"0.7rem", borderRadius:"10px", margin:"1rem", width:"25%"}}>
                       <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Scheduled <br /> Sessions </Typography>
                       <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>10 </Typography>
                     </Box>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
+                    <Box sx={{backgroundColor: "#346E93", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
                       <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Completed <br />Sessions </Typography>
                       <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>08 </Typography>
                     </Box>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
+                    <Box sx={{backgroundColor: "#346E93", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
                       <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Cancelled <br /> Sessions </Typography>
                       <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>02 </Typography>
-                    </Box>
-                  </Box>
-                  <Box sx={{display:"flex", justifyContent:"center"}}>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                      <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>New <br />Requests </Typography>
-                      <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>05 </Typography>
-                    </Box>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"26%"}}>
-                      <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>Accepted <br />Requests </Typography>
-                      <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center", }}>05 </Typography>
-                    </Box>
-                    <Box sx={{backgroundColor: "#E5E8E8", padding:"0.7rem", borderRadius:"10px",  margin:"1rem", width:"25%"}}>
-                      <Typography variant="h6" style={{ fontSize:"18px",fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>Overall Session <br />Duration </Typography>
-                      <Typography variant="h5" style={{ fontWeight: 600, marginTop: "1rem", textAlign:"center",  }}>50hrs </Typography>
                     </Box>
                   </Box>
                 </Box>
