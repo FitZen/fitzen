@@ -37,6 +37,17 @@ const Dashboard = () => {
     return `${formattedHours}:${minutes} ${ampm}`;
   }
 
+  function formatTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0'); // Get hours (0-23) and pad with leading zero if needed
+    const minutes = now.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with leading zero if needed
+    const seconds = now.getSeconds().toString().padStart(2, '0'); // Get seconds and pad with leading zero if needed
+
+    const currentTime = `${hours}:${minutes}:${seconds}`;
+
+    return currentTime;
+}
+
   const currentTime = new Date();
   const currentTimeString = currentTime.toLocaleTimeString();
       
@@ -233,7 +244,7 @@ const Dashboard = () => {
 
           <Typography variant="h5" style={{ fontWeight: 700,  color: "#000000", textAlign:"left", marginTop:"2rem"}}>Daily Tasks</Typography>
           <Box sx={{ width: "94%", backgroundColor: "#E5E8E8", padding: "20px", mt:3 , mb: 2, borderRadius:"10px",  boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
-            {(taskDetails === "undefined") ? 
+            {(!taskDetails) ? 
                 <Box sx={{width:"100%", height:"25%", justifyContent:"space-between", backgroundColor:"#ffffff", borderRadius:"10px", display: "flex", marginTop: "0.5rem",cursor:"pointer" ,"&:hover": {transform: "scale(1.02)", transition: "transform 0.2s ease"}}}>
                  <Typography variant="h6" style={{ fontWeight: 700,  color: "#000000", textAlign:"center", marginTop:"2rem"}}>No tasks for today</Typography>
                 </Box>
@@ -242,7 +253,7 @@ const Dashboard = () => {
                 <FaDotCircle style={{marginTop: "0.8rem", marginLeft:"1rem", color:"#000000"}}/>
                 <Typography variant="h6" style={{ fontSize: "16px",fontWeight: 500,  color: "#000000", textAlign:"left", marginTop:"0.5rem"}}>{task.title}</Typography>
                 <Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500,  color: "#000000", textAlign:"center", marginLeft:"18rem", marginTop:"0.5rem"}}>{convertTo12HourTime(task.start_time)}</Typography>
-                {task.start_time < currentTimeString ?
+                {task.start_time < formatTime() ?
                 <Box style={{display:"flex", backgroundColor:`${color3}`, borderRadius:"50px", width: "15%", height:"68%",  marginLeft:"30%", marginTop:"0.3rem", marginBottom:"0.3rem", textAlign:"center", cursor: "pointer"}}>
                   <Typography variant="h6" style={{fontSize:"16px", fontWeight: 500,  color: "#000000", marginLeft: "1rem", marginTop: '0.1rem'}}>Time passed </Typography>
                   <FaCheckCircle style={{ fontSize: '1.2rem',  color: '#000000',margin: '0 auto', marginTop: '0.3rem', textAlign: "right"}}/>
