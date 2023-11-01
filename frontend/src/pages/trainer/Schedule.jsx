@@ -388,7 +388,7 @@ const Schedule = () => {
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Description:</InputLabel>
                 <TextField variant="outlined" name="content" value={newTask.content} onChange={handleInputChange} error={submitted && !newTask.content} helperText={submitted && !newTask.content ? "Description is required" : ""} multiline rows="1" inputProps={{style: {height: 50, width:230, borderRadius:"5px", outline:"none"}}}/>
 
-                <Button variant="contained" onClick={handleSubmit}  style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
+                <Button variant="contained" onClick={handleSubmit}  style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add </Button>
               </Box>
             </Box>
 
