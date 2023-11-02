@@ -122,7 +122,7 @@ const getCurrentDayTaskDetails = async () => {
 	const data = {
 		labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
 		datasets: [{
-			label: 'Sales',
+			label: 'Workout Sessions',
 			data: [5, 2, 3, 1, 4, 2, 3],
 			backgroundColor: [`${color2}`],
 			borderColor: [`${color2}`],
@@ -151,9 +151,9 @@ const getCurrentDayTaskDetails = async () => {
 	};
 
 	const DoughnutData = {
-		labels: ['Completed', 'Upcoming', 'Cancelled', 'Total'],
+		labels: ['Completed session', 'Upcoming session', 'Cancelled session', 'Total session'],
 		datasets: [{
-			data: [65, 59, 80, 81],
+			data: [2, 20, 1, 23],
 			backgroundColor: [`${color3}`,`${color2}`, `${color4}`, `${color1}`],
 			borderColor: '#000',
 			borderWidth: 0
