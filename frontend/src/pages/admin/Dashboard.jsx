@@ -77,10 +77,10 @@ const Dashboard = () => {
   };
 
   const data = {
-    labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
     datasets: [{
-      label: 'Sales',
-      data: [50, 90, 150, 200, 260, 300, 400, 500],
+      label: 'Total Users',
+      data: [0, 0, 0, 28, 0, 0, 0],
       backgroundColor: [`${color2}`],
       borderColor: [`${color2}`],
       borderWidth: 1
@@ -108,9 +108,9 @@ const Dashboard = () => {
   };
 
   const DoughnutData = {
-    labels: ['Completed', 'Upcoming', 'Cancelled', 'Total'],
+    labels: ['Physical Members', 'Virtual Members', 'Trainers', 'Physiotherapists'],
     datasets: [{
-      data: [65, 59, 80, 81],
+      data: [8, 5, 5, 5],
       backgroundColor: [`${color3}`,`${color2}`, `${color4}`, `${color1}`],
       borderColor: '#000',
       borderWidth: 0
@@ -182,7 +182,7 @@ const Dashboard = () => {
 
                 <Grid md={4} sx={{display:"flex", padding:"1%", width:"25%", borderRadius:"10px", justifyContent:"center", alignContent:"center", textAlign:"center", cursor:"pointer", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', '&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
                     <Box sx={{marginRight:""}}>
-                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>1.34 M</Typography>
+                        <Typography variant="h5" style={{ fontWeight: 700, marginTop: "1rem", textAlign:"left" }}>35.3K</Typography>
                         <Typography variant="h6" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>Total Income</Typography>
                     </Box>
                     <Box sx={{marginTop:"10%", marginLeft:"20%"}}>
