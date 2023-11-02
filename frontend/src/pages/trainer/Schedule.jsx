@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Box from "@mui/material/Box";
-import { Typography, InputLabel, TextField, Button} from "@mui/material";
+import { Typography, InputLabel, TextField, Button, Select, MenuItem} from "@mui/material";
 import Sidebar from "../../components/TrainerSidebar";
 import Navbar from "../../components/TrainerNavbar";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -12,6 +12,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from "@mui/x-date-pickers";
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { set } from "mongoose";
 
 const color2 = "#346E93" //light blue
 
@@ -33,10 +34,16 @@ const Schedule = () => {
 
   const [taskDates, setTaskDates] = useState([]);
 
+  const [memberID, setMemberID] = useState('');
+
+  const handleChangeMemberID = (event) => {
+    setMemberID(event.target.value);
+  }
+
   const [newTask, setNewTask] = useState({
     title: "",
     content: "",
-    memberID: "",
+    //memberID: "",
   });
 
   //for dates picking
@@ -54,7 +61,8 @@ const Schedule = () => {
       navigate('/login');
     }
 
-    getTaskDetails();
+    //getTaskDetails();
+    //getMembersUnderTrainer();
     // Function to handle scroll event
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -72,6 +80,22 @@ const Schedule = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // const getMembersUnderTrainer = async () => {
+  //   const reqData = {
+  //     userID : JSON.parse(localStorage.getItem('userID'))
+  //   };
+
+  //   try{
+  //     console.log("Trainer ID : ",reqData);
+  //     const res = await axios.get("http://localhost:8000/api/trainerpackage/exist-contract-members/${trainerId}",{params:reqData});
+  //     //console.log("Members : ",res.data.data[0]);
+  //     //setMemberID(res.data.data[0].memberID);
+  //   }
+  //   catch(error){
+  //     console.error("Retrieving failed:", error);
+  //   }
+  // }
 
   const getTaskDetails = async () => {
 
@@ -204,7 +228,7 @@ const Schedule = () => {
 
     console.log("handleSubmit called");
 
-    if (!newTask.title || !newTask.content || !newTask.memberID || !dateValue || !timeValue ) {
+    if (!newTask.title || !newTask.content || !dateValue || !timeValue ) {
       // Display error messages or styles for empty fields
       setSubmitted(true);
       return;
@@ -222,7 +246,7 @@ const Schedule = () => {
         start_date: dateValue.format("YYYY-MM-DD"),
         start_time: timeValue.format("HH:mm:ss"),
         userID: JSON.parse(localStorage.getItem('userID')),
-        memberID:newTask.memberID
+        memberID:memberID
       };
       
       console.log("payload : ", payload);
@@ -235,7 +259,8 @@ const Schedule = () => {
       if (res2.status === 201) {
         setNewTask({ title: "", content: "" }); // Clear the form
         setSubmitted(false);
-        setStartDateError(""); // Clear any previous errors
+        setStartDateError("");
+        setMemberID(""); // Clear any previous errors
         setDateValue(null);
         setTimeValue(null);
         setTimeError("");
@@ -336,11 +361,25 @@ const Schedule = () => {
 
             <Box sx={{ width: "50%", height:"87vh", justifyContent: "center", alignItems:"center" }}>
               <Box sx={{width:"60%", height:"100%",justifyContent:"center", padding:"3%", paddingLeft:"8%", marginLeft:"20%", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px",}}>
-                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Task</Typography>
+                <Typography variant="h5" sx={{textAlign:"center", fontWeight:"700", marginLeft:"-2%"}}> Add your Session</Typography>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Task:</InputLabel>
                 <TextField variant="outlined" name="title" value={newTask.title} onChange={handleInputChange} error={submitted && !newTask.title} helperText={submitted && !newTask.title ? "Title is required":""} inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "5%",color:"black" }}>Member ID:</InputLabel>
-                <TextField variant="outlined" name="memberID" value={newTask.memberID} onChange={handleInputChange} error={submitted && !newTask.memberID} helperText={submitted && !newTask.memberID ? "Title is required":""} inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/>
+                {/* <TextField variant="outlined" name="memberID" value={newTask.memberID} onChange={handleInputChange} error={submitted && !newTask.memberID} helperText={submitted && !newTask.memberID ? "Title is required":""} inputProps={{style: {height: 15, width:230, borderRadius:"5px", outline:"none"}}}/> */}
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={memberID}
+                    size="small"
+                    style={{marginTop:"0.2rem", width:"89%", height:"7%", marginBottom:"0rem", borderRadius:"5px",border:"1px solid D8D9DA"}}
+                    
+                    onChange={handleChangeMemberID}
+                >
+                 <MenuItem value={'VM0001'}>VM0001</MenuItem>
+                 <MenuItem value={'VM0002'}>VM0002</MenuItem>
+                 <MenuItem value={'PM0001'}>PM0001</MenuItem>
+                 <MenuItem value={'PM0002'}>PM0002</MenuItem>                
+                </Select>
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Date:</InputLabel>
                 <Box sx={{maxWidth:"450px"}}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -388,7 +427,7 @@ const Schedule = () => {
                 <InputLabel variant="body2" style={{ fontWeight: 500, marginTop: "3%",color:"black" }}>Description:</InputLabel>
                 <TextField variant="outlined" name="content" value={newTask.content} onChange={handleInputChange} error={submitted && !newTask.content} helperText={submitted && !newTask.content ? "Description is required" : ""} multiline rows="1" inputProps={{style: {height: 50, width:230, borderRadius:"5px", outline:"none"}}}/>
 
-                <Button variant="contained" onClick={handleSubmit}  style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add Task </Button>
+                <Button variant="contained" onClick={handleSubmit}  style={{marginTop:"5%",backgroundColor: color2, justifyContent:"center"}}> Add </Button>
               </Box>
             </Box>
 

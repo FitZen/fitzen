@@ -8,7 +8,9 @@ import {
 
 // get notifications
 const getAllNotifications = asyncHandler(async (req, res) => {
-    const receiverId = req.params.receiverId;
+    //console.log("get all notifications");
+    //console.log(req.query.receiverId);
+    const receiverId = req.query.receiverId;
     const notifications = await getNotifications(receiverId);
 
     res.status(200).json({

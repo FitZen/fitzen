@@ -103,31 +103,31 @@ const StudentProgress = () => {
 					>
 					<Navbar />
 				</div>
-				<Box sx={{ display:"flex",paddingTop:"5.5rem",paddingLeft:"62rem", flex:1 }}>
+				{/* <Box sx={{ display:"flex",paddingTop:"5.5rem",paddingLeft:"62rem", flex:1 }}>
 					<Button variant="contained" style={{backgroundColor:"#102B4C", color:"white", fontWeight:"600",}}><PiVideoCameraFill style={{marginRight: "0.5rem"}}/>  Start Virtual Session</Button>
-				</Box>
+				</Box> */}
 				<Box sx={{ paddingLeft:"5rem", flex:1 }}>
-					<Box sx={{ display:"flex", width: "100%", height:"100%", marginTop: "1rem"}}>
+					<Box sx={{ display:"flex", width: "100%", height:"100%", marginTop: "5rem"}}>
 						<Box sx={{ width: "50%", height:"100%", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-							<img src={ProfileImg} alt="Profile" width="45%"  style={{borderRadius:"100%", marginTop:"0.5rem"}}/>
+							<img src={"http://localhost:3000/Profile/vm0001.jpg"} alt="Profile" width="45%"  style={{borderRadius:"100%", marginTop:"0.5rem"}}/>
 						</Box>
 						<Box sx={{ width: "50%", height:"100%", flexDirection:"column",marginTop: "1rem", marginLeft:"-15%", justifyContent:"center"}}>
 								<Box style={{display:"flex"}}>
 									<Typography variant="h5" style={{ fontWeight: 700, textAlign:"left", marginLeft:"-5rem" }}><PiMedalFill style={{marginTop: "1rem"}}/>  Personal Information</Typography>
 								</Box>
-							<Box sx={{display: "flex", marginLeft:"3rem"}}>
+							<Box sx={{display: "flex", marginLeft:"4rem"}}>
 								<Box >
-									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: Dhanush Perera</Typography>
-									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: 38</Typography>
+									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Name: Tharindu Gunawardhana</Typography>
+									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Age: 24</Typography>
 									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Type: Virtual Student</Typography>
 									<Typography variant="h6" style={{ fontSize:"16px",fontWeight: 500, marginTop: "1rem", textAlign:"left", marginLeft:"-57%" }}>Gender: Male</Typography>
 								</Box>
 								<Link to="/trainer/Schedule" style={{textDecoration:"none", color:"#000000"}}>
-								<Box sx={{boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px", marginLeft:"10%", width: "80%", height:"95%", padding:"0.5rem", justifyContent:"center",textAlign:"center",cursor:"pointer",'&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
+								{/* <Box sx={{boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',borderRadius:"10px", marginLeft:"10%", width: "80%", height:"95%", padding:"0.5rem", justifyContent:"center",textAlign:"center",cursor:"pointer",'&:hover': {boxShadow: 'rgba(52, 110, 147, 0.8) 0px 6px 10px, rgba(52, 110, 147, 0.7) 0px 1px 6px', transition: "ease 0.5s"}}}>
 									<Typography variant="h6" style={{ fontWeight: 700,  color: "#000000"}}>Schedule</Typography>
 									<AiFillSchedule size={50} />
 									<Typography variant="h6" style={{ fontWeight: 500,fontSize: "1rem",  color: "#000000" }}>Next Session : 21st August 10:30 am</Typography>
-								</Box>
+								</Box> */}
 								</Link>
 							</Box>
 

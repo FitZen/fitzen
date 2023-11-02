@@ -23,6 +23,7 @@ function formatDate(dateString) {
     return `${year}-${month}-${day}`;
 }
 
+//to get current time
 function formatTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0'); // Get hours (0-23) and pad with leading zero if needed
@@ -33,6 +34,18 @@ function formatTime() {
 
     return currentTime;
 }
+
+//to get current date
+function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 to make it 1-based and padding with '0' if needed.
+    const day = String(currentDate.getDate()).padStart(2, '0'); // Padding with '0' if needed.
+
+    const currentDateFormatted = `${year}-${month}-${day}`;
+
+    return currentDateFormatted;
+  }
 
 
 //get all tasks dates
@@ -125,7 +138,32 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
     //     console.log("new date: ", formatTime());
     // //}
     //console.log("data from backend : ", req.body)
-    if(start_time > formatTime()){
+    if(start_date === getCurrentDate()){
+        if(start_time > formatTime()){
+            const timeCheck = await checkTime(start_date, start_time, userID);
+            if(timeCheck == 1){
+                res.status(500);
+                throw new Error("Time is already allocated!");
+            }
+            else{
+                const result = await addTask(title, description, start_date, start_time, userID);
+                if (!result) {
+                    res.status(500);
+                    throw new Error("Something went wrong!");
+                }
+                res.status(201).json({
+                    data: result,
+                    message: "Task added successfully.",
+                });
+            }
+        }
+        else{
+            res.status(500);
+            throw new Error("You cannot allocate a past time!");
+        
+        }
+    }
+    else{
         const timeCheck = await checkTime(start_date, start_time, userID);
         if(timeCheck == 1){
             res.status(500);
@@ -143,11 +181,7 @@ const addMemberSchedule = asyncHandler(async (req, res) => {
             });
         }
     }
-    else{
-        res.status(500);
-        throw new Error("You cannot allocate a past time!");
-    
-    }
+  
  
 });
 
@@ -166,7 +200,47 @@ const addTrainerSchedule = asyncHandler(async (req, res) => {
     const timeCheckForTrainer = await checkTime(start_date, start_time, userID);
     const timeCheckForMember = await checkTime(start_date, start_time, memberID);
 
-    if(start_time > formatTime()){
+    if(start_date === getCurrentDate()){
+        if(start_time > formatTime()){
+            if((timeCheckForTrainer == 1) || (timeCheckForMember == 1)){
+                res.status(500);
+                throw new Error("Time is already allocated!");
+            }
+            else{
+        
+                const member = await findUserById(memberID);
+                //console.log("member from backend : ", member.type);
+        
+                if(member.type == "Physical Member"){
+                    const result = await addSessionTrainer(title, description, start_date, start_time, userID, memberID);
+                    //const resultMember = await addSessionTrainer(title, description, start_date, start_time, userID, userID);
+                    if (!result) {
+                        res.status(500);
+                        throw new Error("Something went wrong!");
+                    }
+                    res.status(201).json({
+                        data: result,
+                        message: "Task added successfully.",
+                    });
+                }else{
+                    const result = await addVirtualSessionTrainer(title, description, start_date, start_time, userID, memberID);
+                    if (!result) {
+                        res.status(500);
+                        throw new Error("Something went wrong!");
+                    }
+                    res.status(201).json({
+                        data: result,
+                        message: "Task added successfully.",
+                    });
+                }
+            }
+        }else{
+            res.status(500);
+            throw new Error("You cannot allocate a past time!");
+        
+        }
+    }
+    else {
         if((timeCheckForTrainer == 1) || (timeCheckForMember == 1)){
             res.status(500);
             throw new Error("Time is already allocated!");
@@ -199,10 +273,7 @@ const addTrainerSchedule = asyncHandler(async (req, res) => {
                 });
             }
         }
-    }else{
-        res.status(500);
-        throw new Error("You cannot allocate a past time!");
-    
+
     }
     // const result = await addTask(title, description, start_date, start_time, userID);
 

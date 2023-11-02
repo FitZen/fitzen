@@ -198,7 +198,7 @@ const Complaints = () => {
               </Tabs>
 
               <Box sx={{marginTop:"2%", height:"20%", marginLeft:"53%"}}>
-                  <FormControl style={{ width: "10%", height:"25%" }}>
+                  {/* <FormControl style={{ width: "10%", height:"25%" }}>
                       <InputLabel id="demo-simple-select-label">All</InputLabel>
                       <Select
                         
@@ -214,7 +214,7 @@ const Complaints = () => {
                         <MenuItem value={20}></MenuItem>
                       
                       </Select>
-                  </FormControl>
+                  </FormControl> */}
               </Box>
             </Box>
             

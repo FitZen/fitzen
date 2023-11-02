@@ -407,15 +407,15 @@ const Reports = () => {
           </Typography>
               
           <div>
-            <Box sx={{display:"flex"}}>
-              <Tabs style={{ backgroundColor: '#ffffff', width:"32%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }} value={value} onChange={handleChange}>
+            <Box sx={{display:"flex", justifyContent:"space-between", width:"95%"}}>
+              <Tabs style={{ backgroundColor: '#ffffff', width:"34%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }} value={value} onChange={handleChange}>
                 
                 <Tab style={{ fontSize: '15px',fontWeight: '700' }} label="Physical Sessions" />
                 <Tab style={{ fontSize: '15px', marginRight: '250px',fontWeight: '700' }} label="Virtual Sessions" />
     
               </Tabs>
               <Box>
-                <Button variant="contained" onClick={handleOpenComplaintPopup} style={{height:"30%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "2rem",marginLeft: "5.5rem"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints and feedbacks</Button>
+                <Button variant="contained" onClick={handleOpenComplaintPopup} style={{height:"30%",backgroundColor:"#96CDEF", color:"black", fontWeight:"700", marginTop: "2rem"}}><BiSolidMessageEdit size={20} />  &nbsp; Complaints</Button>
               </Box>
             </Box>
               
@@ -447,7 +447,7 @@ const Reports = () => {
 								<Box sx={{display:"flex", textAlign:"center", justifyContent:"center"}}>
 									<BiSolidMessageSquareAdd  style={{marginTop:"0%", color:"red", fontSize:"2rem"}}/>
 									<Typography id="modal-modal-title" variant="h6" component="h2" fontWeight="700" textAlign="center">
-										&nbsp; Add Complaints And Feedbacks
+										&nbsp; Add Complaints
 									</Typography>
 								</Box>
 

@@ -15,6 +15,19 @@ const existContracts = asyncHandler(async (memberId) => {
 });
 
 
+// check is contract exists and get members under the ytrainer
+const existContractsGetMembers = asyncHandler(async (trainerId) => {
+    const sql = 'SELECT * FROM contract WHERE instructor_id = $1 AND status = \'On going\';';
+    const result = await query(sql, [trainerId]);
+
+    if (result.rowCount > 0){
+        return result.rows;
+    } else {
+        return null;
+    }
+});
+
+
 // create contract
 const createContract = asyncHandler(async (memberId, instructorId, packageType, remainSessions, payment) => {
     const sql = 'INSERT INTO contract (member_id, instructor_id, package, remain_sessions, payment) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
@@ -30,5 +43,6 @@ const createContract = asyncHandler(async (memberId, instructorId, packageType, 
 
 export {
     existContracts,
+    existContractsGetMembers,
     createContract,
 }

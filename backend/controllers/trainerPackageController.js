@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import {Stripe} from 'stripe';
 import {
     existContracts,
+    existContractsGetMembers,
     createContract
 } from "../models/contractModel.js";
 import {
@@ -19,6 +20,18 @@ const getExistContracts = asyncHandler(async (req, res) => {
     res.status(200).json({
         contracts: contracts,
     });
+});
+
+
+const getExistContractMembers = asyncHandler(async (req, res) => {
+    const instructorId = req.query.userID;
+    console.log("Hello :",instructorId)
+
+    const contracts = await existContractsGetMembers(instructorId);
+    console.log("Hello :",contracts)
+    // res.status(200).json({
+    //     contracts: contracts,
+    // });
 });
 
 
@@ -67,5 +80,6 @@ const checkoutTrainerPackage = asyncHandler(async (req, res) => {
 
 export {
     getExistContracts,
-    checkoutTrainerPackage,
+    getExistContractMembers,
+    checkoutTrainerPackage
 };

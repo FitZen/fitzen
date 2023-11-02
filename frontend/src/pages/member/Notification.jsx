@@ -71,8 +71,13 @@ const Notification = () => {
 
   const viewNotifications = async () => {
     try {
+
+    const reqData = {
+        receiverId : JSON.parse(localStorage.getItem('userID')),
+    };
      
-      const res = await axios.get("http://localhost:8000/api/");
+    console.log("reqDate", reqData)
+      const res = await axios.get("http://localhost:8000/api/notifications/user/${receiverId}", {params: reqData});
       console.log(res.data.data);
       setNotificationData(res.data.data);
 
@@ -99,14 +104,14 @@ const Notification = () => {
         </div>
         <Box sx={{ paddingLeft:"5rem", flex:1 }}>
           <Typography variant="h4" style={{ fontWeight: 700, marginTop: "5rem", textAlign:"left" }}>Announcements & Notifications</Typography>
-          <Tabs value={selectedTab} onChange={handleTabChange} aria-label="Report Tabs" style={{ backgroundColor: '#ffffff', width:"24%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
+          <Tabs value={selectedTab} onChange={handleTabChange} aria-label="Report Tabs" style={{ backgroundColor: '#ffffff', width:"24.5%",marginTop:"2%", marginBottom:"2%", borderRadius:"5px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}>
               <Tab label="Announcement" onClick={viewAnnouncements}/>
               <Tab label="Notification" onClick={viewNotifications}/>
             </Tabs>
           <Box sx={{  width: "90%", height:"80vh", padding:"1rem", overflowY:"auto", flexWrap:"wrep", borderRadius:"10px", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}}> 
               
             {selectedTab === 0 && announcementData.map((announcement) => ( 
-              <Box sx={{display:"flex", padding:"1rem", borderRadius:"10px",marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border:"2px solid white", '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
+              <Box key={announcement.id} sx={{display:"flex", padding:"1rem", borderRadius:"10px",marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border:"2px solid white", '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
   
                 <Box sx={{display:"flex", flexDirection:"column",  width:"2%", borderRadius:"5px", backgroundColor:"#346E93"}}></Box>
                 <Box sx={{marginLeft:"5%", marginRight:"5%", width:"85%", borderRadius:"10px", padding:"1rem", border:"1px solid #96CDEF"}}>
@@ -129,13 +134,13 @@ const Notification = () => {
             ) )} 
 
             {selectedTab === 1 && notificationData.map((notification) => ( 
-              <Box sx={{display:"flex", padding:"1rem", borderRadius:"10px",marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border:"2px solid white", '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
+              <Box key={notification.id} sx={{display:"flex", padding:"1rem", borderRadius:"10px",marginBottom:"1rem", boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',border:"2px solid white", '&:hover': {borderColor: '#96CDEF',  transition: "ease 0.5s"}}}>
   
                   <Box sx={{display:"flex", flexDirection:"column",  width:"2%", borderRadius:"5px", backgroundColor:"#346E93"}}></Box>
                   <Box sx={{marginLeft:"5%", marginRight:"5%", width:"85%", borderRadius:"10px", padding:"1rem", border:"1px solid #96CDEF"}}>
                     <Typography variant="h6" style={{ fontWeight: 700, textAlign:"left" }}>{notification.title}</Typography>
                     <Typography variant="body1" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left" }}>{notification.content}</Typography>
-                    <Typography variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left", color: "grey", fontSize:"11px" }}>Date: {new Date(notification.posted_on).toLocaleDateString()}</Typography>
+                    <Typography variant="body2" style={{ fontWeight: 500, marginTop: "1rem", textAlign:"left", color: "grey", fontSize:"11px" }}>Date: {new Date(notification.created_on).toLocaleDateString()}</Typography>
                   </Box>
                   <ToggleButton
                     value="check"
