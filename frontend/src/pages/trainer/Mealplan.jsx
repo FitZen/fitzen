@@ -122,6 +122,15 @@ const MealPlan = () => {
 
   }
 
+  const buttonClicked = () => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Meal Plan Send Successfully',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
   const handleMealPlanClick = async (mealPlan) => {
     try {
       const response = await axios.get(`http://localhost:8000/api/mealplans/getmealplan/${mealPlan.id}`);
@@ -339,14 +348,15 @@ const MealPlan = () => {
                             <MenuItem value="">
                             <em>Search Member</em>
                             </MenuItem>
-                              <MenuItem value="Option1">Bob</MenuItem>
-                              <MenuItem value="Option2">Arthur</MenuItem>
-                              <MenuItem value="Option3">David</MenuItem>
+                              <MenuItem value="Option1">VM0001</MenuItem>
+                              <MenuItem value="Option2">VM0002</MenuItem>
+                              <MenuItem value="Option3">PM0001</MenuItem>
+                              <MenuItem value="Option4">PM0002</MenuItem>
                               </Select>
                             </FormControl>
                           </Box>
                         
-                          <Button variant="contained" sx={{ backgroundColor: color2, color: "white",marginTop:"4%", padding: "10px 20px", height: "40px", right: "19%", fontSize: "16px", '&:hover': { backgroundColor: "#808080" } }}>Send</Button>
+                          <Button variant="contained" onClick={buttonClicked} sx={{ backgroundColor: color2, color: "white",marginTop:"4%", padding: "10px 20px", height: "40px", right: "19%", fontSize: "16px", '&:hover': { backgroundColor: "#808080" } }}>Send</Button>
 
                         </Box>
                         
