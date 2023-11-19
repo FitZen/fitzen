@@ -1,8 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
 dotenv.config();
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import { connectDB } from "./config/db.js";
 import { connectMongoDB } from "./config/db.js";
@@ -17,7 +17,7 @@ import goalRoutes from "./routes/goalRoutes.js";
 import trainerRoutes from "./routes/trainerRoutes.js";
 import physiotherapistRoutes from "./routes/physiotherapistRoutes.js";
 import shakebarRoutes from "./routes/shakebarRoutes.js";
-import uploadRoutes from './routes/uploadRoutes.js';
+import uploadRoutes from "./routes/uploadRoutes.js";
 import membershipPlansRoutes from "./routes/membershipPlansRoutes.js";
 import shakebarManagerRoutes from "./routes/shakebarManagerRoutes.js";
 import ratingsRoutes from "./routes/ratingsRoutes.js";
@@ -29,7 +29,6 @@ import checkoutRoutes from "./routes/checkoutRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import trainerPackageRoutes from "./routes/trainerPackageRoutes.js";
 
-
 // start DB connection
 connectDB();
 // start MongoDB connection
@@ -39,9 +38,13 @@ connectMongoDB();
 const app = express();
 
 // allow requests from 'http://localhost:3000'
-app.use(cors({
-  origin: 'http://localhost:3000',
-}));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true, // If needed
+    allowedHeaders: "Content-Type,Authorization", // Adjust as necessary
+  })
+);
 
 // middlewares to parse raw JSON from request body (req.body) and
 // urlencoded data (req.query) from URL query string (?key=value&key2=value2)
@@ -52,35 +55,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // routes
-app.use('/api/users', userRoutes);
-app.use('/api/announcements', announcementRoutes);
-app.use('/api/complaints', complaintRoutes);
-app.use('/api/receptionists', receptionistRoutes);
-app.use('/api/members', memberRoutes);
-app.use('/api/mealplans', mealPlanRoutes);
-app.use('/api/goals', goalRoutes);
-app.use('/api/trainers', trainerRoutes);
-app.use('/api/physiotherapists', physiotherapistRoutes);
-app.use('/api/shakebar', shakebarRoutes);
-app.use('/api/membershipplans', membershipPlansRoutes);
-app.use('/api/shakebarmanagers', shakebarManagerRoutes);
-app.use('/api/ratings', ratingsRoutes);
-app.use('/api/schedule', scheduleRoutes);
-app.use('/api/chat', chatRoutes);
-app.use('/api/message', messageRoutes);
-app.use('/api/requests', requestRoutes);
-app.use('/api/checkout', checkoutRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/trainerpackage', trainerPackageRoutes);
-
+app.use("/api/users", userRoutes);
+app.use("/api/announcements", announcementRoutes);
+app.use("/api/complaints", complaintRoutes);
+app.use("/api/receptionists", receptionistRoutes);
+app.use("/api/members", memberRoutes);
+app.use("/api/mealplans", mealPlanRoutes);
+app.use("/api/goals", goalRoutes);
+app.use("/api/trainers", trainerRoutes);
+app.use("/api/physiotherapists", physiotherapistRoutes);
+app.use("/api/shakebar", shakebarRoutes);
+app.use("/api/membershipplans", membershipPlansRoutes);
+app.use("/api/shakebarmanagers", shakebarManagerRoutes);
+app.use("/api/ratings", ratingsRoutes);
+app.use("/api/schedule", scheduleRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/api/requests", requestRoutes);
+app.use("/api/checkout", checkoutRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/trainerpackage", trainerPackageRoutes);
 
 //upload routes
-app.use('/api/upload', uploadRoutes)
-
+app.use("/api/upload", uploadRoutes);
 
 // route handler for root URL ("/") to indicate the server is running
-app.get('/', (req, res) => {
-    res.send('Server is ready')
+app.get("/", (req, res) => {
+  res.send("Server is ready");
 });
 
 // error handlers
@@ -89,5 +90,5 @@ app.use(errorHandler);
 
 // set up server to listen on port 5000
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`)
+  console.log(`Server is running on port: ${port}`);
 });
